@@ -7,6 +7,7 @@
   "author": "Phat Tran",
   "license": "MIT",
   "scripts": {
+    "precommit": "lint-staged",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -15,5 +16,14 @@
     "next": "^4.1.4",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.59.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --parser flow --write", "git add"]
   }
 }
