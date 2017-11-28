@@ -9,7 +9,7 @@ export default class Home extends React.Component<null> {
     return (
       <Layout>
         <Content>
-          <Text color="caroRed">Home page</Text>
+          <Text color="visaRed">Home page</Text>
         </Content>
       </Layout>
     );

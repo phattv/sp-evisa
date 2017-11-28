@@ -8,7 +8,7 @@ const AnchorExternal = styled.a.attrs({
 })`
   user-select: none;
   cursor: pointer;
-  color: ${colors.caroBlue};
+  color: ${colors.visaBlue};
   text-decoration: none;
   ${props => props.width && `width: ${props.width}`};
 

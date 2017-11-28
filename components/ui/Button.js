@@ -19,8 +19,8 @@ const Button = styled(Flexbox)`
       ? `
 border-radius: 3px;
 color: ${colors[props.color || "white"]};
-background-color: ${colors[props.backgroundColor || "caroBlue"]};
-border-color: ${colors[props.backgroundColor || "caroBlue"]};
+background-color: ${colors[props.backgroundColor || "visaBlue"]};
+border-color: ${colors[props.backgroundColor || "visaBlue"]};
         
 &:hover {
   color: ${colors[props.backgroundColor || "white"]};
@@ -35,9 +35,9 @@ background-color: transparent;
 border-color: ${colors[props.borderColor || "white"]};
 
 &:hover {
-  color: ${colors[props.invertColor || "caroRed"]};
+  color: ${colors[props.invertColor || "visaRed"]};
   background-color: ${colors[props.invertBorderColor || "white"]};
-  border-color: ${colors[props.invertColor || "caroRed"]};
+  border-color: ${colors[props.invertColor || "visaRed"]};
 }
 `};
   ${props =>
