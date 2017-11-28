@@ -21,9 +21,9 @@ export const colors = {
 };
 
 export const fontSizes = {
-  xs: 14,
-  s: 16,
-  default: 18,
+  xs: 12,
+  s: 14,
+  default: 16,
   m: 18,
   l: 22,
   xl: 32,
