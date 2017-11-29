@@ -14,6 +14,7 @@ const Text = styled.span`
 
   ${props =>
     props.letterSpacing && `letter-spacing: ${props.letterSpacing}px`}};
+  ${props => props.fontStyle && `font-style: ${props.fontStyle}`}};
   ${props => props.wordSpacing && `word-spacing: ${props.wordSpacing}px`}};
   ${props => props.textAlign && `text-align: ${props.textAlign}`};
   ${props => props.whiteSpace && `white-space: ${props.whiteSpace}`};

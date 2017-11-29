@@ -93,7 +93,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
             paddingHorizontal={6}
           >
             <Flexbox>
-              <Anchor href="/pro" as="/pro">
+              <Anchor href="/" as="/">
                 <Image
                   src="/static/images/logo.png"
                   alt="evisa logo"

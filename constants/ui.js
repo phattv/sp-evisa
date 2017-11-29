@@ -16,7 +16,7 @@ export const colors = {
   visaRed: "#CD2122",
   visaBlue: "#0061B1",
   darkGrey: "#3E3E3E",
-  lightGrey: "#626262",
+  lightGrey: "#F9F9F9",
   white: "#FFFFFF"
 };
 
