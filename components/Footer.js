@@ -14,16 +14,11 @@ export default class Footer extends React.Component<null> {
           backgroundPosition: "center",
           backgroundSize: "cover"
         }}
-        flexDirection="column"
+        column
       >
-        <Flexbox
-          paddingHorizontal={15}
-          maxWidth={288}
-          flexDirection="column"
-          paddingBottom={5}
-        >
+        <Flexbox paddingHorizontal={15} maxWidth={288} column paddingBottom={5}>
           <Flexbox
-            flexDirection="column"
+            column
             paddingTop={15}
             width="100%"
             responsiveAlignItemsCenter
@@ -81,14 +76,14 @@ export default class Footer extends React.Component<null> {
           >
             <Flexbox
               flex={1}
-              flexDirection="column"
+              column
               alignItems="flex-start"
               paddingHorizontal={2}
             >
               <Text
                 fontSize="m"
                 color="lightGrey"
-                fontWeight="bold"
+                bold
                 borderBottom
                 borderColor="visaRed"
                 marginBottom={5}
@@ -101,7 +96,7 @@ export default class Footer extends React.Component<null> {
                 src="/static/images/payment-logos.png"
                 alt="payment logos"
               />
-              <Flexbox flexDirection="column" alignItems="flex-start">
+              <Flexbox column alignItems="flex-start">
                 <Text color="lightGrey" paddingBottom={1}>
                   Phone: +84.946.583.583
                 </Text>
@@ -118,21 +113,21 @@ export default class Footer extends React.Component<null> {
             {/* Working hours */}
             <Flexbox
               flex={1}
-              flexDirection="column"
+              column
               alignItems="flex-start"
               paddingHorizontal={2}
             >
               <Text
                 fontSize="m"
                 color="lightGrey"
-                fontWeight="bold"
+                bold
                 borderBottom
                 borderColor="visaRed"
                 marginBottom={5}
               >
                 Working Hours
               </Text>
-              <Flexbox flexDirection="column" alignItems="flex-start">
+              <Flexbox column alignItems="flex-start">
                 <Text color="lightGrey" paddingBottom={1}>
                   MON - FRI: 9:00 AM to 5:00 PM
                 </Text>
@@ -144,21 +139,21 @@ export default class Footer extends React.Component<null> {
             {/* About us */}
             <Flexbox
               flex={1}
-              flexDirection="column"
+              column
               alignItems="flex-start"
               paddingHorizontal={2}
             >
               <Text
                 fontSize="m"
                 color="lightGrey"
-                fontWeight="bold"
+                bold
                 borderBottom
                 borderColor="visaRed"
                 marginBottom={5}
               >
                 About us
               </Text>
-              <Flexbox flexDirection="column" alignItems="flex-start">
+              <Flexbox column alignItems="flex-start">
                 <Text color="lightGrey" paddingBottom={1}>
                   About Us
                 </Text>

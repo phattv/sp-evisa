@@ -27,14 +27,14 @@ export default class Layout extends React.Component<Props> {
           <link href="../static/sanitize.css" rel="stylesheet" />
         </Head>
 
-        <Flexbox flexDirection="column" flex={1} minHeight="100vh">
+        <Flexbox column flex={1} minHeight="100vh">
           <Header />
 
           <Flexbox
             paddingTop={18}
             flex={1}
             width="100%"
-            flexDirection="column"
+            column
             backgroundColor={backgroundColor || null}
             borderRight
             borderLeft

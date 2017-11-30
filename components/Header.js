@@ -82,7 +82,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
           left={0}
           backgroundColor="white"
           height={headerHeight}
-          flexDirection="column"
+          column
         >
           <Flexbox
             maxWidth={288}
@@ -142,7 +142,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
 
           {isMenuShowed ? (
             <Flexbox
-              flexDirection="column"
+              column
               position="fixed"
               width="100%"
               top={headerHeight}

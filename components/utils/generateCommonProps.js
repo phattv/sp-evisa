@@ -29,9 +29,12 @@ const setResponsiveFontSize = (
 ): string => {
   let actualFontSize;
   switch (spacingUnit) {
-    case spacingUnits.desktop:
-    case spacingUnits.tablet: {
+    case spacingUnits.desktop: {
       actualFontSize = fontSizes[fontSize || "default"];
+      break;
+    }
+    case spacingUnits.tablet: {
+      actualFontSize = fontSizes[fontSize || "default"] - 1;
       break;
     }
     case spacingUnits.mobile: {
@@ -80,9 +83,7 @@ export const generateCommonProps = (
   return `
 ${setResponsiveFontSize(props.fontSize, spacingUnit)};
 font-family: ${
-    props.fontWeight === "black"
-      ? "Lato_Black"
-      : props.fontWeight === "bold" ? "Lato_Bold" : "Lato_Regular"
+    props.black ? "Lato_Black" : props.bold ? "Lato_Bold" : "Lato_Regular"
   };
 
 ${props.backgroundColor &&
