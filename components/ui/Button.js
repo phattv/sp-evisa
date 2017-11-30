@@ -12,24 +12,24 @@ const Button = styled(Flexbox)`
   border: 2px solid;
   cursor: pointer;
   text-align: center;
-  padding: 15px;
+  padding: 15px 20px;
+  border-radius: 100px;
+  letter-spacing: 1.2px;
 
   ${props =>
     props.solid
       ? `
-border-radius: 3px;
 color: ${colors[props.color || "white"]};
-background-color: ${colors[props.backgroundColor || "visaBlue"]};
-border-color: ${colors[props.backgroundColor || "visaBlue"]};
+background-color: ${colors[props.backgroundColor || "visaRed"]};
+border-color: ${colors[props.backgroundColor || "visaRed"]};
         
 &:hover {
   color: ${colors[props.backgroundColor || "white"]};
-  background-color: ${colors[props.color || "darkBlue"]};
-  border-color: ${colors[props.color || "darkBlue"]};
+  background-color: ${colors[props.color || "darkRed"]};
+  border-color: ${colors[props.color || "darkRed"]};
 }
 `
       : `
-border-radius: 100px;
 color: ${colors[props.color || "white"]};
 background-color: transparent;
 border-color: ${colors[props.borderColor || "white"]};

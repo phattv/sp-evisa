@@ -14,7 +14,10 @@ export const borderRadius = 8;
 
 export const colors = {
   visaRed: "#CD2122",
+  darkRed: "#9F0F12",
   visaBlue: "#0061B1",
+  darkBlue: "#003058",
+  lightBlue: "#f0f5f8",
   darkGrey: "#3E3E3E",
   lightGrey: "#F9F9F9",
   white: "#FFFFFF"
