@@ -95,7 +95,7 @@ ${props.minWidth &&
     `min-width: ${standardizeMetricProp(props.minWidth, spacingUnit)}`};
 ${props.maxWidth &&
     `max-width: ${
-      props.resonsiveLayout
+      props.responsiveLayout
         ? "100%"
         : standardizeMetricProp(props.maxWidth, spacingUnit)
     }`};

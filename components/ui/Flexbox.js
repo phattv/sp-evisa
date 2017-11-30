@@ -5,7 +5,7 @@ import { screenSizes, spacingUnits } from "../../constants/ui";
 
 const setResponsiveFlexDirection = (props, spacingUnit) => {
   if (spacingUnit === spacingUnits.mobile) {
-    if (props.resonsiveLayout) {
+    if (props.responsiveLayout) {
       return !props.flexDirection || props.flexDirection === "row"
         ? "column"
         : "row";

@@ -73,7 +73,12 @@ export default class Footer extends React.Component<null> {
           </Flexbox>
 
           {/* Contact */}
-          <Flexbox width="100%" paddingTop={15} alignItems="flex-start">
+          <Flexbox
+            width="100%"
+            paddingTop={15}
+            alignItems="flex-start"
+            responsiveLayout
+          >
             <Flexbox
               flex={1}
               flexDirection="column"
