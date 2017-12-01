@@ -6,7 +6,8 @@ import {
   Flexbox,
   Image,
   Text,
-  Form
+  Form,
+  Input
 } from "./ui";
 import Layout from "./Layout";
 import Header from "./Header";
@@ -24,5 +25,6 @@ export {
   Layout,
   Header,
   Content,
-  Footer
+  Footer,
+  Input
 };

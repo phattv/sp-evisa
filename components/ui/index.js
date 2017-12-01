@@ -7,5 +7,6 @@ import Button from "./Button";
 import Text from "./Text";
 import Image from "./Image";
 import Form from "./Form";
+import Input from "./Input";
 
-export { Anchor, AnchorExternal, Flexbox, Button, Text, Image, Form };
+export { Anchor, AnchorExternal, Flexbox, Button, Text, Image, Form, Input };

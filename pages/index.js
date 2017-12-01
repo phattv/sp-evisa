@@ -9,7 +9,8 @@ import {
   Flexbox,
   Button,
   Image,
-  Form
+  Form,
+  Input
 } from "../components";
 
 const applyVisaSteps = [
@@ -33,8 +34,31 @@ const applyVisaSteps = [
   }
 ];
 
-export default class Home extends React.Component<null> {
+type State = {
+  quantity?: number,
+  type?: string,
+  processingTime?: string,
+  purpose?: string
+};
+export default class Home extends React.Component<null, State> {
+  state: State = {
+    quantity: 0,
+    type: "",
+    processingTime: "",
+    purpose: ""
+  };
+
+  updateQuantity = event => {
+    this.setState({
+      quantity: event.target.value
+    });
+  };
+
   render() {
+    const { quantity, type, processingTime, purpose } = this.state;
+    const serviceFee = quantity * 18;
+    const processingFee = 0;
+
     return (
       <Layout>
         <Content
@@ -76,8 +100,53 @@ export default class Home extends React.Component<null> {
                 </Flexbox>
                 <Flexbox alignItems="flex-start" paddingTop={5} column>
                   <Text bold>NUMBER OF VISA</Text>
-                  <input type="number" placeholder="1 applicant" />
+                  <Input
+                    value={quantity}
+                    onChange={this.updateQuantity}
+                    marginTop={2}
+                    type="number"
+                    placeholder="1 applicant"
+                  />
                 </Flexbox>
+                <Flexbox alignItems="flex-start" paddingTop={5} column>
+                  <Text bold>TYPE OF VISA</Text>
+                  <Input
+                    value={type}
+                    marginTop={2}
+                    type="number"
+                    placeholder="1 month single"
+                  />
+                </Flexbox>
+                <Flexbox alignItems="flex-start" paddingTop={5} column>
+                  <Text bold>PROCESSING TIME</Text>
+                  <Input
+                    marginTop={2}
+                    type="number"
+                    placeholder="Normal ( Guarantteed 1 working)"
+                  />
+                </Flexbox>
+                <Flexbox alignItems="flex-start" paddingTop={5} column>
+                  <Text bold>PURPOSE OF VISA</Text>
+                  <Input marginTop={2} type="number" placeholder="Tourism" />
+                </Flexbox>
+
+                <Flexbox paddingTop={4} justifyContent="space-between">
+                  <Text bold>Service Fee: </Text>
+                  <Text bold>{`${quantity} x $18 = $${serviceFee}`}</Text>
+                </Flexbox>
+                <Flexbox paddingTop={4} justifyContent="space-between">
+                  <Text bold>Processing Fee: </Text>
+                  <Text bold>{`${quantity} x $0 = $${processingFee}`}</Text>
+                </Flexbox>
+
+                <Flexbox paddingTop={4} justifyContent="space-between">
+                  <Text bold>TOTAL SERVICE FEE:</Text>
+                  <Text bold>${serviceFee + processingFee}</Text>
+                </Flexbox>
+
+                <Button solid marginTop={5}>
+                  APPLY NOW
+                </Button>
               </Form>
             </Flexbox>
           </Flexbox>
@@ -146,8 +215,8 @@ export default class Home extends React.Component<null> {
               responsiveLayout
             >
               {applyVisaSteps.map((step, index) => (
-                <div>
-                  <Flexbox>
+                <div key={index}>
+                  <Flexbox height={20}>
                     <Image
                       src={`/static/images/${step.image}.png`}
                       alt={step.image}
@@ -155,7 +224,7 @@ export default class Home extends React.Component<null> {
                       clickable
                     />
                   </Flexbox>
-                  <Flexbox paddingBottom={4}>
+                  <Flexbox paddingVertical={3}>
                     <Text fontSize="l" color="visaRed" bold>
                       {index + 1}
                     </Text>
@@ -175,7 +244,7 @@ export default class Home extends React.Component<null> {
 
         <Content backgroundColor="white">
           <Flexbox responsiveLayout>
-            <Flexbox flex={1} column>
+            <Flexbox flex={1} column paddingHorizontal={2}>
               <Flexbox>
                 <Image
                   src={`/static/images/take-note.png`}
