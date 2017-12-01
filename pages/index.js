@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import Select from "react-select";
 // custom
 import {
   Layout,
@@ -10,7 +11,8 @@ import {
   Button,
   Image,
   Form,
-  Input
+  Input,
+  Dropdown
 } from "../components";
 
 const applyVisaSteps = [
@@ -33,6 +35,14 @@ const applyVisaSteps = [
       "Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s)."
   }
 ];
+const typeOptions = [{ value: "oneMonth", label: "1 month single" }];
+const processingTimeOptions = [
+  { value: "normal", label: "Normal (Guaranteed 1 working)" }
+];
+const purposeOptions = [
+  { value: "tourism", label: "Tourism" },
+  { value: "work", label: "Work" }
+];
 
 type State = {
   quantity?: number,
@@ -48,9 +58,27 @@ export default class Home extends React.Component<null, State> {
     purpose: ""
   };
 
-  updateQuantity = event => {
+  updateQuantity = (event: Object) => {
     this.setState({
       quantity: event.target.value
+    });
+  };
+
+  updateType = (selectedOption: Object) => {
+    this.setState({
+      type: selectedOption.value
+    });
+  };
+
+  updateProcessingTime = (selectedOption: Object) => {
+    this.setState({
+      processingTime: selectedOption.value
+    });
+  };
+
+  updatePurpose = (selectedOption: Object) => {
+    this.setState({
+      purpose: selectedOption.value
     });
   };
 
@@ -110,24 +138,30 @@ export default class Home extends React.Component<null, State> {
                 </Flexbox>
                 <Flexbox alignItems="flex-start" paddingTop={5} column>
                   <Text bold>TYPE OF VISA</Text>
-                  <Input
+                  <Select
                     value={type}
-                    marginTop={2}
-                    type="number"
                     placeholder="1 month single"
+                    onChange={this.updateType}
+                    options={typeOptions}
                   />
                 </Flexbox>
                 <Flexbox alignItems="flex-start" paddingTop={5} column>
                   <Text bold>PROCESSING TIME</Text>
-                  <Input
-                    marginTop={2}
-                    type="number"
-                    placeholder="Normal ( Guarantteed 1 working)"
+                  <Select
+                    value={type}
+                    placeholder="Normal (Guaranteed 1 working)"
+                    onChange={this.updateProcessingTime}
+                    options={processingTimeOptions}
                   />
                 </Flexbox>
                 <Flexbox alignItems="flex-start" paddingTop={5} column>
                   <Text bold>PURPOSE OF VISA</Text>
-                  <Input marginTop={2} type="number" placeholder="Tourism" />
+                  <Select
+                    value={type}
+                    placeholder="Tourism"
+                    onChange={this.updatePurpose}
+                    options={purposeOptions}
+                  />
                 </Flexbox>
 
                 <Flexbox paddingTop={4} justifyContent="space-between">
