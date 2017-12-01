@@ -150,10 +150,14 @@ ${props.marginHorizontal &&
 
 ${props.border &&
     `border: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
-${props.borderTop && `border-top: 1px solid ${colors.lightGrey}`};
-${props.borderRight && `border-right: 1px solid ${colors.lightGrey}`};
-${props.borderBottom && `border-bottom: 1px solid ${colors.lightGrey}`};
-${props.borderLeft && `border-left: 1px solid ${colors.lightGrey}`};
+${props.borderTop &&
+    `border-top: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+${props.borderRight &&
+    `border-right: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+${props.borderBottom &&
+    `border-bottom: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+${props.borderLeft &&
+    `border-left: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
 ${props.borderRadius && `border-radius: ${borderRadius}px`};
 ${props.borderTopRightRadius && `border-top-right-radius: ${borderRadius}px`};
 ${props.borderBottomRightRadius &&

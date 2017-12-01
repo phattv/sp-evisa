@@ -1,5 +1,13 @@
 // @flow
-import { Anchor, AnchorExternal, Button, Flexbox, Image, Text } from "./ui";
+import {
+  Anchor,
+  AnchorExternal,
+  Button,
+  Flexbox,
+  Image,
+  Text,
+  Form
+} from "./ui";
 import Layout from "./Layout";
 import Header from "./Header";
 import Content from "./Content";
@@ -12,6 +20,7 @@ export {
   Button,
   Text,
   Image,
+  Form,
   Layout,
   Header,
   Content,

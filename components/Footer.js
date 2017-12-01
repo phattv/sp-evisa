@@ -44,21 +44,24 @@ export default class Footer extends React.Component<null> {
             </Text>
             <Flexbox>
               <Image
-                paddingAll={3}
+                marginVertical={2}
+                marginHorizontal={2}
                 maxWidth={8}
                 src="/static/images/facebook-logo.svg"
                 alt="facebook"
                 clickable
               />
               <Image
-                paddingAll={3}
+                marginVertical={2}
+                marginHorizontal={2}
                 maxWidth={8}
                 src="/static/images/instagram-logo.png"
                 alt="instagram"
                 clickable
               />
               <Image
-                paddingAll={3}
+                marginVertical={2}
+                marginHorizontal={2}
                 maxWidth={8}
                 src="/static/images/gplus-logo.svg"
                 alt="glus"
@@ -82,7 +85,7 @@ export default class Footer extends React.Component<null> {
             >
               <Text
                 fontSize="m"
-                color="lightGrey"
+                color="white"
                 bold
                 borderBottom
                 borderColor="visaRed"
@@ -97,13 +100,13 @@ export default class Footer extends React.Component<null> {
                 alt="payment logos"
               />
               <Flexbox column alignItems="flex-start">
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Phone: +84.946.583.583
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Office: 74 Nguyen Khoai Street, HCMC
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Email: sales@vietnamvisafast-cheap.com
                   <br />
                   support@vietnamvisafast-cheap.com
@@ -119,7 +122,7 @@ export default class Footer extends React.Component<null> {
             >
               <Text
                 fontSize="m"
-                color="lightGrey"
+                color="white"
                 bold
                 borderBottom
                 borderColor="visaRed"
@@ -128,10 +131,10 @@ export default class Footer extends React.Component<null> {
                 Working Hours
               </Text>
               <Flexbox column alignItems="flex-start">
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   MON - FRI: 9:00 AM to 5:00 PM
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   SAT - SUN: 11:00 AM to 3:00 PM
                 </Text>
               </Flexbox>
@@ -145,7 +148,7 @@ export default class Footer extends React.Component<null> {
             >
               <Text
                 fontSize="m"
-                color="lightGrey"
+                color="white"
                 bold
                 borderBottom
                 borderColor="visaRed"
@@ -154,22 +157,22 @@ export default class Footer extends React.Component<null> {
                 About us
               </Text>
               <Flexbox column alignItems="flex-start">
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   About Us
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Contact Us
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Terms of Use
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Privacy Policy
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Local Partners
                 </Text>
-                <Text color="lightGrey" paddingBottom={1}>
+                <Text color="white" paddingBottom={1}>
                   Local Websites
                 </Text>
               </Flexbox>
@@ -178,7 +181,7 @@ export default class Footer extends React.Component<null> {
         </Flexbox>
 
         <Flexbox width="100%" backgroundColor="visaRed" paddingVertical={3}>
-          <Text color="lightGrey">
+          <Text color="white">
             Copyright © 2017 VIETNAM VISA FAST- CHEAP SERVICES
           </Text>
         </Flexbox>
