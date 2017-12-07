@@ -1,0 +1,16 @@
+FROM node:alpine
+
+# Create app directory
+RUN mkdir -p usr/src/evisavn
+WORKDIR usr/src/evisavn
+
+# Install app dependencies
+COPY package.json /usr/src/evisavn
+RUN yarn
+
+# Bundle app source
+COPY . /usr/src/evisavn
+
+EXPOSE 3000
+
+CMD [ "yarn", "dev", "-p=3000" ]
