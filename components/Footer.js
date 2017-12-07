@@ -77,8 +77,10 @@ export default class Footer extends React.Component<null> {
             alignItems="flex-start"
             responsiveLayout
           >
+            {/*Contact*/}
             <Flexbox
               flex={1}
+              width="100%"
               column
               alignItems="flex-start"
               paddingHorizontal={2}
@@ -90,6 +92,7 @@ export default class Footer extends React.Component<null> {
                 borderBottom
                 borderColor="visaRed"
                 marginBottom={5}
+                responsiveAlignItemsCenter
               >
                 Contact
               </Text>
@@ -116,6 +119,7 @@ export default class Footer extends React.Component<null> {
             {/* Working hours */}
             <Flexbox
               flex={1}
+              width="100%"
               column
               alignItems="flex-start"
               paddingHorizontal={2}
@@ -142,6 +146,7 @@ export default class Footer extends React.Component<null> {
             {/* About us */}
             <Flexbox
               flex={1}
+              width="100%"
               column
               alignItems="flex-start"
               paddingHorizontal={2}

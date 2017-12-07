@@ -98,9 +98,9 @@ export default class Home extends React.Component<null, State> {
             backgroundSize: "cover"
           }}
         >
-          <Flexbox width="100%">
+          <Flexbox width="100%" responsiveLayout>
             <Flexbox flex={1} />
-            <Flexbox flex={1}>
+            <Flexbox flex={1} paddingVertical={4}>
               <Flexbox column alignItems="center" justifyContent="center">
                 <Text bold color="white" fontSize="l">
                   1. Best price guarantee <br />
