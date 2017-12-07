@@ -1,4 +1,6 @@
-.next
 node_modules
-.next
 .DS_Store
+.next
+out
+deploy
+dist
