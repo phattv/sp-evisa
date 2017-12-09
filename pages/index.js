@@ -11,8 +11,7 @@ import {
   Button,
   Image,
   Form,
-  Input,
-  Dropdown
+  Input
 } from "../components";
 
 const applyVisaSteps = [
@@ -33,6 +32,35 @@ const applyVisaSteps = [
     title: "Get approval letter",
     content:
       "Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s)."
+  }
+];
+const whyChooseUs = [
+  {
+    image: "directions",
+    title: "Faster, cheaper and easier",
+    content:
+      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
+  },
+  {
+    image: "lock",
+    title: "Prompt responses, safe and secure",
+    content:
+      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
+  },
+  {
+    image: "quality",
+    title: "Quality and Reliability",
+    content:
+      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
+  },
+  {
+    image: "time",
+    title:
+      "On time gurantee, \n" +
+      "Refund in full if Rejected visa and \n" +
+      "our services are not good",
+    content:
+      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
   }
 ];
 const typeOptions = [{ value: "oneMonth", label: "1 month single" }];
@@ -343,6 +371,88 @@ export default class Home extends React.Component<null, State> {
                 />
               </div>
             </div>
+          </Flexbox>
+        </Content>
+
+        {/* Why */}
+        <Content>
+          <Flexbox column width="100%">
+            <Text size="xl" black color="visaBlue">
+              Why choose us
+            </Text>
+            <Flexbox responsiveLayout>
+              <Flexbox flex={1}>
+                <Image
+                  src="/static/images/passport.png"
+                  alt="passport"
+                  maxWidth={400}
+                />
+              </Flexbox>
+
+              <Flexbox
+                flex={1}
+                paddingHorizontal={2}
+                paddingVertical={2}
+                column
+              >
+                {whyChooseUs.map(
+                  (reason, index) =>
+                    index < 2 && (
+                      <Flexbox alignItems="center" paddingVertical={2}>
+                        <Image
+                          src={`/static/images/${reason.image}.png`}
+                          alt={reason.image}
+                          paddingRight={3}
+                          maxWidth={20}
+                        />
+                        <Flexbox column>
+                          <Text
+                            bold
+                            size="l"
+                            paddingBottom={1}
+                            textAlign="center"
+                          >
+                            {reason.title}
+                          </Text>
+                          <Text color="grey">{reason.content}</Text>
+                        </Flexbox>
+                      </Flexbox>
+                    )
+                )}
+              </Flexbox>
+
+              <Flexbox
+                flex={1}
+                paddingHorizontal={2}
+                paddingVertical={2}
+                column
+              >
+                {whyChooseUs.map(
+                  (reason, index) =>
+                    index >= 2 && (
+                      <Flexbox alignItems="center" paddingVertical={2}>
+                        <Image
+                          src={`/static/images/${reason.image}.png`}
+                          alt={reason.image}
+                          paddingRight={3}
+                          maxWidth={20}
+                        />
+                        <Flexbox column>
+                          <Text
+                            bold
+                            size="l"
+                            paddingBottom={1}
+                            textAlign="center"
+                          >
+                            {reason.title}
+                          </Text>
+                          <Text color="grey">{reason.content}</Text>
+                        </Flexbox>
+                      </Flexbox>
+                    )
+                )}
+              </Flexbox>
+            </Flexbox>
           </Flexbox>
         </Content>
       </Layout>
