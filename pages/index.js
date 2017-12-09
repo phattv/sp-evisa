@@ -89,6 +89,7 @@ export default class Home extends React.Component<null, State> {
 
     return (
       <Layout>
+        {/* Form */}
         <Content
           style={{
             backgroundImage: "url(/static/images/form-background.png)",
@@ -185,6 +186,7 @@ export default class Home extends React.Component<null, State> {
             </Flexbox>
           </Flexbox>
         </Content>
+
         {/* Welcome */}
         <Content backgroundColor="white">
           <Flexbox column>
@@ -206,7 +208,7 @@ export default class Home extends React.Component<null, State> {
               when they come to Vietnam via airline.
             </Text>
             <br />
-            <Text textAlign="center">
+            <Text textAlign="center" color="grey">
               evisa-vn.com is a legal and that is approved by the government of
               vietnam.
               <br />
@@ -231,6 +233,7 @@ export default class Home extends React.Component<null, State> {
           </Flexbox>
         </Content>
 
+        {/* 3-step */}
         <Content backgroundColor="lightBlue">
           <Flexbox column width="100%">
             <Text size="xl" black color="visaBlue">
@@ -248,7 +251,6 @@ export default class Home extends React.Component<null, State> {
                       src={`/static/images/${step.image}.png`}
                       alt={step.image}
                       maxWidth={20}
-                      clickable
                     />
                   </Flexbox>
                   <Flexbox paddingVertical={3}>
@@ -261,7 +263,9 @@ export default class Home extends React.Component<null, State> {
                     </Text>
                   </Flexbox>
                   <Flexbox>
-                    <Text textAlign="center">{step.content}</Text>
+                    <Text color="grey" textAlign="center">
+                      {step.content}
+                    </Text>
                   </Flexbox>
                 </div>
               ))}
@@ -269,6 +273,7 @@ export default class Home extends React.Component<null, State> {
           </Flexbox>
         </Content>
 
+        {/* Fee & video */}
         <Content backgroundColor="white">
           <Flexbox responsiveLayout>
             <Flexbox flex={1} column paddingHorizontal={2}>
@@ -287,7 +292,7 @@ export default class Home extends React.Component<null, State> {
                 </Text>
               </Flexbox>
               <Flexbox paddingTop={2}>
-                <Text>
+                <Text color="grey">
                   <Text bold color="visaBlue">
                     Visa service fee
                   </Text>{" "}
@@ -299,7 +304,7 @@ export default class Home extends React.Component<null, State> {
                 </Text>
               </Flexbox>
               <Flexbox paddingTop={2}>
-                <Text>
+                <Text color="grey">
                   <Text bold color="visaRed">
                     Stamping fee
                   </Text>{" "}
