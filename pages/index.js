@@ -97,6 +97,65 @@ const purposeOptions = [
   { value: 'tourism', label: 'Tourism' },
   { value: 'work', label: 'Work' },
 ];
+const bookingOnlineReasons = [
+  {
+    title: 'Hassle-free',
+    content: '100% online procedure, no passport send off',
+  },
+  {
+    title: 'Convenience',
+    content: 'Applicable for all air-travellers to Vietnam',
+  },
+  {
+    title: 'Faster',
+    content: 'Maximum 48 hours processing time',
+  },
+  {
+    title: 'Cheaper',
+    content: 'Low service fee, no hidden charge',
+  },
+  {
+    title: 'More accessible',
+    content: 'Best choice for those living far from Embassies',
+  },
+  {
+    title: 'Safe & Sercure',
+    content: 'Our website is secured by 256 bit SSL encryption and SiteLock.',
+  },
+];
+const visaKnowledge = [
+  {
+    title: 'Vietnam Visa Tips',
+    content: 'Guide to apply and get Visa to Vietnam.',
+  },
+  {
+    title: 'Vietnam-visa-application',
+    content: 'Useful informations about Vietnam Visa.',
+  },
+  {
+    title: 'Apply and Get Visa to Vietnam for foreigners',
+    content: 'Necessary info for tourist or business to get Vietam Visa.',
+  },
+  {
+    title: 'VietNam Visa On Arrival',
+    content:
+      'Most likely the legally easiest way to obtain your visa to Vietnam.',
+  },
+  {
+    title: 'Urgent VietNam Visa',
+    content:
+      'Booking visa on Holidays or Weekends or different reasons for everyone.',
+  },
+];
+const applyWithConfidence = [
+  'Safe and Secure',
+  'Good Quality & Reliability',
+  'Prombt Responses',
+  'Competitive Prices ($18)',
+  'Save your time and money',
+  '2 working day',
+  'Money back guarantee for declined applications',
+];
 
 type State = {
   quantity?: number,
@@ -480,9 +539,9 @@ export default class Home extends React.Component<null, State> {
 
         {/* Extra Services */}
         <Content>
-          <Flexbox widht="100%" column>
+          <Flexbox width="100%" column>
             <BlockHeader header="Extra services" />
-            <Flexbox responsiveLayout>
+            <Flexbox width="100%" responsiveLayout>
               {extraServices.map(
                 (service, index) =>
                   index < 3 && (
@@ -501,7 +560,7 @@ export default class Home extends React.Component<null, State> {
                   ),
               )}
             </Flexbox>
-            <Flexbox responsiveLayout>
+            <Flexbox width="100%" responsiveLayout>
               {extraServices.map(
                 (service, index) =>
                   index >= 3 && (
@@ -519,6 +578,111 @@ export default class Home extends React.Component<null, State> {
                     </Flexbox>
                   ),
               )}
+            </Flexbox>
+          </Flexbox>
+        </Content>
+
+        {/* Check marks */}
+        <Content>
+          <Flexbox responsiveLayout>
+            <Flexbox flex={1} column>
+              <Text
+                size="l"
+                color="visaBlue"
+                bold
+                paddingVertical={2}
+                textAlign="center"
+              >
+                REASONS TO BOOK VISA ONLINE
+              </Text>
+
+              <Flexbox
+                paddingVertical={4}
+                marginVertical={4}
+                paddingHorizontal={4}
+                marginHorizontal={4}
+                border
+                column
+                borderRadius
+              >
+                {bookingOnlineReasons.map(reason => (
+                  <Flexbox justifyContent="flex-start" width="100%">
+                    <div>
+                      ✓<Text paddingLeft={1} bold>
+                        {reason.title}
+                      </Text>
+                      :&nbsp;
+                      <Text>{reason.content}</Text>
+                    </div>
+                  </Flexbox>
+                ))}
+              </Flexbox>
+            </Flexbox>
+
+            <Flexbox flex={1} column>
+              <Text
+                size="l"
+                color="visaBlue"
+                bold
+                paddingVertical={2}
+                textAlign="center"
+              >
+                VIETNAM VISA KNOWLEDGE
+              </Text>
+
+              <Flexbox
+                paddingVertical={4}
+                marginVertical={4}
+                paddingHorizontal={4}
+                marginHorizontal={4}
+                border
+                column
+                borderRadius
+              >
+                {visaKnowledge.map(reason => (
+                  <Flexbox justifyContent="flex-start" width="100%">
+                    <div>
+                      ✓<Text paddingLeft={1} bold>
+                        {reason.title}
+                      </Text>
+                      :&nbsp;
+                      <Text>{reason.content}</Text>
+                    </div>
+                  </Flexbox>
+                ))}
+              </Flexbox>
+            </Flexbox>
+
+            <Flexbox flex={1} column>
+              <Text
+                size="l"
+                color="visaBlue"
+                bold
+                paddingVertical={2}
+                textAlign="center"
+              >
+                APPLY WITH CONFIDENT
+              </Text>
+
+              <Flexbox
+                paddingVertical={4}
+                marginVertical={4}
+                paddingHorizontal={4}
+                marginHorizontal={4}
+                border
+                column
+                borderRadius
+              >
+                {applyWithConfidence.map(reason => (
+                  <Flexbox justifyContent="flex-start" width="100%">
+                    <div>
+                      ✓<Text paddingLeft={1} bold>
+                        {reason}
+                      </Text>
+                    </div>
+                  </Flexbox>
+                ))}
+              </Flexbox>
             </Flexbox>
           </Flexbox>
         </Content>
