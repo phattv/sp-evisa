@@ -7,7 +7,6 @@
   "author": "Phat Tran",
   "license": "MIT",
   "scripts": {
-    "precommit": "lint-staged",
     "dev": "next",
     "build": "next build",
     "start": "next start",

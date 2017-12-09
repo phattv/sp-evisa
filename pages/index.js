@@ -1,7 +1,7 @@
 // @flow
 // vendor
-import React from "react";
-import Select from "react-select";
+import React from 'react';
+import Select from 'react-select';
 // custom
 import {
   Layout,
@@ -11,102 +11,128 @@ import {
   Button,
   Image,
   Form,
-  Input
-} from "../components";
+  Input,
+} from '../components';
 
 const applyVisaSteps = [
   {
-    image: "submit-application",
-    title: "Submit application",
+    image: 'submit-application',
+    title: 'Submit application',
     content:
-      "Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s)."
+      'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
   },
   {
-    image: "pay-service-fee",
-    title: "Pay Service Fee",
+    image: 'pay-service-fee',
+    title: 'Pay Service Fee',
     content:
-      "Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s)."
+      'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
   },
   {
-    image: "get-approval-letter",
-    title: "Get approval letter",
+    image: 'get-approval-letter',
+    title: 'Get approval letter',
     content:
-      "Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s)."
-  }
+      'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
+  },
 ];
 const whyChooseUs = [
   {
-    image: "directions",
-    title: "Faster, cheaper and easier",
+    image: 'directions',
+    title: 'Faster, cheaper and easier',
     content:
-      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
+      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
   },
   {
-    image: "lock",
-    title: "Prompt responses, safe and secure",
+    image: 'lock',
+    title: 'Prompt responses, safe and secure',
     content:
-      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
+      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
   },
   {
-    image: "quality",
-    title: "Quality and Reliability",
+    image: 'quality',
+    title: 'Quality and Reliability',
     content:
-      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
+      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
   },
   {
-    image: "time",
+    image: 'time',
     title:
-      "On time gurantee, \n" +
-      "Refund in full if Rejected visa and \n" +
-      "our services are not good",
+      'On time gurantee, \n' +
+      'Refund in full if Rejected visa and \n' +
+      'our services are not good',
     content:
-      "Save your time, save your money,it only takes you 5 minutes to fill in the visa online form."
-  }
+      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
+  },
 ];
-const typeOptions = [{ value: "oneMonth", label: "1 month single" }];
+const extraServices = [
+  {
+    image: 'airport-track',
+    title: 'Air port fast-track Service',
+  },
+  {
+    image: 'car-pickup',
+    title: 'Car pick-up service',
+  },
+  {
+    image: 'visa-renewal',
+    title: 'Vietnam visa extension and renewal service',
+  },
+  {
+    image: 'hotel-booking',
+    title: 'Hotel booking service',
+  },
+  {
+    image: 'domestic-flight',
+    title: 'Vietnam domestic flights',
+  },
+  {
+    image: 'travel-booking',
+    title: 'Tour and travel booking',
+  },
+];
+const typeOptions = [{ value: 'oneMonth', label: '1 month single' }];
 const processingTimeOptions = [
-  { value: "normal", label: "Normal (Guaranteed 1 working)" }
+  { value: 'normal', label: 'Normal (Guaranteed 1 working)' },
 ];
 const purposeOptions = [
-  { value: "tourism", label: "Tourism" },
-  { value: "work", label: "Work" }
+  { value: 'tourism', label: 'Tourism' },
+  { value: 'work', label: 'Work' },
 ];
 
 type State = {
   quantity?: number,
   type?: string,
   processingTime?: string,
-  purpose?: string
+  purpose?: string,
 };
 export default class Home extends React.Component<null, State> {
   state: State = {
     quantity: 0,
-    type: "",
-    processingTime: "",
-    purpose: ""
+    type: '',
+    processingTime: '',
+    purpose: '',
   };
 
   updateQuantity = (event: Object) => {
     this.setState({
-      quantity: event.target.value
+      quantity: event.target.value,
     });
   };
 
   updateType = (selectedOption: Object) => {
     this.setState({
-      type: selectedOption.value
+      type: selectedOption.value,
     });
   };
 
   updateProcessingTime = (selectedOption: Object) => {
     this.setState({
-      processingTime: selectedOption.value
+      processingTime: selectedOption.value,
     });
   };
 
   updatePurpose = (selectedOption: Object) => {
     this.setState({
-      purpose: selectedOption.value
+      purpose: selectedOption.value,
     });
   };
 
@@ -120,11 +146,11 @@ export default class Home extends React.Component<null, State> {
         {/* Form */}
         <Content
           style={{
-            backgroundImage: "url(/static/images/form-background.png)",
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
-            backgroundPosition: "center",
-            backgroundSize: "cover"
+            backgroundImage: 'url(/static/images/form-background.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
           }}
         >
           <Flexbox width="100%" responsiveLayout>
@@ -227,7 +253,7 @@ export default class Home extends React.Component<null, State> {
               </Text>
             </Flexbox>
             <Text bold textAlign="center">
-              We are pleased to serve you at website{" "}
+              We are pleased to serve you at website{' '}
               <Text bold fontStyle="italic" color="visaBlue">
                 evisa-vn.com
               </Text>
@@ -245,12 +271,12 @@ export default class Home extends React.Component<null, State> {
               <br />
               For further information, please contact us at below.
               <br />
-              <Text bold>Hotline:</Text>{" "}
+              <Text bold>Hotline:</Text>{' '}
               <Text bold color="visaBlue">
                 (+84).124.456.789
               </Text>
               <br />
-              <Text bold>Email:</Text>{" "}
+              <Text bold>Email:</Text>{' '}
               <Text bold color="visaBlue">
                 sales@evisa-vn.com | support@evisa-vn.com
               </Text>
@@ -264,9 +290,7 @@ export default class Home extends React.Component<null, State> {
         {/* 3-step */}
         <Content backgroundColor="lightBlue">
           <Flexbox column width="100%">
-            <Text size="xl" black color="visaBlue">
-              3 steps to get Visa
-            </Text>
+            <BlockHeader header="3 steps to get Visa" />
             <Flexbox
               justifyContent="between-around"
               width="100%"
@@ -313,7 +337,7 @@ export default class Home extends React.Component<null, State> {
                   clickable
                 />
                 <Text bold size="l">
-                  When using{" "}
+                  When using{' '}
                   <Text bold size="l" color="visaBlue">
                     evisa-vn.com
                   </Text>, you need to pay 2 kind of fees
@@ -323,7 +347,7 @@ export default class Home extends React.Component<null, State> {
                 <Text color="grey">
                   <Text bold color="visaBlue">
                     Visa service fee
-                  </Text>{" "}
+                  </Text>{' '}
                   is paid on our website for our processing your vietnam visa
                   request. We – evisa-vn will be representative for customers to
                   apply with the Immigration Department to get the visa approval
@@ -335,7 +359,7 @@ export default class Home extends React.Component<null, State> {
                 <Text color="grey">
                   <Text bold color="visaRed">
                     Stamping fee
-                  </Text>{" "}
+                  </Text>{' '}
                   is ruled by the Immigration Department and the rate of
                   stamping fee is publicly announced at any legal Governmental
                   website and on the landing visa counter at any international
@@ -348,10 +372,10 @@ export default class Home extends React.Component<null, State> {
             <div style={{ flex: 1 }}>
               <div
                 style={{
-                  position: "relative",
+                  position: 'relative',
                   paddingTop: 0,
-                  paddingBottom: "56.25%",
-                  height: 0
+                  paddingBottom: '56.25%',
+                  height: 0,
                 }}
               >
                 <iframe
@@ -362,11 +386,11 @@ export default class Home extends React.Component<null, State> {
                   allowFullScreen
                   style={{
                     zIndex: 1,
-                    position: "absolute",
+                    position: 'absolute',
                     top: 0,
                     left: 0,
-                    width: "100%",
-                    height: "100%"
+                    width: '100%',
+                    height: '100%',
                   }}
                 />
               </div>
@@ -377,9 +401,7 @@ export default class Home extends React.Component<null, State> {
         {/* Why */}
         <Content>
           <Flexbox column width="100%">
-            <Text size="xl" black color="visaBlue">
-              Why choose us
-            </Text>
+            <BlockHeader header="Why choose us" />
             <Flexbox responsiveLayout>
               <Flexbox flex={1}>
                 <Image
@@ -417,7 +439,7 @@ export default class Home extends React.Component<null, State> {
                           <Text color="grey">{reason.content}</Text>
                         </Flexbox>
                       </Flexbox>
-                    )
+                    ),
                 )}
               </Flexbox>
 
@@ -449,13 +471,72 @@ export default class Home extends React.Component<null, State> {
                           <Text color="grey">{reason.content}</Text>
                         </Flexbox>
                       </Flexbox>
-                    )
+                    ),
                 )}
               </Flexbox>
             </Flexbox>
           </Flexbox>
         </Content>
+
+        {/* Extra Services */}
+        <Content>
+          <Flexbox widht="100%" column>
+            <BlockHeader header="Extra services" />
+            <Flexbox responsiveLayout>
+              {extraServices.map(
+                (service, index) =>
+                  index < 3 && (
+                    <Flexbox column flex={1}>
+                      <Image
+                        src={`/static/images/${service.image}.png`}
+                        alt={service.image}
+                        paddingVertical={2}
+                        paddingHorizontal={2}
+                        maxWidth={50}
+                      />
+                      <Text textAlign="center" bold size="l">
+                        {service.title}
+                      </Text>
+                    </Flexbox>
+                  ),
+              )}
+            </Flexbox>
+            <Flexbox responsiveLayout>
+              {extraServices.map(
+                (service, index) =>
+                  index >= 3 && (
+                    <Flexbox column flex={1}>
+                      <Image
+                        src={`/static/images/${service.image}.png`}
+                        alt={service.image}
+                        paddingVertical={2}
+                        paddingHorizontal={2}
+                        maxWidth={50}
+                      />
+                      <Text textAlign="center" bold size="l">
+                        {service.title}
+                      </Text>
+                    </Flexbox>
+                  ),
+              )}
+            </Flexbox>
+          </Flexbox>
+        </Content>
       </Layout>
+    );
+  }
+}
+
+type BlockHeaderProps = {
+  header: string,
+};
+class BlockHeader extends React.Component<BlockHeaderProps> {
+  render() {
+    const { header } = this.props;
+    return (
+      <Text size="xl" black color="visaBlue" paddingBottom={8}>
+        {header}
+      </Text>
     );
   }
 }
