@@ -94,13 +94,14 @@ export default class Header extends React.PureComponent<null, HeaderState> {
           >
             <Flexbox>
               <Anchor href="/" as="/">
-                <Image
-                  src="/static/images/logo.png"
-                  alt="evisa logo"
-                  maxHeight={10}
-                  maxWidth={80}
-                  clickable
-                />
+                <Text size="xl">evisa-vn.com</Text>
+                {/*<Image*/}
+                {/*src="/static/images/logo.png"*/}
+                {/*alt="evisa logo"*/}
+                {/*maxHeight={10}*/}
+                {/*maxWidth={80}*/}
+                {/*clickable*/}
+                {/*/>*/}
               </Anchor>
             </Flexbox>
             <Flexbox>

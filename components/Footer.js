@@ -24,13 +24,16 @@ export default class Footer extends React.Component<null> {
             responsiveAlignItemsCenter
           >
             <Anchor href="/" as="/">
-              <Image
-                src="/static/images/logo-white.png"
-                alt="evisa logo"
-                paddingBottom={8}
-                maxWidth={80}
-                clickable
-              />
+              <Text color="white" size="xl">
+                evisa-vn.com
+              </Text>
+              {/*<Image*/}
+              {/*src="/static/images/logo-white.png"*/}
+              {/*alt="evisa logo"*/}
+              {/*paddingBottom={8}*/}
+              {/*maxWidth={80}*/}
+              {/*clickable*/}
+              {/*/>*/}
             </Anchor>
             <Text
               color="lightGrey"
@@ -86,7 +89,7 @@ export default class Footer extends React.Component<null> {
               paddingHorizontal={2}
             >
               <Text
-                fontSize="m"
+                size="m"
                 color="white"
                 bold
                 borderBottom
@@ -110,9 +113,9 @@ export default class Footer extends React.Component<null> {
                   Office: 74 Nguyen Khoai Street, HCMC
                 </Text>
                 <Text color="white" paddingBottom={1}>
-                  Email: sales@vietnamvisafast-cheap.com
+                  Email: sales@evisa-vn.com
                   <br />
-                  support@vietnamvisafast-cheap.com
+                  support@evisa-vn.com
                 </Text>
               </Flexbox>
             </Flexbox>
@@ -125,7 +128,7 @@ export default class Footer extends React.Component<null> {
               paddingHorizontal={2}
             >
               <Text
-                fontSize="m"
+                size="m"
                 color="white"
                 bold
                 borderBottom
@@ -152,7 +155,7 @@ export default class Footer extends React.Component<null> {
               paddingHorizontal={2}
             >
               <Text
-                fontSize="m"
+                size="m"
                 color="white"
                 bold
                 borderBottom
@@ -186,9 +189,7 @@ export default class Footer extends React.Component<null> {
         </Flexbox>
 
         <Flexbox width="100%" backgroundColor="visaRed" paddingVertical={3}>
-          <Text color="white">
-            Copyright © 2017 VIETNAM VISA FAST- CHEAP SERVICES
-          </Text>
+          <Text color="white">Copyright © 2017 evisa-vn</Text>
         </Flexbox>
       </Flexbox>
     );

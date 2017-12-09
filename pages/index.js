@@ -102,7 +102,7 @@ export default class Home extends React.Component<null, State> {
             <Flexbox flex={1} />
             <Flexbox flex={1} paddingVertical={4}>
               <Flexbox column alignItems="center" justifyContent="center">
-                <Text bold color="white" fontSize="l">
+                <Text bold color="white" size="l">
                   1. Best price guarantee <br />
                   2. Vietnam Urgent visa <br />
                   3. Vietnam Extension visa <br />
@@ -122,7 +122,7 @@ export default class Home extends React.Component<null, State> {
             >
               <Form paddingVertical={6} paddingHorizontal={6}>
                 <Flexbox>
-                  <Text color="visaRed" fontSize="xl" bold textAlign="center">
+                  <Text color="visaRed" size="xl" bold textAlign="center">
                     VIETNAM VISA FORM
                   </Text>
                 </Flexbox>
@@ -189,23 +189,17 @@ export default class Home extends React.Component<null, State> {
         <Content backgroundColor="white">
           <Flexbox column>
             <Flexbox paddingBottom={6}>
-              <Text fontSize="xl" black color="visaBlue">
+              <Text size="xl" black color="visaBlue">
                 Welcome to&nbsp;
               </Text>
-              <Text fontSize="xl" black color="visaRed">
-                Vietnamvisa
-              </Text>
-              <Text fontSize="xl" black color="visaBlue">
-                fast-cheap.
-              </Text>
-              <Text fontSize="xl" black color="darkGrey">
-                com
+              <Text size="xl" black color="visaRed">
+                evisa-vn.com
               </Text>
             </Flexbox>
             <Text bold textAlign="center">
               We are pleased to serve you at website{" "}
               <Text bold fontStyle="italic" color="visaBlue">
-                Vietnamvisafast-cheap.com
+                evisa-vn.com
               </Text>
               <br />
               Vietnam visa online is applied for all citizens all over the world
@@ -213,8 +207,8 @@ export default class Home extends React.Component<null, State> {
             </Text>
             <br />
             <Text textAlign="center">
-              Vietnam visa fast-cheap is a legal and that is approved by the
-              government of vietnam.
+              evisa-vn.com is a legal and that is approved by the government of
+              vietnam.
               <br />
               We provide the supporting service for visa approval letter
               application.
@@ -228,8 +222,7 @@ export default class Home extends React.Component<null, State> {
               <br />
               <Text bold>Email:</Text>{" "}
               <Text bold color="visaBlue">
-                sales@vietnamvisafast-cheap.com |
-                support@vietnamvisafast-cheap.com
+                sales@evisa-vn.com | support@evisa-vn.com
               </Text>
             </Text>
             <Button solid marginTop={8}>
@@ -240,7 +233,7 @@ export default class Home extends React.Component<null, State> {
 
         <Content backgroundColor="lightBlue">
           <Flexbox column width="100%">
-            <Text fontSize="xl" black color="visaBlue">
+            <Text size="xl" black color="visaBlue">
               3 steps to get Visa
             </Text>
             <Flexbox
@@ -259,11 +252,11 @@ export default class Home extends React.Component<null, State> {
                     />
                   </Flexbox>
                   <Flexbox paddingVertical={3}>
-                    <Text fontSize="l" color="visaRed" bold>
+                    <Text size="l" color="visaRed" bold>
                       {index + 1}
                     </Text>
                     &nbsp;
-                    <Text fontSize="l" bold color="visaBlue">
+                    <Text size="l" bold color="visaBlue">
                       {step.title}
                     </Text>
                   </Flexbox>
@@ -286,10 +279,10 @@ export default class Home extends React.Component<null, State> {
                   maxWidth={20}
                   clickable
                 />
-                <Text bold fontSize="l">
+                <Text bold size="l">
                   When using{" "}
-                  <Text bold fontSize="l" color="visaBlue">
-                    Vietnamvisafast-cheap.com
+                  <Text bold size="l" color="visaBlue">
+                    evisa-vn.com
                   </Text>, you need to pay 2 kind of fees
                 </Text>
               </Flexbox>
@@ -299,11 +292,10 @@ export default class Home extends React.Component<null, State> {
                     Visa service fee
                   </Text>{" "}
                   is paid on our website for our processing your vietnam visa
-                  request. We – Vietnam Visa Services shafast-cheap will be
-                  representative for customers to apply with the Immigration
-                  Department to get the visa approval letter in time as your
-                  booking( normal service: 2days, urgent : 4-8 hours -Excluding
-                  weekends/national holidays)
+                  request. We – evisa-vn will be representative for customers to
+                  apply with the Immigration Department to get the visa approval
+                  letter in time as your booking( normal service: 2days, urgent
+                  : 4-8 hours -Excluding weekends/national holidays)
                 </Text>
               </Flexbox>
               <Flexbox paddingTop={2}>

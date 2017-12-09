@@ -10,7 +10,7 @@ import {
 const Text = styled.span`
   color: ${props => colors[props.color || "darkGrey"]};
   line-height: ${props =>
-    getLineHeightValue(props.lineHeight || props.fontSize || "default")};
+    getLineHeightValue(props.lineHeight || props.size || "default")};
 
   ${props =>
     props.letterSpacing && `letter-spacing: ${props.letterSpacing}px`}};

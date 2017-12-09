@@ -81,7 +81,7 @@ export const generateCommonProps = (
   spacingUnit: number
 ): string => {
   return `
-${setResponsiveFontSize(props.fontSize, spacingUnit)};
+${setResponsiveFontSize(props.size, spacingUnit)};
 font-family: ${
     props.black ? "Lato_Black" : props.bold ? "Lato_Bold" : "Lato_Regular"
   };
