@@ -1,67 +1,65 @@
 // @flow
 // Vendor
-import * as React from "react";
-import Media from "react-media";
-// import { scrollSpy } from 'react-scroll';
+import * as React from 'react';
+import Media from 'react-media';
 
 // Custom
-import { Anchor, Flexbox, Image, Text, Button } from "../components/ui";
-import { colors, screenSizes } from "../constants/ui";
-import CustomReactScrollLink from "./CustomReactScrollLink";
+import { Anchor, Flexbox, Image, Text } from '../components/ui';
+import { colors, screenSizes } from '../constants/ui';
 
 const headerHeight = 25;
-const blockId = "header";
+const blockId = 'header';
 const styleHtml = `<style>#${blockId} a.active {color: ${
   colors.visaRed
 }}</style>`;
 const menus = [
   {
-    text: "HOME",
-    to: "home"
+    text: 'HOME',
+    url: '/',
   },
   {
-    text: "APPLY VISA ONLINE",
-    to: "applyVisaOnline"
+    text: 'APPLY VISA ONLINE',
+    url: 'apply',
   },
   {
-    text: "VISA FEES",
-    to: "visaFee"
+    text: 'VISA FEES',
+    url: 'visaFee',
   },
   {
-    text: "HOW TO APPLY VISA",
-    to: "howToApply"
+    text: 'HOW TO APPLY VISA',
+    url: 'howToApply',
   },
   {
-    text: "EXTRA SERVICES",
-    to: "extraServices"
+    text: 'EXTRA SERVICES',
+    url: 'extraServices',
   },
   {
-    text: "INFORMATION",
-    url: "/pro/property"
+    text: 'INFORMATION',
+    url: '/pro/property',
   },
   {
-    text: "FEEDBACK",
-    url: "feedback"
-  }
+    text: 'FEEDBACK',
+    url: 'feedback',
+  },
 ];
 
 type HeaderState = {
-  isMenuShowed?: boolean
+  isMenuShowed?: boolean,
 };
 export default class Header extends React.PureComponent<null, HeaderState> {
   state = {
-    isMenuShowed: false
+    isMenuShowed: false,
   };
 
   updateIsMenuShowed = () => {
     this.setState({
-      isMenuShowed: !this.state.isMenuShowed
+      isMenuShowed: !this.state.isMenuShowed,
     });
   };
 
   hideMenu = () => {
     this.setState({
-      isMenuShowed: false
+      isMenuShowed: false,
     });
   };
 
@@ -71,7 +69,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
       <Flexbox id={blockId} style={{ zIndex: 2 }}>
         <Text
           dangerouslySetInnerHTML={{
-            __html: styleHtml
+            __html: styleHtml,
           }}
         />
         <Flexbox
@@ -129,13 +127,17 @@ export default class Header extends React.PureComponent<null, HeaderState> {
             <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
               <Flexbox>
                 {menus.map((menu, index) => (
-                  <CustomReactScrollLink
-                    id={menu.to}
+                  <Flexbox
+                    paddingVertical={3}
+                    paddingHorizontal={3}
                     key={index}
-                    url={menu.url}
                   >
-                    <Text color="white">{menu.text}</Text>
-                  </CustomReactScrollLink>
+                    <Anchor href={menu.url}>
+                      <Text size="m" color="white">
+                        {menu.text}
+                      </Text>
+                    </Anchor>
+                  </Flexbox>
                 ))}
               </Flexbox>
             </Media>

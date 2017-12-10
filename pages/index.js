@@ -479,7 +479,11 @@ export default class Home extends React.Component<null, State> {
                 {whyChooseUs.map(
                   (reason, index) =>
                     index < 2 && (
-                      <Flexbox alignItems="center" paddingVertical={2}>
+                      <Flexbox
+                        alignItems="center"
+                        paddingVertical={2}
+                        key={index}
+                      >
                         <Image
                           src={`/static/images/${reason.image}.png`}
                           alt={reason.image}
@@ -511,7 +515,11 @@ export default class Home extends React.Component<null, State> {
                 {whyChooseUs.map(
                   (reason, index) =>
                     index >= 2 && (
-                      <Flexbox alignItems="center" paddingVertical={2}>
+                      <Flexbox
+                        alignItems="center"
+                        paddingVertical={2}
+                        key={index}
+                      >
                         <Image
                           src={`/static/images/${reason.image}.png`}
                           alt={reason.image}
@@ -545,7 +553,7 @@ export default class Home extends React.Component<null, State> {
               {extraServices.map(
                 (service, index) =>
                   index < 3 && (
-                    <Flexbox column flex={1}>
+                    <Flexbox column flex={1} key={index}>
                       <Image
                         src={`/static/images/${service.image}.png`}
                         alt={service.image}
@@ -564,7 +572,7 @@ export default class Home extends React.Component<null, State> {
               {extraServices.map(
                 (service, index) =>
                   index >= 3 && (
-                    <Flexbox column flex={1}>
+                    <Flexbox column flex={1} key={index}>
                       <Image
                         src={`/static/images/${service.image}.png`}
                         alt={service.image}
@@ -605,8 +613,8 @@ export default class Home extends React.Component<null, State> {
                 column
                 borderRadius
               >
-                {bookingOnlineReasons.map(reason => (
-                  <Flexbox justifyContent="flex-start" width="100%">
+                {bookingOnlineReasons.map((reason, index) => (
+                  <Flexbox justifyContent="flex-start" width="100%" key={index}>
                     <div>
                       ✓<Text paddingLeft={1} bold>
                         {reason.title}
@@ -639,8 +647,8 @@ export default class Home extends React.Component<null, State> {
                 column
                 borderRadius
               >
-                {visaKnowledge.map(reason => (
-                  <Flexbox justifyContent="flex-start" width="100%">
+                {visaKnowledge.map((reason, index) => (
+                  <Flexbox justifyContent="flex-start" width="100%" key={index}>
                     <div>
                       ✓<Text paddingLeft={1} bold>
                         {reason.title}
@@ -673,8 +681,8 @@ export default class Home extends React.Component<null, State> {
                 column
                 borderRadius
               >
-                {applyWithConfidence.map(reason => (
-                  <Flexbox justifyContent="flex-start" width="100%">
+                {applyWithConfidence.map((reason, index) => (
+                  <Flexbox justifyContent="flex-start" width="100%" key={index}>
                     <div>
                       ✓<Text paddingLeft={1} bold>
                         {reason}
