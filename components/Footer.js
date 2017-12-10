@@ -1,5 +1,5 @@
 // @flow
-import { Anchor, AnchorExternal, Flexbox, Text, Image } from "../components/ui";
+import { Anchor, Flexbox, Text, Image } from "../components/ui";
 
 export default class Footer extends React.Component<null> {
   render() {
@@ -8,7 +8,7 @@ export default class Footer extends React.Component<null> {
         width="100%"
         border
         style={{
-          backgroundImage: "url(/static/images/footer-background.png)",
+          backgroundImage: "url(/static/images/airplane-background.png)",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundPosition: "center",

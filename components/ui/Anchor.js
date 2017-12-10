@@ -1,15 +1,18 @@
 // @flow
-import styled from "styled-components";
-import { colors } from "../../constants/ui";
+import styled from 'styled-components';
+import { colors } from '../../constants/ui';
+import Link from 'next/link';
 
-const Anchor = styled.a`
+const Anchor = styled(Link).attrs({
+  prefetch: true,
+})`
   text-decoration: none;
-  color: ${props => colors[props.color || "darkGrey"]};
+  g: ${props => colors[props.color || 'darkGrey']};
   &:hover {
-    color: ${props => colors[props.activeColor || "visaRed"]};
+    color: ${props => colors[props.activeColor || 'visaRed']};
   }
   &.active {
-    color: ${props => colors[props.activeColor || "visaRed"]};
+    color: ${props => colors[props.activeColor || 'visaRed']};
   }
 `;
 
