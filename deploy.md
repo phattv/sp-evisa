@@ -7,6 +7,8 @@
 - `gcloud init` to follow instructions or set separately:  
 - `gcloud gcloud config set project ${PROJECT_ID}`
 - `gcloud gcloud config set compute/zone asia-southeast1-a`
+
+
 - `docker build -t gcr.io/${PROJECT_ID}/evisavn:v1 .` (build Docker image from Dockerfile, `${DOCKER_IMAGE}` will be `gcr.io/${PROJECT_ID}/evisavn:v1`)
 - `docker run --rm -p ${PORT}:${PORT} ${DOCKER_IMAGE}` (run Docker image in local machine, `${PORT}` will be `3000`)
 - open `localhost:${PORT}` on browser to test
