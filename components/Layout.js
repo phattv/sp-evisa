@@ -26,6 +26,7 @@ export default class Layout extends React.Component<Props> {
           <link href="../static/fonts/fonts.css" rel="stylesheet" />
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/react-select.css" rel="stylesheet" />
+          <link href="../static/styles/font-awesome.min.css" rel="stylesheet" />
         </Head>
 
         <Flexbox column flex={1} minHeight="100vh">
