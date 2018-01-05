@@ -89,14 +89,27 @@ const extraServices = [
     title: 'Tour and travel booking',
   },
 ];
-const typeOptions = [{ value: 'oneMonth', label: '1 month single' }];
+
+const typesOfVisa = [
+  { value: 'touristSingle', label: 'Tourist - single (1 month)' },
+  { value: 'touristMultiple', label: 'Tourist - multiple (1 month)' },
+  { value: 'businessSingle', label: 'Business - single (3 months)' },
+  { value: 'businessMultiple', label: 'Business - multiple (3 months)' },
+  { value: 'student', label: 'Student (on arrival)' },
+  { value: 'transit', label: 'Transit - single (5 days)' },
+]
 const processingTimeOptions = [
-  { value: 'normal', label: 'Normal (Guaranteed 1 working)' },
+  { value: 'normal', label: 'Normal (Guaranteed 2 working days)' },
+  { value: 'urgent', label: 'Urgent (Urgent (Guaranteed 4-8 working hours)' },
+  { value: 'emergency', label: 'Emergency (Guaranteed 1 working hour)' },
+  { value: 'overtime', label: 'Overtime' },
+  { value: 'holidy', label: 'Holiday' },
 ];
 const purposeOptions = [
   { value: 'tourism', label: 'Tourism' },
   { value: 'work', label: 'Work' },
 ];
+
 const bookingOnlineReasons = [
   {
     title: 'Hassle-free',
@@ -254,9 +267,9 @@ export default class Home extends React.Component<null, State> {
                   <Text bold>TYPE OF VISA</Text>
                   <Select
                     value={type}
-                    placeholder="1 month single"
+                    placeholder={typesOfVisa[0].label}
                     onChange={this.updateType}
-                    options={typeOptions}
+                    options={typesOfVisa}
                   />
                 </Flexbox>
                 <Flexbox alignItems="flex-start" paddingTop={5} column>
@@ -268,15 +281,15 @@ export default class Home extends React.Component<null, State> {
                     options={processingTimeOptions}
                   />
                 </Flexbox>
-                <Flexbox alignItems="flex-start" paddingTop={5} column>
-                  <Text bold>PURPOSE OF VISA</Text>
-                  <Select
-                    value={type}
-                    placeholder="Tourism"
-                    onChange={this.updatePurpose}
-                    options={purposeOptions}
-                  />
-                </Flexbox>
+                {/*<Flexbox alignItems="flex-start" paddingTop={5} column>*/}
+                  {/*<Text bold>PURPOSE OF VISA</Text>*/}
+                  {/*<Select*/}
+                    {/*value={type}*/}
+                    {/*placeholder="Tourism"*/}
+                    {/*onChange={this.updatePurpose}*/}
+                    {/*options={purposeOptions}*/}
+                  {/*/>*/}
+                {/*</Flexbox>*/}
 
                 <Flexbox paddingTop={4} justifyContent="space-between">
                   <Text bold>Service Fee: </Text>
