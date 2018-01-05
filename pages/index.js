@@ -12,6 +12,7 @@ import {
   Image,
   Form,
   Input,
+  BlockHeader,
 } from '../components';
 
 const applyVisaSteps = [
@@ -708,20 +709,6 @@ export default class Home extends React.Component<null, State> {
           </Flexbox>
         </Content>
       </Layout>
-    );
-  }
-}
-
-type BlockHeaderProps = {
-  header: string,
-};
-class BlockHeader extends React.Component<BlockHeaderProps> {
-  render() {
-    const { header } = this.props;
-    return (
-      <Text size="xl" black color="visaBlue" paddingBottom={8}>
-        {header}
-      </Text>
     );
   }
 }
