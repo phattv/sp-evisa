@@ -1,5 +1,5 @@
 // @flow
-import { Anchor, Flexbox, Text, Image } from "../components/ui";
+import { Anchor, Flexbox, Text, Image } from '../components/ui';
 
 export default class Footer extends React.Component<null> {
   render() {
@@ -8,11 +8,11 @@ export default class Footer extends React.Component<null> {
         width="100%"
         border
         style={{
-          backgroundImage: "url(/static/images/airplane-background.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "center",
-          backgroundSize: "cover"
+          backgroundImage: 'url(/static/images/airplane-background.png)',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
         }}
         column
       >
@@ -165,24 +165,36 @@ export default class Footer extends React.Component<null> {
                 About us
               </Text>
               <Flexbox column alignItems="flex-start">
-                <Text color="white" paddingBottom={1}>
-                  About Us
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Contact Us
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Terms of Use
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Privacy Policy
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Local Partners
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Local Websites
-                </Text>
+                <Anchor href="/about">
+                  <Text color="white" paddingBottom={1}>
+                    About Us
+                  </Text>
+                </Anchor>
+                <Anchor href="/contact">
+                  <Text color="white" paddingBottom={1}>
+                    Contact Us
+                  </Text>
+                </Anchor>
+                <Anchor href="/terms">
+                  <Text color="white" paddingBottom={1}>
+                    Terms of Use
+                  </Text>
+                </Anchor>
+                <Anchor href="/privacy">
+                  <Text color="white" paddingBottom={1}>
+                    Privacy Policy
+                  </Text>
+                </Anchor>
+                <Anchor href="/partners">
+                  <Text color="white" paddingBottom={1}>
+                    Local Partners
+                  </Text>
+                </Anchor>
+                <Anchor href="/websites">
+                  <Text color="white" paddingBottom={1}>
+                    Local Websites
+                  </Text>
+                </Anchor>
               </Flexbox>
             </Flexbox>
           </Flexbox>

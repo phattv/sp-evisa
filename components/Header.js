@@ -19,27 +19,27 @@ const menus = [
   },
   {
     text: 'APPLY VISA ONLINE',
-    url: 'apply',
+    url: '/apply',
   },
   {
     text: 'VISA FEES',
-    url: 'visaFee',
+    url: '/fees',
   },
   {
     text: 'HOW TO APPLY VISA',
-    url: 'howToApply',
+    url: '/how',
   },
   {
     text: 'EXTRA SERVICES',
-    url: 'extraServices',
+    url: '/services',
   },
   {
     text: 'INFORMATION',
-    url: '/pro/property',
+    url: '/information',
   },
   {
     text: 'FEEDBACK',
-    url: 'feedback',
+    url: '/feedback',
   },
 ];
 
