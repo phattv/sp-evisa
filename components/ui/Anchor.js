@@ -8,7 +8,7 @@ import { colors } from '../../constants/ui';
 
 const StyledLink = styled.a`
   text-decoration: none;
-  color: ${props => colors[props.color || 'darkGrey']};
+  color: ${props => colors[props.color || 'visaBlue']};
   &:hover {
     color: ${props => colors[props.activeColor || 'visaRed']};
   }
