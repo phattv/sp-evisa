@@ -9,9 +9,9 @@ type Props = {
 };
 class BlockHeader extends React.Component<Props> {
   render() {
-    const { header } = this.props;
+    const { header, ...rest } = this.props;
     return (
-      <Text size="xl" black color="visaBlue" paddingBottom={8}>
+      <Text size="xl" black color="visaBlue" paddingBottom={8} {...rest}>
         {header}
       </Text>
     );

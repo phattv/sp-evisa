@@ -1,19 +1,15 @@
 // @flow
 // vendor
 import React from 'react';
-import Select from 'react-select';
 // custom
 import {
-  Layout,
   Anchor,
-  Content,
-  Text,
-  Flexbox,
-  Button,
-  Image,
-  Form,
-  Input,
   BlockHeader,
+  Content,
+  Flexbox,
+  Image,
+  Layout,
+  Text,
 } from '../components';
 
 type Props = {};
