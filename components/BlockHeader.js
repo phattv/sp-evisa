@@ -6,12 +6,19 @@ import { Text } from './ui';
 
 type Props = {
   header: string,
+  smallPadding?: boolean,
 };
 class BlockHeader extends React.Component<Props> {
   render() {
-    const { header, ...rest } = this.props;
+    const { header, smallPadding, ...rest } = this.props;
     return (
-      <Text size="xl" black color="visaBlue" paddingBottom={8} {...rest}>
+      <Text
+        size="xl"
+        black
+        color="visaBlue"
+        paddingBottom={smallPadding ? 4 : 8}
+        {...rest}
+      >
         {header}
       </Text>
     );

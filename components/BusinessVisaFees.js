@@ -7,12 +7,14 @@ import { colors } from '../constants/ui';
 type Props = {};
 type State = {};
 
-class BusinessVisaFees extends React.Component<Props, State> {
+class TouristVisaFees extends React.Component<Props, State> {
   render() {
     return (
-      <table style={{
-        width: '100%'
-      }}>
+      <table
+        style={{
+          width: '100%',
+        }}
+      >
         <tr
           style={{
             backgroundColor: colors.visaRed,
@@ -34,7 +36,7 @@ class BusinessVisaFees extends React.Component<Props, State> {
           }}
         >
           <td
-            rowSpan="12"
+            rowSpan="10"
             style={{
               backgroundColor: colors.visaBlue,
               color: colors.white,
@@ -55,44 +57,50 @@ class BusinessVisaFees extends React.Component<Props, State> {
         </tr>
         <tr>
           <td>1 pax</td>
-          <td style={{ textAlign: 'center' }}>21</td>
-          <td style={{ textAlign: 'center' }}>26</td>
-          <td style={{ textAlign: 'center' }}>34</td>
-          <td style={{ textAlign: 'center' }}>55</td>
+          <td style={{ textAlign: 'center' }}>110</td>
           <td style={{ textAlign: 'center' }} rowSpan="5">
             N/A
           </td>
-          <td style={{ textAlign: 'center' }} rowSpan="5">
-            N/A
-          </td>
+          <td style={{ textAlign: 'center' }}>146</td>
+          <td style={{ textAlign: 'center' }}>174</td>
+          <td style={{ textAlign: 'center' }}>361</td>
+          <td style={{ textAlign: 'center' }}>523</td>
         </tr>
         <tr>
           <td>2 pax</td>
-          <td style={{ textAlign: 'center' }}>18.25</td>
-          <td style={{ textAlign: 'center' }}>23/25</td>
-          <td style={{ textAlign: 'center' }}>30.25</td>
-          <td style={{ textAlign: 'center' }}>52.25</td>
+          <td style={{ textAlign: 'center' }}>105</td>
+          <td />
+          <td style={{ textAlign: 'center' }}>139</td>
+          <td style={{ textAlign: 'center' }}>166</td>
+          <td style={{ textAlign: 'center' }}>344</td>
+          <td style={{ textAlign: 'center' }}>498</td>
         </tr>
         <tr>
           <td>3-5 pax</td>
-          <td style={{ textAlign: 'center' }}>17.25</td>
-          <td style={{ textAlign: 'center' }}>22.25</td>
-          <td style={{ textAlign: 'center' }}>28.25</td>
-          <td style={{ textAlign: 'center' }}>46.75</td>
+          <td style={{ textAlign: 'center' }}>103</td>
+          <td />
+          <td style={{ textAlign: 'center' }}>135</td>
+          <td style={{ textAlign: 'center' }}>162</td>
+          <td style={{ textAlign: 'center' }}>333</td>
+          <td style={{ textAlign: 'center' }}>483</td>
         </tr>
         <tr>
           <td>6-9 pax</td>
-          <td style={{ textAlign: 'center' }}>15.25</td>
-          <td style={{ textAlign: 'center' }}>19.25</td>
-          <td style={{ textAlign: 'center' }}>26.25</td>
-          <td style={{ textAlign: 'center' }}>39.05</td>
+          <td style={{ textAlign: 'center' }}>101</td>
+          <td />
+          <td style={{ textAlign: 'center' }}>133</td>
+          <td style={{ textAlign: 'center' }}>159</td>
+          <td style={{ textAlign: 'center' }}>326</td>
+          <td style={{ textAlign: 'center' }}>472</td>
         </tr>
         <tr>
           <td>10+ pax</td>
-          <td style={{ textAlign: 'center' }}>14</td>
-          <td style={{ textAlign: 'center' }}>17</td>
-          <td style={{ textAlign: 'center' }}>22</td>
-          <td style={{ textAlign: 'center' }}>33</td>
+          <td style={{ textAlign: 'center' }}>99</td>
+          <td />
+          <td style={{ textAlign: 'center' }}>130</td>
+          <td style={{ textAlign: 'center' }}>155</td>
+          <td style={{ textAlign: 'center' }}>320</td>
+          <td style={{ textAlign: 'center' }}>462</td>
         </tr>
         <tr
           style={{
@@ -107,7 +115,7 @@ class BusinessVisaFees extends React.Component<Props, State> {
               fontWeight: 'bold',
             }}
           >
-            URGENT PROCESSING (1 WORKING DAY)
+            URGENT PROCESSING (3 WORKING DAYS)
           </td>
         </tr>
         <tr>
@@ -118,7 +126,7 @@ class BusinessVisaFees extends React.Component<Props, State> {
               textAlign: 'center',
             }}
           >
-            Plus 10 USD/pax
+            Plus 30 USD/pax
           </td>
         </tr>
         <tr
@@ -134,34 +142,7 @@ class BusinessVisaFees extends React.Component<Props, State> {
               fontWeight: 'bold',
             }}
           >
-            SUPER-URGENT PROCESSING (4 WORKING HOURS)
-          </td>
-        </tr>
-        <tr>
-          <td />
-          <td
-            colSpan="7"
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            Plus 25 USD/pax
-          </td>
-        </tr>
-        <tr
-          style={{
-            backgroundColor: colors.lighterGrey,
-          }}
-        >
-          <td />
-          <td
-            colSpan="7"
-            style={{
-              textAlign: 'center',
-              fontWeight: 'bold',
-            }}
-          >
-            INSTANT PROCESSING (2 WORKING HOURS)
+            SUPER-URGENT PROCESSING (2 WORKING DAYS)
           </td>
         </tr>
         <tr>
@@ -193,8 +174,8 @@ class BusinessVisaFees extends React.Component<Props, State> {
           <td style={{ textAlign: 'center' }}>135</td>
         </tr>
       </table>
-    )
+    );
   }
 }
 
-export default BusinessVisaFees;
+export default TouristVisaFees;

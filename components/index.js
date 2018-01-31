@@ -15,6 +15,7 @@ import Content from "./Content";
 import Footer from "./Footer";
 import BlockHeader from "./BlockHeader";
 import TouristVisaFees from "./TouristVisaFees";
+import BusinessVisaFees from "./BusinessVisaFees";
 
 export {
   Anchor,
@@ -31,4 +32,5 @@ export {
   BlockHeader,
   Input,
   TouristVisaFees,
+  BusinessVisaFees,
 };

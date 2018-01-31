@@ -10,6 +10,7 @@ import {
   Layout,
   Text,
   TouristVisaFees,
+  BusinessVisaFees,
 } from '../components';
 import { colors } from '../constants/ui';
 
@@ -76,12 +77,22 @@ class VisaFees extends React.Component<Props, State> {
               </Flexbox>
             </Flexbox>
 
-            <BlockHeader paddingTop="5" header="DETAILED PRICING TABLES" />
+            <BlockHeader paddingTop="8" header="DETAILED PRICING TABLES" />
             <Flexbox width="100%" justifyContent="flex-start">
-              <BlockHeader header="For tourist visas to Vietnam:" />
+              <BlockHeader
+                header="For tourist visas to Vietnam:"
+                smallPadding
+              />
             </Flexbox>
-
             <TouristVisaFees />
+
+            <Flexbox width="100%" justifyContent="flex-start" paddingTop="8">
+              <BlockHeader
+                header="For business visas to Vietnam:"
+                smallPadding
+              />
+            </Flexbox>
+            <BusinessVisaFees />
           </Flexbox>
         </Content>
 
