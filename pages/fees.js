@@ -14,18 +14,7 @@ import {
 } from '../components';
 import { colors } from '../constants/ui';
 
-type Props = {};
-type State = {};
-
-class VisaFees extends React.Component<Props, State> {
-  constructor(props: Object) {
-    super(props);
-  }
-
-  static defaultProps: Props = {};
-
-  state = {};
-
+class VisaFees extends React.Component {
   render() {
     return (
       <Layout>
