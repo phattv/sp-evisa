@@ -190,11 +190,6 @@ export default class Footer extends React.Component<null> {
                     Local Partners
                   </Text>
                 </Anchor>
-                <Anchor href="/websites">
-                  <Text color="white" paddingBottom={1}>
-                    Local Websites
-                  </Text>
-                </Anchor>
               </Flexbox>
             </Flexbox>
           </Flexbox>

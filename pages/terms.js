@@ -109,7 +109,7 @@ class TermsAndCondition extends React.Component<Props, State> {
             {shouldShowMore
               ? faqs.map((faq, index) => (
                   <Flexbox column alignItems="flex-start" key={index}>
-                    <Text p bold size={l}>
+                    <Text p bold size="l">
                       {faq.question}
                     </Text>
                     <Text
@@ -121,7 +121,7 @@ class TermsAndCondition extends React.Component<Props, State> {
                 ))
               : faqs.slice(0, 2).map((faq, index) => (
                   <Flexbox column alignItems="flex-start" key={index}>
-                    <Text p bold size={l}>
+                    <Text p bold size="l">
                       {faq.question}
                     </Text>
                     <Text
