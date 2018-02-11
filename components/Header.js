@@ -35,7 +35,7 @@ const menus = [
   },
   {
     text: 'INFORMATION',
-    url: '/information',
+    url: '/news',
   },
   {
     text: 'FEEDBACK',
