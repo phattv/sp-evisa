@@ -11,7 +11,7 @@ import {
   Text,
 } from '../components'
 
-class HowToApply extends React.Component {
+class AboutUs extends React.Component {
   render() {
     return (
       <Layout>
@@ -107,4 +107,4 @@ class HowToApply extends React.Component {
   }
 }
 
-export default HowToApply
+export default AboutUs

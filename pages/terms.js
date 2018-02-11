@@ -66,7 +66,7 @@ type Props = {}
 type State = {
   shouldShowMore: boolean,
 }
-class Feedback extends React.Component<Props, State> {
+class TermsAndCondition extends React.Component<Props, State> {
   state = {
     shouldShowMore: false,
   }
@@ -154,4 +154,4 @@ class Feedback extends React.Component<Props, State> {
   }
 }
 
-export default Feedback
+export default TermsAndCondition
