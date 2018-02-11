@@ -49,14 +49,14 @@ class Contact extends React.Component<Props, State> {
                 <Anchor href="/faq">Frequently Asked Questions today</Anchor>.
               </Text>
               <Flexbox paddingBottom={3}>
-                <i class="fa fa-fw fa-2x fa-map-marker" aria-hidden="true" />
+                <i className="fa fa-fw fa-2x fa-map-marker" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
                   23rd Floor, Vinaconex 9 Building, Pham Hung Road, Me Tri, Tu
                   Liem, Hanoi, Vietnam
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
-                <i class="fa fa-fw fa-2x fa-phone" aria-hidden="true" />
+                <i className="fa fa-fw fa-2x fa-phone" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
                   +84.473.005.333 (ext. 221 or 224)
                   <br />
@@ -64,7 +64,7 @@ class Contact extends React.Component<Props, State> {
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
-                <i class="fa fa-fw fa-2x fa-envelope" aria-hidden="true" />
+                <i className="fa fa-fw fa-2x fa-envelope" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
                   <Anchor href="mailto:sales@vietnamvisafast-cheap.com">
                     Sales@vietnamvisafast-cheap.com
@@ -78,7 +78,7 @@ class Contact extends React.Component<Props, State> {
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
-                <i class="fa fa-fw fa-2x fa-clock-o" aria-hidden="true" />
+                <i className="fa fa-fw fa-2x fa-clock-o" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
                   Mon-Fri: 8:00 AM – 6:00 PM (GMT+7)
                   <br />

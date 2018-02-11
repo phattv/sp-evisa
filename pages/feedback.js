@@ -118,12 +118,12 @@ class Feedback extends React.Component<Props, State> {
               {shouldShowMore ? (
                 <Text alignItems="center" color="white">
                   SHOW LESS{' '}
-                  <i class="fa fa-arrow-up" />
+                  <i className="fa fa-arrow-up" />
                 </Text>
               ) : (
                 <Text alignItems="center" color="white">
                   READ MORE{' '}
-                  <i class="fa fa-arrow-down" />
+                  <i className="fa fa-arrow-down" />
                 </Text>
               )}
             </Button>
