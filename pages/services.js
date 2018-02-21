@@ -5,6 +5,7 @@ import React from 'react'
 import {
   Button,
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -16,7 +17,8 @@ class ExtraServices extends React.Component {
   render() {
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/services-background.png" />
+        <PageHeader header="EXTRA SERVICES" />
         <Content>
           <Flexbox width="100%" column flex={1}>
             <Text p textAlign="center" bold>
@@ -31,7 +33,7 @@ class ExtraServices extends React.Component {
                 <Flexbox>
                   <Flexbox flex={1} paddingRight={10}>
                     <Image
-                      src="/static/images/passport.png"
+                      src="/static/images/airport-fast-track.png"
                       alt="passport"
                       maxWidth={400}
                     />
@@ -71,7 +73,7 @@ class ExtraServices extends React.Component {
                 <Flexbox>
                   <Flexbox flex={1} paddingRight={10}>
                     <Image
-                      src="/static/images/passport.png"
+                      src="/static/images/car-pickup.png"
                       alt="passport"
                       maxWidth={400}
                     />
@@ -98,7 +100,7 @@ class ExtraServices extends React.Component {
                 <Flexbox>
                   <Flexbox flex={1} paddingRight={10}>
                     <Image
-                      src="/static/images/passport.png"
+                      src="/static/images/visa-renewal.png"
                       alt="passport"
                       maxWidth={400}
                     />
@@ -128,7 +130,7 @@ class ExtraServices extends React.Component {
                 <Flexbox>
                   <Flexbox flex={1} paddingRight={10}>
                     <Image
-                      src="/static/images/passport.png"
+                      src="/static/images/hotel-booking.png"
                       alt="passport"
                       maxWidth={400}
                     />
@@ -154,7 +156,7 @@ class ExtraServices extends React.Component {
                 <Flexbox>
                   <Flexbox flex={1} paddingRight={10}>
                     <Image
-                      src="/static/images/passport.png"
+                      src="/static/images/domestic-flight.png"
                       alt="passport"
                       maxWidth={400}
                     />
@@ -178,7 +180,7 @@ class ExtraServices extends React.Component {
                 <Flexbox>
                   <Flexbox flex={1} paddingRight={10}>
                     <Image
-                      src="/static/images/passport.png"
+                      src="/static/images/travel-booking.png"
                       alt="passport"
                       maxWidth={400}
                     />
