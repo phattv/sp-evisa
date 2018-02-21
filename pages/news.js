@@ -4,6 +4,7 @@ import React from 'react'
 // custom
 import {
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -16,7 +17,8 @@ class News extends React.Component {
   render() {
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/news-background.png" />
+        <PageHeader header="NEWS" />
         <Content>
           <Flexbox width="100%" flex={1} justifyContent="flex-start">
             <Flexbox
