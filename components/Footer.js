@@ -1,5 +1,6 @@
 // @flow
 import { Anchor, Flexbox, Text, Image } from '../components/ui';
+const currentYear = new Date().getFullYear();
 
 export default class Footer extends React.Component<null> {
   render() {
@@ -113,9 +114,12 @@ export default class Footer extends React.Component<null> {
                   Office: 74 Nguyen Khoai Street, HCMC
                 </Text>
                 <Text color="white" paddingBottom={1}>
-                  Email: sales@evisa-vn.com
-                  <br />
-                  support@evisa-vn.com
+                  Email:&nbsp;&nbsp;<Anchor href="mailto:sales@evisa-vn.com">
+                    sales@evisa-vn.com
+                  </Anchor>
+                  &nbsp;/&nbsp;<Anchor href="support@evisa-vn.com">
+                    support@evisa-vn.com
+                  </Anchor>
                 </Text>
               </Flexbox>
             </Flexbox>
@@ -165,38 +169,38 @@ export default class Footer extends React.Component<null> {
                 About us
               </Text>
               <Flexbox column alignItems="flex-start">
-                <Anchor href="/about">
-                  <Text color="white" paddingBottom={1}>
+                <Text paddingBottom={1}>
+                  <Anchor color="white" href="/about">
                     About Us
-                  </Text>
-                </Anchor>
-                <Anchor href="/contact">
-                  <Text color="white" paddingBottom={1}>
+                  </Anchor>
+                </Text>
+                <Text paddingBottom={1}>
+                  <Anchor color="white" href="/contact">
                     Contact Us
-                  </Text>
-                </Anchor>
-                <Anchor href="/terms">
-                  <Text color="white" paddingBottom={1}>
+                  </Anchor>
+                </Text>
+                <Text paddingBottom={1}>
+                  <Anchor color="white" href="/terms">
                     Terms of Use
-                  </Text>
-                </Anchor>
-                <Anchor href="/privacy">
-                  <Text color="white" paddingBottom={1}>
+                  </Anchor>
+                </Text>
+                <Text paddingBottom={1}>
+                  <Anchor color="white" href="/privacy">
                     Privacy Policy
-                  </Text>
-                </Anchor>
-                <Anchor href="/partners">
-                  <Text color="white" paddingBottom={1}>
+                  </Anchor>
+                </Text>
+                <Text paddingBottom={1}>
+                  <Anchor href="/partners" color="white">
                     Local Partners
-                  </Text>
-                </Anchor>
+                  </Anchor>
+                </Text>
               </Flexbox>
             </Flexbox>
           </Flexbox>
         </Flexbox>
 
         <Flexbox width="100%" backgroundColor="visaRed" paddingVertical={3}>
-          <Text color="white">Copyright © 2017 evisa-vn</Text>
+          <Text color="white">Copyright © {currentYear} evisa-vn</Text>
         </Flexbox>
       </Flexbox>
     );

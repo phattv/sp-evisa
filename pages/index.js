@@ -18,19 +18,19 @@ import {
 const applyVisaSteps = [
   {
     image: 'submit-application',
-    title: 'Submit application',
+    title: '1. Submit application',
     content:
       'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
   },
   {
     image: 'pay-service-fee',
-    title: 'Pay Service Fee',
+    title: '2. Pay Service Fee',
     content:
       'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
   },
   {
     image: 'get-approval-letter',
-    title: 'Get approval letter',
+    title: '3. Get approval letter',
     content:
       'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
   },
@@ -379,10 +379,6 @@ export default class Home extends React.Component<null, State> {
                     />
                   </Flexbox>
                   <Flexbox paddingVertical={3}>
-                    <Text size="l" color="visaRed" bold>
-                      {index + 1}
-                    </Text>
-                    &nbsp;
                     <Text size="l" bold color="visaBlue">
                       {step.title}
                     </Text>
@@ -606,8 +602,8 @@ export default class Home extends React.Component<null, State> {
 
         {/* Check marks */}
         <Content>
-          <Flexbox responsiveLayout>
-            <Flexbox flex={1} column>
+          <Flexbox responsiveLayout alignItems="stretch">
+            <Flexbox flex={1} column height="100%">
               <Text
                 size="l"
                 color="visaBlue"
@@ -619,6 +615,7 @@ export default class Home extends React.Component<null, State> {
               </Text>
 
               <Flexbox
+                width="90%"
                 paddingVertical={4}
                 marginVertical={4}
                 paddingHorizontal={4}
@@ -641,7 +638,7 @@ export default class Home extends React.Component<null, State> {
               </Flexbox>
             </Flexbox>
 
-            <Flexbox flex={1} column>
+            <Flexbox flex={1} column height="100%">
               <Text
                 size="l"
                 color="visaBlue"
@@ -653,6 +650,7 @@ export default class Home extends React.Component<null, State> {
               </Text>
 
               <Flexbox
+                width="90%"
                 paddingVertical={4}
                 marginVertical={4}
                 paddingHorizontal={4}
@@ -675,7 +673,7 @@ export default class Home extends React.Component<null, State> {
               </Flexbox>
             </Flexbox>
 
-            <Flexbox flex={1} column>
+            <Flexbox flex={1} column height="100%">
               <Text
                 size="l"
                 color="visaBlue"
@@ -687,6 +685,7 @@ export default class Home extends React.Component<null, State> {
               </Text>
 
               <Flexbox
+                width="90%"
                 paddingVertical={4}
                 marginVertical={4}
                 paddingHorizontal={4}
