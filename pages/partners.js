@@ -4,6 +4,7 @@ import React from 'react'
 // custom
 import {
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -15,7 +16,8 @@ class Partners extends React.Component {
   render() {
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/partners-background.png" />
+        <PageHeader header="LOCAL PARTNERS" />
         <Content>
           <Flexbox width="100%" column flex={1}>
             <BlockHeader header="About Vietnam discovery travel" />
@@ -49,7 +51,7 @@ class Partners extends React.Component {
                 paddingHorizontal={2}
               >
                 <Image
-                  src="/static/images/passport.png"
+                  src="/static/images/tour-booking.png"
                   alt="passport"
                   maxWidth={400}
                 />
@@ -78,7 +80,7 @@ class Partners extends React.Component {
                 paddingHorizontal={2}
               >
                 <Image
-                  src="/static/images/passport.png"
+                  src="/static/images/hotel-reservation.png"
                   alt="passport"
                   maxWidth={400}
                 />
@@ -107,7 +109,7 @@ class Partners extends React.Component {
                 paddingHorizontal={2}
               >
                 <Image
-                  src="/static/images/passport.png"
+                  src="/static/images/transportation.png"
                   alt="passport"
                   maxWidth={400}
                 />

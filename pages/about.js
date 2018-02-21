@@ -4,6 +4,7 @@ import React from 'react'
 // custom
 import {
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -15,10 +16,11 @@ class AboutUs extends React.Component {
   render() {
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/about-us-background.png" />
+        <PageHeader header="ABOUT US" />
         <Content>
           <Flexbox width="100%" column flex={1}>
-            <Flexbox>
+            <Flexbox responsiveLayout>
               <Flexbox flex={2} column alignItems="flex-start">
                 <BlockHeader header="Who We Are" />
                 <Text p bold color="visaBlue">
@@ -96,8 +98,8 @@ class AboutUs extends React.Component {
                 David La (Mr.)
               </Flexbox>
 
-              <Flexbox flex={1}>
-                <Image src="/static/images/passport.png" alt="passport" />
+              <Flexbox flex={1} paddingHorizontal={2} paddingVertical={2}>
+                <Image src="/static/images/who-we-are.png" alt="passport" />
               </Flexbox>
             </Flexbox>
           </Flexbox>

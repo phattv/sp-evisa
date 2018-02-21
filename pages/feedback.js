@@ -5,6 +5,7 @@ import React from 'react'
 import {
   Button,
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -80,7 +81,8 @@ class Feedback extends React.Component<Props, State> {
 
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/feedback-background.png" />
+        <PageHeader header="FEEDBACK" />
         <Content>
           <Flexbox width="100%" column flex={1} alignItems="flex-start">
             <BlockHeader header="Frequently Asked Questions" />

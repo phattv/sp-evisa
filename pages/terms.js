@@ -5,6 +5,7 @@ import React from 'react'
 import {
   Button,
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -82,7 +83,8 @@ class TermsAndCondition extends React.Component<Props, State> {
 
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/terms-background.png" />
+        <PageHeader header="TERM OF USE" />
         <Content>
           <Flexbox width="100%" column flex={1} alignItems="flex-start">
             <BlockHeader header="Terms Of Use" />
