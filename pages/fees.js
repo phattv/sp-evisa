@@ -4,6 +4,7 @@ import * as React from 'react';
 // custom
 import {
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -19,6 +20,7 @@ class VisaFees extends React.Component {
     return (
       <Layout>
         <Image src="/static/images/fees-background.png" />
+        <PageHeader header="VISA FEES" />
         <Content>
           <Flexbox width="100%" responsiveLayout column>
             <Flexbox column>

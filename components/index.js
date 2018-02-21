@@ -14,6 +14,7 @@ import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
 import BlockHeader from "./BlockHeader";
+import PageHeader from "./PageHeader";
 import TouristVisaFees from "./TouristVisaFees";
 import BusinessVisaFees from "./BusinessVisaFees";
 
@@ -30,6 +31,7 @@ export {
   Content,
   Footer,
   BlockHeader,
+  PageHeader,
   Input,
   TouristVisaFees,
   BusinessVisaFees,
