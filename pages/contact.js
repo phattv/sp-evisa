@@ -5,6 +5,7 @@ import React from 'react';
 import {
   Anchor,
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -28,6 +29,7 @@ class Contact extends React.Component<Props, State> {
     return (
       <Layout>
         <Image src="/static/images/contact-us-background.png" />
+        <PageHeader header="CONTACT US" />
         <Content>
           <Flexbox width="100%" responsiveLayout>
             <Flexbox flex={2} column alignItems="flex-start">
