@@ -5,6 +5,7 @@ import React from 'react'
 import {
   Button,
   BlockHeader,
+  PageHeader,
   Content,
   Flexbox,
   Image,
@@ -16,7 +17,8 @@ class HowToApply extends React.Component {
   render() {
     return (
       <Layout>
-        <Image src="/static/images/contact-us-background.png" />
+        <Image src="/static/images/how-to-apply-background.png" />
+        <PageHeader header="HOW TO APPLY VISA?" />
         <Content>
           <Flexbox width="100%" column flex={1}>
             <BlockHeader header="How Vietnam Visa Works" />
@@ -45,16 +47,16 @@ class HowToApply extends React.Component {
             </Text>
 
             <Flexbox column>
-              <Flexbox>
+              <Flexbox paddingVertical={1}>
                 <Flexbox flex={1} paddingRight={10}>
                   <Image
-                    src="/static/images/passport.png"
+                    src="/static/images/submit-application-2.png"
                     alt="passport"
                     maxWidth={400}
                   />
                 </Flexbox>
                 <Flexbox flex={2} column alignItems="flex-start">
-                  <BlockHeader header="1. Submit application" />
+                  <BlockHeader header="1. Submit application" smallPadding />
                   <Text p>
                     Fill out the secured online application form. You are
                     required to enter the exact personal information of the
@@ -69,16 +71,17 @@ class HowToApply extends React.Component {
                   </Text>
                 </Flexbox>
               </Flexbox>
-              <Flexbox>
+
+              <Flexbox paddingVertical={1}>
                 <Flexbox flex={1} paddingRight={10}>
                   <Image
-                    src="/static/images/passport.png"
+                    src="/static/images/pay-service-fee-2.png"
                     alt="passport"
                     maxWidth={400}
                   />
                 </Flexbox>
                 <Flexbox flex={2} column alignItems="flex-start">
-                  <BlockHeader header="2. Pay Service Fee" />
+                  <BlockHeader header="2. Pay Service Fee" smallPadding />
                   <Text p>
                     Fill out the secured online application form. You are
                     required to enter the exact personal information of the
@@ -93,16 +96,17 @@ class HowToApply extends React.Component {
                   </Text>
                 </Flexbox>
               </Flexbox>
-              <Flexbox>
+
+              <Flexbox paddingVertical={1}>
                 <Flexbox flex={1} paddingRight={10}>
                   <Image
-                    src="/static/images/passport.png"
+                    src="/static/images/get-approval-letter-2.png"
                     alt="passport"
                     maxWidth={400}
                   />
                 </Flexbox>
                 <Flexbox flex={2} column alignItems="flex-start">
-                  <BlockHeader header="3. Get approval letter" />
+                  <BlockHeader header="3. Get approval letter" smallPadding />
                   <Text p>
                     Fill out the secured online application form. You are
                     required to enter the exact personal information of the
