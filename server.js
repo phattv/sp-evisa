@@ -3,7 +3,7 @@ const express = require("express"),
   cookieParser = require("cookie-parser"),
   cors = require("cors");
 
-const port = 3000,
+const port = 80,
   distFolder = "dist",
   assetPrefix = "";
 

@@ -8,6 +8,6 @@ services:
     volumes:
       - ./:/usr/src/evisavn
     ports:
-      - "3000:3000"
+      - "3000:80"
     environment:
       - NODE_ENV=development

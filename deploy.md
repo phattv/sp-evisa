@@ -17,10 +17,12 @@
 ### Continue setting up on console.cloud.google.com
 - `gcloud container clusters create nextjs-cluster --num-nodes=3` (create a new cluster named `nextjs-cluster` with 3 Compute instances)
 - `gcloud container clusters list` to verify
+- `kubectl delete deployment evisavn` (if get AlreadyExist error)
 - `kubectl run evisavn --image=${DOCKER_IMAGE} --port ${PORT}` (create 1 pod using port `${PORT}` within docker, `${POD_NAME}` will be `evisavn`)
-- wait a moment, then verify `kubectl get pods` if **STATUS** is **Running**
+- wait for a moment, then verify `kubectl get pods` if **STATUS** is **Running**
+- `kubectl delete service evisavn` (if get AlreadyExist error)
 - `kubectl expose deployment ${POD_NAME} --type=LoadBalancer --port ${PORT}` (expose the app to the outside world using a Google Cloud Load balancer)
-- wait a moment, then copy `kubectl get services` **EXTERNAL-IP** value with **PORT**, then open in browser with `${EXTERNAL-IP}:${PORT}`
+- wait for a moment, then copy `kubectl get services` **EXTERNAL-IP** value with **PORT**, then open in browser with `${EXTERNAL-IP}:${PORT}`
 
 ### variables:
 | variable name | value |
