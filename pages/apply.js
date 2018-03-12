@@ -3,204 +3,144 @@
 import * as React from 'react';
 import Select from 'react-select';
 import { Form, Field } from 'react-final-form';
-import map from 'lodash/map';
+import { Div, Input, Button } from 'glamorous';
 // custom
-import {
-  Layout,
-  Content,
-  Text,
-  Flexbox,
-  Button,
-  Image,
-  Input,
-} from '../components';
+import { Layout, Content, Text, Flexbox } from '../components';
+import { colors, borderRadius, spacingValues } from '../constants/ui';
 
-const purposesOfVisit = {
-  tourist: 'tourist',
-  business: 'business',
-  student: 'student',
-  transit: 'transit',
-};
-const visaTypes = {
-  [purposesOfVisit.tourist]: {
-    oneMonthSingle: '1 month single entry',
-    oneMonthMultiple: '1 month multiple entry',
+const typeOptions = [
+  { value: '1 month single', label: '1 month single' },
+  { value: '1 month multiple', label: '1 month multiple' },
+  { value: '3 months single', label: '3 months single' },
+  { value: '3 months multiple', label: '3 months multiple' },
+  { value: '6 months multiple', label: '6 months multiple' },
+  { value: '1 year multiple', label: '1 year multiple' },
+];
+const processingTimeOptions = [
+  { value: 'normal', label: 'normal' },
+  {
+    value: 'urgent (guaranteed 4-8 working hours)',
+    label: 'urgent (guaranteed 4-8 working hours)',
   },
-  [purposesOfVisit.business]: {
-    threeMonthSingle: '3 month single entry',
-    threeMonthMultiple: '3 month multiple entry',
+  {
+    value: 'emergency (guaranteed 1 working hour',
+    label: 'emergency (guaranteed 1 working hour',
   },
-  [purposesOfVisit.student]: {
-    student: 'Student visa'
-  },
-  [purposesOfVisit.transit]: {
-    fiveDays: '5 days single entry'
-  }
-}
+  { value: 'overtime', label: 'overtime' },
+  { value: 'holiday', label: 'holiday' },
+];
+const purposeOptions = [
+  { value: 'tourist', label: 'tourist' },
+  { value: 'business', label: 'business' },
+];
 
 type Props = {};
-type State = {};
-
+type State = {
+  quantity: number | string,
+  type: string,
+  processingTime: string,
+  purpose: string,
+};
 class ApplyVisaOnline extends React.Component<Props, State> {
-  constructor(props: Object) {
-    super(props);
-  }
-
-  static defaultProps: Props = {};
-
   state = {
     quantity: 0,
     type: '',
+    processingTime: '',
+    purpose: '',
   };
 
-  onSubmit = values => {
-    window.alert(JSON.stringify(values, 0, 2));
+  onSubmit = (values: Object) => {
+    window.alert(JSON.stringify(values, null, 2));
   };
 
-  updateTypesOfVisa = event => {
+  updateQuantity = (event: Object) =>
     this.setState({
-      visaTypes: visaTypes[event.target.value]
-    })
-  };
+      quantity: event.target.value,
+    });
+
+  updateType = (selectedOption: Object) =>
+    this.setState({
+      type: selectedOption.value,
+    });
+
+  updateProcessingTime = (selectedOption: Object) =>
+    this.setState({
+      processingTime: selectedOption.value,
+    });
+
+  updatePurpose = (selectedOption: Object) =>
+    this.setState({
+      purpose: selectedOption.value,
+    });
 
   render() {
-    const { visaTypes } = this.state
-
     const { quantity, type, processingTime, purpose } = this.state;
 
     return (
       <Layout>
         <Content>
-          {/*<Form*/}
-            {/*onSubmit={this.onSubmit}*/}
-            {/*initialValues={{*/}
-              {/*employed: true,*/}
-              {/*purposeOfVisit: purposesOfVisit.tourist,*/}
-            {/*}}*/}
-            {/*render={({ handleSubmit, reset, submitting, pristine, values }) => (*/}
-              {/*<form onSubmit={handleSubmit}>*/}
-                {/*<div>*/}
-                  {/*<Text bold>NUMBER OF APPLICANTS</Text>*/}
-                  {/*<Field*/}
-                    {/*name="noOfApplicants"*/}
-                    {/*component="input"*/}
-                    {/*type="number"*/}
-                    {/*placeholder="1"*/}
-                  {/*/>*/}
-                {/*</div>*/}
-                {/*<div>*/}
-                  {/*<Text bold>PURPOSE OF VISIT</Text>*/}
-                  {/*<Field*/}
-                    {/*name="purposeOfVisit"*/}
-                    {/*component="select"*/}
-                    {/*onChange={this.updateTypesOfVisa}*/}
-                  {/*>*/}
-                    {/*{map(purposesOfVisit, (purpose, index) => (*/}
-                      {/*<option key={index} value={purpose}>*/}
-                        {/*{purpose}*/}
-                      {/*</option>*/}
-                    {/*))}*/}
-                  {/*</Field>*/}
-                {/*</div>*/}
-                {/*<div>*/}
-                  {/*<Text bold>TYPE OF VISA</Text>*/}
-                  {/*<Field name="purposeOfVisit" component="select">*/}
-                    {/*{map(visaTypes, (type, index) =>*/}
-                      {/*<option key={index} value={type}>*/}
-                        {/*{type}*/}
-                      {/*</option>*/}
-                    {/*)}*/}
-                  {/*</Field>*/}
-                {/*</div>*/}
-
-                {/**/}
-
-                {/*<div className="buttons">*/}
-                  {/*<button type="submit" disabled={submitting || pristine}>*/}
-                    {/*Submit*/}
-                  {/*</button>*/}
-                  {/*<button*/}
-                    {/*type="button"*/}
-                    {/*onClick={reset}*/}
-                    {/*disabled={submitting || pristine}*/}
-                  {/*>*/}
-                    {/*Reset*/}
-                  {/*</button>*/}
-                {/*</div>*/}
-                {/*<pre>{JSON.stringify(values, 0, 2)}</pre>*/}
-              {/*</form>*/}
-            {/*)}*/}
-          {/*/>*/}
-          <Flexbox
+          <Div
+            display="flex"
             flex={1}
-            border
-            borderColor="visaBlue"
-            backgroundColor="lightGrey"
-            borderRadius
+            border={`1px solid ${colors.visaBlue}`}
+            backgroundColor={colors.lightGrey}
+            borderRadius={borderRadius}
+            padding={spacingValues.xl}
           >
-            <Form paddingVertical={6} paddingHorizontal={6}>
-              <Flexbox>
-                <Text color="visaRed" size="xl" bold textAlign="center">
-                  VIETNAM VISA FORM
-                </Text>
-              </Flexbox>
-              <Flexbox alignItems="flex-start" paddingTop={5} column>
-                <Text bold>NUMBER OF VISA</Text>
-                <Input
-                  value={quantity}
-                  onChange={this.updateQuantity}
-                  marginTop={2}
-                  type="number"
-                  placeholder="1 applicant"
-                />
-              </Flexbox>
-              <Flexbox alignItems="flex-start" paddingTop={5} column>
-                <Text bold>TYPE OF VISA</Text>
-                <Select
-                  value={type}
-                  placeholder="1 month single"
-                  onChange={this.updateType}
-                  options={typeOptions}
-                />
-              </Flexbox>
-              <Flexbox alignItems="flex-start" paddingTop={5} column>
-                <Text bold>PROCESSING TIME</Text>
-                <Select
-                  value={type}
-                  placeholder="Normal (Guaranteed 1 working)"
-                  onChange={this.updateProcessingTime}
-                  options={processingTimeOptions}
-                />
-              </Flexbox>
-              <Flexbox alignItems="flex-start" paddingTop={5} column>
-                <Text bold>PURPOSE OF VISA</Text>
-                <Select
-                  value={type}
-                  placeholder="Tourism"
-                  onChange={this.updatePurpose}
-                  options={purposeOptions}
-                />
-              </Flexbox>
+            <Form
+              onSubmit={this.onSubmit}
+              render={({ handleSubmit, pristine, invalid }) => (
+                <Div>
+                  <Flexbox>
+                    <Text color="visaRed" size="xl" bold textAlign="center">
+                      VIETNAM VISA FORM
+                    </Text>
+                  </Flexbox>
+                  <Flexbox alignItems="flex-start" paddingTop={5} column>
+                    <Text bold>NUMBER OF VISA</Text>
+                    <Input
+                      value={quantity}
+                      onChange={this.updateQuantity}
+                      marginTop={2}
+                      type="number"
+                      placeholder="1"
+                    />
+                  </Flexbox>
+                  <Flexbox alignItems="flex-start" paddingTop={5} column>
+                    <Text bold>TYPE OF VISA</Text>
+                    <Select
+                      value={type}
+                      placeholder="1 month single"
+                      onChange={this.updateType}
+                      options={typeOptions}
+                    />
+                  </Flexbox>
+                  <Flexbox alignItems="flex-start" paddingTop={5} column>
+                    <Text bold>PROCESSING TIME</Text>
+                    <Select
+                      value={processingTime}
+                      placeholder="Normal (Guaranteed 1 working)"
+                      onChange={this.updateProcessingTime}
+                      options={processingTimeOptions}
+                    />
+                  </Flexbox>
+                  <Flexbox alignItems="flex-start" paddingTop={5} column>
+                    <Text bold>PURPOSE OF VISA</Text>
+                    <Select
+                      value={purpose}
+                      placeholder="Tourism"
+                      onChange={this.updatePurpose}
+                      options={purposeOptions}
+                    />
+                  </Flexbox>
 
-              <Flexbox paddingTop={4} justifyContent="space-between">
-                <Text bold>Service Fee: </Text>
-                <Text bold>{`${quantity} x $18 = $${serviceFee}`}</Text>
-              </Flexbox>
-              <Flexbox paddingTop={4} justifyContent="space-between">
-                <Text bold>Processing Fee: </Text>
-                <Text bold>{`${quantity} x $0 = $${processingFee}`}</Text>
-              </Flexbox>
-
-              <Flexbox paddingTop={4} justifyContent="space-between">
-                <Text bold>TOTAL SERVICE FEE:</Text>
-                <Text bold>${serviceFee + processingFee}</Text>
-              </Flexbox>
-
-              <Button solid marginTop={5}>
-                APPLY NOW
-              </Button>
-            </Form>
-          </Flexbox>
+                  <Button solid marginTop={5}>
+                    APPLY NOW
+                  </Button>
+                </Div>
+              )}
+            />
+          </Div>
         </Content>
       </Layout>
     );
