@@ -1,8 +1,9 @@
 // @flow
 // vendor
-import React from 'react'
+import React from 'react';
 // custom
 import {
+  Anchor,
   Button,
   BlockHeader,
   PageHeader,
@@ -11,7 +12,7 @@ import {
   Image,
   Layout,
   Text,
-} from '../components'
+} from '../components';
 
 class HowToApply extends React.Component {
   render() {
@@ -154,9 +155,11 @@ class HowToApply extends React.Component {
               for Vietnam visa.
             </Text>
 
-            <Button solid marginBottom={3}>
-              Apply vietnam visa on arrival
-            </Button>
+            <Anchor href="/apply">
+              <Button solid marginBottom={3}>
+                Apply vietnam visa on arrival
+              </Button>
+            </Anchor>
 
             <Text p textAlign="center" color="visaBlue" bold>
               To know the best way to apply for a visa to Vietnam from your
@@ -165,8 +168,8 @@ class HowToApply extends React.Component {
           </Flexbox>
         </Content>
       </Layout>
-    )
+    );
   }
 }
 
-export default HowToApply
+export default HowToApply;

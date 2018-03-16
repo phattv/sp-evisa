@@ -1,17 +1,15 @@
 // @flow
 // vendor
 import React from 'react';
-import Select from 'react-select';
 // custom
 import {
+  Anchor,
   Layout,
   Content,
   Text,
   Flexbox,
   Button,
   Image,
-  Form,
-  Input,
   BlockHeader,
 } from '../components';
 
@@ -98,7 +96,7 @@ const typesOfVisa = [
   { value: 'businessMultiple', label: 'Business - multiple (3 months)' },
   { value: 'student', label: 'Student (on arrival)' },
   { value: 'transit', label: 'Transit - single (5 days)' },
-]
+];
 const processingTimeOptions = [
   { value: 'normal', label: 'Normal (Guaranteed 2 working days)' },
   { value: 'urgent', label: 'Urgent (Urgent (Guaranteed 4-8 working hours)' },
@@ -171,49 +169,10 @@ const applyWithConfidence = [
   'Money back guarantee for declined applications',
 ];
 
-type State = {
-  quantity?: number,
-  type?: string,
-  processingTime?: string,
-  purpose?: string,
-};
-export default class Home extends React.Component<null, State> {
-  state: State = {
-    quantity: 0,
-    type: '',
-    processingTime: '',
-    purpose: '',
-  };
-
-  updateQuantity = (event: Object) => {
-    this.setState({
-      quantity: event.target.value,
-    });
-  };
-
-  updateType = (selectedOption: Object) => {
-    this.setState({
-      type: selectedOption.value,
-    });
-  };
-
-  updateProcessingTime = (selectedOption: Object) => {
-    this.setState({
-      processingTime: selectedOption.value,
-    });
-  };
-
-  updatePurpose = (selectedOption: Object) => {
-    this.setState({
-      purpose: selectedOption.value,
-    });
-  };
-
+type Props = {};
+type State = {};
+export default class Home extends React.Component<Props, State> {
   render() {
-    const { quantity, type, processingTime, purpose } = this.state;
-    const serviceFee = quantity * 18;
-    const processingFee = 0;
-
     return (
       <Layout>
         {/* Form */}
@@ -228,88 +187,34 @@ export default class Home extends React.Component<null, State> {
         >
           <Flexbox width="100%" responsiveLayout>
             <Flexbox flex={1} />
-            <Flexbox flex={1} paddingVertical={4}>
-              <Flexbox column alignItems="center" justifyContent="center">
-                <Text bold color="white" size="l">
-                  1. Best price guarantee <br />
-                  2. Vietnam Urgent visa <br />
-                  3. Vietnam Extension visa <br />
-                  4. Payment online
-                </Text>
-                <Button solid marginTop={5}>
-                  GET STARTED NOW!
-                </Button>
-              </Flexbox>
-            </Flexbox>
+            <Flexbox flex={1} paddingVertical={4} />
             <Flexbox
               flex={1}
               border
               borderColor="visaBlue"
               backgroundColor="lightGrey"
               borderRadius
+              paddingVertical={6}
+              paddingHorizontal={6}
             >
-              <Form paddingVertical={6} paddingHorizontal={6}>
-                <Flexbox>
+              <Flexbox column alignItems="center" justifyContent="center">
+                <Flexbox paddingBottom={2}>
                   <Text color="visaRed" size="xl" bold textAlign="center">
                     VIETNAM VISA FORM
                   </Text>
                 </Flexbox>
-                <Flexbox alignItems="flex-start" paddingTop={5} column>
-                  <Text bold>NUMBER OF VISA</Text>
-                  <Input
-                    value={quantity}
-                    onChange={this.updateQuantity}
-                    marginTop={2}
-                    type="number"
-                    placeholder="1 applicant"
-                  />
-                </Flexbox>
-                <Flexbox alignItems="flex-start" paddingTop={5} column>
-                  <Text bold>TYPE OF VISA</Text>
-                  <Select
-                    value={type}
-                    placeholder={typesOfVisa[0].label}
-                    onChange={this.updateType}
-                    options={typesOfVisa}
-                  />
-                </Flexbox>
-                <Flexbox alignItems="flex-start" paddingTop={5} column>
-                  <Text bold>PROCESSING TIME</Text>
-                  <Select
-                    value={type}
-                    placeholder="Normal (Guaranteed 1 working)"
-                    onChange={this.updateProcessingTime}
-                    options={processingTimeOptions}
-                  />
-                </Flexbox>
-                {/*<Flexbox alignItems="flex-start" paddingTop={5} column>*/}
-                  {/*<Text bold>PURPOSE OF VISA</Text>*/}
-                  {/*<Select*/}
-                    {/*value={type}*/}
-                    {/*placeholder="Tourism"*/}
-                    {/*onChange={this.updatePurpose}*/}
-                    {/*options={purposeOptions}*/}
-                  {/*/>*/}
-                {/*</Flexbox>*/}
-
-                <Flexbox paddingTop={4} justifyContent="space-between">
-                  <Text bold>Service Fee: </Text>
-                  <Text bold>{`${quantity} x $18 = $${serviceFee}`}</Text>
-                </Flexbox>
-                <Flexbox paddingTop={4} justifyContent="space-between">
-                  <Text bold>Processing Fee: </Text>
-                  <Text bold>{`${quantity} x $0 = $${processingFee}`}</Text>
-                </Flexbox>
-
-                <Flexbox paddingTop={4} justifyContent="space-between">
-                  <Text bold>TOTAL SERVICE FEE:</Text>
-                  <Text bold>${serviceFee + processingFee}</Text>
-                </Flexbox>
-
-                <Button solid marginTop={5}>
-                  APPLY NOW
-                </Button>
-              </Form>
+                <Text bold color="white" size="l">
+                  1. Best price guarantee <br />
+                  2. Vietnam Urgent visa <br />
+                  3. Vietnam Extension visa <br />
+                  4. Payment online
+                </Text>
+                <Anchor href="/apply">
+                  <Button solid marginTop={5}>
+                    GET STARTED NOW!
+                  </Button>
+                </Anchor>
+              </Flexbox>
             </Flexbox>
           </Flexbox>
         </Content>
