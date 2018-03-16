@@ -3,10 +3,10 @@
 import * as React from 'react';
 import Select from 'react-select';
 import { Form, Field } from 'react-final-form';
-import { Div, Input, Button, Label } from 'glamorous';
+import { Div, Input, Label } from 'glamorous';
 import ReactTooltip from 'react-tooltip';
 // custom
-import { Layout, Content, Text, Flexbox } from '../components';
+import { Layout, Content, Text, Flexbox, Button } from '../components';
 import { colors, borderRadius, spacingValues } from '../constants/ui';
 import countries from '../static/countries.json';
 
@@ -69,6 +69,7 @@ type State = {
   paymentMethod: string,
   isTermsAgreed: boolean,
   totalFee: number,
+  shouldShowErrorMessage: boolean,
 };
 class ApplyVisaOnline extends React.Component<Props, State> {
   state = {
@@ -88,10 +89,28 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     paymentMethod: '',
     isTermsAgreed: false,
     totalFee: 0,
+    shouldShowErrorMessage: false,
   };
 
-  onSubmit = (values: Object) => {
-    window.alert(JSON.stringify(values, null, 2));
+  onSubmit = (event: Object) => {
+    const {
+      isTermsAgreed,
+      country,
+      quantity,
+      type,
+      processingTime,
+      purpose,
+    } = this.state;
+    const shouldShowErrorMessage =
+      !isTermsAgreed ||
+      (!country && !quantity && !type && !processingTime && !purpose);
+    this.setState({
+      shouldShowErrorMessage: shouldShowErrorMessage,
+    });
+
+    if (shouldShowErrorMessage === true) {
+      console.log('xxx', 'navigate to next step')
+    }
   };
 
   updateCountry = (selectedOption: Object) => {
@@ -232,6 +251,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
       extraServices,
       isTermsAgreed,
       totalFee,
+      shouldShowErrorMessage,
     } = this.state;
 
     return (
@@ -261,7 +281,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       column
                       width="100%"
                     >
-                      <Text bold>COUNTRY</Text>
+                      <Text bold>COUNTRY *</Text>
                       <Select
                         value={country}
                         placeholder="Select..."
@@ -275,7 +295,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       column
                       width="100%"
                     >
-                      <Text bold>NUMBER OF APPLICANT</Text>
+                      <Text bold>NUMBER OF APPLICANT *</Text>
                       <Input
                         backgroundColor="white"
                         padding={`${spacingValues.xs}px ${spacingValues.s}px`}
@@ -296,7 +316,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       column
                       width="100%"
                     >
-                      <Text bold>TYPE OF VISA</Text>
+                      <Text bold>TYPE OF VISA *</Text>
                       <Select
                         value={type}
                         placeholder="Select..."
@@ -310,7 +330,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       column
                       width="100%"
                     >
-                      <Text bold>PROCESSING TIME</Text>
+                      <Text bold>PROCESSING TIME *</Text>
                       <Select
                         value={processingTime}
                         placeholder="Normal"
@@ -324,7 +344,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       column
                       width="100%"
                     >
-                      <Text bold>PURPOSE OF VISA</Text>
+                      <Text bold>PURPOSE OF VISA *</Text>
                       <Select
                         value={purpose}
                         placeholder="Select..."
@@ -598,6 +618,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       </Label>
 
                       <Label
+                        paddingTop={16}
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
@@ -615,9 +636,21 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       </Label>
                     </Div>
 
-                    <Button solid marginTop={5}>
-                      APPLY NOW
+                    <Button
+                      solid
+                      marginTop={5}
+                      marginBottom={5}
+                      onClick={this.onSubmit}
+                    >
+                      NEXT&nbsp;&nbsp;
+                      <i className="fa fa-arrow-right" />
                     </Button>
+
+                    {shouldShowErrorMessage && (
+                      <Text color="visaRed" bold>
+                        Please fill in the inputs and accept Terms of Use
+                      </Text>
+                    )}
                   </Flexbox>
                 </Flexbox>
               )}
