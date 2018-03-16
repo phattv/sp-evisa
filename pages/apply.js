@@ -12,6 +12,8 @@ import {
   spacingValues,
 } from '../constants/ui';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
+import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
+import ApplyFormStepThree from '../components/ApplyFormStepThree';
 
 type Props = {};
 type State = {
@@ -81,10 +83,10 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                   <ApplyFormStepOne onSubmit={this.nagivateToStepTwo} />
                 </TabPanel>
                 <TabPanel>
-                  <h2>Any content 2</h2>
+                  <ApplyFormStepTwo />
                 </TabPanel>
                 <TabPanel>
-                  <h2>Any content 3</h2>
+                  <ApplyFormStepThree />
                 </TabPanel>
               </Tabs>
             </Flexbox>
