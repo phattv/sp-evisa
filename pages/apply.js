@@ -3,10 +3,16 @@
 import * as React from 'react';
 import Select from 'react-select';
 import { Form, Field } from 'react-final-form';
-import { Div, Input, Button } from 'glamorous';
+import { Div, Input, Button, Label } from 'glamorous';
 // custom
 import { Layout, Content, Text, Flexbox } from '../components';
 import { colors, borderRadius, spacingValues } from '../constants/ui';
+
+const costPerPerson = 8;
+const airportFastTrackCost = 45;
+const stampingFeeCost = 8;
+const privateVisaLetterCost = 8;
+const carPickUpCost = 30;
 
 const typeOptions = [
   { value: '1 month single', label: '1 month single' },
@@ -21,14 +27,14 @@ const purposeOptions = [
   { value: 'business', label: 'Business' },
 ];
 const processingTimeOptions = [
-  { value: 'normal', label: 'Normal' },
+  { value: 'normal', label: 'Normal (Guaranteed 2 working days)' },
   {
     value: 'urgent',
-    label: 'Urgent (guaranteed 4-8 working hours)',
+    label: 'Urgent (Guaranteed 4-8 working hours)',
   },
   {
     value: 'emergency',
-    label: 'Emergency (guaranteed 1 working hour)',
+    label: 'Emergency (Guaranteed 1 working hour)',
   },
   { value: 'overtime', label: 'Overtime' },
   { value: 'holiday', label: 'Holiday' },
@@ -51,6 +57,7 @@ type State = {
   processingTime: string,
   airport: string,
   arrivalDate: string,
+  extraServices: Object,
 };
 class ApplyVisaOnline extends React.Component<Props, State> {
   state = {
@@ -60,6 +67,12 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     processingTime: processingTimeOptions[0].value,
     airport: airportOptions[0].value,
     arrivalDate: '',
+    extraServices: {
+      airportFastTrack: false,
+      stampingFee: false,
+      privateVisaLetter: false,
+      carPickUp: false,
+    },
   };
 
   onSubmit = (values: Object) => {
@@ -93,9 +106,45 @@ class ApplyVisaOnline extends React.Component<Props, State> {
 
   updateArrivalDate = (event: Object) => {
     this.setState({
-      arrivalDate: event.target.value
-    })
-  }
+      arrivalDate: event.target.value,
+    });
+  };
+
+  updateAirportFastTrack = (event: Object) => {
+    this.setState({
+      extraServices: {
+        ...this.state.extraServices,
+        airportFastTrack: event.target.value,
+      },
+    });
+  };
+
+  updateStampingFee = (event: Object) => {
+    this.setState({
+      extraServices: {
+        ...this.state.extraServices,
+        stampingFee: event.target.value,
+      },
+    });
+  };
+
+  updatePrivateVisaLetter = (event: Object) => {
+    this.setState({
+      extraServices: {
+        ...this.state.extraServices,
+        privateVisaLetter: event.target.value,
+      },
+    });
+  };
+
+  updateCarPickUp = (event: Object) => {
+    this.setState({
+      extraServices: {
+        ...this.state.extraServices,
+        carPickUp: event.target.value,
+      },
+    });
+  };
 
   render() {
     const {
@@ -105,6 +154,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
       purpose,
       airport,
       arrivalDate,
+      extraServices,
     } = this.state;
 
     return (
@@ -224,9 +274,69 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       />
                     </Flexbox>
 
-                    <Button solid marginTop={5}>
-                      APPLY NOW
-                    </Button>
+                    <Flexbox
+                      borderColor="darkGrey"
+                      borderTop
+                      alignItems="flex-start"
+                      paddingTop={1}
+                      paddingBottom={5}
+                      column
+                      width="100%"
+                    >
+                      <Text bold>EXTRA SERVICES</Text>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="checkbox"
+                          onChange={this.updateAirportFastTrack}
+                          value={extraServices.airportFastTrack}
+                          marginRight={spacingValues.s}
+                        />
+                        <Text bold>Airport fast track</Text>
+                      </Label>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="checkbox"
+                          onChange={this.updateStampingFee}
+                          value={extraServices.stampingFee}
+                          marginRight={spacingValues.s}
+                        />
+                        <Text bold>Stamping fee</Text>
+                      </Label>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="checkbox"
+                          onChange={this.updatePrivateVisaLetter}
+                          value={extraServices.privateVisaLetter}
+                          marginRight={spacingValues.s}
+                        />
+                        <Text bold>Private visa letter</Text>
+                      </Label>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="checkbox"
+                          onChange={this.updateCarPickUp}
+                          value={extraServices.carPickUp}
+                          marginRight={spacingValues.s}
+                        />
+                        <Text bold>Car pick-up (4 seats)</Text>
+                      </Label>
+                    </Flexbox>
                   </Flexbox>
                   <Flexbox
                     flex={1}
@@ -265,12 +375,70 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                         <Text bold>Arrival airport:</Text>
                         <Text>{airport}</Text>
                       </Flexbox>
-                      <Flexbox display="flex" justifyContent="space-between">
+                      <Flexbox
+                        display="flex"
+                        justifyContent="space-between"
+                        paddingBottom={2}
+                      >
                         <Text bold>Arrival date:</Text>
                         <Text>{arrivalDate}</Text>
                       </Flexbox>
+
+                      <Flexbox
+                        paddingTop={2}
+                        display="flex"
+                        justifyContent="space-between"
+                        borderTop
+                        borderColor="darkGrey"
+                      >
+                        <Text bold>Extra services:</Text>
+                      </Flexbox>
+                      {extraServices.airportFastTrack ? (
+                        <Flexbox
+                          display="flex"
+                          justifyContent="space-between"
+                          paddingBottom={2}
+                        >
+                          <Text bold>Airport fast track</Text>
+                          <Text>{airportFastTrackCost}</Text>
+                        </Flexbox>
+                      ) : null}
+                      {extraServices.stampingFee && (
+                        <Flexbox
+                          display="flex"
+                          justifyContent="space-between"
+                          paddingBottom={2}
+                        >
+                          <Text bold>Stamping fee</Text>
+                          <Text>{stampingFeeCost}</Text>
+                        </Flexbox>
+                      )}
+                      {extraServices.privateVisaLetter && (
+                        <Flexbox
+                          display="flex"
+                          justifyContent="space-between"
+                          paddingBottom={2}
+                        >
+                          <Text bold>Private visa letter</Text>
+                          <Text>{privateVisaLetterCost}</Text>
+                        </Flexbox>
+                      )}
+                      {extraServices.carPickUp && (
+                        <Flexbox
+                          display="flex"
+                          justifyContent="space-between"
+                          paddingBottom={2}
+                        >
+                          <Text bold>Car pick-up (4 seats)</Text>
+                          <Text>{carPickUpCost}</Text>
+                        </Flexbox>
+                      )}
                     </Div>
                   </Flexbox>
+
+                  <Button solid marginTop={5}>
+                    APPLY NOW
+                  </Button>
                 </Flexbox>
               )}
             />
