@@ -25,16 +25,13 @@ export default class Footer extends React.Component<null> {
             responsiveAlignItemsCenter
           >
             <Anchor href="/" as="/">
-              <Text color="white" size="xl">
-                evisa-vn.com
-              </Text>
-              {/*<Image*/}
-              {/*src="/static/images/logo-white.png"*/}
-              {/*alt="evisa logo"*/}
-              {/*paddingBottom={8}*/}
-              {/*maxWidth={80}*/}
-              {/*clickable*/}
-              {/*/>*/}
+              <Image
+                src="/static/images/logo.png"
+                alt="evisa logo"
+                paddingBottom={8}
+                maxWidth={40}
+                clickable
+              />
             </Anchor>
             <Text
               color="lightGrey"
