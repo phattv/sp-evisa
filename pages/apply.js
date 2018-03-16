@@ -8,12 +8,18 @@ import ReactTooltip from 'react-tooltip';
 // custom
 import { Layout, Content, Text, Flexbox } from '../components';
 import { colors, borderRadius, spacingValues } from '../constants/ui';
+import countries from '../static/countries.json';
 
 const costPerPerson = 8;
 const airportFastTrackCost = 45;
 const stampingFeeCost = 8;
 const privateVisaLetterCost = 8;
 const carPickUpCost = 30;
+
+const countryOptions = countries.map(country => ({
+  value: country.iso3,
+  label: country.nicename,
+}));
 
 const typeOptions = [
   { value: '1 month single', label: '1 month single' },
@@ -52,6 +58,7 @@ const airportOptions = [
 
 type Props = {};
 type State = {
+  country: string,
   quantity: number | string,
   type: string,
   purpose: string,
@@ -65,6 +72,7 @@ type State = {
 };
 class ApplyVisaOnline extends React.Component<Props, State> {
   state = {
+    country: '',
     quantity: 0,
     type: typeOptions[0].value,
     purpose: purposeOptions[0].value,
@@ -84,6 +92,12 @@ class ApplyVisaOnline extends React.Component<Props, State> {
 
   onSubmit = (values: Object) => {
     window.alert(JSON.stringify(values, null, 2));
+  };
+
+  updateCountry = (selectedOption: Object) => {
+    this.setState({
+      country: selectedOption.value,
+    });
   };
 
   updateQuantity = (event: Object) =>
@@ -208,6 +222,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
 
   render() {
     const {
+      country,
       quantity,
       type,
       processingTime,
@@ -240,6 +255,20 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                     alignItems="flex-start"
                     marginRight={spacingValues.xs}
                   >
+                    <Flexbox
+                      alignItems="flex-start"
+                      paddingBottom={5}
+                      column
+                      width="100%"
+                    >
+                      <Text bold>COUNTRY</Text>
+                      <Select
+                        value={country}
+                        placeholder="Select..."
+                        onChange={this.updateCountry}
+                        options={countryOptions}
+                      />
+                    </Flexbox>
                     <Flexbox
                       alignItems="flex-start"
                       paddingBottom={5}
