@@ -4,6 +4,7 @@ import * as React from 'react';
 import Select from 'react-select';
 import { Form, Field } from 'react-final-form';
 import { Div, Input, Button, Label } from 'glamorous';
+import ReactTooltip from 'react-tooltip';
 // custom
 import { Layout, Content, Text, Flexbox } from '../components';
 import { colors, borderRadius, spacingValues } from '../constants/ui';
@@ -284,7 +285,15 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       width="100%"
                     >
                       <Text bold>EXTRA SERVICES</Text>
+                      <ReactTooltip multiline />
                       <Label
+                        data-tip="All immigration procedures shall be handled by our staff in the most timely manner.
+                        <br/>
+                        You will not need to get in line and wait for visa stamping.
+                        <br/>
+                        Highly recommended if you don't want to waste time at the airport or/and you are visiting Vietnam for the first time.
+                        <br/>
+                        * Visa stamping fee shall be paid in cash and borne by you."
                         display="flex"
                         alignItems="center"
                         cursor="pointer"
@@ -297,7 +306,14 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                         />
                         <Text bold>Airport fast track</Text>
                       </Label>
+                      <ReactTooltip multiline />
                       <Label
+                        data-tip="
+                        Highly recommended to accelerate immigration procedures at Vietnam airport.
+                        <br/>
+                        You will not need to pay this fee again upon arrival.
+                        <br/>
+                        * Only available when fast-track service is applied."
                         display="flex"
                         alignItems="center"
                         cursor="pointer"
@@ -310,7 +326,13 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                         />
                         <Text bold>Stamping fee</Text>
                       </Label>
+                      <ReactTooltip multiline />
                       <Label
+                        data-tip="
+                        Private/confidential visa approval letter is efficient in case you want your visa approval letter to contain only your name or the name of your group
+                        <br/>
+                        because it is typical for a visa approval letter to contain a number of names of unacquainted people.
+                        "
                         display="flex"
                         alignItems="center"
                         cursor="pointer"
@@ -323,7 +345,15 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                         />
                         <Text bold>Private visa letter</Text>
                       </Label>
+                      <ReactTooltip multiline />
                       <Label
+                        data-tip="
+                        You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.
+                        <br/>
+                        Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.
+                        <br />
+                        * Accompanying fast-track service is recommended so that the pick-up is as scheduled.
+                        "
                         display="flex"
                         alignItems="center"
                         cursor="pointer"
