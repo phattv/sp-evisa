@@ -59,6 +59,9 @@ type State = {
   airport: string,
   arrivalDate: string,
   extraServices: Object,
+  paymentMethod: string,
+  isTermsAgreed: boolean,
+  totalFee: number,
 };
 class ApplyVisaOnline extends React.Component<Props, State> {
   state = {
@@ -74,6 +77,9 @@ class ApplyVisaOnline extends React.Component<Props, State> {
       privateVisaLetter: false,
       carPickUp: false,
     },
+    paymentMethod: '',
+    isTermsAgreed: false,
+    totalFee: 0,
   };
 
   onSubmit = (values: Object) => {
@@ -81,9 +87,12 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   };
 
   updateQuantity = (event: Object) =>
-    this.setState({
-      quantity: event.target.value,
-    });
+    this.setState(
+      {
+        quantity: event.target.value,
+      },
+      () => this.calculateTotalFee(),
+    );
 
   updateType = (selectedOption: Object) =>
     this.setState({
@@ -91,59 +100,109 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     });
 
   updateProcessingTime = (selectedOption: Object) =>
-    this.setState({
-      processingTime: selectedOption ? selectedOption.value : '',
-    });
+    this.setState(
+      {
+        processingTime: selectedOption ? selectedOption.value : '',
+      },
+      () => this.calculateTotalFee(),
+    );
 
   updatePurpose = (selectedOption: Object) =>
-    this.setState({
-      purpose: selectedOption ? selectedOption.value : '',
-    });
+    this.setState(
+      {
+        purpose: selectedOption ? selectedOption.value : '',
+      },
+      () => this.calculateTotalFee(),
+    );
 
   updateAirport = (selectedOption: Object) =>
-    this.setState({
-      airport: selectedOption ? selectedOption.value : '',
-    });
+    this.setState(
+      {
+        airport: selectedOption ? selectedOption.value : '',
+      },
+      () => this.calculateTotalFee(),
+    );
 
   updateArrivalDate = (event: Object) => {
-    this.setState({
-      arrivalDate: event.target.value,
-    });
+    this.setState(
+      {
+        arrivalDate: event.target.value,
+      },
+      () => this.calculateTotalFee(),
+    );
   };
 
   updateAirportFastTrack = (event: Object) => {
-    this.setState({
-      extraServices: {
-        ...this.state.extraServices,
-        airportFastTrack: event.target.value,
+    this.setState(
+      {
+        extraServices: {
+          ...this.state.extraServices,
+          airportFastTrack: !this.state.extraServices.airportFastTrack,
+        },
       },
-    });
+      () => this.calculateTotalFee(),
+    );
   };
 
   updateStampingFee = (event: Object) => {
-    this.setState({
-      extraServices: {
-        ...this.state.extraServices,
-        stampingFee: event.target.value,
+    this.setState(
+      {
+        extraServices: {
+          ...this.state.extraServices,
+          stampingFee: !this.state.extraServices.stampingFee,
+        },
       },
-    });
+      () => this.calculateTotalFee(),
+    );
   };
 
   updatePrivateVisaLetter = (event: Object) => {
-    this.setState({
-      extraServices: {
-        ...this.state.extraServices,
-        privateVisaLetter: event.target.value,
+    this.setState(
+      {
+        extraServices: {
+          ...this.state.extraServices,
+          privateVisaLetter: !this.state.extraServices.privateVisaLetter,
+        },
       },
-    });
+      () => this.calculateTotalFee(),
+    );
   };
 
   updateCarPickUp = (event: Object) => {
-    this.setState({
-      extraServices: {
-        ...this.state.extraServices,
-        carPickUp: event.target.value,
+    this.setState(
+      {
+        extraServices: {
+          ...this.state.extraServices,
+          carPickUp: !this.state.extraServices.carPickUp,
+        },
       },
+      () => this.calculateTotalFee(),
+    );
+  };
+
+  updatePaymentMethod = (event: Object) => {
+    this.setState(
+      {
+        paymentMethod: event.target.value,
+      },
+      () => this.calculateTotalFee(),
+    );
+  };
+
+  updateIsTermsAgreed = (event: Object) => {
+    this.setState(
+      {
+        isTermsAgreed: !this.state.isTermsAgreed,
+      },
+      () => this.calculateTotalFee(),
+    );
+  };
+
+  calculateTotalFee = () => {
+    const { quantity } = this.state;
+    const parsedQuantity = Number.parseInt(quantity, 10);
+    this.setState({
+      totalFee: parsedQuantity * costPerPerson,
     });
   };
 
@@ -156,6 +215,8 @@ class ApplyVisaOnline extends React.Component<Props, State> {
       airport,
       arrivalDate,
       extraServices,
+      isTermsAgreed,
+      totalFee,
     } = this.state;
 
     return (
@@ -423,52 +484,112 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                       >
                         <Text bold>Extra services:</Text>
                       </Flexbox>
-                      {extraServices.airportFastTrack ? (
-                        <Flexbox
-                          display="flex"
-                          justifyContent="space-between"
-                          paddingBottom={2}
-                        >
+                      {extraServices.airportFastTrack && (
+                        <Flexbox display="flex" justifyContent="space-between">
                           <Text bold>Airport fast track</Text>
                           <Text>{airportFastTrackCost}</Text>
                         </Flexbox>
-                      ) : null}
+                      )}
                       {extraServices.stampingFee && (
-                        <Flexbox
-                          display="flex"
-                          justifyContent="space-between"
-                          paddingBottom={2}
-                        >
+                        <Flexbox display="flex" justifyContent="space-between">
                           <Text bold>Stamping fee</Text>
                           <Text>{stampingFeeCost}</Text>
                         </Flexbox>
                       )}
                       {extraServices.privateVisaLetter && (
-                        <Flexbox
-                          display="flex"
-                          justifyContent="space-between"
-                          paddingBottom={2}
-                        >
+                        <Flexbox display="flex" justifyContent="space-between">
                           <Text bold>Private visa letter</Text>
                           <Text>{privateVisaLetterCost}</Text>
                         </Flexbox>
                       )}
                       {extraServices.carPickUp && (
-                        <Flexbox
-                          display="flex"
-                          justifyContent="space-between"
-                          paddingBottom={2}
-                        >
+                        <Flexbox display="flex" justifyContent="space-between">
                           <Text bold>Car pick-up (4 seats)</Text>
                           <Text>{carPickUpCost}</Text>
                         </Flexbox>
                       )}
-                    </Div>
-                  </Flexbox>
 
-                  <Button solid marginTop={5}>
-                    APPLY NOW
-                  </Button>
+                      <Flexbox
+                        paddingTop={2}
+                        paddingBottom={2}
+                        display="flex"
+                        justifyContent="space-between"
+                        borderTop
+                        borderColor="darkGrey"
+                      >
+                        <Text bold>TOTAL FEE:</Text>
+                        {totalFee && (
+                          <Text bold color="visaRed" size="xxl">
+                            ${totalFee}
+                          </Text>
+                        )}
+                      </Flexbox>
+                      <Text>Select payment method:</Text>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="radio"
+                          name="paymentMethod"
+                          onChange={this.updatePaymentMethod}
+                          value="paypal"
+                          marginRight={spacingValues.s}
+                        />
+                        <Text>Paypal</Text>
+                      </Label>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="radio"
+                          name="paymentMethod"
+                          onChange={this.updatePaymentMethod}
+                          value="credit"
+                          marginRight={spacingValues.s}
+                        />
+                        <Text>Visa/Master/AMEX/JCB/Union Pay</Text>
+                      </Label>
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="radio"
+                          name="paymentMethod"
+                          onChange={this.updatePaymentMethod}
+                          value="wu"
+                          marginRight={spacingValues.s}
+                        />
+                        <Text>Western Union</Text>
+                      </Label>
+
+                      <Label
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        cursor="pointer"
+                      >
+                        <Input
+                          type="checkbox"
+                          onChange={this.updateIsTermsAgreed}
+                          value={isTermsAgreed}
+                          marginRight={spacingValues.s}
+                        />
+                        <Text bold>
+                          I have read and agree with the Terms of Use
+                        </Text>
+                      </Label>
+                    </Div>
+
+                    <Button solid marginTop={5}>
+                      APPLY NOW
+                    </Button>
+                  </Flexbox>
                 </Flexbox>
               )}
             />
