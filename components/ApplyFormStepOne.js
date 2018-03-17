@@ -9,18 +9,13 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 // custom
 import { Text, Flexbox, Button } from '../components';
 import { colors, borderRadius, spacingValues } from '../constants/ui';
-import countries from '../static/countries.json';
+import countryOptions from '../static/countries.json';
 
 const costPerPerson = 8;
 const airportFastTrackCost = 45;
 const stampingFeeCost = 8;
 const privateVisaLetterCost = 8;
 const carPickUpCost = 30;
-
-const countryOptions = countries.map(country => ({
-  value: country.iso3,
-  label: country.nicename,
-}));
 
 const typeOptions = [
   { value: '1 month single', label: '1 month single' },
