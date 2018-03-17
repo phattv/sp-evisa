@@ -261,12 +261,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       <Form
         onSubmit={this.onSubmit}
         render={({ handleSubmit, pristine, invalid }) => (
-          <Flexbox alignItems="flex-start" flex={1}>
+          <Flexbox alignItems="flex-start" flex={1} responsiveLayout>
             <Flexbox
               flex={1}
               column
               alignItems="flex-start"
-              marginRight={spacingValues.xs}
+              width="100%"
+              marginLeft={spacingValues.xxs}
+              marginRight={spacingValues.xxs}
             >
               <Flexbox
                 alignItems="flex-start"
@@ -471,7 +473,13 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 </Label>
               </Flexbox>
             </Flexbox>
-            <Flexbox flex={1} column width="100%" marginLeft={spacingValues.xs}>
+            <Flexbox
+              flex={1}
+              column
+              width="100%"
+              marginLeft={spacingValues.xxs}
+              marginRight={spacingValues.xxs}
+            >
               <Text size="l" bold>
                 REVIEW YOUR ORDER
               </Text>
