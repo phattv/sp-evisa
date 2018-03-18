@@ -1,10 +1,10 @@
 version: "3"
 services:
-  evisavn:
+  evisa:
     build:
       context: .
       dockerfile: Dockerfile
-    image: evisavn
+    image: evisa
     ports:
       - "3000:80"
     environment:
