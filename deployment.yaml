@@ -2,21 +2,21 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: evisavn
-  name: evisavn
+    app: evisa
+  name: evisa
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: evisavn
+      name: evisa
   template:
     metadata:
       labels:
-        name: evisavn
+        name: evisa
     spec:
       containers:
-      - image: gcr.io/evisavn-188706/evisavn:v3
-        name: evisavn
+      - image: gcr.io/evisa-198403/evisa:v1.0
+        name: evisa
         ports:
         - containerPort: 80
           protocol: TCP

@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: evisa-ing
+spec:
+  rules:
+    - host: evisa-vn.com
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: evisa
+            servicePort: 80
