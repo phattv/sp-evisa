@@ -2,6 +2,9 @@
 // vendor
 import * as React from 'react';
 import { Div } from 'glamorous';
+import { connect } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import { bindActionCreators } from 'redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 // custom
 import { Flexbox, Layout, Content } from '../components';
@@ -14,6 +17,8 @@ import {
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
+import { initialStore } from '../store';
+import { finishStepOne } from '../actions';
 
 type Props = {};
 type State = {
@@ -97,8 +102,6 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   }
 }
 
-export default ApplyVisaOnline;
-
 type CustomTabProps = {
   children: React.Node,
   index: number,
@@ -128,3 +131,20 @@ class CustomTab extends React.Component<CustomTabProps> {
     );
   }
 }
+
+const ApplyVisaOnlineWithRedux = connect(
+  () => {},
+  dispatch => {
+    return {};
+  },
+)(ApplyVisaOnline);
+
+const mapStateToProps = null;
+const mapDispatchToProps = dispatch => {
+  return {
+    finishStepOne: bindActionCreators(finishStepOne, dispatch),
+  };
+};
+export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
+  ApplyVisaOnlineWithRedux,
+);
