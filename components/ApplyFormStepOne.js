@@ -99,25 +99,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   onSubmit = (event: Object) => {
-    const {
-      isTermsAgreed,
-      country,
-      quantity,
-      type,
-      processingTime,
-      purpose,
-      paymentMethod,
-    } = this.state;
+    const { country, quantity, type, processingTime, purpose } = this.state;
 
     // required fields
     const shouldShowErrorMessage =
-      !isTermsAgreed ||
-      (!country &&
-        !quantity &&
-        !type &&
-        !processingTime &&
-        !purpose &&
-        !paymentMethod);
+      !country ||
+      parseInt(quantity) <= 0 ||
+      !type ||
+      !processingTime ||
+      !purpose;
     this.setState({
       shouldShowErrorMessage: shouldShowErrorMessage,
     });
@@ -126,8 +116,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     this.props.finishStepOne(this.state);
 
     // onSubmit callback
-    const { onSubmit } = this.props;
     if (shouldShowErrorMessage === false) {
+      const { onSubmit } = this.props;
       onSubmit && onSubmit();
     }
   };
@@ -286,7 +276,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       totalFee,
       shouldShowErrorMessage,
     } = this.state;
-    console.log('xxx stepOne', this.props);
 
     return (
       <Form
@@ -303,7 +292,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             >
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -319,7 +308,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -342,7 +331,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -358,7 +347,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -374,7 +363,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -390,7 +379,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -404,7 +393,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -422,7 +411,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox
                 alignItems="flex-start"
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -444,7 +433,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 borderTop
                 alignItems="flex-start"
                 paddingTop={1}
-                paddingBottom={5}
+                paddingBottom={3}
                 column
                 width="100%"
               >
@@ -632,9 +621,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                     </Text>
                   )}
                 </Flexbox>
-                <Text>
-                  Payment method&nbsp;<Text color="visaRed">*</Text>:
-                </Text>
+                <Text>Payment method:</Text>
                 <Label display="flex" alignItems="center" cursor="pointer">
                   <Input
                     type="radio"

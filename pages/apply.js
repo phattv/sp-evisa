@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 // custom
-import { Flexbox, Layout, Content } from '../components';
+import { Flexbox, Layout, Content, Text } from '../components';
 import {
   colors,
   fontSizes,
@@ -28,6 +28,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   };
 
   updateCurrentTabIndex = (tabIndex: number) => {
+    // TODO: check current tab validity
     this.setState({
       currentTabIndex: tabIndex,
     });
@@ -67,7 +68,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                     listStyleType: 'none',
                   }}
                 >
-                  <Flexbox justifyContent="flex-end">
+                  <Flexbox justifyContent="flex-end" responsiveLayout>
                     <Tab>
                       <CustomTab index={0} currentIndex={currentTabIndex}>
                         1. Visa Options
@@ -117,9 +118,6 @@ class CustomTab extends React.Component<CustomTabProps> {
         backgroundColor={
           index === currentIndex ? colors.visaRed : colors.darkGrey
         }
-        color="white"
-        fontSize={fontSizes.l}
-        fontWeight="bold"
         padding={`${spacingValues.xs}px ${spacingValues.l}px`}
         cursor="pointer"
         css={{
@@ -128,7 +126,9 @@ class CustomTab extends React.Component<CustomTabProps> {
           },
         }}
       >
-        {children}
+        <Text size="l" bold color="white">
+          {children}
+        </Text>
       </Div>
     );
   }
