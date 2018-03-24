@@ -63,6 +63,7 @@ type State = {
   processingTime: string,
   airport: string,
   arrivalDate: string,
+  departureDate: string,
   extraServices: Object,
   paymentMethod: string,
   isTermsAgreed: boolean,
@@ -72,12 +73,13 @@ type State = {
 class ApplyFormStepOne extends React.Component<Props, State> {
   state = {
     country: '',
-    quantity: 0,
+    quantity: 1,
     type: typeOptions[0].value,
     purpose: purposeOptions[0].value,
     processingTime: processingTimeOptions[0].value,
     airport: airportOptions[0].value,
     arrivalDate: '',
+    departureDate: '',
     extraServices: {
       airportFastTrack: false,
       stampingFee: false,
@@ -158,6 +160,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     this.setState(
       {
         arrivalDate: event.target.value,
+      },
+      () => this.calculateTotalFee(),
+    );
+  };
+
+  updateDepartureDate = (event: Object) => {
+    this.setState(
+      {
+        departureDate: event.target.value,
       },
       () => this.calculateTotalFee(),
     );
@@ -246,6 +257,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       purpose,
       airport,
       arrivalDate,
+      departureDate,
       extraServices,
       isTermsAgreed,
       totalFee,
@@ -372,6 +384,24 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
                   onChange={this.updateArrivalDate}
+                />
+              </Flexbox>
+              <Flexbox
+                alignItems="flex-start"
+                paddingBottom={5}
+                column
+                width="100%"
+              >
+                <Text bold>DEPARTURE DATE</Text>
+                <Input
+                  type="date"
+                  value={departureDate}
+                  backgroundColor="white"
+                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
+                  borderRadius={borderRadius}
+                  border={`1px solid ${colors.lightGrey}`}
+                  width="100%"
+                  onChange={this.updateDepartureDate}
                 />
               </Flexbox>
 
@@ -506,13 +536,17 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   <Text bold>Arrival airport:</Text>
                   <Text>{airport}</Text>
                 </Flexbox>
+                <Flexbox display="flex" justifyContent="space-between">
+                  <Text bold>Arrival date:</Text>
+                  <Text>{arrivalDate}</Text>
+                </Flexbox>
                 <Flexbox
                   display="flex"
                   justifyContent="space-between"
                   paddingBottom={2}
                 >
-                  <Text bold>Arrival date:</Text>
-                  <Text>{arrivalDate}</Text>
+                  <Text bold>Departure date:</Text>
+                  <Text>{departureDate}</Text>
                 </Flexbox>
 
                 <Flexbox
@@ -594,6 +628,16 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                     marginRight={spacingValues.s}
                   />
                   <Text>Western Union</Text>
+                </Label>
+                <Label display="flex" alignItems="center" cursor="pointer">
+                  <Input
+                    type="radio"
+                    name="paymentMethod"
+                    onChange={this.updatePaymentMethod}
+                    value="later"
+                    marginRight={spacingValues.s}
+                  />
+                  <Text>I will page later</Text>
                 </Label>
 
                 <Label
