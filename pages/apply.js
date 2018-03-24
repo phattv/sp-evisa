@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Div } from 'glamorous';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import { bindActionCreators } from 'redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 // custom
 import { Flexbox, Layout, Content } from '../components';
@@ -138,7 +137,7 @@ class CustomTab extends React.Component<CustomTabProps> {
 const ApplyVisaOnlineWithRedux = connect(null, null)(ApplyVisaOnline);
 
 const mapStateToProps = null;
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = {};
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyVisaOnlineWithRedux,
 );

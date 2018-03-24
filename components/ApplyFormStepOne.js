@@ -8,7 +8,6 @@ import ReactTooltip from 'react-tooltip';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import { bindActionCreators } from 'redux';
 // custom
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
@@ -268,6 +267,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     });
   };
 
+  componentDidMount() {
+    this.calculateTotalFee();
+  }
+
   render() {
     const {
       country,
@@ -304,7 +307,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>COUNTRY *</Text>
+                <Text bold>
+                  COUNTRY &nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Select
                   value={country}
                   placeholder="Select..."
@@ -318,7 +323,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>NUMBER OF APPLICANT *</Text>
+                <Text bold>
+                  NUMBER OF APPLICANT&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Input
                   backgroundColor="white"
                   padding={`${spacingValues.xs}px ${spacingValues.s}px`}
@@ -339,7 +346,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>TYPE OF VISA *</Text>
+                <Text bold>
+                  TYPE OF VISA&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Select
                   value={type}
                   placeholder="Select..."
@@ -353,7 +362,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>PROCESSING TIME *</Text>
+                <Text bold>
+                  PROCESSING TIME&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Select
                   value={processingTime}
                   placeholder="Normal"
@@ -367,7 +378,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>PURPOSE OF VISA *</Text>
+                <Text bold>
+                  PURPOSE OF VISA&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Select
                   value={purpose}
                   placeholder="Select..."
@@ -619,7 +632,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                     </Text>
                   )}
                 </Flexbox>
-                <Text>Select payment method *:</Text>
+                <Text>
+                  Payment method&nbsp;<Text color="visaRed">*</Text>:
+                </Text>
                 <Label display="flex" alignItems="center" cursor="pointer">
                   <Input
                     type="radio"
@@ -708,10 +723,8 @@ const mapStateToProps = store => {
     stepOne: store.stepOne,
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    finishStepOne: bindActionCreators(finishStepOne, dispatch),
-  };
+const mapDispatchToProps = {
+  finishStepOne: finishStepOne,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepOneWithRedux,

@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import { bindActionCreators } from 'redux';
 // custom
 import { initialStore } from '../store';
 import { finishStepThree } from '../actions';
@@ -38,10 +37,8 @@ const mapStateToProps = store => {
     stepThree: store.stepThree,
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    finishStepThree: bindActionCreators(finishStepThree, dispatch),
-  };
+const mapDispatchToProps = {
+  finishStepThree: finishStepThree,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepThreeWithRedux,

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Div } from 'glamorous';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import { bindActionCreators } from 'redux';
 // custom
 import { Button } from '../components';
 import { finishStepTwo } from '../actions';
@@ -12,6 +11,7 @@ import { initialStore } from '../store';
 
 type Props = {
   onSubmit: () => void,
+  stepOne: Object,
   stepTwo: Object,
   finishStepTwo: Object => void,
 };
@@ -26,9 +26,9 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   state = {};
 
   onSubmit = () => {
-    const { onSubmit } = this.props
-    onSubmit && onSubmit()
-  }
+    const { onSubmit } = this.props;
+    onSubmit && onSubmit();
+  };
 
   render() {
     console.log('xxx stepTwo', this.props);
@@ -38,13 +38,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         approval letter right now OR just select applicant's nationality, then
         SKIP THIS STEP. An application form will be sent to your registered
         email for later fulfilling.
-
-        <Button
-          solid
-          marginTop={5}
-          marginBottom={5}
-          onClick={this.onSubmit}
-        >
+        <Button solid marginTop={5} marginBottom={5} onClick={this.onSubmit}>
           NEXT&nbsp;&nbsp;
           <i className="fa fa-arrow-right" />
         </Button>
@@ -57,13 +51,12 @@ const ApplyFormStepTwoWithRedux = connect(null, null)(ApplyFormStepTwo);
 
 const mapStateToProps = store => {
   return {
+    stepOne: store.stepOne,
     stepTwo: store.stepTwo,
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    finishStepTwo: bindActionCreators(finishStepTwo, dispatch),
-  };
+const mapDispatchToProps = {
+  finishStepTwo: finishStepTwo,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwoWithRedux,
