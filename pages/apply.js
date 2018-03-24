@@ -18,7 +18,6 @@ import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import { initialStore } from '../store';
-import { finishStepOne } from '../actions';
 
 type Props = {};
 type State = {
@@ -37,6 +36,10 @@ class ApplyVisaOnline extends React.Component<Props, State> {
 
   nagivateToStepTwo = () => {
     this.updateCurrentTabIndex(1);
+  };
+
+  navigateToStepThree = () => {
+    this.updateCurrentTabIndex(2);
   };
 
   render() {
@@ -88,7 +91,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                   <ApplyFormStepOne onSubmit={this.nagivateToStepTwo} />
                 </TabPanel>
                 <TabPanel>
-                  <ApplyFormStepTwo />
+                  <ApplyFormStepTwo onSubmit={this.navigateToStepThree} />
                 </TabPanel>
                 <TabPanel>
                   <ApplyFormStepThree />
@@ -132,19 +135,10 @@ class CustomTab extends React.Component<CustomTabProps> {
   }
 }
 
-const ApplyVisaOnlineWithRedux = connect(
-  () => {},
-  dispatch => {
-    return {};
-  },
-)(ApplyVisaOnline);
+const ApplyVisaOnlineWithRedux = connect(null, null)(ApplyVisaOnline);
 
 const mapStateToProps = null;
-const mapDispatchToProps = dispatch => {
-  return {
-    finishStepOne: bindActionCreators(finishStepOne, dispatch),
-  };
-};
+const mapDispatchToProps = dispatch => ({});
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyVisaOnlineWithRedux,
 );

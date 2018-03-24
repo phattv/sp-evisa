@@ -2,14 +2,19 @@
 // vendor
 import * as React from 'react';
 import Select from 'react-select';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { Div, Input, Label } from 'glamorous';
 import ReactTooltip from 'react-tooltip';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { connect } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import { bindActionCreators } from 'redux';
 // custom
-import { Text, Flexbox, Button } from '../components';
-import { colors, borderRadius, spacingValues } from '../constants/ui';
+import { Button, Flexbox, Text } from '../components';
+import { borderRadius, colors, spacingValues } from '../constants/ui';
 import countryOptions from '../static/countries.json';
+import { initialStore } from '../store';
+import { finishStepOne } from '../actions';
 
 const costPerPerson = 8;
 const airportFastTrackCost = 45;
@@ -54,6 +59,8 @@ const airportOptions = [
 
 type Props = {
   onSubmit: () => void,
+  stepOne: Object,
+  finishStepOne: Object => void,
 };
 type State = {
   country: string,
@@ -100,16 +107,29 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       type,
       processingTime,
       purpose,
+      paymentMethod,
     } = this.state;
+
+    // required fields
     const shouldShowErrorMessage =
       !isTermsAgreed ||
-      (!country && !quantity && !type && !processingTime && !purpose);
+      (!country &&
+        !quantity &&
+        !type &&
+        !processingTime &&
+        !purpose &&
+        !paymentMethod);
     this.setState({
       shouldShowErrorMessage: shouldShowErrorMessage,
     });
 
+    // save to store
+    this.props.finishStepOne(this.state);
+
+    // onSubmit callback
+    const { onSubmit } = this.props;
     if (shouldShowErrorMessage === false) {
-      this.props.onSubmit && this.props.onSubmit();
+      onSubmit && onSubmit();
     }
   };
 
@@ -263,6 +283,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       totalFee,
       shouldShowErrorMessage,
     } = this.state;
+    console.log('xxx stepOne', this.props);
 
     return (
       <Form
@@ -598,7 +619,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                     </Text>
                   )}
                 </Flexbox>
-                <Text>Select payment method:</Text>
+                <Text>Select payment method *:</Text>
                 <Label display="flex" alignItems="center" cursor="pointer">
                   <Input
                     type="radio"
@@ -669,7 +690,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
               {shouldShowErrorMessage && (
                 <Text color="visaRed" bold>
-                  Please fill in the inputs and accept Terms of Use
+                  Please fill in the required inputs and accept Terms of Use
                 </Text>
               )}
             </Flexbox>
@@ -680,4 +701,18 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   }
 }
 
-export default ApplyFormStepOne;
+const ApplyFormStepOneWithRedux = connect(null, null)(ApplyFormStepOne);
+
+const mapStateToProps = store => {
+  return {
+    stepOne: store.stepOne,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    finishStepOne: bindActionCreators(finishStepOne, dispatch),
+  };
+};
+export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
+  ApplyFormStepOneWithRedux,
+);
