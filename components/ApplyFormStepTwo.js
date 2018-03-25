@@ -7,7 +7,6 @@ import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 // custom
 import { Button, Flexbox, Text } from '../components';
-import { finishStepTwo } from '../actions';
 import { initialStore } from '../store';
 import { spacingValues } from '../constants/ui';
 import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
@@ -36,7 +35,11 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
     return (
       <Div>
-        <Flexbox paddingBottom={5}>
+        <Flexbox
+          marginLeft={spacingValues.xxs}
+          marginRight={spacingValues.xxs}
+          paddingBottom={5}
+        >
           <Text>
             Please fill out all required information below to process Vietnam
             visa approval letter right now OR just select applicant's
