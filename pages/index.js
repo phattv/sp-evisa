@@ -174,17 +174,17 @@ type State = {};
 export default class Home extends React.Component<Props, State> {
   render() {
     return (
-      <Layout>
+      <Layout
+        style={{
+          backgroundImage: 'url(/static/images/form-background.png)',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
+      >
         {/* Form */}
-        <Content
-          style={{
-            backgroundImage: 'url(/static/images/form-background.png)',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-          }}
-        >
+        <Content>
           <Flexbox width="100%" responsiveLayout>
             <Flexbox flex={1} />
             <Flexbox flex={1} paddingVertical={4} />
@@ -220,7 +220,7 @@ export default class Home extends React.Component<Props, State> {
         </Content>
 
         {/* Welcome */}
-        <Content backgroundColor="white">
+        <Content>
           <Flexbox column>
             <Flexbox paddingBottom={6}>
               <Text size="xl" black color="visaBlue">
@@ -230,7 +230,7 @@ export default class Home extends React.Component<Props, State> {
                 evisa-vn.com
               </Text>
             </Flexbox>
-            <Text bold textAlign="center">
+            <Text bold textAlign="center" color="white">
               We are pleased to serve you at website{' '}
               <Text bold fontStyle="italic" color="visaBlue">
                 evisa-vn.com
@@ -240,7 +240,7 @@ export default class Home extends React.Component<Props, State> {
               when they come to Vietnam via airline.
             </Text>
             <br />
-            <Text textAlign="center" color="grey">
+            <Text textAlign="center" color="white">
               evisa-vn.com is a legal and that is approved by the government of
               vietnam.
               <br />
@@ -249,13 +249,17 @@ export default class Home extends React.Component<Props, State> {
               <br />
               For further information, please contact us at below.
               <br />
-              <Text bold>Hotline:</Text>{' '}
-              <Text bold color="visaBlue">
+              <Text bold color="white">
+                Hotline:
+              </Text>{' '}
+              <Text bold color="white">
                 (+84).124.456.789
               </Text>
               <br />
-              <Text bold>Email:</Text>{' '}
-              <Text bold color="visaBlue">
+              <Text bold color="white">
+                Email:
+              </Text>{' '}
+              <Text bold color="white">
                 sales@evisa-vn.com | support@evisa-vn.com
               </Text>
             </Text>
@@ -373,7 +377,7 @@ export default class Home extends React.Component<Props, State> {
         </Content>
 
         {/* Why */}
-        <Content>
+        <Content backgroundColor="white">
           <Flexbox column width="100%">
             <BlockHeader header="Why choose us" />
             <Flexbox responsiveLayout>
@@ -461,7 +465,7 @@ export default class Home extends React.Component<Props, State> {
         </Content>
 
         {/* Extra Services */}
-        <Content>
+        <Content backgroundColor="lightBlue">
           <Flexbox width="100%" column>
             <BlockHeader header="Extra services" />
             <Flexbox width="100%" responsiveLayout>
@@ -506,7 +510,7 @@ export default class Home extends React.Component<Props, State> {
         </Content>
 
         {/* Check marks */}
-        <Content>
+        <Content backgroundColor="white">
           <Flexbox responsiveLayout alignItems="stretch">
             <Flexbox flex={1} column height="100%">
               <Text
