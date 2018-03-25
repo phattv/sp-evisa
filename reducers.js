@@ -19,7 +19,7 @@ const reducer = (state: Store = initialState, action: Object) => {
     }
     case actionTypes.FINISH_STEP_TWO: {
       return Object.assign({}, state, {
-        stepTwo: action.payload,
+        stepTwo: {...state.stepTwo, ...action.payload},
       });
     }
     case actionTypes.FINISH_STEP_THREE: {

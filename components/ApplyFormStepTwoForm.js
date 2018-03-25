@@ -4,10 +4,14 @@ import * as React from 'react';
 import { Div, Input } from 'glamorous';
 import Select from 'react-select';
 import get from 'lodash/get';
+import { connect } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
 // custom
 import { Flexbox, Text } from '../components';
 import countryOptions from '../static/countries.json';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
+import { finishStepTwo } from '../actions';
+import { initialStore } from '../store';
 
 const genderOptions = [
   { value: 'male', label: 'Male' },
@@ -17,6 +21,7 @@ const genderOptions = [
 type Props = {
   index: number,
   initialCountry: string,
+  finishStepTwo: Object => void,
 };
 type State = {
   name: string,
@@ -39,39 +44,61 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   };
 
   updateName = (event: Object) => {
-    this.setState({
-      name: event.target.value,
-    });
+    this.setState(
+      {
+        name: event.target.value,
+      },
+      () => this.updateStore(),
+    );
   };
 
   updateCountry = (selectedOption: Object) => {
-    this.setState({
-      country: selectedOption.value,
-    });
+    this.setState(
+      {
+        country: selectedOption.value,
+      },
+      () => this.updateStore(),
+    );
   };
 
   updateBirthday = (event: Object) => {
-    this.setState({
-      birthday: event.target.value,
-    });
+    this.setState(
+      {
+        birthday: event.target.value,
+      },
+      () => this.updateStore(),
+    );
   };
 
   updatePassport = (event: Object) => {
-    this.setState({
-      passport: event.target.value,
-    });
+    this.setState(
+      {
+        passport: event.target.value,
+      },
+      () => this.updateStore(),
+    );
   };
 
   updateGender = (selectedOption: Object) => {
-    this.setState({
-      gender: selectedOption.value,
-    });
+    this.setState(
+      {
+        gender: selectedOption.value,
+      },
+      () => this.updateStore(),
+    );
   };
 
   updatePassportExpiryDate = (event: Object) => {
-    this.setState({
-      passportExpiryDate: event.target.value,
-    });
+    this.setState(
+      {
+        passportExpiryDate: event.target.value,
+      },
+      () => this.updateStore(),
+    );
+  };
+
+  updateStore = () => {
+    this.props.finishStepTwo({ [this.props.index]: this.state });
   };
 
   toggleBlock = () => {
@@ -198,6 +225,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>GENDER</Text>
               <Select
+                clearable={false}
                 value={gender}
                 placeholder="Select..."
                 onChange={this.updateGender}
@@ -229,4 +257,14 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   }
 }
 
-export default ApplyFormStepTwoForm;
+const ApplyFormStepTwoWithRedux = connect(null, null)(ApplyFormStepTwoForm);
+
+const mapStateToProps = store => {
+  return {};
+};
+const mapDispatchToProps = {
+  finishStepTwo: finishStepTwo,
+};
+export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
+  ApplyFormStepTwoWithRedux,
+);

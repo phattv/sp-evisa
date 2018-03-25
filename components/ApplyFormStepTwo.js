@@ -15,7 +15,6 @@ import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 type Props = {
   onSubmit: () => void,
   stepOne: Object,
-  stepTwo: Object,
   finishStepTwo: Object => void,
 };
 type State = {};
@@ -100,12 +99,9 @@ const ApplyFormStepTwoWithRedux = connect(null, null)(ApplyFormStepTwo);
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
-    stepTwo: store.stepTwo,
   };
 };
-const mapDispatchToProps = {
-  finishStepTwo: finishStepTwo,
-};
+const mapDispatchToProps = null;
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwoWithRedux,
 );

@@ -327,7 +327,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   marginTop={2}
                   type="number"
                   placeholder="1"
-                  min={0}
+                  min={1}
                 />
               </Flexbox>
               <Flexbox
