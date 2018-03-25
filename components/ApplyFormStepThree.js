@@ -23,6 +23,7 @@ type State = {
   email: string,
   hasFlightInfo: boolean,
   flightNumber: string,
+  shouldShowSuccessMessage: boolean,
 };
 
 class ApplyFormStepThree extends React.Component<Props, State> {
@@ -34,6 +35,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     email: '',
     hasFlightInfo: false,
     flightNumber: '',
+    shouldShowSuccessMessage: false,
   };
 
   updateName = (event: Object) => {
@@ -82,10 +84,21 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.props.finishStepThree(this.state);
   };
 
-  onSubmit = () => {};
+  onSubmit = () => {
+    this.setState({
+      shouldShowSuccessMessage: true,
+    });
+  };
 
   render() {
-    const { name, phone, email, hasFlightInfo, flightNumber } = this.state;
+    const {
+      name,
+      phone,
+      email,
+      hasFlightInfo,
+      flightNumber,
+      shouldShowSuccessMessage,
+    } = this.state;
 
     return (
       <Div>
@@ -246,6 +259,11 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 >
                   PROCESS MY VISA NOW
                 </Button>
+                {shouldShowSuccessMessage && (
+                  <Text color="visaBlue">
+                    Thank you for choosing us, we will contact you shortly!
+                  </Text>
+                )}
               </Flexbox>
             </Flexbox>
           )}

@@ -147,7 +147,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
           />
         </Flexbox>
         {shouldShowStepTwoForm && (
-          <Div display={shouldShowStepTwoForm ? 'block' : 'none'}>
+          <Div display={shouldShowStepTwoForm ? 'block' : 'none'} width="100%">
             <Flexbox
               alignItems="flex-start"
               paddingBottom={3}
