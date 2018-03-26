@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Select from 'react-select';
 import { Form } from 'react-final-form';
-import { Div, Input, Label } from 'glamorous';
+import { Input, Label } from 'glamorous';
 import ReactTooltip from 'react-tooltip';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { connect } from 'react-redux';
@@ -14,12 +14,7 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import countryOptions from '../static/countries.json';
 import { initialStore } from '../store';
 import { finishStepOne } from '../actions';
-
-const costPerPerson = 8;
-const airportFastTrackCost = 45;
-const stampingFeeCost = 8;
-const privateVisaLetterCost = 8;
-const carPickUpCost = 30;
+import ApplyFormReviewForm from './ApplyFormReviewForm';
 
 const typeOptions = [
   { value: '1 month single', label: '1 month single' },
@@ -71,9 +66,6 @@ type State = {
   arrivalDate: string,
   departureDate: string,
   extraServices: Object,
-  paymentMethod: string,
-  isTermsAgreed: boolean,
-  totalFee: number,
   shouldShowErrorMessage: boolean,
 };
 class ApplyFormStepOne extends React.Component<Props, State> {
@@ -92,9 +84,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       privateVisaLetter: false,
       carPickUp: false,
     },
-    paymentMethod: '',
-    isTermsAgreed: false,
-    totalFee: 0,
     shouldShowErrorMessage: false,
   };
 
@@ -128,13 +117,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     });
   };
 
-  updateQuantity = (event: Object) =>
+  updateQuantity = (event: Object) => {
     this.setState(
       {
         quantity: event.target.value,
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
+  };
 
   updateType = (selectedOption: Object) =>
     this.setState({
@@ -146,7 +136,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         processingTime: selectedOption ? selectedOption.value : '',
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
 
   updatePurpose = (selectedOption: Object) =>
@@ -154,7 +144,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         purpose: selectedOption ? selectedOption.value : '',
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
 
   updateAirport = (selectedOption: Object) =>
@@ -162,7 +152,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         airport: selectedOption ? selectedOption.value : '',
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
 
   updateArrivalDate = (event: Object) => {
@@ -170,7 +160,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         arrivalDate: event.target.value,
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
   };
 
@@ -179,7 +169,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         departureDate: event.target.value,
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
   };
 
@@ -191,7 +181,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           airportFastTrack: !this.state.extraServices.airportFastTrack,
         },
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
   };
 
@@ -203,7 +193,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           stampingFee: !this.state.extraServices.stampingFee,
         },
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
   };
 
@@ -215,7 +205,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           privateVisaLetter: !this.state.extraServices.privateVisaLetter,
         },
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
   };
 
@@ -227,38 +217,16 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           carPickUp: !this.state.extraServices.carPickUp,
         },
       },
-      () => this.calculateTotalFee(),
+      () => this.updateStepOneToStore(),
     );
   };
 
-  updatePaymentMethod = (event: Object) => {
-    this.setState(
-      {
-        paymentMethod: event.target.value,
-      },
-      () => this.calculateTotalFee(),
-    );
-  };
-
-  updateIsTermsAgreed = (event: Object) => {
-    this.setState(
-      {
-        isTermsAgreed: !this.state.isTermsAgreed,
-      },
-      () => this.calculateTotalFee(),
-    );
-  };
-
-  calculateTotalFee = () => {
-    const { quantity } = this.state;
-    const parsedQuantity = Number.parseInt(quantity, 10);
-    this.setState({
-      totalFee: parsedQuantity * costPerPerson,
-    });
+  updateStepOneToStore = () => {
+    this.props.finishStepOne(this.state);
   };
 
   componentDidMount() {
-    this.calculateTotalFee();
+    this.updateStepOneToStore();
   }
 
   render() {
@@ -272,8 +240,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       arrivalDate,
       departureDate,
       extraServices,
-      isTermsAgreed,
-      totalFee,
       shouldShowErrorMessage,
     } = this.state;
 
@@ -529,157 +495,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               marginLeft={spacingValues.xxs}
               marginRight={spacingValues.xxs}
             >
-              <Text size="l" bold>
-                REVIEW YOUR ORDER
-              </Text>
-              <Div
-                width="100%"
-                marginTop={spacingValues.m}
-                border={`3px solid ${colors.visaBlue}`}
-                borderRadius={borderRadius}
-                padding={spacingValues.xxl}
-              >
-                <Flexbox paddingBottom={spacingValues.xxs}>
-                  <Text color="visaRed" size="l" bold>
-                    Your Info
-                  </Text>
-                </Flexbox>
-                <Flexbox display="flex" justifyContent="space-between">
-                  <Text bold>Number of applicants:</Text>
-                  <Text>{quantity}</Text>
-                </Flexbox>
-                <Flexbox display="flex" justifyContent="space-between">
-                  <Text bold>Type of visa:</Text>
-                  <Text>{type}</Text>
-                </Flexbox>
-                <Flexbox display="flex" justifyContent="space-between">
-                  <Text bold>Purpose of visit:</Text>
-                  <Text>{purpose}</Text>
-                </Flexbox>
-                <Flexbox display="flex" justifyContent="space-between">
-                  <Text bold>Arrival airport:</Text>
-                  <Text>{airport}</Text>
-                </Flexbox>
-                <Flexbox display="flex" justifyContent="space-between">
-                  <Text bold>Arrival date:</Text>
-                  <Text>{arrivalDate}</Text>
-                </Flexbox>
-                <Flexbox
-                  display="flex"
-                  justifyContent="space-between"
-                  paddingBottom={2}
-                >
-                  <Text bold>Departure date:</Text>
-                  <Text>{departureDate}</Text>
-                </Flexbox>
-
-                <Flexbox
-                  paddingTop={2}
-                  display="flex"
-                  justifyContent="space-between"
-                  borderTop
-                  borderColor="darkGrey"
-                >
-                  <Text bold>Extra services:</Text>
-                </Flexbox>
-                {extraServices.airportFastTrack && (
-                  <Flexbox display="flex" justifyContent="space-between">
-                    <Text bold>Airport fast track</Text>
-                    <Text>{airportFastTrackCost}</Text>
-                  </Flexbox>
-                )}
-                {extraServices.stampingFee && (
-                  <Flexbox display="flex" justifyContent="space-between">
-                    <Text bold>Stamping fee</Text>
-                    <Text>{stampingFeeCost}</Text>
-                  </Flexbox>
-                )}
-                {extraServices.privateVisaLetter && (
-                  <Flexbox display="flex" justifyContent="space-between">
-                    <Text bold>Private visa letter</Text>
-                    <Text>{privateVisaLetterCost}</Text>
-                  </Flexbox>
-                )}
-                {extraServices.carPickUp && (
-                  <Flexbox display="flex" justifyContent="space-between">
-                    <Text bold>Car pick-up (4 seats)</Text>
-                    <Text>{carPickUpCost}</Text>
-                  </Flexbox>
-                )}
-
-                <Flexbox
-                  paddingTop={2}
-                  paddingBottom={2}
-                  display="flex"
-                  justifyContent="space-between"
-                  borderTop
-                  borderColor="darkGrey"
-                >
-                  <Text bold>TOTAL FEE:</Text>
-                  {totalFee && (
-                    <Text bold color="visaRed" size="xxl">
-                      ${totalFee}
-                    </Text>
-                  )}
-                </Flexbox>
-                <Text>Payment method:</Text>
-                <Label display="flex" alignItems="center" cursor="pointer">
-                  <Input
-                    type="radio"
-                    name="paymentMethod"
-                    onChange={this.updatePaymentMethod}
-                    value="paypal"
-                    marginRight={spacingValues.s}
-                  />
-                  <Text>Paypal</Text>
-                </Label>
-                <Label display="flex" alignItems="center" cursor="pointer">
-                  <Input
-                    type="radio"
-                    name="paymentMethod"
-                    onChange={this.updatePaymentMethod}
-                    value="credit"
-                    marginRight={spacingValues.s}
-                  />
-                  <Text>Visa/Master/AMEX/JCB/Union Pay</Text>
-                </Label>
-                <Label display="flex" alignItems="center" cursor="pointer">
-                  <Input
-                    type="radio"
-                    name="paymentMethod"
-                    onChange={this.updatePaymentMethod}
-                    value="wu"
-                    marginRight={spacingValues.s}
-                  />
-                  <Text>Western Union</Text>
-                </Label>
-                <Label display="flex" alignItems="center" cursor="pointer">
-                  <Input
-                    type="radio"
-                    name="paymentMethod"
-                    onChange={this.updatePaymentMethod}
-                    value="later"
-                    marginRight={spacingValues.s}
-                  />
-                  <Text>I will page later</Text>
-                </Label>
-
-                <Label
-                  paddingTop={16}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updateIsTermsAgreed}
-                    value={isTermsAgreed}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold>I have read and agree with the Terms of Use</Text>
-                </Label>
-              </Div>
+              <ApplyFormReviewForm />
 
               <Button
                 solid

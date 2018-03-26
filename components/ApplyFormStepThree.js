@@ -10,6 +10,7 @@ import { initialStore } from '../store';
 import { finishStepThree } from '../actions';
 import { Flexbox, Text, Button } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
+import ApplyFormReviewForm from './ApplyFormReviewForm';
 
 type Props = {
   stepOne: Object,
@@ -251,6 +252,8 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 marginLeft={spacingValues.xxs}
                 marginRight={spacingValues.xxs}
               >
+                <ApplyFormReviewForm />
+
                 <Button
                   solid
                   marginTop={5}

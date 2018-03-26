@@ -10,6 +10,7 @@ import { Button, Flexbox, Text } from '../components';
 import { initialStore } from '../store';
 import { spacingValues } from '../constants/ui';
 import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
+import ApplyFormReviewForm from './ApplyFormReviewForm';
 
 type Props = {
   onSubmit: () => void,
@@ -79,6 +80,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                 marginLeft={spacingValues.xxs}
                 marginRight={spacingValues.xxs}
               >
+                <ApplyFormReviewForm />
+
                 <Button
                   solid
                   marginTop={5}
