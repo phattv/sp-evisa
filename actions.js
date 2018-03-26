@@ -8,6 +8,7 @@ import type { Dispatch } from 'redux';
  */
 const actionTypes = {
   FINISH_STEP_ONE: 'FINISH_STEP_ONE',
+  RESET_STEP_TWO: 'RESET_STEP_TWO',
   FINISH_STEP_TWO: 'FINISH_STEP_TWO',
   FINISH_STEP_THREE: 'FINISH_STEP_THREE',
 };
@@ -21,6 +22,12 @@ const finishStepOne = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
     type: actionTypes.FINISH_STEP_ONE,
     payload: params,
+  });
+};
+const resetStepTwo = () => (dispatch: Dispatch) => {
+  return dispatch({
+    type: actionTypes.RESET_STEP_TWO,
+    payload: {},
   });
 };
 const finishStepTwo = (params: Object) => (dispatch: Dispatch) => {
@@ -41,4 +48,10 @@ const finishStepThree = (params: Object) => (dispatch: Dispatch) => {
  * | EXPORTS |
  * +---------+
  */
-export { actionTypes, finishStepOne, finishStepTwo, finishStepThree };
+export {
+  actionTypes,
+  finishStepOne,
+  resetStepTwo,
+  finishStepTwo,
+  finishStepThree,
+};
