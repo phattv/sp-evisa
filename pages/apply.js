@@ -4,15 +4,10 @@ import * as React from 'react';
 import { Div } from 'glamorous';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 // custom
-import { Flexbox, Layout, Content, Text } from '../components';
-import {
-  colors,
-  fontSizes,
-  borderRadius,
-  spacingValues,
-} from '../constants/ui';
+import { Content, Flexbox, Layout, Text } from '../components';
+import { borderRadius, colors, spacingValues, } from '../constants/ui';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
@@ -27,19 +22,16 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     currentTabIndex: 0,
   };
 
-  updateCurrentTabIndex = (tabIndex: number) => {
-    // TODO: check current tab validity
+  nagivateToStepTwo = () => {
     this.setState({
-      currentTabIndex: tabIndex,
+      currentTabIndex: 1,
     });
   };
 
-  nagivateToStepTwo = () => {
-    this.updateCurrentTabIndex(1);
-  };
-
   navigateToStepThree = () => {
-    this.updateCurrentTabIndex(2);
+    this.setState({
+      currentTabIndex: 2,
+    });
   };
 
   render() {
@@ -58,7 +50,6 @@ class ApplyVisaOnline extends React.Component<Props, State> {
             <Flexbox flex={1}>
               <Tabs
                 selectedIndex={currentTabIndex}
-                onSelect={this.updateCurrentTabIndex}
                 style={{
                   width: '100%',
                 }}
@@ -69,17 +60,17 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                   }}
                 >
                   <Flexbox justifyContent="flex-end" responsiveLayout>
-                    <Tab>
+                    <Tab disabled>
                       <CustomTab index={0} currentIndex={currentTabIndex}>
                         1. Visa Options
                       </CustomTab>
                     </Tab>
-                    <Tab>
+                    <Tab disabled>
                       <CustomTab index={1} currentIndex={currentTabIndex}>
                         2. Applicant Details
                       </CustomTab>
                     </Tab>
-                    <Tab>
+                    <Tab disabled>
                       <CustomTab index={2} currentIndex={currentTabIndex}>
                         3. Review & Finalize
                       </CustomTab>
@@ -119,12 +110,6 @@ class CustomTab extends React.Component<CustomTabProps> {
           index === currentIndex ? colors.visaRed : colors.darkGrey
         }
         padding={`${spacingValues.xs}px ${spacingValues.l}px`}
-        cursor="pointer"
-        css={{
-          ':hover': {
-            backgroundColor: colors.darkRed,
-          },
-        }}
       >
         <Text size="l" bold color="white">
           {children}
