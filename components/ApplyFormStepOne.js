@@ -528,7 +528,7 @@ const mapStateToProps = store => {
   };
 };
 const mapDispatchToProps = {
-  finishStepOne: finishStepOne,
+  finishStepOne,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepOneWithRedux,

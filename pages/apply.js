@@ -48,6 +48,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
           >
             <Flexbox flex={1}>
               <Tabs
+                onSelect={() => {}}
                 selectedIndex={currentTabIndex}
                 style={{
                   width: '100%',

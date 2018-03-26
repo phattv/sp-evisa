@@ -237,13 +237,12 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>PASSPORT NUMBER</Text>
               <Input
-                type="date"
-                value={passport}
                 backgroundColor="white"
                 padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                 borderRadius={borderRadius}
                 border={`1px solid ${colors.lightGrey}`}
                 width="100%"
+                value={passport}
                 onChange={this.updatePassport}
               />
             </Flexbox>
@@ -293,7 +292,7 @@ const mapStateToProps = store => {
   return {};
 };
 const mapDispatchToProps = {
-  finishStepTwo: finishStepTwo,
+  finishStepTwo,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwoWithRedux,

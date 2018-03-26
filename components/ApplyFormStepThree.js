@@ -13,7 +13,6 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 
 type Props = {
-  stepOne: Object,
   stepTwo: Object,
   stepThree: Object,
   finishStepThree: Object => void,
@@ -94,6 +93,47 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
     const { onSubmit } = this.props;
     onSubmit && onSubmit();
+  };
+
+  renderApplicants = () => {
+    const { stepTwo } = this.props;
+    return Object.keys(stepTwo).map(index => (
+      <Flexbox
+        key={index}
+        column
+        alignItems="flex-start"
+        border
+        borderRadius
+        borderColor="visaBlue"
+        width="100%"
+        paddingVertical={2}
+        paddingHorizontal={2}
+        marginVertical={1}
+        marginHorizontal={1}
+      >
+        <Div>
+          <Text bold>Full name:</Text> <Text>{stepTwo[index].name}</Text>
+        </Div>
+        <Div>
+          <Text bold>Country:</Text> <Text>{stepTwo[index].country}</Text>
+        </Div>
+        <Div>
+          <Text bold>Date of birth:</Text>{' '}
+          <Text>{stepTwo[index].birthday}</Text>
+        </Div>
+        <Div>
+          <Text bold>Passport number:</Text>{' '}
+          <Text>{stepTwo[index].passport}</Text>
+        </Div>
+        <Div>
+          <Text bold>Passport expiry date:</Text>{' '}
+          <Text>{stepTwo[index].passportExpiryDate}</Text>
+        </Div>
+        <Div>
+          <Text bold>Gender:</Text> <Text>{stepTwo[index].gender}</Text>
+        </Div>
+      </Flexbox>
+    ));
   };
 
   render() {
@@ -248,6 +288,19 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                     marginTop={2}
                   />
                 </Div>
+
+                {/* Applicants information */}
+                <Flexbox
+                  alignItems="flex-start"
+                  justifyContent="space-between"
+                  width="100%"
+                  marginTop={5}
+                >
+                  <Text size="l" bold>
+                    APPLICANT(S) INFORMATION
+                  </Text>
+                </Flexbox>
+                {this.renderApplicants()}
               </Flexbox>
 
               {/* Review form */}
@@ -295,13 +348,12 @@ const ApplyFormStepThreeWithRedux = connect(null, null)(ApplyFormStepThree);
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.stepOne,
     stepTwo: store.stepTwo,
     stepThree: store.stepThree,
   };
 };
 const mapDispatchToProps = {
-  finishStepThree: finishStepThree,
+  finishStepThree,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepThreeWithRedux,

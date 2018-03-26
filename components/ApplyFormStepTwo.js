@@ -11,12 +11,13 @@ import { initialStore } from '../store';
 import { spacingValues } from '../constants/ui';
 import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
+import { resetStepTwo } from '../actions';
 
 type Props = {
   onSubmit: () => void,
   stepOne: Object,
   stepTwo: Object,
-  finishStepTwo: Object => void,
+  resetStepTwo: () => void,
   goBack: () => void,
 };
 type State = {
@@ -49,8 +50,14 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     }
   };
 
+  goBack = () => {
+    const { resetStepTwo, goBack } = this.props;
+    resetStepTwo();
+    goBack();
+  };
+
   render() {
-    const { stepOne: { quantity, country }, goBack } = this.props;
+    const { stepOne: { quantity, country } } = this.props;
     const { shouldShowErrorMessage } = this.state;
 
     const applicants = [];
@@ -112,7 +119,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   marginTop={5}
                   marginBottom={5}
                 >
-                  <Button solid onClick={goBack}>
+                  <Button solid onClick={this.goBack}>
                     <i className="fa fa-arrow-left" />
                     &nbsp;&nbsp;BACK
                   </Button>
@@ -145,7 +152,9 @@ const mapStateToProps = store => {
     stepTwo: store.stepTwo,
   };
 };
-const mapDispatchToProps = null;
+const mapDispatchToProps = {
+  resetStepTwo,
+};
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwoWithRedux,
 );
