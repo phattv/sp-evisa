@@ -16,10 +16,15 @@ type Props = {
   onSubmit: () => void,
   stepOne: Object,
   finishStepTwo: Object => void,
+  goBack: () => void,
 };
-type State = {};
+type State = {
+  shouldShowErrorMessage: boolean,
+};
 class ApplyFormStepTwo extends React.Component<Props, State> {
-  state = {};
+  state = {
+    shouldShowErrorMessage: false,
+  };
 
   onSubmit = () => {
     const { onSubmit } = this.props;
@@ -27,7 +32,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   };
 
   render() {
-    const { stepOne: { quantity, country } } = this.props;
+    const { stepOne: { quantity, country }, goBack } = this.props;
+    const { shouldShowErrorMessage } = this.state;
 
     const applicants = [];
     for (let index = 0; index < quantity; index++) {
@@ -82,15 +88,28 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
               >
                 <ApplyFormReviewForm />
 
-                <Button
-                  solid
+                <Flexbox
+                  width="100%"
+                  justifyContent="space-around"
                   marginTop={5}
                   marginBottom={5}
-                  onClick={this.onSubmit}
                 >
-                  NEXT&nbsp;&nbsp;
-                  <i className="fa fa-arrow-right" />
-                </Button>
+                  <Button solid onClick={goBack}>
+                    <i className="fa fa-arrow-left" />
+                    &nbsp;&nbsp;BACK
+                  </Button>
+
+                  <Button solid onClick={this.onSubmit}>
+                    NEXT&nbsp;&nbsp;
+                    <i className="fa fa-arrow-right" />
+                  </Button>
+                </Flexbox>
+
+                {shouldShowErrorMessage && (
+                  <Text color="visaRed" bold>
+                    Please fill in the required inputs
+                  </Text>
+                )}
               </Flexbox>
             </Flexbox>
           )}

@@ -98,7 +98,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       !processingTime ||
       !purpose;
     this.setState({
-      shouldShowErrorMessage: shouldShowErrorMessage,
+      shouldShowErrorMessage,
     });
 
     // save to store
@@ -509,7 +509,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
               {shouldShowErrorMessage && (
                 <Text color="visaRed" bold>
-                  Please fill in the required inputs and accept Terms of Use
+                  Please fill in the required inputs
                 </Text>
               )}
             </Flexbox>

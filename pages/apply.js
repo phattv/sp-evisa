@@ -7,7 +7,7 @@ import withRedux from 'next-redux-wrapper';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 // custom
 import { Content, Flexbox, Layout, Text } from '../components';
-import { borderRadius, colors, spacingValues, } from '../constants/ui';
+import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
@@ -22,7 +22,13 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     currentTabIndex: 0,
   };
 
-  nagivateToStepTwo = () => {
+  navigateToStepOne = () => {
+    this.setState({
+      currentTabIndex: 0,
+    });
+  };
+
+  navigateToStepTwo = () => {
     this.setState({
       currentTabIndex: 1,
     });
@@ -79,10 +85,13 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                 </TabList>
 
                 <TabPanel>
-                  <ApplyFormStepOne onSubmit={this.nagivateToStepTwo} />
+                  <ApplyFormStepOne onSubmit={this.navigateToStepTwo} />
                 </TabPanel>
                 <TabPanel>
-                  <ApplyFormStepTwo onSubmit={this.navigateToStepThree} />
+                  <ApplyFormStepTwo
+                    onSubmit={this.navigateToStepThree}
+                    goBack={this.navigateToStepOne}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <ApplyFormStepThree />
