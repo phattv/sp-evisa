@@ -25,7 +25,10 @@ type State = {
   email: string,
   hasFlightInfo: boolean,
   flightNumber: string,
+  shouldShowErrorMessage: boolean,
   shouldShowSuccessMessage: boolean,
+  paymentMethod: string,
+  isTermsAgreed: boolean,
 };
 
 class ApplyFormStepThree extends React.Component<Props, State> {
@@ -37,7 +40,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     email: '',
     hasFlightInfo: false,
     flightNumber: '',
+    shouldShowErrorMessage: false,
     shouldShowSuccessMessage: false,
+    paymentMethod: '',
+    isTermsAgreed: false,
   };
 
   updateName = (event: Object) => {
@@ -86,13 +92,31 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.props.finishStepThree(this.state);
   };
 
-  onSubmit = () => {
+  updatePaymentMethod = (paymentMethod: string) => {
     this.setState({
-      shouldShowSuccessMessage: true,
+      paymentMethod,
+    });
+  };
+
+  updateIsTermsAgreed = (isTermsAgreed: boolean) => {
+    this.setState({
+      isTermsAgreed,
+    });
+  };
+
+  onSubmit = () => {
+    const { name, phone, email, paymentMethod, isTermsAgreed } = this.state;
+    const shouldShowSuccessMessage =
+      !!name && !!phone && !!email && !!paymentMethod && isTermsAgreed;
+    this.setState({
+      shouldShowSuccessMessage,
+      shouldShowErrorMessage: !shouldShowSuccessMessage,
     });
 
-    const { onSubmit } = this.props;
-    onSubmit && onSubmit();
+    if (shouldShowSuccessMessage) {
+      const { onSubmit } = this.props;
+      onSubmit && onSubmit();
+    }
   };
 
   renderApplicants = () => {
@@ -144,6 +168,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       hasFlightInfo,
       flightNumber,
       shouldShowSuccessMessage,
+      shouldShowErrorMessage,
     } = this.state;
     const { goBack } = this.props;
 
@@ -185,7 +210,9 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                   column
                   width="100%"
                 >
-                  <Text bold>FULL NAME</Text>
+                  <Text bold>
+                    FULL NAME&nbsp;<Text color="visaRed">*</Text>
+                  </Text>
                   <Input
                     autoFocus
                     backgroundColor="white"
@@ -204,7 +231,9 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                   column
                   width="100%"
                 >
-                  <Text bold>EMAIL</Text>
+                  <Text bold>
+                    EMAIL&nbsp;<Text color="visaRed">*</Text>
+                  </Text>
                   <Input
                     type="email"
                     backgroundColor="white"
@@ -223,7 +252,9 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                   column
                   width="100%"
                 >
-                  <Text bold>PHONE NUMBER</Text>
+                  <Text bold>
+                    PHONE NUMBER&nbsp;<Text color="visaRed">*</Text>
+                  </Text>
                   <Input
                     backgroundColor="white"
                     padding={`${spacingValues.xs}px ${spacingValues.s}px`}
@@ -311,7 +342,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 marginLeft={spacingValues.xxs}
                 marginRight={spacingValues.xxs}
               >
-                <ApplyFormReviewForm />
+                <ApplyFormReviewForm
+                  updatePaymentMethod={this.updatePaymentMethod}
+                  updateIsTermsAgreed={this.updateIsTermsAgreed}
+                />
 
                 <Flexbox
                   width="100%"
@@ -333,6 +367,12 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 {shouldShowSuccessMessage && (
                   <Text color="visaBlue" textAlign="center">
                     Thank you for choosing us, we will contact you shortly!
+                  </Text>
+                )}
+
+                {shouldShowErrorMessage && (
+                  <Text color="visaRed" textAlign="center">
+                    Please fill in the required inputs & accept Terms of Use
                   </Text>
                 )}
               </Flexbox>

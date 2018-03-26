@@ -10,6 +10,7 @@ import { Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { initialStore } from '../store';
 
+// TODO: pull from API
 const costPerPerson = 8;
 const airportFastTrackCost = 45;
 const stampingFeeCost = 8;
@@ -18,6 +19,8 @@ const carPickUpCost = 30;
 
 type Props = {
   stepOne: Object,
+  updatePaymentMethod: (string) => void,
+  updateIsTermsAgreed: (boolean) => void,
 };
 type State = {
   paymentMethod: string,
@@ -39,13 +42,13 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   updatePaymentMethod = (event: Object) => {
     this.setState({
       paymentMethod: event.target.value,
-    });
+    }, () => this.props.updatePaymentMethod(this.state.paymentMethod))
   };
 
   updateIsTermsAgreed = (event: Object) => {
     this.setState({
       isTermsAgreed: !this.state.isTermsAgreed,
-    });
+    }, () => this.props.updateIsTermsAgreed(this.state.isTermsAgreed));
   };
 
   calculateTotalFee = (nextProps?: Object) => {
@@ -178,7 +181,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
               </Text>
             )}
           </Flexbox>
-          <Text>Payment method:</Text>
+          <Text>Payment method&nbsp;<Text color="visaRed">*</Text></Text>
           <Label display="flex" alignItems="center" cursor="pointer">
             <Input
               type="radio"
