@@ -31,6 +31,7 @@ type State = {
   passport: string,
   passportExpiryDate: string,
   shouldShowStepTwoForm: boolean,
+  isFilledIn: boolean,
 };
 class ApplyFormStepTwoForm extends React.Component<Props, State> {
   state = {
@@ -41,6 +42,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
     passport: '',
     passportExpiryDate: '',
     shouldShowStepTwoForm: true,
+    isFilledIn: false,
   };
 
   updateName = (event: Object) => {
@@ -98,7 +100,30 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   };
 
   updateStore = () => {
-    this.props.finishStepTwo({ [this.props.index]: this.state });
+    const {
+      name,
+      country,
+      birthday,
+      gender,
+      passport,
+      passportExpiryDate,
+    } = this.state;
+    const { finishStepTwo, index } = this.props;
+
+    const isFilledIn =
+      !!name &&
+      !!country &&
+      !!birthday &&
+      !!gender &&
+      !!passport &&
+      !!passportExpiryDate;
+
+    this.setState(
+      {
+        isFilledIn,
+      },
+      () => finishStepTwo({ [index]: this.state }),
+    );
   };
 
   toggleBlock = () => {
@@ -106,6 +131,11 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
       shouldShowStepTwoForm: !this.state.shouldShowStepTwoForm,
     });
   };
+
+  componentDidMount() {
+    const { finishStepTwo, index } = this.props;
+    finishStepTwo({ [index]: this.state });
+  }
 
   render() {
     const {

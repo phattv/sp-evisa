@@ -15,6 +15,7 @@ import ApplyFormReviewForm from './ApplyFormReviewForm';
 type Props = {
   onSubmit: () => void,
   stepOne: Object,
+  stepTwo: Object,
   finishStepTwo: Object => void,
   goBack: () => void,
 };
@@ -27,8 +28,25 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   };
 
   onSubmit = () => {
-    const { onSubmit } = this.props;
-    onSubmit && onSubmit();
+    const { stepTwo } = this.props;
+    const indexes = Object.keys(stepTwo);
+    if (indexes.length > 0) {
+      let isFillInValues = [];
+      indexes.forEach(index => {
+        isFillInValues.push(stepTwo[index].isFilledIn);
+      });
+
+      // show error
+      if (isFillInValues.includes(false)) {
+        this.setState({
+          shouldShowErrorMessage: true,
+        });
+      } else {
+        // continue to step 3
+        const { onSubmit } = this.props;
+        onSubmit && onSubmit();
+      }
+    }
   };
 
   render() {
@@ -107,7 +125,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
                 {shouldShowErrorMessage && (
                   <Text color="visaRed" bold>
-                    Please fill in the required inputs
+                    Please fill in applicant(s) information!
                   </Text>
                 )}
               </Flexbox>
@@ -124,6 +142,7 @@ const ApplyFormStepTwoWithRedux = connect(null, null)(ApplyFormStepTwo);
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
+    stepTwo: store.stepTwo,
   };
 };
 const mapDispatchToProps = null;

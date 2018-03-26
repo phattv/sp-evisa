@@ -8,7 +8,7 @@ import { Div, Input, Label } from 'glamorous';
 // custom
 import { initialStore } from '../store';
 import { finishStepThree } from '../actions';
-import { Flexbox, Text, Button } from '../components';
+import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 
@@ -17,6 +17,8 @@ type Props = {
   stepTwo: Object,
   stepThree: Object,
   finishStepThree: Object => void,
+  onSubmit: () => void,
+  goBack: Object => void,
 };
 type State = {
   name: string,
@@ -89,6 +91,9 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.setState({
       shouldShowSuccessMessage: true,
     });
+
+    const { onSubmit } = this.props;
+    onSubmit && onSubmit();
   };
 
   render() {
@@ -100,6 +105,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       flightNumber,
       shouldShowSuccessMessage,
     } = this.state;
+    const { goBack } = this.props;
 
     return (
       <Div>
@@ -254,16 +260,25 @@ class ApplyFormStepThree extends React.Component<Props, State> {
               >
                 <ApplyFormReviewForm />
 
-                <Button
-                  solid
+                <Flexbox
+                  width="100%"
+                  justifyContent="space-around"
                   marginTop={5}
                   marginBottom={5}
-                  onClick={this.onSubmit}
                 >
-                  PROCESS MY VISA NOW
-                </Button>
+                  <Button solid onClick={goBack}>
+                    <i className="fa fa-arrow-left" />
+                    &nbsp;&nbsp;BACK
+                  </Button>
+
+                  <Button solid onClick={this.onSubmit}>
+                    FINISH&nbsp;&nbsp;
+                    <i className="fa fa-check" />
+                  </Button>
+                </Flexbox>
+
                 {shouldShowSuccessMessage && (
-                  <Text color="visaBlue">
+                  <Text color="visaBlue" textAlign="center">
                     Thank you for choosing us, we will contact you shortly!
                   </Text>
                 )}

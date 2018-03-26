@@ -22,22 +22,15 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     currentTabIndex: 0,
   };
 
-  navigateToStepOne = () => {
+  navigateToStep = (index: number) => {
     this.setState({
-      currentTabIndex: 0,
+      currentTabIndex: index || 0,
     });
   };
 
-  navigateToStepTwo = () => {
-    this.setState({
-      currentTabIndex: 1,
-    });
-  };
-
-  navigateToStepThree = () => {
-    this.setState({
-      currentTabIndex: 2,
-    });
+  finishForm = () => {
+    // TODO: make API call to save order
+    console.log('xxx', 'form is finished')
   };
 
   render() {
@@ -85,16 +78,19 @@ class ApplyVisaOnline extends React.Component<Props, State> {
                 </TabList>
 
                 <TabPanel>
-                  <ApplyFormStepOne onSubmit={this.navigateToStepTwo} />
+                  <ApplyFormStepOne onSubmit={() => this.navigateToStep(1)} />
                 </TabPanel>
                 <TabPanel>
                   <ApplyFormStepTwo
-                    onSubmit={this.navigateToStepThree}
-                    goBack={this.navigateToStepOne}
+                    onSubmit={() => this.navigateToStep(2)}
+                    goBack={() => this.navigateToStep(0)}
                   />
                 </TabPanel>
                 <TabPanel>
-                  <ApplyFormStepThree />
+                  <ApplyFormStepThree
+                    onSubmit={this.finishForm}
+                    goBack={() => this.navigateToStep(1)}
+                  />
                 </TabPanel>
               </Tabs>
             </Flexbox>

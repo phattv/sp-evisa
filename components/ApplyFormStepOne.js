@@ -509,7 +509,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
               {shouldShowErrorMessage && (
                 <Text color="visaRed" bold>
-                  Please fill in the required inputs
+                  Please fill in the required inputs!
                 </Text>
               )}
             </Flexbox>
