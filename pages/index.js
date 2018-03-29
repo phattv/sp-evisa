@@ -16,50 +16,49 @@ import {
 const applyVisaSteps = [
   {
     image: 'submit-application',
-    title: '1. Submit application',
+    title: '1. Submit your application',
     content:
-      'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
+      'Fill in the secured online application online. You are required to enter the precise personal information which appears on your passport.',
   },
   {
     image: 'pay-service-fee',
-    title: '2. Pay Service Fee',
+    title: '2. Pay for service fee',
     content:
-      'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
+      'You can make payment with your Credit/ Debit Card via OnePay/PayPal or pay via Western Union',
   },
   {
     image: 'get-approval-letter',
-    title: '3. Get approval letter',
+    title: '3. Get your approval letter',
     content:
-      'Fill out the secured online application form. You are required to enter the exact personal information of the applicant(s) that matches the information on your passport(s).',
+      'Check your email for your visa approval letter (attached with entry-and- exit form).\n' +
+      'Print the documents out and fill in the entry-and- exit form.\n' +
+      'Prepare 2 passport sized photos (4x6cm) and stamping fee which is $25 for single entry or $50 for multiple entry visa',
   },
 ];
 const whyChooseUs = [
   {
     image: 'directions',
-    title: 'Faster, cheaper and easier',
+    title: 'Faster, cheaper and simpler',
     content:
-      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
+      'Save your time (it costs you less than 3 minutes to fill in the online form)',
   },
   {
     image: 'lock',
-    title: 'Prompt responses, safe and secure',
+    title: 'Prompt response, strictly confidential information',
     content:
-      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
+      'You will get responses within 5 minutes when contacting evisa-vn.com Your information is kept confidentially',
   },
   {
     image: 'quality',
-    title: 'Quality and Reliability',
+    title: 'Quality and reliability',
     content:
-      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
+      'Evisa-vn.com is trusted by clients from all over the world. We guarantee to return all your fee in case your application is rejected.',
   },
   {
     image: 'time',
-    title:
-      'On time gurantee, \n' +
-      'Refund in full if Rejected visa and \n' +
-      'our services are not good',
+    title: 'Punctuality guarantee and full-fee return',
     content:
-      'Save your time, save your money,it only takes you 5 minutes to fill in the visa online form.',
+      'We guarantee you will get your visa approval letter within 2 working days/or within 1 working day depending on the services chosen. You get all-your- fee return if your application is rejected and our services do not satisfy your demands.',
   },
 ];
 const extraServices = [
@@ -163,7 +162,7 @@ const applyWithConfidence = [
   'Safe and Secure',
   'Good Quality & Reliability',
   'Prombt Responses',
-  'Competitive Prices ($18)',
+  'Competitive Prices ($8)',
   'Save your time and money',
   '2 working day',
   'Money back guarantee for declined applications',
@@ -203,11 +202,11 @@ export default class Home extends React.Component<Props, State> {
                     VIETNAM VISA FORM
                   </Text>
                 </Flexbox>
-                <Text bold color="white" size="l">
-                  1. Best price guarantee <br />
-                  2. Vietnam Urgent visa <br />
-                  3. Vietnam Extension visa <br />
-                  4. Payment online
+                <Text bold size="l">
+                  1. BEST PRICE GUARANTEE <br />
+                  2. Urgent Vietnam Visa <br />
+                  3. Vietnam Visa Extension <br />
+                  4. Online Payment
                 </Text>
                 <Anchor href="/apply">
                   <Button solid marginTop={5}>
@@ -223,31 +222,28 @@ export default class Home extends React.Component<Props, State> {
         <Content>
           <Flexbox column>
             <Flexbox paddingBottom={6}>
-              <Text size="xl" black color="visaBlue">
-                Welcome to&nbsp;
-              </Text>
-              <Text size="xl" black color="visaRed">
-                evisa-vn.com
+              <Text size="xl" black color="visaRed" textAlign="center">
+                Welcome evisa-vn.com
               </Text>
             </Flexbox>
             <Text bold textAlign="center" color="white">
-              We are pleased to serve you at website{' '}
+              It’s our honor to serve you at{' '}
               <Text bold fontStyle="italic" color="visaBlue">
                 evisa-vn.com
               </Text>
               <br />
-              Vietnam visa online is applied for all citizens all over the world
-              when they come to Vietnam via airline.
+              Online Vietnam Visa is applied for citizens from all over the
+              world who travel to Vietnam by air travel.
             </Text>
             <br />
             <Text textAlign="center" color="white">
-              evisa-vn.com is a legal and that is approved by the government of
-              vietnam.
+              evisa-vn.com is a legal organization approved by Vietnamese
+              government
               <br />
-              We provide the supporting service for visa approval letter
-              application.
+              We provide supportive services for online Vietnam Visa applicants
+              who need a visa approval letter.
               <br />
-              For further information, please contact us at below.
+              For further information, please contact us at below:
               <br />
               <Text bold color="white">
                 Hotline:
@@ -264,7 +260,7 @@ export default class Home extends React.Component<Props, State> {
               </Text>
             </Text>
             <Button solid marginTop={8}>
-              Contact with us now
+              Contact us now!
             </Button>
           </Flexbox>
         </Content>
@@ -272,14 +268,14 @@ export default class Home extends React.Component<Props, State> {
         {/* 3-step */}
         <Content backgroundColor="lightBlue">
           <Flexbox column width="100%">
-            <BlockHeader header="3 steps to get Visa" />
+            <BlockHeader header="3 STEPS TO GET A VIETNAM VISA ONLINE" />
             <Flexbox
               justifyContent="between-around"
               width="100%"
               responsiveLayout
             >
               {applyVisaSteps.map((step, index) => (
-                <div key={index}>
+                <Flexbox flex={1} column key={index}>
                   <Flexbox height={20}>
                     <Image
                       src={`/static/images/${step.image}.png`}
@@ -297,7 +293,7 @@ export default class Home extends React.Component<Props, State> {
                       {step.content}
                     </Text>
                   </Flexbox>
-                </div>
+                </Flexbox>
               ))}
             </Flexbox>
           </Flexbox>
@@ -315,10 +311,7 @@ export default class Home extends React.Component<Props, State> {
                   clickable
                 />
                 <Text bold size="l">
-                  When using{' '}
-                  <Text bold size="l" color="visaBlue">
-                    evisa-vn.com
-                  </Text>, you need to pay 2 kind of fees
+                  2 types of fee need to be paid using evisa-vn services.
                 </Text>
               </Flexbox>
               <Flexbox paddingTop={2}>
@@ -326,11 +319,9 @@ export default class Home extends React.Component<Props, State> {
                   <Text bold color="visaBlue">
                     Visa service fee
                   </Text>{' '}
-                  is paid on our website for our processing your vietnam visa
-                  request. We – evisa-vn will be representative for customers to
-                  apply with the Immigration Department to get the visa approval
-                  letter in time as your booking( normal service: 2days, urgent
-                  : 4-8 hours -Excluding weekends/national holidays)
+                  Applicants have to pay for the visa processing conducting by
+                  evisa-vn.com to get the visa approval letter according to the
+                  service chosen.
                 </Text>
               </Flexbox>
               <Flexbox paddingTop={2}>
@@ -338,12 +329,10 @@ export default class Home extends React.Component<Props, State> {
                   <Text bold color="visaRed">
                     Stamping fee
                   </Text>{' '}
-                  is ruled by the Immigration Department and the rate of
-                  stamping fee is publicly announced at any legal Governmental
-                  website and on the landing visa counter at any international
-                  airport. You can pay this fee directly to the Immigration
-                  Department ‘s officer at landing visa desk by cash (in USD or
-                  VND) and receive the red bill for this fee.
+                  Applicants must pay in cash (in VND or USD) at the landing
+                  visa counter on arrival. The fee is ruled by Immigration
+                  Department and publicly announces on governmental websites.
+                  Applicants will get the receipt after paying for the fee
                 </Text>
               </Flexbox>
             </Flexbox>
@@ -379,7 +368,7 @@ export default class Home extends React.Component<Props, State> {
         {/* Why */}
         <Content backgroundColor="white">
           <Flexbox column width="100%">
-            <BlockHeader header="Why choose us" />
+            <BlockHeader header="Why choose us?" />
             <Flexbox responsiveLayout>
               <Flexbox flex={1}>
                 <Image
