@@ -6,6 +6,7 @@ import Head from "next/head";
 // custom
 import { Flexbox } from "../components/ui";
 import { Header, Footer } from "../components";
+import { initGA, logPageView } from '../utils/analytics'
 
 type Props = {
   children: string | React.Node,
@@ -14,6 +15,14 @@ type Props = {
 };
 
 export default class Layout extends React.Component<Props> {
+  componentDidMount () {
+    if (!window.GA_INITIALIZED) {
+      initGA()
+      window.GA_INITIALIZED = true
+    }
+    logPageView()
+  }
+
   render() {
     const { title, backgroundColor, children, ...rest } = this.props;
 
