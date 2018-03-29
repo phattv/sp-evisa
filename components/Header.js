@@ -107,13 +107,6 @@ export default class Header extends React.PureComponent<null, HeaderState> {
                 maxHeight={10}
                 width="auto"
               />
-              <Image
-                paddingLeft={4}
-                src="/static/images/email.png"
-                alt="email"
-                maxHeight={10}
-                width="auto"
-              />
               <Media query={`(max-width: ${screenSizes.tablet}px)`}>
                 <Flexbox onClick={this.updateIsMenuShowed} paddingLeft={4}>
                   <Image src="/static/images/line-hamburger.svg" alt="Menu" />
@@ -151,14 +144,18 @@ export default class Header extends React.PureComponent<null, HeaderState> {
               backgroundColor="visaBlue"
             >
               {menus.map((menu, index) => (
-                <CustomReactScrollLink
-                  id={menu.to}
-                  key={index}
+                <Text
                   paddingVertical={3}
-                  onClick={this.hideMenu}
+                  paddingHorizontal={3}
+                  clickable
+                  textAlign="center"
+                  width="100%"
+                  borderBottom
                 >
-                  <Text color="white">{menu.text}</Text>
-                </CustomReactScrollLink>
+                  <Anchor color="white" href={menu.url}>
+                    {menu.text}
+                  </Anchor>
+                </Text>
               ))}
             </Flexbox>
           ) : null}
