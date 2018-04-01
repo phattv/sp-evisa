@@ -2,7 +2,7 @@
 // Vendor
 import * as React from 'react';
 import Media from 'react-media';
-
+import Router from 'next/router'
 // Custom
 import { Anchor, Flexbox, Image, Text } from '../components/ui';
 import { colors, screenSizes } from '../constants/ui';
@@ -62,6 +62,10 @@ export default class Header extends React.PureComponent<null, HeaderState> {
       isMenuShowed: false,
     });
   };
+
+  navigateToUrl = (url: string) => {
+    Router.push(url)
+  }
 
   render() {
     const { isMenuShowed } = this.state;
@@ -141,20 +145,22 @@ export default class Header extends React.PureComponent<null, HeaderState> {
               width="100%"
               top={headerHeight}
               left={0}
-              backgroundColor="visaBlue"
+              backgroundColor="white"
             >
               {menus.map((menu, index) => (
                 <Text
+                  key={index}
                   paddingVertical={3}
                   paddingHorizontal={3}
                   clickable
                   textAlign="center"
                   width="100%"
                   borderBottom
+                  bold
+                  color="visaBlue"
+                  onClick={() => this.navigateToUrl(menu.url)}
                 >
-                  <Anchor color="white" href={menu.url}>
-                    {menu.text}
-                  </Anchor>
+                  {menu.text}
                 </Text>
               ))}
             </Flexbox>
