@@ -33,6 +33,10 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     console.log('xxx', 'form is finished')
   };
 
+  componentDidMount() {
+    window.Intercom("update");
+  }
+
   render() {
     const { currentTabIndex } = this.state;
     return (

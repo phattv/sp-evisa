@@ -15,6 +15,10 @@ import {
 } from '../components';
 
 class HowToApply extends React.Component {
+  componentDidMount() {
+    window.Intercom("update");
+  }
+
   render() {
     return (
       <Layout>

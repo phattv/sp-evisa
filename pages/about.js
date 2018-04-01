@@ -13,6 +13,10 @@ import {
 } from '../components'
 
 class AboutUs extends React.Component {
+  componentDidMount() {
+    window.Intercom("update");
+  }
+
   render() {
     return (
       <Layout>

@@ -171,6 +171,10 @@ const applyWithConfidence = [
 type Props = {};
 type State = {};
 export default class Home extends React.Component<Props, State> {
+  componentDidMount() {
+    window.Intercom("update");
+  }
+
   render() {
     return (
       <Layout

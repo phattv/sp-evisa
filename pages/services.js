@@ -14,6 +14,10 @@ import {
 } from '../components';
 
 class ExtraServices extends React.Component {
+  componentDidMount() {
+    window.Intercom("update");
+  }
+
   render() {
     return (
       <Layout>

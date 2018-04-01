@@ -16,6 +16,10 @@ import {
 import { colors } from '../constants/ui';
 
 class VisaFees extends React.Component {
+  componentDidMount() {
+    window.Intercom("update");
+  }
+
   render() {
     return (
       <Layout>
