@@ -48,8 +48,8 @@ class HowToApply extends React.Component {
             </Text>
 
             <Flexbox column>
-              <Flexbox paddingVertical={1}>
-                <Flexbox flex={1} paddingRight={10}>
+              <Flexbox paddingVertical={1} responsiveLayout>
+                <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                   <Image
                     src="/static/images/submit-application-2.png"
                     alt="passport"
@@ -73,8 +73,8 @@ class HowToApply extends React.Component {
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox paddingVertical={1}>
-                <Flexbox flex={1} paddingRight={10}>
+              <Flexbox paddingVertical={1} responsiveLayout>
+                <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                   <Image
                     src="/static/images/pay-service-fee-2.png"
                     alt="passport"
@@ -98,8 +98,8 @@ class HowToApply extends React.Component {
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox paddingVertical={1}>
-                <Flexbox flex={1} paddingRight={10}>
+              <Flexbox paddingVertical={1} responsiveLayout>
+                <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                   <Image
                     src="/static/images/get-approval-letter-2.png"
                     alt="passport"

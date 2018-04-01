@@ -1,6 +1,6 @@
 // @flow
 // vendor
-import React from 'react'
+import React from 'react';
 // custom
 import {
   Button,
@@ -11,7 +11,7 @@ import {
   Image,
   Layout,
   Text,
-} from '../components'
+} from '../components';
 
 class ExtraServices extends React.Component {
   render() {
@@ -30,8 +30,8 @@ class ExtraServices extends React.Component {
             <Flexbox column>
               <Flexbox column alignItems="flex-start" paddingTop={10}>
                 <BlockHeader header="1. Airport fast-track Service" />
-                <Flexbox>
-                  <Flexbox flex={1} paddingRight={10}>
+                <Flexbox responsiveLayout>
+                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                     <Image
                       src="/static/images/airport-fast-track.png"
                       alt="passport"
@@ -70,8 +70,8 @@ class ExtraServices extends React.Component {
 
               <Flexbox column alignItems="flex-start" paddingTop={10}>
                 <BlockHeader header="2. Car pick-up service" />
-                <Flexbox>
-                  <Flexbox flex={1} paddingRight={10}>
+                <Flexbox responsiveLayout>
+                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                     <Image
                       src="/static/images/car-pickup.png"
                       alt="passport"
@@ -97,8 +97,8 @@ class ExtraServices extends React.Component {
 
               <Flexbox column alignItems="flex-start" paddingTop={10}>
                 <BlockHeader header="3. Vietnam visa extension and renewal service" />
-                <Flexbox>
-                  <Flexbox flex={1} paddingRight={10}>
+                <Flexbox responsiveLayout>
+                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                     <Image
                       src="/static/images/visa-renewal.png"
                       alt="passport"
@@ -127,8 +127,8 @@ class ExtraServices extends React.Component {
 
               <Flexbox column alignItems="flex-start" paddingTop={10}>
                 <BlockHeader header="4. Hotel booking service" />
-                <Flexbox>
-                  <Flexbox flex={1} paddingRight={10}>
+                <Flexbox responsiveLayout>
+                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                     <Image
                       src="/static/images/hotel-booking.png"
                       alt="passport"
@@ -153,8 +153,8 @@ class ExtraServices extends React.Component {
 
               <Flexbox column alignItems="flex-start" paddingTop={10}>
                 <BlockHeader header="5. Vietnam domestic flights" />
-                <Flexbox>
-                  <Flexbox flex={1} paddingRight={10}>
+                <Flexbox responsiveLayout>
+                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                     <Image
                       src="/static/images/domestic-flight.png"
                       alt="passport"
@@ -177,8 +177,8 @@ class ExtraServices extends React.Component {
 
               <Flexbox column alignItems="flex-start" paddingTop={10}>
                 <BlockHeader header="6. Tour and travel booking" />
-                <Flexbox>
-                  <Flexbox flex={1} paddingRight={10}>
+                <Flexbox responsiveLayout>
+                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
                     <Image
                       src="/static/images/travel-booking.png"
                       alt="passport"
@@ -202,8 +202,8 @@ class ExtraServices extends React.Component {
           </Flexbox>
         </Content>
       </Layout>
-    )
+    );
   }
 }
 
-export default ExtraServices
+export default ExtraServices;

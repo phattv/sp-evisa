@@ -1,6 +1,6 @@
 // @flow
 // vendor
-import React from 'react'
+import React from 'react';
 // custom
 import {
   BlockHeader,
@@ -10,8 +10,8 @@ import {
   Image,
   Layout,
   Text,
-} from '../components'
-import { colors } from '../constants/ui'
+} from '../components';
+import { colors } from '../constants/ui';
 
 class News extends React.Component {
   render() {
@@ -20,7 +20,12 @@ class News extends React.Component {
         <Image src="/static/images/news-background.png" />
         <PageHeader header="NEWS" />
         <Content>
-          <Flexbox width="100%" flex={1} justifyContent="flex-start">
+          <Flexbox
+            width="100%"
+            flex={1}
+            justifyContent="flex-start"
+            responsiveLayout
+          >
             <Flexbox
               flex={2}
               column
@@ -220,8 +225,8 @@ class News extends React.Component {
           </Flexbox>
         </Content>
       </Layout>
-    )
+    );
   }
 }
 
-export default News
+export default News;
