@@ -16,6 +16,7 @@ const initialState = {
   stepOne: {},
   stepTwo: {},
   stepThree: {},
+  fees: [],
 };
 
 /**

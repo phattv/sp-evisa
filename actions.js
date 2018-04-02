@@ -11,6 +11,7 @@ const actionTypes = {
   RESET_STEP_TWO: 'RESET_STEP_TWO',
   UPDATE_STEP_TWO: 'UPDATE_STEP_TWO',
   UPDATE_STEP_THREE: 'UPDATE_STEP_THREE',
+  UPDATE_FEES: 'UPDATE_FEES',
 };
 
 /**
@@ -42,6 +43,12 @@ const updateStepThree = (params: Object) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
+const updateFees = (params: Array<Object>) => (dispatch: Dispatch) => {
+  return dispatch({
+    type: actionTypes.UPDATE_FEES,
+    payload: params,
+  });
+};
 
 /**
  * +---------+
@@ -54,4 +61,5 @@ export {
   resetStepTwo,
   updateStepTwo,
   updateStepThree,
+  updateFees,
 };

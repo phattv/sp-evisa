@@ -32,6 +32,11 @@ const reducer = (state: Store = initialState, action: Object) => {
         stepThree: action.payload,
       });
     }
+    case actionTypes.UPDATE_FEES: {
+      return Object.assign({}, state, {
+        fees: action.payload
+      })
+    }
     default: {
       return state;
     }
