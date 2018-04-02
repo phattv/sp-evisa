@@ -127,7 +127,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
                     paddingHorizontal={3}
                     key={index}
                   >
-                    <Text size="m">
+                    <Text size="m" textAlign="center">
                       <Anchor href={menu.url} color="white">
                         {menu.text}
                       </Anchor>

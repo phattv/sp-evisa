@@ -4,8 +4,8 @@
   font-family: 'Lato_Regular';
   src: url('./Lato-Regular.eot');
   src: url('./Lato-Regular.eot?#iefix') format('embedded-opentype'),
-    url('./Lato-Regular.woff') format('woff'),
     url('./Lato-Regular.ttf') format('truetype'),
+    url('./Lato-Regular.woff') format('woff'),
     url('./Lato-Regular.svg#proxima_nova_altregular') format('svg');
   font-style: normal;
 }
@@ -14,18 +14,8 @@
   font-family: 'Lato_Bold';
   src: url('./Lato-Bold.eot');
   src: url('./Lato-Bold.eot?#iefix') format('embedded-opentype'),
-    url('./Lato-Bold.woff') format('woff'),
     url('./Lato-Bold.ttf') format('truetype'),
+    url('./Lato-Bold.woff') format('woff'),
     url('./Lato-Bold.svg#proxima_nova_altBold') format('svg');
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Lato_Black';
-  src: url('./Lato-Black.eot');
-  src: url('./Lato-Black.eot?#iefix') format('embedded-opentype'),
-    url('./Lato-Black.woff') format('woff'),
-    url('./Lato-Black.ttf') format('truetype'),
-    url('./Lato-Black.svg#proxima_nova_altBlack') format('svg');
   font-style: normal;
 }

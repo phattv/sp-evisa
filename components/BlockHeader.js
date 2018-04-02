@@ -14,7 +14,7 @@ class BlockHeader extends React.Component<Props> {
     return (
       <Text
         size="xl"
-        black
+        bold
         textAlign="center"
         color="visaBlue"
         paddingBottom={smallPadding ? 4 : 8}

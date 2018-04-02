@@ -226,7 +226,7 @@ export default class Home extends React.Component<Props, State> {
         <Content>
           <Flexbox column>
             <Flexbox paddingBottom={6}>
-              <Text size="xl" black color="visaRed" textAlign="center">
+              <Text size="xl" bold color="visaRed" textAlign="center">
                 Welcome evisa-vn.com
               </Text>
             </Flexbox>

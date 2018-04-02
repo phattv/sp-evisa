@@ -1,33 +1,32 @@
 // @flow
 // vendor
-import * as React from "react";
-import Head from "next/head";
+import * as React from 'react';
+import Head from 'next/head';
 
 // custom
-import { Flexbox } from "../components/ui";
-import { Header, Footer } from "../components";
-import { initGA, logPageView } from '../utils/analytics'
+import { Flexbox } from '../components/ui';
+import { Header, Footer } from '../components';
+import { initGA, logPageView } from '../utils/analytics';
 import { colors } from '../constants/ui';
 
 type Props = {
   children: string | React.Node,
   title?: string,
-  backgroundColor?: string
+  backgroundColor?: string,
 };
 
 export default class Layout extends React.Component<Props> {
-  componentDidMount () {
-
+  componentDidMount() {
     // Init Google Analytics
     if (!window.GA_INITIALIZED) {
-      initGA()
-      window.GA_INITIALIZED = true
+      initGA();
+      window.GA_INITIALIZED = true;
     }
-    logPageView()
+    logPageView();
 
     // Init intercom
-    window.Intercom("boot", {
-      app_id: "a3ouns0a"
+    window.Intercom('boot', {
+      app_id: 'a3ouns0a',
     });
   }
 
@@ -37,23 +36,23 @@ export default class Layout extends React.Component<Props> {
     return (
       <Flexbox {...rest}>
         <Head>
-          <title>{title || "Vietam evisa"}</title>
+          <title>{title || 'Vietam evisa'}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
-          <link href="../static/fonts/fonts.css" rel="stylesheet" />
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/react-select.css" rel="stylesheet" />
           <link href="../static/styles/font-awesome.min.css" rel="stylesheet" />
+          <link href="../static/fonts/fonts.css" rel="stylesheet" />
 
-          <script src='../static/intercom.js' />
+          <style>
+            {`th, td { padding: 4px; border: 1px solid ${colors.lightGrey}; }`}
+          </style>
+
+          <script src="../static/intercom.js" />
         </Head>
 
         <Flexbox column flex={1} minHeight="100vh">
           <Header />
-
-          <style>{`th, td { padding: 4px; border: 1px solid ${
-            colors.lightGrey
-            }; }`}</style>
 
           <Flexbox
             paddingTop={18}
