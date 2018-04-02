@@ -2,7 +2,6 @@
 // vendor
 import * as React from 'react';
 import Select from 'react-select';
-import axios from 'axios';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
@@ -21,6 +20,7 @@ import countryOptions from '../static/countries.json';
 import { updateFees } from '../actions';
 import { initialStore } from '../store';
 import { colors } from '../constants/ui';
+import { getFeesByCountryId } from '../utils/apiClient';
 
 type Props = {
   fees: Array<Object>,
@@ -54,23 +54,6 @@ class VisaFees extends React.Component<Props, State> {
     }
   }
 
-  getFeesByCountryId = () => {
-    const { countryId } = this.state;
-    const isProd = location.hostname.endsWith('evisa-vn.com');
-    const apiServer = isProd
-      ? 'http://api.evisa-vn.com'
-      : 'http://localhost:8001';
-
-    axios
-      .get(`${apiServer}/fees-by-country/${countryId}`)
-      .then(response => {
-        return this.props.updateFees(response.data);
-      })
-      .catch(error => {
-        console.error('xxx', error);
-      });
-  };
-
   updateCountryId = (country: Object) => {
     this.setState(
       {
@@ -78,8 +61,12 @@ class VisaFees extends React.Component<Props, State> {
         touristFees: {},
         businessFees: {},
       },
-      () => this.getFeesByCountryId(),
+      () => getFeesByCountryId({ countryId: country.value }, this.updateFees),
     );
+  };
+
+  updateFees = data => {
+    this.props.updateFees(data);
   };
 
   updateTouristFees = (touristFees: Object) => {
@@ -96,7 +83,6 @@ class VisaFees extends React.Component<Props, State> {
 
   render() {
     const { countryId, touristFees, businessFees } = this.state;
-    console.log('xxx', this.state);
 
     return (
       <Layout>
