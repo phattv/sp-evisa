@@ -1,5 +1,5 @@
 - `gcloud auth login`
-- `gcloud container images list-tags gcr.io/evisa-198403/evisa` (get {DOCKER_TAG})
+- `gcloud container images list-tags gcr.io/evisa-198403/evisa`
 - `docker build -t gcr.io/evisa-198403/evisa:{NEXT_DOCKER_TAG} .`
 - `docker run --rm -p 80:80 gcr.io/evisa-198403/evisa:{NEXT_DOCKER_TAG}` (open localhost on browser to test)
 - `gcloud docker -- push gcr.io/evisa-198403/evisa:{NEXT_DOCKER_TAG}`

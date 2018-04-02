@@ -96,7 +96,7 @@ class VisaFees extends React.Component<Props, State> {
                 paid by customers
               </Text>
               <Flexbox column>
-                <Flexbox flex={1} column alignItems="flex-start">
+                <Flexbox flex={1} column alignItems="flex-start" width="100%">
                   <BlockHeader header="Service fee" smallPadding />
                   <Flexbox alignItems="flex-start">
                     <Text p>
@@ -107,7 +107,7 @@ class VisaFees extends React.Component<Props, State> {
                     </Text>
                   </Flexbox>
                 </Flexbox>
-                <Flexbox flex={1} column alignItems="flex-start">
+                <Flexbox flex={1} column alignItems="flex-start" width="100%">
                   <BlockHeader header="Stamping fee" smallPadding />
                   <Flexbox alignItems="flex-start">
                     <Text p>
