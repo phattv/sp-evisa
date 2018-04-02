@@ -26,7 +26,7 @@ class Contact extends React.Component<Props, State> {
   state = {};
 
   componentDidMount() {
-    window.Intercom("update");inter
+    window.Intercom("update");
   }
 
   render() {

@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from 'react';
+import { Div } from 'glamorous';
 // custom
 import {
   Button,
@@ -12,10 +13,11 @@ import {
   Layout,
   Text,
 } from '../components';
+import { colors, spacingValues } from '../constants/ui';
 
 class ExtraServices extends React.Component {
   componentDidMount() {
-    window.Intercom("update");
+    window.Intercom('update');
   }
 
   render() {
@@ -26,16 +28,22 @@ class ExtraServices extends React.Component {
         <Content>
           <Flexbox width="100%" column flex={1}>
             <Text p textAlign="center" bold>
-              In order to help Foreigners avoid confusing to choose the required
-              services in their trip, We offer an all-in-one package which
-              covers every little thing the visitor need for their trip.
+              In order to help our customers in choosing a care-free service, we
+              offer an all-in-one package which covers all your demands for a
+              Vietnam trip.
             </Text>
+            <BlockHeader header="EXTRA SERVICES UPON ARRIVAL" />
 
             <Flexbox column>
-              <Flexbox column alignItems="flex-start" paddingTop={10}>
-                <BlockHeader header="1. Airport fast-track Service" />
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="AIRPORT FAST TRACK" />
                 <Flexbox responsiveLayout>
-                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/airport-fast-track.png"
                       alt="passport"
@@ -43,39 +51,67 @@ class ExtraServices extends React.Component {
                     />
                   </Flexbox>
                   <Flexbox flex={2} column alignItems="flex-start">
-                    <Text p>There are two options for choosing:</Text>
+                    <Div overflowX="auto">
+                      <table>
+                        <tr>
+                          <th>TYPE OF FAST TRACK</th>
+                          <th colSpan="4">AIRPORT</th>
+                        </tr>
+                        <tr>
+                          <th />
+                          <th>IN HA NOI</th>
+                          <th>HA NOI</th>
+                          <th>DA NANG</th>
+                          <th>CAM RANH</th>
+                        </tr>
+                        <tr>
+                          <td>Airport Fast Track</td>
+                          <td>25 USD/pax</td>
+                          <td>25 USD/pax</td>
+                          <td>25 USD/pax</td>
+                          <td>25 USD/pax</td>
+                        </tr>
+                        <tr>
+                          <td>Airport VIP Fast Track</td>
+                          <td>40 USD/pax</td>
+                          <td>40 USD/pax</td>
+                          <td>40 USD/pax</td>
+                          <td>40 USD/pax</td>
+                        </tr>
+                      </table>
+                    </Div>
                     <Text p>
-                      <Text color="visaBlue" bold>
-                        A. Fast track:
-                      </Text>{' '}
-                      Our staff will meet you at the Visa Landing Counter with
-                      your name on the welcome board and assist you to get visa
-                      stamp and visa sticker without getting line as others.
-                      Just 5 -10 minutes (it depends on the number of applicants
-                      at Visa Landing Counter) you will at the luggage lounge to
-                      wait for your belonging.
+                      A. Fast track: Our staff will meet you at the Visa Landing
+                      Counter with your name on the welcome board and assist you
+                      to get visa stamp and visa sticker without getting line as
+                      others. Just 5 -10 minutes (it depends on the number of
+                      applicants at Visa Landing Counter) you will at the
+                      luggage lounge to wait for your belonging.
                     </Text>
                     <Text p>
-                      <Text color="visaBlue" bold>
-                        B. VIP Fast track:
-                      </Text>{' '}
-                      Our staff will meet you at the Visa Landing Counter with
-                      your name on the welcome board and assist you to get visa
-                      stamp and visa sticker without getting line as others.
-                      After that, our staff will escort you go to luggage lounge
-                      to assist you take care your luggage as baggage porters.
+                      B. VIP Fast track: Our staff will meet you at the Visa
+                      Landing Counter with your name on the welcome board and
+                      assist you to get visa stamp and visa sticker without
+                      getting line as others. After that, our staff will escort
+                      you go to luggage lounge to assist you take care of your
+                      luggage as baggage porters.
                     </Text>
                     <Button solid marginTop={3}>
-                      View more
+                      APPLY
                     </Button>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox column alignItems="flex-start" paddingTop={10}>
-                <BlockHeader header="2. Car pick-up service" />
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="PICK UP AT THE AIRPORT" />
                 <Flexbox responsiveLayout>
-                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/car-pickup.png"
                       alt="passport"
@@ -83,26 +119,65 @@ class ExtraServices extends React.Component {
                     />
                   </Flexbox>
                   <Flexbox flex={2} column alignItems="flex-start">
-                    <Text color="visaBlue" bold>
-                      Why do you use Car Pick-up Service?
-                    </Text>
-                    <Text p>
-                      You are tired and just want to seat in luxury, comfortable
-                      car with cool atmosphere and be driven directly to your
-                      hotel. We can provide a private car like that in some
-                      minutes as soon as coming at the airport.
-                    </Text>
+                    <Div overflowX="auto">
+                      <table>
+                        <tr>
+                          <th>ECONOMY CAR</th>
+                          <th colSpan="4">PICK-UP AIRPORT</th>
+                        </tr>
+                        <tr>
+                          <th />
+                          <th>IN HA NOI</th>
+                          <th>HA NOI</th>
+                          <th>DA NANG</th>
+                          <th>CAM RANH</th>
+                        </tr>
+                        <tr>
+                          <td>4 seats</td>
+                          <td>25 USD</td>
+                          <td>25 USD</td>
+                          <td>25 USD</td>
+                          <td>25 USD</td>
+                        </tr>
+                        <tr>
+                          <td>16 seats</td>
+                          <td>30 USD</td>
+                          <td>30 USD</td>
+                          <td>30 USD</td>
+                          <td>30 USD</td>
+                        </tr>
+                        <tr>
+                          <td>16 seats</td>
+                          <td>90 USD</td>
+                          <td>90 USD</td>
+                          <td>90 USD</td>
+                          <td>90 USD</td>
+                        </tr>
+                        <tr>
+                          <td>24 seats</td>
+                          <td>150 USD</td>
+                          <td>150 USD</td>
+                          <td>150 USD</td>
+                          <td>150 USD</td>
+                        </tr>
+                      </table>
+                    </Div>
                     <Button solid marginTop={3}>
-                      View more
+                      APPLY
                     </Button>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox column alignItems="flex-start" paddingTop={10}>
-                <BlockHeader header="3. Vietnam visa extension and renewal service" />
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="VIETNAM VISA EXTENSION" />
                 <Flexbox responsiveLayout>
-                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/visa-renewal.png"
                       alt="passport"
@@ -110,29 +185,74 @@ class ExtraServices extends React.Component {
                     />
                   </Flexbox>
                   <Flexbox flex={2} column alignItems="flex-start">
+                    <Div overflowX="auto">
+                      <table>
+                        <tr>
+                          <th>TYPE OF VISA</th>
+                          <th colSpan="2">EXTEND VIETNAM VISA</th>
+                          <th colSpan="2">REVEW VIETNAM VISA</th>
+                        </tr>
+                        <tr>
+                          <th />
+                          <th>IN HA NOI</th>
+                          <th>IN HO CHI MINH</th>
+                          <th>IN HA NOI</th>
+                          <th>IN HO CHI MINH</th>
+                        </tr>
+                        <tr>
+                          <td>1 month single</td>
+                          <td>N/A</td>
+                          <td>60-155 USD</td>
+                          <td>N/A</td>
+                          <td>200 USD</td>
+                        </tr>
+                        <tr>
+                          <td>1 month multiple</td>
+                          <td>N/A</td>
+                          <td>N/A</td>
+                          <td>N/A</td>
+                          <td>N/A</td>
+                        </tr>
+                        <tr>
+                          <td>3 months single</td>
+                          <td>N/A</td>
+                          <td>180-310 USD</td>
+                          <td>N/A</td>
+                          <td>330 USD</td>
+                        </tr>
+                        <tr>
+                          <td>1 month single</td>
+                          <td>N/A</td>
+                          <td>N/A</td>
+                          <td>N/A</td>
+                          <td>350 USD</td>
+                        </tr>
+                      </table>
+                    </Div>
                     <Text p>
-                      This section explains the customer how to apply to their
-                      visa extension for the temporary staying permission in
-                      Vietnam with the purpose for visiting relatives,
-                      traveling, business or others.
+                      Extend Vietnam Visa: Extend your stay in Vietnam base on
+                      your original visa
                     </Text>
                     <Text p>
-                      You have opportunity to extend your stay in Vietnam by
-                      visa extension and renewal. So what is difference between
-                      a visa extension and renewal? Please note that visa
-                      extension or renewals belongs to your current visa.
+                      Renew Vietnam Visa: Extend your stay in Vietnam and get
+                      new visa stamp into your passport
                     </Text>
                     <Button solid marginTop={3}>
-                      View more
+                      APPLY
                     </Button>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox column alignItems="flex-start" paddingTop={10}>
-                <BlockHeader header="4. Hotel booking service" />
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="HOTEL BOOKING SERVICES" />
                 <Flexbox responsiveLayout>
-                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/hotel-booking.png"
                       alt="passport"
@@ -141,24 +261,27 @@ class ExtraServices extends React.Component {
                   </Flexbox>
                   <Flexbox flex={2} column alignItems="flex-start">
                     <Text p>
-                      * With more than 2000 hotels in our system stretching from
+                      With more than 2000 hotels in our system stretching from
                       the north to the south of Viet Nam, we can recommend you a
-                      good place for resting after a long flight.
-                    </Text>
-                    <Text p>
-                      This is special offer for your business trip or vacation.
+                      good place for resting after a long flight. This is
+                      special offer for your business trip or vacation.
                     </Text>
                     <Button solid marginTop={3}>
-                      View more
+                      APPLY
                     </Button>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox column alignItems="flex-start" paddingTop={10}>
-                <BlockHeader header="5. Vietnam domestic flights" />
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="VIETNAM DOMESTIC FLIGHTS" />
                 <Flexbox responsiveLayout>
-                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/domestic-flight.png"
                       alt="passport"
@@ -169,20 +292,26 @@ class ExtraServices extends React.Component {
                     <Text p>
                       Vietnam airline, Jetstar airline or Vietjet airline ,
                       which airline do you prefer? Let us search it for you ,
-                      business class or cheap class ,we have enough capabilities
-                      searching query flights to match for your needs.
+                      business class or economy class ,we have enough
+                      capabilities searching query flights to match for your
+                      needs.
                     </Text>
                     <Button solid marginTop={3}>
-                      View more
+                      APPLY
                     </Button>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
 
-              <Flexbox column alignItems="flex-start" paddingTop={10}>
-                <BlockHeader header="6. Tour and travel booking" />
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="TOUR AND TRAVEL BOOKING" />
                 <Flexbox responsiveLayout>
-                  <Flexbox flex={1} paddingRight={5} paddingLeft={5}>
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/travel-booking.png"
                       alt="passport"
@@ -191,13 +320,13 @@ class ExtraServices extends React.Component {
                   </Flexbox>
                   <Flexbox flex={2} column alignItems="flex-start">
                     <Text p>
-                      With a deep knowledge about people and country of Vietnam
-                      is our advantage , we will help you to understand of
-                      experience History, Culture, Traditional culinary of
-                      Indochina in general and Viet Nam in particular.
+                      With a wide knowledge about people and country of Vietnam,
+                      we will help you with detailed information about History,
+                      Culture, Tradition and Cuture of not only Vietnam but also
+                      our relative countries.
                     </Text>
                     <Button solid marginTop={3}>
-                      View more
+                      APPLY
                     </Button>
                   </Flexbox>
                 </Flexbox>

@@ -7,6 +7,7 @@ import Head from "next/head";
 import { Flexbox } from "../components/ui";
 import { Header, Footer } from "../components";
 import { initGA, logPageView } from '../utils/analytics'
+import { colors } from '../constants/ui';
 
 type Props = {
   children: string | React.Node,
@@ -49,6 +50,10 @@ export default class Layout extends React.Component<Props> {
 
         <Flexbox column flex={1} minHeight="100vh">
           <Header />
+
+          <style>{`th, td { padding: 4px; border: 1px solid ${
+            colors.lightGrey
+            }; }`}</style>
 
           <Flexbox
             paddingTop={18}

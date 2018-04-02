@@ -212,16 +212,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             />
             <Text>Western Union</Text>
           </Label>
-          <Label display="flex" alignItems="center" cursor="pointer">
-            <Input
-              type="radio"
-              name="paymentMethod"
-              onChange={this.updatePaymentMethod}
-              value="later"
-              marginRight={spacingValues.s}
-            />
-            <Text>I will page later</Text>
-          </Label>
 
           <Label
             paddingTop={16}
@@ -236,7 +226,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
               value={isTermsAgreed}
               marginRight={spacingValues.s}
             />
-            <Text bold>I have read and agree with the Terms of Use</Text>
+            <Text bold>I have read and agreed with the Terms of Use</Text>
           </Label>
         </Div>
       </Div>

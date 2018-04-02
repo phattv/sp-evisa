@@ -16,7 +16,7 @@ import {
 
 class HowToApply extends React.Component {
   componentDidMount() {
-    window.Intercom("update");
+    window.Intercom('update');
   }
 
   render() {
@@ -113,15 +113,9 @@ class HowToApply extends React.Component {
                 <Flexbox flex={2} column alignItems="flex-start">
                   <BlockHeader header="3. Get approval letter" smallPadding />
                   <Text p>
-                    Fill out the secured online application form. You are
-                    required to enter the exact personal information of the
-                    applicant(s) that matches the information on your
-                    passport(s).
+                    After 1 working day (urgent service) or 2 working days
+                    (normal one), YOU WILL:
                     <ul>
-                      <li>
-                        After 1 working day (urgent service) or 2 working days
-                        (normal one), YOU WILL:
-                      </li>
                       <li>
                         Get visa approval letter via email (attached with
                         entry-and-exit form)
@@ -153,22 +147,15 @@ class HowToApply extends React.Component {
             </Flexbox>
 
             <Text p textAlign="center" fontStyle="italic">
-              In this case, your best option is to apply for a visa on arrival
-              to Vietnam if your nationality is supported. If not, you should
-              find the nearest Vietnam embassy in neighbor countries to apply
-              for Vietnam visa.
+              Therefore, evisa-vn.com is the fastest and the most convienient
+              tool for you to get the Vietnam Visa you need.
             </Text>
 
             <Anchor href="/apply">
               <Button solid marginBottom={3}>
-                Apply vietnam visa on arrival
+                Apply for Vietnam Visa on Arrival Now
               </Button>
             </Anchor>
-
-            <Text p textAlign="center" color="visaBlue" bold>
-              To know the best way to apply for a visa to Vietnam from your
-              country, please click on the country in the list below
-            </Text>
           </Flexbox>
         </Content>
       </Layout>

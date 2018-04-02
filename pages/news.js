@@ -166,7 +166,7 @@ class News extends React.Component {
               >
                 <Text p bold>
                   <i
-                    class="fa fa-fw fa fa-check"
+                    className="fa fa-fw fa fa-check"
                     aria-hidden="true"
                     style={{
                       color: colors.visaBlue,
@@ -176,7 +176,7 @@ class News extends React.Component {
                 </Text>
                 <Text p bold>
                   <i
-                    class="fa fa-fw fa fa-check"
+                    className="fa fa-fw fa fa-check"
                     aria-hidden="true"
                     style={{
                       color: colors.visaBlue,
@@ -186,7 +186,7 @@ class News extends React.Component {
                 </Text>
                 <Text p bold>
                   <i
-                    class="fa fa-fw fa fa-check"
+                    className="fa fa-fw fa fa-check"
                     aria-hidden="true"
                     style={{
                       color: colors.visaBlue,
@@ -196,7 +196,7 @@ class News extends React.Component {
                 </Text>
                 <Text p bold>
                   <i
-                    class="fa fa-fw fa fa-check"
+                    className="fa fa-fw fa fa-check"
                     aria-hidden="true"
                     style={{
                       color: colors.visaBlue,
@@ -206,7 +206,7 @@ class News extends React.Component {
                 </Text>
                 <Text p bold>
                   <i
-                    class="fa fa-fw fa fa-check"
+                    className="fa fa-fw fa fa-check"
                     aria-hidden="true"
                     style={{
                       color: colors.visaBlue,
@@ -216,7 +216,7 @@ class News extends React.Component {
                 </Text>
                 <Text p bold>
                   <i
-                    class="fa fa-fw fa fa-check"
+                    className="fa fa-fw fa fa-check"
                     aria-hidden="true"
                     style={{
                       color: colors.visaBlue,

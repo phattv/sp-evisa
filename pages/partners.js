@@ -47,7 +47,7 @@ class Partners extends React.Component {
               At your fingertips at Vietnamdiscovery.com, you may find:
             </Text>
 
-            <Flexbox responsizeLayout>
+            <Flexbox responsiveLayout>
               <Flexbox
                 flex={1}
                 column

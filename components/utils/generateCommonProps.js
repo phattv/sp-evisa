@@ -126,7 +126,7 @@ ${props.paddingHorizontal &&
       props.paddingHorizontal,
       spacingUnit,
       props.responsiveNoPaddingHorizontal,
-      props.responsizePaddingHorizontal
+      props.responsivePaddingHorizontal
     )};
   
 ${props.marginTop &&

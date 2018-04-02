@@ -17,7 +17,7 @@ import { colors } from '../constants/ui';
 
 class VisaFees extends React.Component {
   componentDidMount() {
-    window.Intercom("update");
+    window.Intercom('update');
   }
 
   render() {
@@ -29,9 +29,8 @@ class VisaFees extends React.Component {
           <Flexbox width="100%" responsiveLayout column>
             <Flexbox column>
               <Text bold paddingVertical={10}>
-                Before applying for Vietnam visa on arrival, you should notice
-                that when using this kind of visa, you need to pay two kinds of
-                fee.
+                Applying Vietnam Visa on arrival, two types of fee need to be
+                paid by customers
               </Text>
               <Flexbox>
                 <Flexbox flex={1} column alignItems="flex-start">
@@ -39,10 +38,10 @@ class VisaFees extends React.Component {
                   <Flexbox alignItems="flex-start">
                     <Image src="/static/images/fees-image.png" />
                     <Text p paddingHorizontal={5}>
-                      Service fee is paid online to Vietnam-visa.com in order to
-                      get the visa approval letter approved so that you can fly
-                      to Vietnam. This fee would vary depending upon your visa
-                      type, number of applicants and processing time.
+                      Service fee is paid online to evisa-vn.com which is the
+                      service fee for the process of getting the visa approval
+                      letter. You use the letter to get Vietnam visa stamp at
+                      the airports.
                     </Text>
                   </Flexbox>
                 </Flexbox>
@@ -51,28 +50,9 @@ class VisaFees extends React.Component {
                   <Flexbox alignItems="flex-start">
                     <Image src="/static/images/fees-image.png" />
                     <Text p paddingHorizontal={5}>
-                      Stamping fee is paid in USD in cash for each person at the
-                      landing visa office upon arrival at Vietnam airport. It is
-                      &nbsp;
-                      <Text color="visaRed" bold>
-                        25 USD
-                      </Text>{' '}
-                      for a single entry visa, &nbsp;<Text color="visaRed" bold>
-                        50 USD
-                      </Text>{' '}
-                      for a multiple entry visa valid for up to 3 months, &nbsp;<Text
-                        color="visaRed"
-                        bold
-                      >
-                        95 USD
-                      </Text>{' '}
-                      for 6 months multiple entry visa, or &nbsp;<Text
-                        color="visaRed"
-                        bold
-                      >
-                        1325 USD
-                      </Text>{' '}
-                      for 1 year multiple entry visa.
+                      Stamping fee is paid in cash (USD) at the landing visa
+                      counter at the arrival airport. This fee is vary depend on
+                      types of visa:
                     </Text>
                   </Flexbox>
                 </Flexbox>

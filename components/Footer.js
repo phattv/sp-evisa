@@ -39,9 +39,8 @@ export default class Footer extends React.Component<null> {
               textAlign="center"
               paddingBottom={3}
             >
-              In a continuous effort to best benefit regular customers and
-              partners, we – Vietnam-visa.com – have developed an array of
-              preferential rates and discounts for our
+              In a progressive effort to provide excelent services to all
+              in-need customers
             </Text>
             <Flexbox>
               <Image

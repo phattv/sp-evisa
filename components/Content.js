@@ -23,7 +23,7 @@ export default class Content extends React.Component<Props> {
           maxWidth={288}
           paddingHorizontal={20}
           paddingVertical={isSqueeze ? 12 : 18}
-          responsizePaddingHorizontal
+          responsivePaddingHorizontal
           width="100%"
         >
           {children}
