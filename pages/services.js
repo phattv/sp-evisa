@@ -42,7 +42,7 @@ class ExtraServices extends React.Component {
                 width="100%"
               >
                 <BlockHeader header="AIRPORT FAST TRACK" />
-                <Flexbox responsiveLayout>
+                <Flexbox responsiveLayout width="100%">
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/airport-fast-track.png"
@@ -110,7 +110,7 @@ class ExtraServices extends React.Component {
                 width="100%"
               >
                 <BlockHeader header="PICK UP AT THE AIRPORT" />
-                <Flexbox responsiveLayout>
+                <Flexbox responsiveLayout width="100%">
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/car-pickup.png"
@@ -176,7 +176,7 @@ class ExtraServices extends React.Component {
                 width="100%"
               >
                 <BlockHeader header="VIETNAM VISA EXTENSION" />
-                <Flexbox responsiveLayout>
+                <Flexbox responsiveLayout width="100%">
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/visa-renewal.png"
@@ -251,7 +251,7 @@ class ExtraServices extends React.Component {
                 width="100%"
               >
                 <BlockHeader header="HOTEL BOOKING SERVICES" />
-                <Flexbox responsiveLayout>
+                <Flexbox responsiveLayout width="100%">
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/hotel-booking.png"
@@ -280,7 +280,7 @@ class ExtraServices extends React.Component {
                 width="100%"
               >
                 <BlockHeader header="VIETNAM DOMESTIC FLIGHTS" />
-                <Flexbox responsiveLayout>
+                <Flexbox responsiveLayout width="100%">
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/domestic-flight.png"
@@ -310,7 +310,7 @@ class ExtraServices extends React.Component {
                 width="100%"
               >
                 <BlockHeader header="TOUR AND TRAVEL BOOKING" />
-                <Flexbox responsiveLayout>
+                <Flexbox responsiveLayout width="100%">
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/travel-booking.png"

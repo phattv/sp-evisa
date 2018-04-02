@@ -7,7 +7,7 @@ import { Form } from 'react-final-form';
 import { Div, Input, Label } from 'glamorous';
 // custom
 import { initialStore } from '../store';
-import { finishStepThree } from '../actions';
+import { updateStepThree } from '../actions';
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
@@ -15,7 +15,7 @@ import ApplyFormReviewForm from './ApplyFormReviewForm';
 type Props = {
   stepTwo: Object,
   stepThree: Object,
-  finishStepThree: Object => void,
+  updateStepThree: Object => void,
   onSubmit: () => void,
   goBack: Object => void,
 };
@@ -89,7 +89,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   updateStore = () => {
-    this.props.finishStepThree(this.state);
+    this.props.updateStepThree(this.state);
   };
 
   updatePaymentMethod = (paymentMethod: string) => {
@@ -393,7 +393,7 @@ const mapStateToProps = store => {
   };
 };
 const mapDispatchToProps = {
-  finishStepThree,
+  updateStepThree,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepThreeWithRedux,

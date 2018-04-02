@@ -10,7 +10,7 @@ import withRedux from 'next-redux-wrapper';
 import { Flexbox, Text } from '../components';
 import countryOptions from '../static/countries.json';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
-import { finishStepTwo } from '../actions';
+import { updateStepTwo } from '../actions';
 import { initialStore } from '../store';
 
 const genderOptions = [
@@ -21,7 +21,7 @@ const genderOptions = [
 type Props = {
   index: number,
   initialCountry: string,
-  finishStepTwo: Object => void,
+  updateStepTwo: Object => void,
 };
 type State = {
   name: string,
@@ -108,7 +108,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
       passport,
       passportExpiryDate,
     } = this.state;
-    const { finishStepTwo, index } = this.props;
+    const { updateStepTwo, index } = this.props;
 
     const isFilledIn =
       !!name &&
@@ -122,7 +122,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
       {
         isFilledIn,
       },
-      () => finishStepTwo({ [index]: this.state }),
+      () => updateStepTwo({ [index]: this.state }),
     );
   };
 
@@ -133,8 +133,8 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    const { finishStepTwo, index } = this.props;
-    finishStepTwo({ [index]: this.state });
+    const { updateStepTwo, index } = this.props;
+    updateStepTwo({ [index]: this.state });
   }
 
   render() {
@@ -292,7 +292,7 @@ const mapStateToProps = store => {
   return {};
 };
 const mapDispatchToProps = {
-  finishStepTwo,
+  updateStepTwo,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwoWithRedux,

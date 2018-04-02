@@ -13,7 +13,7 @@ import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import countryOptions from '../static/countries.json';
 import { initialStore } from '../store';
-import { finishStepOne } from '../actions';
+import { updateStepOne } from '../actions';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 
 const typeOptions = [
@@ -54,7 +54,7 @@ const airportOptions = [
 type Props = {
   onSubmit: () => void,
   stepOne: Object,
-  finishStepOne: Object => void,
+  updateStepOne: Object => void,
 };
 type State = {
   country: string,
@@ -102,7 +102,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     });
 
     // save to store
-    this.props.finishStepOne(this.state);
+    this.props.updateStepOne(this.state);
 
     // onSubmit callback
     if (shouldShowErrorMessage === false) {
@@ -222,7 +222,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateStepOneToStore = () => {
-    this.props.finishStepOne(this.state);
+    this.props.updateStepOne(this.state);
   };
 
   componentDidMount() {
@@ -528,7 +528,7 @@ const mapStateToProps = store => {
   };
 };
 const mapDispatchToProps = {
-  finishStepOne,
+  updateStepOne,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepOneWithRedux,

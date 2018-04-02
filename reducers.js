@@ -12,7 +12,7 @@ import { initialState } from './store';
  */
 const reducer = (state: Store = initialState, action: Object) => {
   switch (action.type) {
-    case actionTypes.FINISH_STEP_ONE: {
+    case actionTypes.UPDATE_STEP_ONE: {
       return Object.assign({}, state, {
         stepOne: action.payload,
       });
@@ -22,12 +22,12 @@ const reducer = (state: Store = initialState, action: Object) => {
         stepTwo: {},
       });
     }
-    case actionTypes.FINISH_STEP_TWO: {
+    case actionTypes.UPDATE_STEP_TWO: {
       return Object.assign({}, state, {
         stepTwo: { ...state.stepTwo, ...action.payload },
       });
     }
-    case actionTypes.FINISH_STEP_THREE: {
+    case actionTypes.UPDATE_STEP_THREE: {
       return Object.assign({}, state, {
         stepThree: action.payload,
       });

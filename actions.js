@@ -7,10 +7,10 @@ import type { Dispatch } from 'redux';
  * +--------------+
  */
 const actionTypes = {
-  FINISH_STEP_ONE: 'FINISH_STEP_ONE',
+  UPDATE_STEP_ONE: 'UPDATE_STEP_ONE',
   RESET_STEP_TWO: 'RESET_STEP_TWO',
-  FINISH_STEP_TWO: 'FINISH_STEP_TWO',
-  FINISH_STEP_THREE: 'FINISH_STEP_THREE',
+  UPDATE_STEP_TWO: 'UPDATE_STEP_TWO',
+  UPDATE_STEP_THREE: 'UPDATE_STEP_THREE',
 };
 
 /**
@@ -18,9 +18,9 @@ const actionTypes = {
  * | ACTIONS |
  * +---------+
  */
-const finishStepOne = (params: Object) => (dispatch: Dispatch) => {
+const updateStepOne = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
-    type: actionTypes.FINISH_STEP_ONE,
+    type: actionTypes.UPDATE_STEP_ONE,
     payload: params,
   });
 };
@@ -30,15 +30,15 @@ const resetStepTwo = () => (dispatch: Dispatch) => {
     payload: {},
   });
 };
-const finishStepTwo = (params: Object) => (dispatch: Dispatch) => {
+const updateStepTwo = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
-    type: actionTypes.FINISH_STEP_TWO,
+    type: actionTypes.UPDATE_STEP_TWO,
     payload: params,
   });
 };
-const finishStepThree = (params: Object) => (dispatch: Dispatch) => {
+const updateStepThree = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
-    type: actionTypes.FINISH_STEP_THREE,
+    type: actionTypes.UPDATE_STEP_THREE,
     payload: params,
   });
 };
@@ -50,8 +50,8 @@ const finishStepThree = (params: Object) => (dispatch: Dispatch) => {
  */
 export {
   actionTypes,
-  finishStepOne,
+  updateStepOne,
   resetStepTwo,
-  finishStepTwo,
-  finishStepThree,
+  updateStepTwo,
+  updateStepThree,
 };
