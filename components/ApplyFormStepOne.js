@@ -13,16 +13,17 @@ import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import countryOptions from '../static/countries.json';
 import { initialStore } from '../store';
-import { updateStepOne } from '../actions';
+import { updateStepOne, updateFees } from '../actions';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
+import { getFeesByCountryId } from '../utils/apiClient';
 
 const typeOptions = [
-  { value: '1 month single', label: '1 month single' },
-  { value: '1 month multiple', label: '1 month multiple' },
-  { value: '3 months single', label: '3 months single' },
-  { value: '3 months multiple', label: '3 months multiple' },
-  { value: '6 months multiple', label: '6 months multiple' },
-  { value: '1 year multiple', label: '1 year multiple' },
+  { value: 'one_month_single', label: '1 month single' },
+  { value: 'one_month_multiple', label: '1 month multiple' },
+  { value: 'three_month_single', label: '3 months single' },
+  { value: 'three_month_multiple', label: '3 months multiple' },
+  { value: 'six_month_multiple', label: '6 months multiple' },
+  { value: 'one_year_multiple', label: '1 year multiple' },
 ];
 const purposeOptions = [
   { value: 'tourist', label: 'Tourist' },
@@ -55,6 +56,7 @@ type Props = {
   onSubmit: () => void,
   stepOne: Object,
   updateStepOne: Object => void,
+  updateFees: (Array<Object>) => void,
 };
 type State = {
   country: string,
@@ -112,9 +114,20 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateCountry = (selectedOption: Object) => {
-    this.setState({
-      country: selectedOption.value,
-    });
+    this.setState(
+      {
+        country: selectedOption.value,
+      },
+      () =>
+        getFeesByCountryId(
+          { countryId: selectedOption.value },
+          this.updateFees,
+        ),
+    );
+  };
+
+  updateFees = data => {
+    this.props.updateFees(data);
   };
 
   updateQuantity = (event: Object) => {
@@ -268,7 +281,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 <Select
                   autoFocus
                   value={country}
-                  placeholder="Select..."
+                  placeholder="Select.."
                   onChange={this.updateCountry}
                   options={countryOptions}
                 />
@@ -529,6 +542,7 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = {
   updateStepOne,
+  updateFees,
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepOneWithRedux,
