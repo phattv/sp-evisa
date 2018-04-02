@@ -5,13 +5,13 @@ import { Div, Input, Label } from 'glamorous';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 // custom
 import { Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { initialStore } from '../store';
 
-// TODO: pull from API
-const costPerPerson = 8;
+// TODO: Handle extra services
 const airportFastTrackCost = 45;
 const stampingFeeCost = 8;
 const privateVisaLetterCost = 8;
@@ -19,10 +19,12 @@ const carPickUpCost = 30;
 
 type Props = {
   stepOne: Object,
-  updatePaymentMethod: (string) => void,
-  updateIsTermsAgreed: (boolean) => void,
+  updatePaymentMethod: string => void,
+  updateIsTermsAgreed: boolean => void,
+  fees: Array<Object>,
 };
 type State = {
+  costPerPerson: number,
   paymentMethod: string,
   isTermsAgreed: boolean,
   totalFee: number,
@@ -33,6 +35,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   static defaultProps: Props = {};
 
   state = {
+    costPerPerson: 0,
     paymentMethod: '',
     isTermsAgreed: false,
     totalFee: 0,
@@ -40,18 +43,28 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
 
   updatePaymentMethod = (event: Object) => {
-    this.setState({
-      paymentMethod: event.target.value,
-    }, () => this.props.updatePaymentMethod(this.state.paymentMethod))
+    const { updatePaymentMethod } = this.props;
+    this.setState(
+      {
+        paymentMethod: event.target.value,
+      },
+      () =>
+        updatePaymentMethod && updatePaymentMethod(this.state.paymentMethod),
+    );
   };
 
   updateIsTermsAgreed = (event: Object) => {
-    this.setState({
-      isTermsAgreed: !this.state.isTermsAgreed,
-    }, () => this.props.updateIsTermsAgreed(this.state.isTermsAgreed));
+    const { updateIsTermsAgreed } = this.props;
+    this.setState(
+      {
+        isTermsAgreed: !this.state.isTermsAgreed,
+      },
+      () =>
+        updateIsTermsAgreed && updateIsTermsAgreed(this.state.isTermsAgreed),
+    );
   };
 
-  calculateTotalFee = (nextProps?: Object) => {
+  calculateTotalFee = (nextProps: Object) => {
     const quantity = get(
       nextProps,
       'stepOne.quantity',
@@ -59,16 +72,27 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
     this.setState({
-      totalFee: parsedQuantity * costPerPerson,
+      totalFee: parsedQuantity * this.state.costPerPerson,
     });
   };
 
   componentWillReceiveProps(nextProps) {
-    this.calculateTotalFee(nextProps);
-  }
-
-  componentDidMount() {
-    this.calculateTotalFee();
+    if (
+      this.props.fees !== nextProps.fees ||
+      this.props.stepOne !== nextProps.stepOne
+    ) {
+      const type = get(nextProps, 'stepOne.type', '');
+      const purpose = get(nextProps, 'stepOne.purpose', '');
+      const fees = get(nextProps, 'fees', []).find(
+        fees => fees.type === purpose,
+      );
+      this.setState(
+        {
+          costPerPerson: isEmpty(fees) ? 0 : fees[type],
+        },
+        () => this.calculateTotalFee(nextProps),
+      );
+    }
   }
 
   render() {
@@ -181,7 +205,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
               </Text>
             )}
           </Flexbox>
-          <Text>Payment method&nbsp;<Text color="visaRed">*</Text></Text>
+          <Text>
+            Payment method&nbsp;<Text color="visaRed">*</Text>
+          </Text>
           <Label display="flex" alignItems="center" cursor="pointer">
             <Input
               type="radio"
@@ -239,6 +265,7 @@ const ApplyFormReviewFormWithRedux = connect(null, null)(ApplyFormReviewForm);
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
+    fees: store.fees,
   };
 };
 const mapDispatchToProps = {};
