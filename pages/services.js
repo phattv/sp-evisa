@@ -53,31 +53,35 @@ class ExtraServices extends React.Component {
                   <Flexbox flex={2} column alignItems="flex-start">
                     <Div overflowX="auto">
                       <table>
-                        <tr>
-                          <th>TYPE OF FAST TRACK</th>
-                          <th colSpan="4">AIRPORT</th>
-                        </tr>
-                        <tr>
-                          <th />
-                          <th>IN HA NOI</th>
-                          <th>HA NOI</th>
-                          <th>DA NANG</th>
-                          <th>CAM RANH</th>
-                        </tr>
-                        <tr>
-                          <td>Airport Fast Track</td>
-                          <td>25 USD/pax</td>
-                          <td>25 USD/pax</td>
-                          <td>25 USD/pax</td>
-                          <td>25 USD/pax</td>
-                        </tr>
-                        <tr>
-                          <td>Airport VIP Fast Track</td>
-                          <td>40 USD/pax</td>
-                          <td>40 USD/pax</td>
-                          <td>40 USD/pax</td>
-                          <td>40 USD/pax</td>
-                        </tr>
+                        <thead>
+                          <tr>
+                            <th>TYPE OF FAST TRACK</th>
+                            <th colSpan="4">AIRPORT</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th />
+                            <th>IN HA NOI</th>
+                            <th>HA NOI</th>
+                            <th>DA NANG</th>
+                            <th>CAM RANH</th>
+                          </tr>
+                          <tr>
+                            <td>Airport Fast Track</td>
+                            <td>25 USD/pax</td>
+                            <td>25 USD/pax</td>
+                            <td>25 USD/pax</td>
+                            <td>25 USD/pax</td>
+                          </tr>
+                          <tr>
+                            <td>Airport VIP Fast Track</td>
+                            <td>40 USD/pax</td>
+                            <td>40 USD/pax</td>
+                            <td>40 USD/pax</td>
+                            <td>40 USD/pax</td>
+                          </tr>
+                        </tbody>
                       </table>
                     </Div>
                     <Text p>
@@ -121,45 +125,49 @@ class ExtraServices extends React.Component {
                   <Flexbox flex={2} column alignItems="flex-start">
                     <Div overflowX="auto">
                       <table>
-                        <tr>
-                          <th>ECONOMY CAR</th>
-                          <th colSpan="4">PICK-UP AIRPORT</th>
-                        </tr>
-                        <tr>
-                          <th />
-                          <th>IN HA NOI</th>
-                          <th>HA NOI</th>
-                          <th>DA NANG</th>
-                          <th>CAM RANH</th>
-                        </tr>
-                        <tr>
-                          <td>4 seats</td>
-                          <td>25 USD</td>
-                          <td>25 USD</td>
-                          <td>25 USD</td>
-                          <td>25 USD</td>
-                        </tr>
-                        <tr>
-                          <td>16 seats</td>
-                          <td>30 USD</td>
-                          <td>30 USD</td>
-                          <td>30 USD</td>
-                          <td>30 USD</td>
-                        </tr>
-                        <tr>
-                          <td>16 seats</td>
-                          <td>90 USD</td>
-                          <td>90 USD</td>
-                          <td>90 USD</td>
-                          <td>90 USD</td>
-                        </tr>
-                        <tr>
-                          <td>24 seats</td>
-                          <td>150 USD</td>
-                          <td>150 USD</td>
-                          <td>150 USD</td>
-                          <td>150 USD</td>
-                        </tr>
+                        <thead>
+                          <tr>
+                            <th>ECONOMY CAR</th>
+                            <th colSpan="4">PICK-UP AIRPORT</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th />
+                            <th>IN HA NOI</th>
+                            <th>HA NOI</th>
+                            <th>DA NANG</th>
+                            <th>CAM RANH</th>
+                          </tr>
+                          <tr>
+                            <td>4 seats</td>
+                            <td>25 USD</td>
+                            <td>25 USD</td>
+                            <td>25 USD</td>
+                            <td>25 USD</td>
+                          </tr>
+                          <tr>
+                            <td>16 seats</td>
+                            <td>30 USD</td>
+                            <td>30 USD</td>
+                            <td>30 USD</td>
+                            <td>30 USD</td>
+                          </tr>
+                          <tr>
+                            <td>16 seats</td>
+                            <td>90 USD</td>
+                            <td>90 USD</td>
+                            <td>90 USD</td>
+                            <td>90 USD</td>
+                          </tr>
+                          <tr>
+                            <td>24 seats</td>
+                            <td>150 USD</td>
+                            <td>150 USD</td>
+                            <td>150 USD</td>
+                            <td>150 USD</td>
+                          </tr>
+                        </tbody>
                       </table>
                     </Div>
                     <Button solid marginTop={3}>
@@ -187,46 +195,50 @@ class ExtraServices extends React.Component {
                   <Flexbox flex={2} column alignItems="flex-start">
                     <Div overflowX="auto">
                       <table>
-                        <tr>
-                          <th>TYPE OF VISA</th>
-                          <th colSpan="2">EXTEND VIETNAM VISA</th>
-                          <th colSpan="2">REVEW VIETNAM VISA</th>
-                        </tr>
-                        <tr>
-                          <th />
-                          <th>IN HA NOI</th>
-                          <th>IN HO CHI MINH</th>
-                          <th>IN HA NOI</th>
-                          <th>IN HO CHI MINH</th>
-                        </tr>
-                        <tr>
-                          <td>1 month single</td>
-                          <td>N/A</td>
-                          <td>60-155 USD</td>
-                          <td>N/A</td>
-                          <td>200 USD</td>
-                        </tr>
-                        <tr>
-                          <td>1 month multiple</td>
-                          <td>N/A</td>
-                          <td>N/A</td>
-                          <td>N/A</td>
-                          <td>N/A</td>
-                        </tr>
-                        <tr>
-                          <td>3 months single</td>
-                          <td>N/A</td>
-                          <td>180-310 USD</td>
-                          <td>N/A</td>
-                          <td>330 USD</td>
-                        </tr>
-                        <tr>
-                          <td>1 month single</td>
-                          <td>N/A</td>
-                          <td>N/A</td>
-                          <td>N/A</td>
-                          <td>350 USD</td>
-                        </tr>
+                        <thead>
+                          <tr>
+                            <th>TYPE OF VISA</th>
+                            <th colSpan="2">EXTEND VIETNAM VISA</th>
+                            <th colSpan="2">REVEW VIETNAM VISA</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th />
+                            <th>IN HA NOI</th>
+                            <th>IN HO CHI MINH</th>
+                            <th>IN HA NOI</th>
+                            <th>IN HO CHI MINH</th>
+                          </tr>
+                          <tr>
+                            <td>1 month single</td>
+                            <td>N/A</td>
+                            <td>60-155 USD</td>
+                            <td>N/A</td>
+                            <td>200 USD</td>
+                          </tr>
+                          <tr>
+                            <td>1 month multiple</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                          </tr>
+                          <tr>
+                            <td>3 months single</td>
+                            <td>N/A</td>
+                            <td>180-310 USD</td>
+                            <td>N/A</td>
+                            <td>330 USD</td>
+                          </tr>
+                          <tr>
+                            <td>1 month single</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>350 USD</td>
+                          </tr>
+                        </tbody>
                       </table>
                     </Div>
                     <Text p>

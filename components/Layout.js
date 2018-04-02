@@ -45,7 +45,7 @@ export default class Layout extends React.Component<Props> {
           <link href="../static/fonts/fonts.css" rel="stylesheet" />
 
           <style>
-            {`th, td { padding: 4px; border: 1px solid ${colors.lightGrey}; }`}
+            {`th, td { padding: 10px; border: 1px solid ${colors.lightGrey}; text-align: center; }`}
           </style>
 
           <script src="../static/intercom.js" />
