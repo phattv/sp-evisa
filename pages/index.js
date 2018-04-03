@@ -161,10 +161,10 @@ const visaKnowledge = [
 const applyWithConfidence = [
   'Safe and Secure',
   'Good Quality & Reliability',
-  'Prombt Responses',
+  'Prompt Responses',
   'Competitive Prices ($8)',
   'Save your time and money',
-  '2 working day',
+  '2 working days',
   'Money back guarantee for declined applications',
 ];
 
