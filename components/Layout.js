@@ -45,12 +45,13 @@ export default class Layout extends React.Component<Props> {
           <link href="../static/fonts/fonts.css" rel="stylesheet" />
 
           <style>
-            {`th, td { padding: 10px; border: 1px solid ${colors.lightGrey}; text-align: center; }`}
+            {`th, td { padding: 10px; border: 1px solid ${
+              colors.lightGrey
+            }; text-align: center; }`}
           </style>
 
           <script src="../static/intercom.js" />
-          <script src="https://www.paypalobjects.com/api/checkout.js" />
-          <script src="../static/paypal-button.js" />
+          <script src="../static/paypal-checkout.min.js" />
         </Head>
 
         <Flexbox column flex={1} minHeight="100vh">

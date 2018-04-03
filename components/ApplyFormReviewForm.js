@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import { Div, Input, Label } from 'glamorous';
 import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
@@ -29,17 +30,31 @@ type State = {
   isTermsAgreed: boolean,
   totalFee: number,
   shouldShowErrorMessage: boolean,
+
+  env: string,
+  client: Object,
+  commit: boolean,
 };
 
 class ApplyFormReviewForm extends React.Component<Props, State> {
-  static defaultProps: Props = {};
-
   state = {
     costPerPerson: 0,
     paymentMethod: '',
     isTermsAgreed: false,
     totalFee: 0,
     shouldShowErrorMessage: false,
+    // Paypal configs:
+    env: 'production',
+    client: {
+      sandbox:
+        'ARbpiltFosCc8bt1e1DnQvUeaWirbKNSdfNccETRH2cOnTn6jB5sg7tOTaHCMlyZngMBSgGIvZOCOk6S',
+      production:
+        'AeposU75PsU1HDeKovqhb-komh_0cm5uJlbecPvnN4epIla8DyfOwTTvbrup8UWGv6vRiUMXPXFL-6kz',
+    },
+    commit: true,
+    style: {
+      size: 'responsive'
+    }
   };
 
   updatePaymentMethod = (event: Object) => {
@@ -95,6 +110,42 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     }
   }
 
+  //<editor-fold desc="Paypal configs">
+  payment = (data, actions) => {
+    return actions.payment.create({
+      payment: {
+        transactions: [
+          {
+            // TODO: get amount from store
+            amount: { total: '1.00', currency: 'USD' },
+          },
+        ],
+      },
+    });
+  };
+
+  onAuthorize = (data, actions) => {
+    console.log('The payment was authorized!');
+    console.log('Payment ID = ', data.paymentID);
+    console.log('PayerID = ', data.payerID);
+
+    return actions.payment.execute().then(function(payment) {
+      alert('Payment Succeeded!');
+      // The payment is complete!
+      // You can now show a confirmation message to the customer
+    });
+  };
+
+  onCancel = (data, actions) => {
+    console.log('The payment was cancelled!');
+    console.log('Payment ID = ', data.paymentID);
+  };
+
+  onError = error => {
+    console.error('paypal error', error);
+  };
+  //</editor-fold>
+
   render() {
     const {
       stepOne: {
@@ -108,7 +159,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         isTermsAgreed,
       },
     } = this.props;
-    const { totalFee } = this.state;
+    const { totalFee, commit, env, client, style } = this.state;
+
+    let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
 
     return (
       <Div>
@@ -205,40 +258,22 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
               </Text>
             )}
           </Flexbox>
-          <Text>
-            Payment method&nbsp;<Text color="visaRed">*</Text>
-          </Text>
-          {/*<Label display="flex" alignItems="center" cursor="pointer">*/}
-            {/*<Input*/}
-              {/*type="radio"*/}
-              {/*name="paymentMethod"*/}
-              {/*onChange={this.updatePaymentMethod}*/}
-              {/*value="paypal"*/}
-              {/*marginRight={spacingValues.s}*/}
-            {/*/>*/}
-            {/*<Text>Paypal</Text>*/}
-          {/*</Label>*/}
-          {/*<Label display="flex" alignItems="center" cursor="pointer">*/}
-            {/*<Input*/}
-              {/*type="radio"*/}
-              {/*name="paymentMethod"*/}
-              {/*onChange={this.updatePaymentMethod}*/}
-              {/*value="credit"*/}
-              {/*marginRight={spacingValues.s}*/}
-            {/*/>*/}
-            {/*<Text>Visa/Master/AMEX/JCB/Union Pay</Text>*/}
-          {/*</Label>*/}
-          {/*<Label display="flex" alignItems="center" cursor="pointer">*/}
-            {/*<Input*/}
-              {/*type="radio"*/}
-              {/*name="paymentMethod"*/}
-              {/*onChange={this.updatePaymentMethod}*/}
-              {/*value="wu"*/}
-              {/*marginRight={spacingValues.s}*/}
-            {/*/>*/}
-            {/*<Text>Western Union</Text>*/}
-          {/*</Label>*/}
-          <div id="paypal-button" />
+          <Flexbox paddingBottom={5} justifyContent="flex-start">
+            <Text>
+              Payment method&nbsp;<Text color="visaRed">*</Text>
+            </Text>
+          </Flexbox>
+
+          <PayPalButton
+            commit={commit}
+            env={env}
+            client={client}
+            style={style}
+            payment={(data, actions) => this.payment(data, actions)}
+            onAuthorize={(data, actions) => this.onAuthorize(data, actions)}
+            onCanccel={(data, actions) => this.onCancel(data, actions)}
+            onError={error => this.onError(error)}
+          />
 
           <Label
             paddingTop={16}
