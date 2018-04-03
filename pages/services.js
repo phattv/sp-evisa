@@ -13,7 +13,6 @@ import {
   Layout,
   Text,
 } from '../components';
-import { colors, spacingValues } from '../constants/ui';
 
 class ExtraServices extends React.Component {
   componentDidMount() {
@@ -26,7 +25,7 @@ class ExtraServices extends React.Component {
         <Image src="/static/images/services-background.png" />
         <PageHeader header="EXTRA SERVICES" />
         <Content>
-          <Flexbox width="100%" column flex={1}>
+          <Flexbox width="100%" column>
             <Text p textAlign="center" bold>
               In order to help our customers in choosing a care-free service, we
               offer an all-in-one package which covers all your demands for a
