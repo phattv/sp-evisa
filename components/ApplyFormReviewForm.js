@@ -208,36 +208,37 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           <Text>
             Payment method&nbsp;<Text color="visaRed">*</Text>
           </Text>
-          <Label display="flex" alignItems="center" cursor="pointer">
-            <Input
-              type="radio"
-              name="paymentMethod"
-              onChange={this.updatePaymentMethod}
-              value="paypal"
-              marginRight={spacingValues.s}
-            />
-            <Text>Paypal</Text>
-          </Label>
-          <Label display="flex" alignItems="center" cursor="pointer">
-            <Input
-              type="radio"
-              name="paymentMethod"
-              onChange={this.updatePaymentMethod}
-              value="credit"
-              marginRight={spacingValues.s}
-            />
-            <Text>Visa/Master/AMEX/JCB/Union Pay</Text>
-          </Label>
-          <Label display="flex" alignItems="center" cursor="pointer">
-            <Input
-              type="radio"
-              name="paymentMethod"
-              onChange={this.updatePaymentMethod}
-              value="wu"
-              marginRight={spacingValues.s}
-            />
-            <Text>Western Union</Text>
-          </Label>
+          {/*<Label display="flex" alignItems="center" cursor="pointer">*/}
+            {/*<Input*/}
+              {/*type="radio"*/}
+              {/*name="paymentMethod"*/}
+              {/*onChange={this.updatePaymentMethod}*/}
+              {/*value="paypal"*/}
+              {/*marginRight={spacingValues.s}*/}
+            {/*/>*/}
+            {/*<Text>Paypal</Text>*/}
+          {/*</Label>*/}
+          {/*<Label display="flex" alignItems="center" cursor="pointer">*/}
+            {/*<Input*/}
+              {/*type="radio"*/}
+              {/*name="paymentMethod"*/}
+              {/*onChange={this.updatePaymentMethod}*/}
+              {/*value="credit"*/}
+              {/*marginRight={spacingValues.s}*/}
+            {/*/>*/}
+            {/*<Text>Visa/Master/AMEX/JCB/Union Pay</Text>*/}
+          {/*</Label>*/}
+          {/*<Label display="flex" alignItems="center" cursor="pointer">*/}
+            {/*<Input*/}
+              {/*type="radio"*/}
+              {/*name="paymentMethod"*/}
+              {/*onChange={this.updatePaymentMethod}*/}
+              {/*value="wu"*/}
+              {/*marginRight={spacingValues.s}*/}
+            {/*/>*/}
+            {/*<Text>Western Union</Text>*/}
+          {/*</Label>*/}
+          <div id="paypal-button" />
 
           <Label
             paddingTop={16}

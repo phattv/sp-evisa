@@ -49,6 +49,8 @@ export default class Layout extends React.Component<Props> {
           </style>
 
           <script src="../static/intercom.js" />
+          <script src="https://www.paypalobjects.com/api/checkout.js" />
+          <script src="../static/paypal-button.js" />
         </Head>
 
         <Flexbox column flex={1} minHeight="100vh">
