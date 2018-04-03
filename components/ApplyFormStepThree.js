@@ -214,7 +214,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                     FULL NAME&nbsp;<Text color="visaRed">*</Text>
                   </Text>
                   <Input
-                    autoFocus
                     backgroundColor="white"
                     padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                     borderRadius={borderRadius}

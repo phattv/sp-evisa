@@ -120,7 +120,6 @@ class VisaFees extends React.Component<Props, State> {
 
                 <Flexbox width="100%" column>
                   <Select
-                    autoFocus
                     value={countryId}
                     placeholder="Select country"
                     onChange={this.updateCountryId}

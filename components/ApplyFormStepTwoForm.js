@@ -186,7 +186,6 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>FULL NAME</Text>
               <Input
-                autoFocus={index === 0}
                 backgroundColor="white"
                 padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                 borderRadius={borderRadius}

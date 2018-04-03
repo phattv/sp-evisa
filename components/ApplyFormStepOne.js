@@ -279,7 +279,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   COUNTRY &nbsp;<Text color="visaRed">*</Text>
                 </Text>
                 <Select
-                  autoFocus
                   value={country}
                   placeholder="Select.."
                   onChange={this.updateCountry}
