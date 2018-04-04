@@ -17,17 +17,19 @@ type Props = {
 
 export default class Layout extends React.Component<Props> {
   componentDidMount() {
-    // Init Google Analytics
-    if (!window.GA_INITIALIZED) {
-      initGA();
-      window.GA_INITIALIZED = true;
-    }
-    logPageView();
+    if (process.env.NODE_ENV === 'production') {
+      // Init Google Analytics
+      if (!window.GA_INITIALIZED) {
+        initGA();
+        window.GA_INITIALIZED = true;
+      }
+      logPageView();
 
-    // Init intercom
-    window.Intercom('boot', {
-      app_id: 'a3ouns0a',
-    });
+      // Init intercom
+      window.Intercom('boot', {
+        app_id: 'a3ouns0a',
+      });
+    }
   }
 
   render() {
