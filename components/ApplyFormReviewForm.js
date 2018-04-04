@@ -1,16 +1,16 @@
 // @flow
 // vendor
-import * as React from 'react';
-import ReactDOM from 'react-dom';
-import { Div, Input, Label } from 'glamorous';
-import { connect } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
+import * as React from "react";
+import ReactDOM from "react-dom";
+import { Div, Input, Label } from "glamorous";
+import { connect } from "react-redux";
+import withRedux from "next-redux-wrapper";
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 // custom
-import { Flexbox, Text } from '../components';
-import { borderRadius, colors, spacingValues } from '../constants/ui';
-import { initialStore } from '../store';
+import { Flexbox, Text } from "../components";
+import { borderRadius, colors, spacingValues } from "../constants/ui";
+import { initialStore } from "../store";
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -22,7 +22,7 @@ type Props = {
   stepOne: Object,
   updatePaymentMethod: string => void,
   updateIsTermsAgreed: boolean => void,
-  fees: Array<Object>,
+  fees: Array<Object>
 };
 type State = {
   costPerPerson: number,
@@ -31,32 +31,34 @@ type State = {
   totalFee: number,
   shouldShowErrorMessage: boolean,
 
+  isPaypalLoaded: boolean,
   env: string,
   client: Object,
   commit: boolean,
-  style: Object,
+  style: Object
 };
 
 class ApplyFormReviewForm extends React.Component<Props, State> {
   state = {
     costPerPerson: 0,
-    paymentMethod: '',
+    paymentMethod: "",
     isTermsAgreed: false,
     totalFee: 0,
     shouldShowErrorMessage: false,
     // Paypal configs:
+    isPaypalLoaded: false,
     env: process.env.NODE_ENV === "production" ? "production" : "sandbox",
     client: {
       sandbox:
-        'ARbpiltFosCc8bt1e1DnQvUeaWirbKNSdfNccETRH2cOnTn6jB5sg7tOTaHCMlyZngMBSgGIvZOCOk6S',
+        "ARbpiltFosCc8bt1e1DnQvUeaWirbKNSdfNccETRH2cOnTn6jB5sg7tOTaHCMlyZngMBSgGIvZOCOk6S",
       production:
-        'AeposU75PsU1HDeKovqhb-komh_0cm5uJlbecPvnN4epIla8DyfOwTTvbrup8UWGv6vRiUMXPXFL-6kz',
+        "AeposU75PsU1HDeKovqhb-komh_0cm5uJlbecPvnN4epIla8DyfOwTTvbrup8UWGv6vRiUMXPXFL-6kz"
     },
     commit: true,
     style: {
-      size: 'responsive',
-      label: 'pay',
-      fundingicons: true,
+      size: "responsive",
+      label: "pay",
+      fundingicons: true
     }
   };
 
@@ -64,10 +66,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const { updatePaymentMethod } = this.props;
     this.setState(
       {
-        paymentMethod: event.target.value,
+        paymentMethod: event.target.value
       },
-      () =>
-        updatePaymentMethod && updatePaymentMethod(this.state.paymentMethod),
+      () => updatePaymentMethod && updatePaymentMethod(this.state.paymentMethod)
     );
   };
 
@@ -75,22 +76,21 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const { updateIsTermsAgreed } = this.props;
     this.setState(
       {
-        isTermsAgreed: !this.state.isTermsAgreed,
+        isTermsAgreed: !this.state.isTermsAgreed
       },
-      () =>
-        updateIsTermsAgreed && updateIsTermsAgreed(this.state.isTermsAgreed),
+      () => updateIsTermsAgreed && updateIsTermsAgreed(this.state.isTermsAgreed)
     );
   };
 
   calculateTotalFee = (nextProps: Object) => {
     const quantity = get(
       nextProps,
-      'stepOne.quantity',
-      get(this, 'props.stepOne.quantity'),
+      "stepOne.quantity",
+      get(this, "props.stepOne.quantity")
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
     this.setState({
-      totalFee: parsedQuantity * this.state.costPerPerson,
+      totalFee: parsedQuantity * this.state.costPerPerson
     });
   };
 
@@ -99,16 +99,16 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       this.props.fees !== nextProps.fees ||
       this.props.stepOne !== nextProps.stepOne
     ) {
-      const type = get(nextProps, 'stepOne.type', '');
-      const purpose = get(nextProps, 'stepOne.purpose', '');
-      const fees = get(nextProps, 'fees', []).find(
-        fees => fees.type === purpose,
+      const type = get(nextProps, "stepOne.type", "");
+      const purpose = get(nextProps, "stepOne.purpose", "");
+      const fees = get(nextProps, "fees", []).find(
+        fees => fees.type === purpose
       );
       this.setState(
         {
-          costPerPerson: isEmpty(fees) ? 0 : fees[type],
+          costPerPerson: isEmpty(fees) ? 0 : fees[type]
         },
-        () => this.calculateTotalFee(nextProps),
+        () => this.calculateTotalFee(nextProps)
       );
     }
   }
@@ -120,34 +120,41 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         transactions: [
           {
             // TODO: get amount from store
-            amount: { total: '1.00', currency: 'USD' },
-          },
-        ],
-      },
+            amount: { total: "1.00", currency: "USD" }
+          }
+        ]
+      }
     });
   };
 
   onAuthorize = (data, actions) => {
-    console.log('The payment was authorized!');
-    console.log('Payment ID = ', data.paymentID);
-    console.log('PayerID = ', data.payerID);
+    console.log("The payment was authorized!");
+    console.log("Payment ID = ", data.paymentID);
+    console.log("PayerID = ", data.payerID);
 
     return actions.payment.execute().then(function(payment) {
-      alert('Payment Succeeded!');
+      alert("Payment Succeeded!");
       // The payment is complete!
       // You can now show a confirmation message to the customer
     });
   };
 
   onCancel = (data, actions) => {
-    console.log('The payment was cancelled!');
-    console.log('Payment ID = ', data.paymentID);
+    console.log("The payment was cancelled!");
+    console.log("Payment ID = ", data.paymentID);
   };
 
   onError = error => {
-    console.error('paypal error', error);
+    console.error("paypal error", error);
   };
   //</editor-fold>
+
+  componentDidMount() {
+    require("../static/paypal-checkout.min");
+    this.setState({
+      isPaypalLoaded: true
+    });
+  }
 
   render() {
     const {
@@ -159,12 +166,15 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         arrivalDate,
         departureDate,
         extraServices,
-        isTermsAgreed,
-      },
+        isTermsAgreed
+      }
     } = this.props;
-    const { totalFee, commit, env, client, style } = this.state;
+    const { totalFee, commit, env, client, style, isPaypalLoaded } = this.state;
 
-    let PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
+    let PayPalButton = React.Fragment;
+    if (isPaypalLoaded) {
+      PayPalButton = paypal.Button.driver("react", { React, ReactDOM });
+    }
 
     return (
       <Div>
@@ -221,25 +231,25 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           >
             <Text bold>Extra services:</Text>
           </Flexbox>
-          {get(extraServices, 'airportFastTrack') && (
+          {get(extraServices, "airportFastTrack") && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Airport fast track</Text>
               <Text>{airportFastTrackCost}</Text>
             </Flexbox>
           )}
-          {get(extraServices, 'stampingFee') && (
+          {get(extraServices, "stampingFee") && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Stamping fee</Text>
               <Text>{stampingFeeCost}</Text>
             </Flexbox>
           )}
-          {get(extraServices, 'privateVisaLetter') && (
+          {get(extraServices, "privateVisaLetter") && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Private visa letter</Text>
               <Text>{privateVisaLetterCost}</Text>
             </Flexbox>
           )}
-          {get(extraServices, 'carPickUp') && (
+          {get(extraServices, "carPickUp") && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Car pick-up (4 seats)</Text>
               <Text>{carPickUpCost}</Text>
@@ -267,16 +277,18 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             </Text>
           </Flexbox>
 
-          <PayPalButton
-            commit={commit}
-            env={env}
-            client={client}
-            style={style}
-            payment={(data, actions) => this.payment(data, actions)}
-            onAuthorize={(data, actions) => this.onAuthorize(data, actions)}
-            onCanccel={(data, actions) => this.onCancel(data, actions)}
-            onError={error => this.onError(error)}
-          />
+          {isPaypalLoaded && (
+            <PayPalButton
+              commit={commit}
+              env={env}
+              client={client}
+              style={style}
+              payment={(data, actions) => this.payment(data, actions)}
+              onAuthorize={(data, actions) => this.onAuthorize(data, actions)}
+              onCanccel={(data, actions) => this.onCancel(data, actions)}
+              onError={error => this.onError(error)}
+            />
+          )}
 
           <Label
             paddingTop={16}
@@ -304,10 +316,10 @@ const ApplyFormReviewFormWithRedux = connect(null, null)(ApplyFormReviewForm);
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
-    fees: store.fees,
+    fees: store.fees
   };
 };
 const mapDispatchToProps = {};
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
-  ApplyFormReviewFormWithRedux,
+  ApplyFormReviewFormWithRedux
 );
