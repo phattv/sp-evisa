@@ -34,6 +34,7 @@ type State = {
   env: string,
   client: Object,
   commit: boolean,
+  style: Object,
 };
 
 class ApplyFormReviewForm extends React.Component<Props, State> {
@@ -44,7 +45,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     totalFee: 0,
     shouldShowErrorMessage: false,
     // Paypal configs:
-    env: 'production',
+    env: process.env.NODE_ENV === "production" ? "production" : "sandbox",
     client: {
       sandbox:
         'ARbpiltFosCc8bt1e1DnQvUeaWirbKNSdfNccETRH2cOnTn6jB5sg7tOTaHCMlyZngMBSgGIvZOCOk6S',
@@ -53,7 +54,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     },
     commit: true,
     style: {
-      size: 'responsive'
+      size: 'responsive',
+      label: 'pay',
+      fundingicons: true,
     }
   };
 
