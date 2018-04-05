@@ -1,5 +1,5 @@
 // @flow
-import { Anchor, Flexbox, Text, Image } from '../components/ui';
+import { Anchor, Flexbox, Text, Image } from "../components/ui";
 const currentYear = new Date().getFullYear();
 
 export default class Footer extends React.Component<null> {
@@ -9,11 +9,11 @@ export default class Footer extends React.Component<null> {
         width="100%"
         border
         style={{
-          backgroundImage: 'url(/static/images/airplane-background.png)',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
+          backgroundImage: "url(/static/images/airplane-background.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover"
         }}
         column
       >
@@ -70,82 +70,12 @@ export default class Footer extends React.Component<null> {
             </Flexbox>
           </Flexbox>
 
-          {/* Contact */}
           <Flexbox
             width="100%"
             paddingTop={15}
             alignItems="flex-start"
             responsiveLayout
           >
-            {/*Contact*/}
-            <Flexbox
-              flex={1}
-              width="100%"
-              column
-              alignItems="flex-start"
-              paddingHorizontal={2}
-            >
-              <Text
-                size="m"
-                color="white"
-                bold
-                borderBottom
-                borderColor="visaRed"
-                marginBottom={5}
-                responsiveAlignItemsCenter
-              >
-                Contact
-              </Text>
-              <Image
-                paddingBottom={5}
-                maxWidth={50}
-                src="/static/images/payment-logos.png"
-                alt="payment logos"
-              />
-              <Flexbox column alignItems="flex-start">
-                <Text color="white" paddingBottom={1}>
-                  Phone: +84.946.583.583
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Office: 74 Nguyen Khoai Street, HCMC
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  Email:&nbsp;&nbsp;<Anchor href="mailto:sales@evisa-vn.com">
-                    sales@evisa-vn.com
-                  </Anchor>
-                  &nbsp;/&nbsp;<Anchor href="support@evisa-vn.com">
-                    support@evisa-vn.com
-                  </Anchor>
-                </Text>
-              </Flexbox>
-            </Flexbox>
-            {/* Working hours */}
-            <Flexbox
-              flex={1}
-              width="100%"
-              column
-              alignItems="flex-start"
-              paddingHorizontal={2}
-            >
-              <Text
-                size="m"
-                color="white"
-                bold
-                borderBottom
-                borderColor="visaRed"
-                marginBottom={5}
-              >
-                Working Hours
-              </Text>
-              <Flexbox column alignItems="flex-start">
-                <Text color="white" paddingBottom={1}>
-                  MON - FRI: 9:00 AM to 5:00 PM
-                </Text>
-                <Text color="white" paddingBottom={1}>
-                  SAT - SUN: 11:00 AM to 3:00 PM
-                </Text>
-              </Flexbox>
-            </Flexbox>
             {/* About us */}
             <Flexbox
               flex={1}
@@ -191,6 +121,75 @@ export default class Footer extends React.Component<null> {
                   </Anchor>
                 </Text>
               </Flexbox>
+            </Flexbox>
+            {/*Contact*/}
+            <Flexbox
+              flex={1}
+              width="100%"
+              column
+              alignItems="flex-start"
+              paddingHorizontal={2}
+            >
+              <Text
+                size="m"
+                color="white"
+                bold
+                borderBottom
+                borderColor="visaRed"
+                marginBottom={5}
+                responsiveAlignItemsCenter
+              >
+                Contact
+              </Text>
+              <Image
+                paddingBottom={5}
+                maxWidth={50}
+                src="/static/images/payment-logos.png"
+                alt="payment logos"
+              />
+              <Flexbox column alignItems="flex-start">
+                <Text color="white" paddingBottom={1}>
+                  Phone: +84.946.583.583
+                </Text>
+                <Text color="white" paddingBottom={1}>
+                  Office: 74 Nguyen Khoai Street, HCMC
+                </Text>
+                <Flexbox column alignItems="flex-start">
+                  <Text color="white" paddingBottom={1}>
+                    MON - FRI: 9:00 AM to 5:00 PM
+                  </Text>
+                  <Text color="white" paddingBottom={1}>
+                    SAT - SUN: 11:00 AM to 3:00 PM
+                  </Text>
+                </Flexbox>
+                <Text color="white" paddingBottom={1}>
+                  Email:&nbsp;&nbsp;<Anchor href="mailto:sales@evisa-vn.com">
+                    sales@evisa-vn.com
+                  </Anchor>
+                  &nbsp;/&nbsp;<Anchor href="support@evisa-vn.com">
+                    support@evisa-vn.com
+                  </Anchor>
+                </Text>
+              </Flexbox>
+            </Flexbox>
+            {/* Vietnam Visa Tips */}
+            <Flexbox
+              flex={1}
+              width="100%"
+              column
+              alignItems="flex-start"
+              paddingHorizontal={2}
+            >
+              <Text
+                size="m"
+                color="white"
+                bold
+                borderBottom
+                borderColor="visaRed"
+                marginBottom={5}
+              >
+                Vietnam Visa Tips
+              </Text>
             </Flexbox>
           </Flexbox>
         </Flexbox>

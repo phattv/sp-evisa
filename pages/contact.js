@@ -1,6 +1,6 @@
 // @flow
 // vendor
-import React from 'react';
+import React from "react";
 // custom
 import {
   Anchor,
@@ -10,8 +10,8 @@ import {
   Flexbox,
   Image,
   Layout,
-  Text,
-} from '../components';
+  Text
+} from "../components";
 
 type Props = {};
 type State = {};
@@ -40,7 +40,7 @@ class Contact extends React.Component<Props, State> {
               <BlockHeader header="Get in touch" />
               <Text p>
                 Whether you are our esteemed customer or just have a question
-                about Vietnam visa on arrival,{' '}
+                about Vietnam visa on arrival,{" "}
                 <Anchor href="/">evisa-vn.com</Anchor> is committed to providing
                 a rewarding customer experience. Select the most convenient way
                 to reach us, and we look forward to assisting you.
@@ -51,42 +51,39 @@ class Contact extends React.Component<Props, State> {
               <Text p>
                 We are here to serve you. Whether you have questions about
                 Vietnam visa procedure, your answers are just a click away. It’s
-                available 24/7. Please visit our{' '}
-                <Anchor href="/faq">Frequently Asked Questions today</Anchor>.
+                available 24/7. Please visit our{" "}
+                <Anchor href="/feedback">
+                  Frequently Asked Questions today
+                </Anchor>.
               </Text>
               <Flexbox paddingBottom={3}>
-                <i className="fa fa-fw fa-2x fa-map-marker" aria-hidden="true" />
+                <i
+                  className="fa fa-fw fa-2x fa-map-marker"
+                  aria-hidden="true"
+                />
                 <Text bold paddingLeft={2}>
-                  23rd Floor, Vinaconex 9 Building, Pham Hung Road, Me Tri, Tu
-                  Liem, Hanoi, Vietnam
+                  7th Floor, Kim Nguyên Building, 74 Nguyễn Khoái street,
+                  District 4, Ho Chi Minh City, Vietnam
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
                 <i className="fa fa-fw fa-2x fa-phone" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
-                  +84.473.005.333 (ext. 221 or 224)
-                  <br />
-                  +1 (559) 922-2468 (ext. 1)
+                  +84. 0932 022 762
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
                 <i className="fa fa-fw fa-2x fa-envelope" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
-                  <Anchor href="mailto:sales@vietnamvisafast-cheap.com">
-                    Sales@vietnamvisafast-cheap.com
-                  </Anchor>{' '}
-                  (for booking our service)
-                  <br />
-                  <Anchor href="mailto:support@vietnamvisafast-cheap.com">
-                    Support@vietnamvisafast-cheap.com
-                  </Anchor>{' '}
-                  (for questions/information)
+                  <Anchor href="mailto:contact@evisa-vn.com">
+                    contact@evisa-vn.com
+                  </Anchor>{" "}
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
                 <i className="fa fa-fw fa-2x fa-clock-o" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
-                  Mon-Fri: 8:00 AM – 6:00 PM (GMT+7)
+                  Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
                   <br />
                   Sat: 8:30 AM – 12:00 PM (GMT+7)
                 </Text>
@@ -95,9 +92,9 @@ class Contact extends React.Component<Props, State> {
             <Flexbox flex={1} column alignItems="flex-start">
               <BlockHeader header="Maps" />
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.428072752236!2d105.78072111568572!3d21.01555108600561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab533bc5be8d%3A0xa2500ae3d7fb30fc!2sVinaconex+9!5e0!3m2!1sen!2s!4v1515116450829"
-                width="400"
-                height="300"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.729362099555!2d106.69216831594012!3d10.7553289923358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0dddd8cfbb%3A0xbc825dce9a152e94!2zNzQgTmd1eeG7hW4gS2hvw6FpLCBwaMaw4budbmcgMiwgUXXhuq1uIDQsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1522893117988"
+                width="350"
+                height="262.5"
                 frameBorder="0"
                 style={{ border: 0 }}
                 allowFullScreen

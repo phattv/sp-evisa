@@ -1,6 +1,6 @@
 // @flow
 // vendor
-import React from 'react'
+import React from "react";
 // custom
 import {
   BlockHeader,
@@ -9,8 +9,8 @@ import {
   Flexbox,
   Image,
   Layout,
-  Text,
-} from '../components'
+  Text
+} from "../components";
 
 class AboutUs extends React.Component {
   componentDidMount() {
@@ -27,90 +27,74 @@ class AboutUs extends React.Component {
             <Flexbox responsiveLayout>
               <Flexbox flex={2} column alignItems="flex-start">
                 <BlockHeader header="Who We Are" />
-                <Text p bold color="visaBlue">
-                  “The warmest greeting from Vietnam Visa Online Service !"
+                <Text p>
+                  First of all, on behalf of evisa-vn.com’s group, it’s our
+                  honors to welcome all the customers who have placed their
+                  trust on us to get our excellent services in return.
                 </Text>
                 <Text p>
-                  * It’s a great honor for us to support those who needs Vietnam
-                  visa. Thank you for interesting in our visa service!
+                  Thanks for your interesting in our service. We guarantee our
+                  services will never fail you- our customers.
                 </Text>
                 <Text p>
-                  * www.Vietnam-Evisa.org is is non-governmental website, but we
-                  are on your behalf to contact with the Vietnamese Immigration
+                  {" "}
+                  Evisa-vn.com is a non-governmental website; however, we work
+                  on our customers’ behalf to contact Vietnamese Immigration
                   Department to proceed the Vietnam visa approval letter which
-                  is permitted for who want to get the visa at the airport
-                  because of some difficult reasons at Vietnamese Embassy in
-                  your country.
+                  is permitted for people who want to get their visa at the
+                  airport without wasting time at Vietnamese Embassy.
                 </Text>
                 <Text p>
-                  * Vietnam-Evisa is one of the leading services with
-                  10-years-experience in visa service for Vietnam Embassy. We
+                  Evisa-vn.com is one of the leading services company with
+                  10-years-experience in visa services for Vietnam Embassy. We
                   provide a high quality Vietnam visa on arrival service with an
                   organized and professional team as slogan “ Creating values
                   for clients, growing up with clients, being the valuable
-                  partner with the clients are our insistent faith.”
+                  partner with the clients are our insistent faith”
                 </Text>
                 <Text p>
-                  * Our service is available to avoid the lengthy procedures to
-                  get visa of the client’s local Vietnamese Embassies. Visa
-                  Vietnam Online is legitimated by the Vietnamese Immigration
-                  Department. So we confidently recommend you the Visa Booking
-                  Online service via website www.vietnam-evisa.org. This site
-                  not only offers the most convenient, economic and fastest
-                  service but also provides a helpful guide for those who needs
-                  visa to enter Vietnam.
+                  Our service is available to avoid the lengthy procedures to
+                  get visa of the client’s local Vietnamese Embassies. Vietnam
+                  Visa Online is legitimated by the Vietnamese Immigration
+                  Department. So we confidently recommend you the Booking Visa
+                  Online service via website evisa-vn.com. This site not only
+                  offers the most convenient, economic and fastest service but
+                  also provides helpful guides for those who need the visa to
+                  enter Vietnam.
                 </Text>
                 <Text p>
-                  * It’s so simple, fast and secured with No hidden charge, No
-                  failure transactions to receive the visa stamp at all of
-                  Vietnam International Airport. Please give Vietnam E-Visa Team
-                  an opportunity to help you save money and time! You now can
-                  get your visa to Vietnam in couple of minutes with your
+                  It’s so simple, fast and secured with No hidden charge, No fee
+                  charged if your visa is denied. Please give Vietnam E-Visa
+                  Team an opportunity to help you save money and time! You now
+                  can get your visa to Vietnam in couple of minutes with your
                   Internet Connected computers or Wifi built-in Mobile phones.
                   Besides, our payment method is also most convenient, simple
                   and secured.
                 </Text>
                 <Text p>
-                  For more information, please feel free to contact
-                  Vietnam-Evisa team. Our Customer Care Center is online 24/7 to
-                  support traveller via
+                  For more information, please feel free to contact Evisa-vn
+                  team. Our Customer Care Center is online 24/7 to support
+                  travellers via
                 </Text>
                 <Text p>
                   <Text bold color="visaBlue">
                     Hotline:
-                  </Text>
-                  {' '}(+84) 909.343.525;
-                </Text>
-                <Text p>
-                  <Text bold color="visaBlue">
-                    Tollfree:
-                  </Text>
-                  {' '}+1-800-642-1567 or{' '}
+                  </Text>{" "}
+                  (+84) 092 022 762
                 </Text>
                 <Text p>
                   <Text bold color="visaBlue">
                     Email:
-                  </Text>
-                  {' '}Info@Vietnam-Evisa.Org
+                  </Text>{" "}
+                  contact@evisa-vn.com
                 </Text>
-                <Text p bold fontStyle="italic">
-                  Have a nice trip to Vietnam!
-                </Text>
-                <Text p bold color="visaBlue">
-                  Director
-                </Text>{' '}
-                David La (Mr.)
-              </Flexbox>
-
-              <Flexbox flex={1} paddingHorizontal={2} paddingVertical={2}>
-                <Image src="/static/images/who-we-are.png" alt="passport" />
               </Flexbox>
             </Flexbox>
           </Flexbox>
         </Content>
       </Layout>
-    )
+    );
   }
 }
 
-export default AboutUs
+export default AboutUs;
