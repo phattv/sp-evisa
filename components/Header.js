@@ -70,7 +70,8 @@ export default class Header extends React.PureComponent<null, HeaderState> {
   render() {
     const { isMenuShowed } = this.state;
     return (
-      <Flexbox id={blockId} style={{ zIndex: 2 }}>
+      // Paypal z-index: 100
+      <Flexbox id={blockId} style={{ zIndex: 101 }}>
         <Text
           dangerouslySetInnerHTML={{
             __html: styleHtml,
