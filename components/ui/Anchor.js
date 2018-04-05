@@ -25,7 +25,7 @@ class Anchor extends React.Component<Props> {
   render() {
     const { href, children, ...rest } = this.props;
     return (
-      <Link prefetch passHref href={href}>
+      <Link prefetch passHref href={href} scroll>
         <StyledLink {...rest}>{children}</StyledLink>
       </Link>
     );

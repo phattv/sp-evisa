@@ -64,7 +64,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
   };
 
   navigateToUrl = (url: string) => {
-    Router.push(url)
+    Router.push(url).then(() => window.scrollTo(0, 0))
   }
 
   render() {
