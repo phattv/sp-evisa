@@ -1,6 +1,6 @@
 // @flow
 // vendor
-import React from 'react';
+import React from "react";
 // custom
 import {
   Anchor,
@@ -10,162 +10,163 @@ import {
   Flexbox,
   Button,
   Image,
-  BlockHeader,
-} from '../components';
+  BlockHeader
+} from "../components";
+import { companyInfo } from "../constants/companyInfo";
 
 const applyVisaSteps = [
   {
-    image: 'submit-application',
-    title: '1. Submit your application',
+    image: "submit-application",
+    title: "1. Submit your application",
     content:
-      'Fill in the secured online application online. You are required to enter the precise personal information which appears on your passport.',
+      "Fill in the secured online application online. You are required to enter the precise personal information which appears on your passport."
   },
   {
-    image: 'pay-service-fee',
-    title: '2. Pay for service fee',
+    image: "pay-service-fee",
+    title: "2. Pay for service fee",
     content:
-      'You can make payment with your Credit/ Debit Card via OnePay/PayPal or pay via Western Union',
+      "You can make payment with your Credit/ Debit Card via OnePay/PayPal or pay via Western Union"
   },
   {
-    image: 'get-approval-letter',
-    title: '3. Get your approval letter',
+    image: "get-approval-letter",
+    title: "3. Get your approval letter",
     content:
-      'Check your email for your visa approval letter (attached with entry-and- exit form).\n' +
-      'Print the documents out and fill in the entry-and- exit form.\n' +
-      'Prepare 2 passport sized photos (4x6cm) and stamping fee which is $25 for single entry or $50 for multiple entry visa',
-  },
+      "Check your email for your visa approval letter (attached with entry-and- exit form).\n" +
+      "Print the documents out and fill in the entry-and- exit form.\n" +
+      "Prepare 2 passport sized photos (4x6cm) and stamping fee which is $25 for single entry or $50 for multiple entry visa"
+  }
 ];
 const whyChooseUs = [
   {
-    image: 'directions',
-    title: 'Faster, cheaper and simpler',
+    image: "directions",
+    title: "Faster, cheaper and simpler",
     content:
-      'Save your time (it costs you less than 3 minutes to fill in the online form)',
+      "Save your time (it costs you less than 3 minutes to fill in the online form)"
   },
   {
-    image: 'lock',
-    title: 'Prompt response, strictly confidential information',
+    image: "lock",
+    title: "Prompt response, strictly confidential information",
     content:
-      'You will get responses within 5 minutes when contacting evisa-vn.com Your information is kept confidentially',
+      "You will get responses within 5 minutes when contacting evisa-vn.com Your information is kept confidentially"
   },
   {
-    image: 'quality',
-    title: 'Quality and reliability',
+    image: "quality",
+    title: "Quality and reliability",
     content:
-      'Evisa-vn.com is trusted by clients from all over the world. We guarantee to return all your fee in case your application is rejected.',
+      "Evisa-vn.com is trusted by clients from all over the world. We guarantee to return all your fee in case your application is rejected."
   },
   {
-    image: 'time',
-    title: 'Punctuality guarantee and full-fee return',
+    image: "time",
+    title: "Punctuality guarantee and full-fee return",
     content:
-      'We guarantee you will get your visa approval letter within 2 working days/or within 1 working day depending on the services chosen. You get all-your- fee return if your application is rejected and our services do not satisfy your demands.',
-  },
+      "We guarantee you will get your visa approval letter within 2 working days/or within 1 working day depending on the services chosen. You get all-your- fee return if your application is rejected and our services do not satisfy your demands."
+  }
 ];
 const extraServices = [
   {
-    image: 'airport-track',
-    title: 'Air port fast-track Service',
+    image: "airport-track",
+    title: "Air port fast-track Service"
   },
   {
-    image: 'car-pickup',
-    title: 'Car pick-up service',
+    image: "car-pickup",
+    title: "Car pick-up service"
   },
   {
-    image: 'visa-renewal',
-    title: 'Vietnam visa extension and renewal service',
+    image: "visa-renewal",
+    title: "Vietnam visa extension and renewal service"
   },
   {
-    image: 'hotel-booking',
-    title: 'Hotel booking service',
+    image: "hotel-booking",
+    title: "Hotel booking service"
   },
   {
-    image: 'domestic-flight',
-    title: 'Vietnam domestic flights',
+    image: "domestic-flight",
+    title: "Vietnam domestic flights"
   },
   {
-    image: 'travel-booking',
-    title: 'Tour and travel booking',
-  },
+    image: "travel-booking",
+    title: "Tour and travel booking"
+  }
 ];
 
 const typesOfVisa = [
-  { value: 'touristSingle', label: 'Tourist - single (1 month)' },
-  { value: 'touristMultiple', label: 'Tourist - multiple (1 month)' },
-  { value: 'businessSingle', label: 'Business - single (3 months)' },
-  { value: 'businessMultiple', label: 'Business - multiple (3 months)' },
-  { value: 'student', label: 'Student (on arrival)' },
-  { value: 'transit', label: 'Transit - single (5 days)' },
+  { value: "touristSingle", label: "Tourist - single (1 month)" },
+  { value: "touristMultiple", label: "Tourist - multiple (1 month)" },
+  { value: "businessSingle", label: "Business - single (3 months)" },
+  { value: "businessMultiple", label: "Business - multiple (3 months)" },
+  { value: "student", label: "Student (on arrival)" },
+  { value: "transit", label: "Transit - single (5 days)" }
 ];
 const processingTimeOptions = [
-  { value: 'normal', label: 'Normal (Guaranteed 2 working days)' },
-  { value: 'urgent', label: 'Urgent (Urgent (Guaranteed 4-8 working hours)' },
-  { value: 'emergency', label: 'Emergency (Guaranteed 1 working hour)' },
-  { value: 'overtime', label: 'Overtime' },
-  { value: 'holidy', label: 'Holiday' },
+  { value: "normal", label: "Normal (Guaranteed 2 working days)" },
+  { value: "urgent", label: "Urgent (Urgent (Guaranteed 4-8 working hours)" },
+  { value: "emergency", label: "Emergency (Guaranteed 1 working hour)" },
+  { value: "overtime", label: "Overtime" },
+  { value: "holidy", label: "Holiday" }
 ];
 const purposeOptions = [
-  { value: 'tourism', label: 'Tourism' },
-  { value: 'work', label: 'Work' },
+  { value: "tourism", label: "Tourism" },
+  { value: "work", label: "Work" }
 ];
 
 const bookingOnlineReasons = [
   {
-    title: 'Hassle-free',
-    content: '100% online procedure, no passport send off',
+    title: "Hassle-free",
+    content: "100% online procedure, no passport send off"
   },
   {
-    title: 'Convenience',
-    content: 'Applicable for all air-travellers to Vietnam',
+    title: "Convenience",
+    content: "Applicable for all air-travellers to Vietnam"
   },
   {
-    title: 'Faster',
-    content: 'Maximum 48 hours processing time',
+    title: "Faster",
+    content: "Maximum 48 hours processing time"
   },
   {
-    title: 'Cheaper',
-    content: 'Low service fee, no hidden charge',
+    title: "Cheaper",
+    content: "Low service fee, no hidden charge"
   },
   {
-    title: 'More accessible',
-    content: 'Best choice for those living far from Embassies',
+    title: "More accessible",
+    content: "Best choice for those living far from Embassies"
   },
   {
-    title: 'Safe & Sercure',
-    content: 'Our website is secured by 256 bit SSL encryption and SiteLock.',
-  },
+    title: "Safe & Sercure",
+    content: "Our website is secured by 256 bit SSL encryption and SiteLock."
+  }
 ];
 const visaKnowledge = [
   {
-    title: 'Vietnam Visa Tips',
-    content: 'Guide to apply and get Visa to Vietnam.',
+    title: "Vietnam Visa Tips",
+    content: "Guide to apply and get Visa to Vietnam."
   },
   {
-    title: 'Vietnam-visa-application',
-    content: 'Useful informations about Vietnam Visa.',
+    title: "Vietnam-visa-application",
+    content: "Useful informations about Vietnam Visa."
   },
   {
-    title: 'Apply and Get Visa to Vietnam for foreigners',
-    content: 'Necessary info for tourist or business to get Vietam Visa.',
+    title: "Apply and Get Visa to Vietnam for foreigners",
+    content: "Necessary info for tourist or business to get Vietam Visa."
   },
   {
-    title: 'VietNam Visa On Arrival',
+    title: "VietNam Visa On Arrival",
     content:
-      'Most likely the legally easiest way to obtain your visa to Vietnam.',
+      "Most likely the legally easiest way to obtain your visa to Vietnam."
   },
   {
-    title: 'Urgent VietNam Visa',
+    title: "Urgent VietNam Visa",
     content:
-      'Booking visa on Holidays or Weekends or different reasons for everyone.',
-  },
+      "Booking visa on Holidays or Weekends or different reasons for everyone."
+  }
 ];
 const applyWithConfidence = [
-  'Safe and Secure',
-  'Good Quality & Reliability',
-  'Prompt Responses',
-  'Competitive Prices ($8)',
-  'Save your time and money',
-  '2 working days',
-  'Money back guarantee for declined applications',
+  "Safe and Secure",
+  "Good Quality & Reliability",
+  "Prompt Responses",
+  "Competitive Prices ($8)",
+  "Save your time and money",
+  "2 working days",
+  "Money back guarantee for declined applications"
 ];
 
 type Props = {};
@@ -179,11 +180,11 @@ export default class Home extends React.Component<Props, State> {
     return (
       <Layout
         style={{
-          backgroundImage: 'url(/static/images/form-background.png)',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
+          backgroundImage: "url(/static/images/form-background.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center",
+          backgroundSize: "cover"
         }}
       >
         {/* Form */}
@@ -227,11 +228,11 @@ export default class Home extends React.Component<Props, State> {
           <Flexbox column>
             <Flexbox paddingBottom={6}>
               <Text size="xl" bold color="visaRed" textAlign="center">
-                Welcome evisa-vn.com
+                Welcome to evisa-vn.com
               </Text>
             </Flexbox>
             <Text bold textAlign="center" color="white">
-              It’s our honor to serve you at{' '}
+              It’s our honor to serve you at{" "}
               <Text bold fontStyle="italic" color="visaBlue">
                 evisa-vn.com
               </Text>
@@ -251,16 +252,20 @@ export default class Home extends React.Component<Props, State> {
               <br />
               <Text bold color="white">
                 Hotline:
-              </Text>{' '}
+              </Text>{" "}
               <Text bold color="white">
-                (+84).124.456.789
+                <Anchor href={`tel:${companyInfo.phone}`}>
+                  {companyInfo.phoneString}
+                </Anchor>
               </Text>
               <br />
               <Text bold color="white">
                 Email:
-              </Text>{' '}
+              </Text>{" "}
               <Text bold color="white">
-                sales@evisa-vn.com | support@evisa-vn.com
+                <Anchor href={`mailto:${companyInfo.email}`}>
+                  {companyInfo.email}
+                </Anchor>
               </Text>
             </Text>
             <Button solid marginTop={8}>
@@ -322,7 +327,7 @@ export default class Home extends React.Component<Props, State> {
                 <Text color="grey">
                   <Text bold color="visaBlue">
                     Visa service fee
-                  </Text>{' '}
+                  </Text>{" "}
                   Applicants have to pay for the visa processing conducting by
                   evisa-vn.com to get the visa approval letter according to the
                   service chosen.
@@ -332,7 +337,7 @@ export default class Home extends React.Component<Props, State> {
                 <Text color="grey">
                   <Text bold color="visaRed">
                     Stamping fee
-                  </Text>{' '}
+                  </Text>{" "}
                   Applicants must pay in cash (in VND or USD) at the landing
                   visa counter on arrival. The fee is ruled by Immigration
                   Department and publicly announces on governmental websites.
@@ -343,10 +348,10 @@ export default class Home extends React.Component<Props, State> {
             <div style={{ flex: 1 }}>
               <div
                 style={{
-                  position: 'relative',
+                  position: "relative",
                   paddingTop: 0,
-                  paddingBottom: '56.25%',
-                  height: 0,
+                  paddingBottom: "56.25%",
+                  height: 0
                 }}
               >
                 <iframe
@@ -357,11 +362,11 @@ export default class Home extends React.Component<Props, State> {
                   allowFullScreen
                   style={{
                     zIndex: 1,
-                    position: 'absolute',
+                    position: "absolute",
                     top: 0,
                     left: 0,
-                    width: '100%',
-                    height: '100%',
+                    width: "100%",
+                    height: "100%"
                   }}
                 />
               </div>
@@ -414,7 +419,7 @@ export default class Home extends React.Component<Props, State> {
                           <Text color="grey">{reason.content}</Text>
                         </Flexbox>
                       </Flexbox>
-                    ),
+                    )
                 )}
               </Flexbox>
 
@@ -450,7 +455,7 @@ export default class Home extends React.Component<Props, State> {
                           <Text color="grey">{reason.content}</Text>
                         </Flexbox>
                       </Flexbox>
-                    ),
+                    )
                 )}
               </Flexbox>
             </Flexbox>
@@ -477,7 +482,7 @@ export default class Home extends React.Component<Props, State> {
                         {service.title}
                       </Text>
                     </Flexbox>
-                  ),
+                  )
               )}
             </Flexbox>
             <Flexbox width="100%" responsiveLayout>
@@ -496,7 +501,7 @@ export default class Home extends React.Component<Props, State> {
                         {service.title}
                       </Text>
                     </Flexbox>
-                  ),
+                  )
               )}
             </Flexbox>
           </Flexbox>

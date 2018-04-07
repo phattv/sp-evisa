@@ -3,6 +3,7 @@
 import React from "react";
 // custom
 import {
+  Anchor,
   BlockHeader,
   PageHeader,
   Content,
@@ -11,6 +12,7 @@ import {
   Layout,
   Text
 } from "../components";
+import { companyInfo } from '../constants/companyInfo';
 
 class AboutUs extends React.Component {
   componentDidMount() {
@@ -80,13 +82,17 @@ class AboutUs extends React.Component {
                   <Text bold color="visaBlue">
                     Hotline:
                   </Text>{" "}
-                  (+84) 092 022 762
+                  <Anchor href={`tel:${companyInfo.phone}`}>
+                    {companyInfo.phoneString}
+                  </Anchor>
                 </Text>
                 <Text p>
                   <Text bold color="visaBlue">
                     Email:
                   </Text>{" "}
-                  contact@evisa-vn.com
+                  <Anchor href={`mailto:${companyInfo.email}`}>
+                    {companyInfo.email}
+                  </Anchor>
                 </Text>
               </Flexbox>
             </Flexbox>

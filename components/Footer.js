@@ -1,5 +1,6 @@
 // @flow
 import { Anchor, Flexbox, Text, Image } from "../components/ui";
+import { companyInfo } from "../constants/companyInfo";
 const currentYear = new Date().getFullYear();
 
 export default class Footer extends React.Component<null> {
@@ -149,10 +150,13 @@ export default class Footer extends React.Component<null> {
               />
               <Flexbox column alignItems="flex-start">
                 <Text color="white" paddingBottom={1}>
-                  Phone: +84.946.583.583
+                  Phone:{" "}
+                  <Anchor href={`tel:${companyInfo.phone}`}>
+                    {companyInfo.phoneString}
+                  </Anchor>
                 </Text>
                 <Text color="white" paddingBottom={1}>
-                  Office: 74 Nguyen Khoai Street, HCMC
+                  {companyInfo.address}
                 </Text>
                 <Flexbox column alignItems="flex-start">
                   <Text color="white" paddingBottom={1}>
@@ -163,11 +167,10 @@ export default class Footer extends React.Component<null> {
                   </Text>
                 </Flexbox>
                 <Text color="white" paddingBottom={1}>
-                  Email:&nbsp;&nbsp;<Anchor href="mailto:sales@evisa-vn.com">
-                    sales@evisa-vn.com
-                  </Anchor>
-                  &nbsp;/&nbsp;<Anchor href="support@evisa-vn.com">
-                    support@evisa-vn.com
+                  Email:&nbsp;&nbsp;<Anchor
+                    href={`mailto:${companyInfo.email}`}
+                  >
+                    {companyInfo.email}
                   </Anchor>
                 </Text>
               </Flexbox>

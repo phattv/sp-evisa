@@ -1,71 +1,72 @@
 // @flow
 // Vendor
-import * as React from 'react';
-import Media from 'react-media';
-import Router from 'next/router'
+import * as React from "react";
+import Media from "react-media";
+import Router from "next/router";
 // Custom
-import { Anchor, Flexbox, Image, Text } from '../components/ui';
-import { colors, screenSizes } from '../constants/ui';
+import { Anchor, Flexbox, Image, Text } from "../components/ui";
+import { colors, screenSizes } from "../constants/ui";
+import { companyInfo } from "../constants/companyInfo"
 
 const headerHeight = 25;
-const blockId = 'header';
+const blockId = "header";
 const styleHtml = `<style>#${blockId} a.active {color: ${
   colors.visaRed
 }}</style>`;
 const menus = [
   {
-    text: 'HOME',
-    url: '/',
+    text: "HOME",
+    url: "/"
   },
   {
-    text: 'APPLY VISA ONLINE',
-    url: '/apply',
+    text: "APPLY VISA ONLINE",
+    url: "/apply"
   },
   {
-    text: 'VISA FEES',
-    url: '/fees',
+    text: "VISA FEES",
+    url: "/fees"
   },
   {
-    text: 'HOW TO APPLY VISA',
-    url: '/how',
+    text: "HOW TO APPLY VISA",
+    url: "/how"
   },
   {
-    text: 'EXTRA SERVICES',
-    url: '/services',
+    text: "EXTRA SERVICES",
+    url: "/services"
   },
   {
-    text: 'INFORMATION',
-    url: '/news',
+    text: "INFORMATION",
+    url: "/news"
   },
   {
-    text: 'FEEDBACK',
-    url: '/feedback',
-  },
+    text: "FEEDBACK",
+    url: "/feedback"
+  }
 ];
 
 type HeaderState = {
-  isMenuShowed?: boolean,
+  isMenuShowed?: boolean
 };
 export default class Header extends React.PureComponent<null, HeaderState> {
   state = {
-    isMenuShowed: false,
+    isMenuShowed: false
   };
 
   updateIsMenuShowed = () => {
     this.setState({
-      isMenuShowed: !this.state.isMenuShowed,
+      isMenuShowed: !this.state.isMenuShowed
     });
   };
 
   hideMenu = () => {
     this.setState({
-      isMenuShowed: false,
+      isMenuShowed: false
     });
   };
 
   navigateToUrl = (url: string) => {
-    Router.push(url).then(() => window.scrollTo(0, 0))
-  }
+    Router.push(url).then(() => window.scrollTo(0, 0));
+  };
 
   render() {
     const { isMenuShowed } = this.state;
@@ -74,7 +75,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
       <Flexbox id={blockId} style={{ zIndex: 101 }}>
         <Text
           dangerouslySetInnerHTML={{
-            __html: styleHtml,
+            __html: styleHtml
           }}
         />
         <Flexbox
@@ -106,12 +107,20 @@ export default class Header extends React.PureComponent<null, HeaderState> {
               </Anchor>
             </Flexbox>
             <Flexbox>
-              <Image
-                src="/static/images/hotline.png"
-                alt="hotline"
-                maxHeight={10}
-                width="auto"
-              />
+              <Anchor href={`tel:${companyInfo.phone}`}>
+                <Flexbox>
+                  <i
+                    className="fa fa-3x fa-fw fa-phone"
+                    style={{
+                      color: colors.visaRed
+                    }}
+                  />
+                  <Flexbox column alignItems="flex-start">
+                    <Text color="visaRed">HOTLINE</Text>
+                    <Text size="s">{companyInfo.phoneString}</Text>
+                  </Flexbox>
+                </Flexbox>
+              </Anchor>
               <Media query={`(max-width: ${screenSizes.tablet}px)`}>
                 <Flexbox onClick={this.updateIsMenuShowed} paddingLeft={4}>
                   <Image src="/static/images/line-hamburger.svg" alt="Menu" />

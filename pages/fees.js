@@ -128,9 +128,9 @@ class VisaFees extends React.Component<Props, State> {
 
                   <Flexbox responsiveLayout>
                     {!isEmpty(touristFees) && (
-                      <Flexbox column paddingVertical={5}>
+                      <Flexbox column paddingVertical={5} paddingHorizontal={5}>
                         <BlockHeader
-                          header="VIETNAM TOURIST FEES"
+                          header="TOURIST FEES"
                           smallPadding
                         />
                         <table>
@@ -203,9 +203,9 @@ class VisaFees extends React.Component<Props, State> {
                     )}
 
                     {!isEmpty(businessFees) && (
-                      <Flexbox column paddingVertical={5}>
+                      <Flexbox column paddingVertical={5} paddingHorizontal={5}>
                         <BlockHeader
-                          header="VIETNAM BUSINESS FEES"
+                          header="BUSINESS FEES"
                           smallPadding
                         />
                         <table>

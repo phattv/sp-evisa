@@ -12,6 +12,7 @@ import {
   Layout,
   Text
 } from "../components";
+import { companyInfo } from "../constants/companyInfo";
 
 type Props = {};
 type State = {};
@@ -62,22 +63,21 @@ class Contact extends React.Component<Props, State> {
                   aria-hidden="true"
                 />
                 <Text bold paddingLeft={2}>
-                  7th Floor, Kim Nguyên Building, 74 Nguyễn Khoái street,
-                  District 4, Ho Chi Minh City, Vietnam
+                  {companyInfo.address}
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
                 <i className="fa fa-fw fa-2x fa-phone" aria-hidden="true" />
-                <Text bold paddingLeft={2}>
-                  +84. 0932 022 762
-                </Text>
+                <Anchor href={`tel:${companyInfo.phone}`}>
+                  {companyInfo.phoneString}
+                </Anchor>
               </Flexbox>
               <Flexbox paddingBottom={3}>
                 <i className="fa fa-fw fa-2x fa-envelope" aria-hidden="true" />
                 <Text bold paddingLeft={2}>
-                  <Anchor href="mailto:contact@evisa-vn.com">
-                    contact@evisa-vn.com
-                  </Anchor>{" "}
+                  <Anchor href={`mailto:${companyInfo.email}`}>
+                    {companyInfo.email}
+                  </Anchor>
                 </Text>
               </Flexbox>
               <Flexbox paddingBottom={3}>
