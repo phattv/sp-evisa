@@ -163,7 +163,7 @@ const applyWithConfidence = [
   "Safe and Secure",
   "Good Quality & Reliability",
   "Prompt Responses",
-  "Competitive Prices ($8)",
+  "Competitive Prices ($11)",
   "Save your time and money",
   "2 working days",
   "Money back guarantee for declined applications"
@@ -191,7 +191,6 @@ export default class Home extends React.Component<Props, State> {
         <Content>
           <Flexbox width="100%" responsiveLayout>
             <Flexbox flex={1} />
-            <Flexbox flex={1} paddingVertical={4} />
             <Flexbox
               flex={1}
               border
@@ -220,6 +219,7 @@ export default class Home extends React.Component<Props, State> {
                 </Anchor>
               </Flexbox>
             </Flexbox>
+            <Flexbox flex={1} />
           </Flexbox>
         </Content>
 
@@ -227,7 +227,7 @@ export default class Home extends React.Component<Props, State> {
         <Content>
           <Flexbox column>
             <Flexbox paddingBottom={6}>
-              <Text size="xl" bold color="visaRed" textAlign="center">
+              <Text size="xl" bold color="visaBlue" textAlign="center">
                 Welcome to evisa-vn.com
               </Text>
             </Flexbox>

@@ -116,11 +116,17 @@ export default class Footer extends React.Component<null> {
                     Privacy Policy
                   </Anchor>
                 </Text>
-                <Text paddingBottom={1}>
-                  <Anchor href="/partners" color="white">
-                    Local Partners
-                  </Anchor>
-                </Text>
+                {/*<Text paddingBottom={1}>*/}
+                  {/*<Anchor href="/partners" color="white">*/}
+                    {/*Local Partners*/}
+                  {/*</Anchor>*/}
+                {/*</Text>*/}
+                <Image
+                  paddingVertical={2}
+                  maxWidth={50}
+                  src="/static/images/payment-logos.png"
+                  alt="payment logos"
+                />
               </Flexbox>
             </Flexbox>
             {/*Contact*/}
@@ -142,16 +148,10 @@ export default class Footer extends React.Component<null> {
               >
                 Contact
               </Text>
-              <Image
-                paddingBottom={5}
-                maxWidth={50}
-                src="/static/images/payment-logos.png"
-                alt="payment logos"
-              />
               <Flexbox column alignItems="flex-start">
                 <Text color="white" paddingBottom={1}>
                   Phone:{" "}
-                  <Anchor href={`tel:${companyInfo.phone}`}>
+                  <Anchor href={`tel:${companyInfo.phone}`} color="visaRed">
                     {companyInfo.phoneString}
                   </Anchor>
                 </Text>
@@ -169,6 +169,7 @@ export default class Footer extends React.Component<null> {
                 <Text color="white" paddingBottom={1}>
                   Email:&nbsp;&nbsp;<Anchor
                     href={`mailto:${companyInfo.email}`}
+                    color="visaRed"
                   >
                     {companyInfo.email}
                   </Anchor>

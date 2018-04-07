@@ -1,11 +1,11 @@
 // @flow
 // vendor
-import * as React from 'react';
-import Select from 'react-select';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
-import { connect } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
+import * as React from "react";
+import Select from "react-select";
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
+import { connect } from "react-redux";
+import withRedux from "next-redux-wrapper";
 // custom
 import {
   BlockHeader,
@@ -14,40 +14,40 @@ import {
   Flexbox,
   Image,
   Layout,
-  Text,
-} from '../components';
-import countryOptions from '../static/countries.json';
-import { updateFees } from '../actions';
-import { initialStore } from '../store';
-import { colors } from '../constants/ui';
-import { getFeesByCountryId } from '../utils/apiClient';
+  Text
+} from "../components";
+import countryOptions from "../static/countries.json";
+import { updateFees } from "../actions";
+import { initialStore } from "../store";
+import { colors } from "../constants/ui";
+import { getFeesByCountryId } from "../utils/apiClient";
 
 type Props = {
   fees: Array<Object>,
-  updateFees: (Array<Object>) => void,
+  updateFees: (Array<Object>) => void
 };
 type State = {
   countryId: number,
   touristFees: Object,
-  businessFees: Object,
+  businessFees: Object
 };
 class VisaFees extends React.Component<Props, State> {
   state = {
     countryId: 0,
     touristFees: {},
-    businessFees: {},
+    businessFees: {}
   };
 
   componentDidMount() {
-    window.Intercom('update');
+    window.Intercom("update");
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.fees !== nextProps.fees) {
-      get(nextProps, 'fees', []).forEach(fees => {
-        if (fees.type === 'tourist') {
+      get(nextProps, "fees", []).forEach(fees => {
+        if (fees.type === "tourist") {
           this.updateTouristFees(fees);
-        } else if (fees.type === 'business') {
+        } else if (fees.type === "business") {
           this.updateBusinessFees(fees);
         }
       });
@@ -59,9 +59,9 @@ class VisaFees extends React.Component<Props, State> {
       {
         countryId: country.value,
         touristFees: {},
-        businessFees: {},
+        businessFees: {}
       },
-      () => getFeesByCountryId({ countryId: country.value }, this.updateFees),
+      () => getFeesByCountryId({ countryId: country.value }, this.updateFees)
     );
   };
 
@@ -71,13 +71,13 @@ class VisaFees extends React.Component<Props, State> {
 
   updateTouristFees = (touristFees: Object) => {
     this.setState({
-      touristFees,
+      touristFees
     });
   };
 
   updateBusinessFees = (businessFees: Object) => {
     this.setState({
-      businessFees,
+      businessFees
     });
   };
 
@@ -118,27 +118,29 @@ class VisaFees extends React.Component<Props, State> {
                   </Flexbox>
                 </Flexbox>
 
-                <Flexbox width="100%" column>
-                  <Select
-                    value={countryId}
-                    placeholder="Select country"
-                    onChange={this.updateCountryId}
-                    options={countryOptions}
-                  />
+                <Flexbox width="100%" column paddingTop={5}>
+                  <Text p size="l">
+                    Please select your coutry to see the price in detail
+                  </Text>
+                  <Flexbox width="100%" maxWidth={100}>
+                    <Select
+                      value={countryId}
+                      placeholder="Select country"
+                      onChange={this.updateCountryId}
+                      options={countryOptions}
+                    />
+                  </Flexbox>
 
                   <Flexbox responsiveLayout>
                     {!isEmpty(touristFees) && (
                       <Flexbox column paddingVertical={5} paddingHorizontal={5}>
-                        <BlockHeader
-                          header="TOURIST FEES"
-                          smallPadding
-                        />
+                        <BlockHeader header="TOURIST FEES" smallPadding />
                         <table>
                           <thead
                             style={{
                               backgroundColor: colors.visaRed,
                               color: colors.white,
-                              fontWeight: 'bold',
+                              fontWeight: "bold"
                             }}
                           >
                             <tr>
@@ -152,7 +154,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {touristFees.one_month_single
                                   ? `${touristFees.one_month_single} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -160,7 +162,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {touristFees.one_month_multiple
                                   ? `${touristFees.one_month_multiple} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -168,7 +170,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {touristFees.three_month_single
                                   ? `${touristFees.three_month_single} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -178,7 +180,7 @@ class VisaFees extends React.Component<Props, State> {
                                   ? `${
                                       touristFees.three_month_multiple
                                     } USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -186,7 +188,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {touristFees.six_month_multiple
                                   ? `${touristFees.six_month_multiple} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -194,7 +196,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {touristFees.one_year_multiple
                                   ? `${touristFees.one_year_multiple} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                           </tbody>
@@ -204,16 +206,13 @@ class VisaFees extends React.Component<Props, State> {
 
                     {!isEmpty(businessFees) && (
                       <Flexbox column paddingVertical={5} paddingHorizontal={5}>
-                        <BlockHeader
-                          header="BUSINESS FEES"
-                          smallPadding
-                        />
+                        <BlockHeader header="BUSINESS FEES" smallPadding />
                         <table>
                           <thead
                             style={{
                               backgroundColor: colors.visaRed,
                               color: colors.white,
-                              fontWeight: 'bold',
+                              fontWeight: "bold"
                             }}
                           >
                             <tr>
@@ -227,7 +226,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {businessFees.one_month_single
                                   ? `${businessFees.one_month_single} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -235,7 +234,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {businessFees.one_month_multiple
                                   ? `${businessFees.one_month_multiple} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -243,7 +242,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {businessFees.three_month_single
                                   ? `${businessFees.three_month_single} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -253,7 +252,7 @@ class VisaFees extends React.Component<Props, State> {
                                   ? `${
                                       businessFees.three_month_multiple
                                     } USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -261,7 +260,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {businessFees.six_month_multiple
                                   ? `${businessFees.six_month_multiple} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                             <tr>
@@ -269,7 +268,7 @@ class VisaFees extends React.Component<Props, State> {
                               <td>
                                 {businessFees.one_year_multiple
                                   ? `${businessFees.one_year_multiple} USD/pax`
-                                  : 'N/A'}
+                                  : "N/A"}
                               </td>
                             </tr>
                           </tbody>
@@ -277,6 +276,13 @@ class VisaFees extends React.Component<Props, State> {
                       </Flexbox>
                     )}
                   </Flexbox>
+
+                  {!isEmpty(touristFees) &&
+                    !isEmpty(businessFees) && (
+                      <Text fontStyle="italic">
+                        Note: Stamping is excluded from the fee tables above
+                      </Text>
+                    )}
                 </Flexbox>
               </Flexbox>
             </Flexbox>
@@ -291,12 +297,12 @@ const VisaFeesWithRedux = connect(null, null)(VisaFees);
 
 const mapStateToProps = store => {
   return {
-    fees: store.fees,
+    fees: store.fees
   };
 };
 const mapDispatchToProps = {
-  updateFees,
+  updateFees
 };
 export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
-  VisaFeesWithRedux,
+  VisaFeesWithRedux
 );
