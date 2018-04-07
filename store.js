@@ -5,7 +5,7 @@ import type { Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // custom
-import { reducer } from './reducers';
+import { rootReducer } from './reducers';
 
 /**
  * +---------------+
@@ -35,7 +35,7 @@ const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware));
  * +-------+
  */
 const initialStore = (initialState: Store = initialState) => {
-  return createStore(reducer, initialState, composedEnhancers);
+  return createStore(rootReducer, initialState, composedEnhancers);
 };
 
 /**

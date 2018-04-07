@@ -10,7 +10,7 @@ import { initialState } from './store';
  * | REDUCERS |
  * +----------+
  */
-const reducer = (state: Store = initialState, action: Object) => {
+const rootReducer = (state: Store = initialState, action: Object) => {
   switch (action.type) {
     case actionTypes.UPDATE_STEP_ONE: {
       return Object.assign({}, state, {
@@ -48,4 +48,4 @@ const reducer = (state: Store = initialState, action: Object) => {
  * | EXPORTS |
  * +---------+
  */
-export { reducer };
+export { rootReducer };
