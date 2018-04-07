@@ -116,8 +116,8 @@ export default class Header extends React.PureComponent<null, HeaderState> {
                     }}
                   />
                   <Flexbox column alignItems="flex-start">
-                    <Text color="visaRed">HOTLINE</Text>
-                    <Text size="s">{companyInfo.phoneString}</Text>
+                    <Text color="visaRed" bold>HOTLINE</Text>
+                    <Text size="s" bold>{companyInfo.phoneString}</Text>
                   </Flexbox>
                 </Flexbox>
               </Anchor>
