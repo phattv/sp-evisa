@@ -12,7 +12,7 @@ import withRedux from 'next-redux-wrapper';
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import countryOptions from '../static/countries.json';
-import { initialStore } from '../store';
+import { store } from '../store';
 import { updateStepOne, updateFees } from '../actions';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { getFeesByCountryId } from '../utils/apiClient';
@@ -543,6 +543,6 @@ const mapDispatchToProps = {
   updateStepOne,
   updateFees,
 };
-export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
+export default withRedux(store, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepOneWithRedux,
 );

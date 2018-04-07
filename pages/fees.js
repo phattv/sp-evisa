@@ -18,7 +18,7 @@ import {
 } from "../components";
 import countryOptions from "../static/countries.json";
 import { updateFees } from "../actions";
-import { initialStore } from "../store";
+import { store } from "../store";
 import { colors } from "../constants/ui";
 import { getFeesByCountryId } from "../utils/apiClient";
 
@@ -303,6 +303,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   updateFees
 };
-export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
+export default withRedux(store, mapStateToProps, mapDispatchToProps)(
   VisaFeesWithRedux
 );

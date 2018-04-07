@@ -34,7 +34,7 @@ const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware));
  * | STORE |
  * +-------+
  */
-const initialStore = (initialState: Store = initialState) => {
+const store = (initialState: Store = initialState) => {
   return createStore(rootReducer, initialState, composedEnhancers);
 };
 
@@ -43,4 +43,4 @@ const initialStore = (initialState: Store = initialState) => {
  * | EXPORTS |
  * +---------+
  */
-export { initialState, initialStore };
+export { initialState, store };

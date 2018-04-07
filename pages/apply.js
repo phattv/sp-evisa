@@ -11,7 +11,7 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
-import { initialStore } from '../store';
+import { store } from '../store';
 
 type Props = {};
 type State = {
@@ -133,6 +133,6 @@ const ApplyVisaOnlineWithRedux = connect(null, null)(ApplyVisaOnline);
 
 const mapStateToProps = null;
 const mapDispatchToProps = {};
-export default withRedux(initialStore, mapStateToProps, mapDispatchToProps)(
+export default withRedux(store, mapStateToProps, mapDispatchToProps)(
   ApplyVisaOnlineWithRedux,
 );
