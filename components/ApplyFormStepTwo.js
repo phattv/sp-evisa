@@ -145,8 +145,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.stepOne,
-    stepTwo: store.stepTwo,
+    stepOne: store.form.stepOne,
+    stepTwo: store.form.stepTwo,
   };
 };
 const mapDispatchToProps = {

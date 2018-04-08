@@ -312,8 +312,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.stepOne,
-    fees: store.fees
+    stepOne: store.form.stepOne,
+    fees: store.form.fees
   };
 };
 const mapDispatchToProps = {};
