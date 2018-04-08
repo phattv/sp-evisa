@@ -10,7 +10,7 @@ import { Flexbox, Text } from '../components';
 import countryOptions from '../static/countries.json';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { updateStepTwo } from '../actions';
-import { store } from '../store';
+import { configureStore } from '../store';
 
 const genderOptions = [
   { value: 'male', label: 'Male' },
@@ -290,6 +290,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   updateStepTwo,
 };
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwoForm,
 );

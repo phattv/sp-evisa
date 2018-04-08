@@ -9,7 +9,7 @@ import isEmpty from "lodash/isEmpty";
 // custom
 import { Flexbox, Text } from "../components";
 import { borderRadius, colors, spacingValues } from "../constants/ui";
-import { store } from "../store";
+import { configureStore } from "../store";
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -317,6 +317,6 @@ const mapStateToProps = store => {
   };
 };
 const mapDispatchToProps = {};
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm
 );

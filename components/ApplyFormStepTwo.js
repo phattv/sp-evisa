@@ -6,7 +6,7 @@ import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 // custom
 import { Button, Flexbox, Text } from '../components';
-import { store } from '../store';
+import { configureStore } from '../store';
 import { spacingValues } from '../constants/ui';
 import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
@@ -152,6 +152,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   resetStepTwo,
 };
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepTwo,
 );
