@@ -3,7 +3,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { Div, Input, Label } from "glamorous";
-import { connect } from "react-redux";
 import withRedux from "next-redux-wrapper";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
@@ -311,8 +310,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   }
 }
 
-const ApplyFormReviewFormWithRedux = connect(null, null)(ApplyFormReviewForm);
-
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
@@ -321,5 +318,5 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = {};
 export default withRedux(store, mapStateToProps, mapDispatchToProps)(
-  ApplyFormReviewFormWithRedux
+  ApplyFormReviewForm
 );

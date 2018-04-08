@@ -1,7 +1,6 @@
 // @flow
 // vendor
 import * as React from 'react';
-import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 import { Div, Input, Label } from 'glamorous';
@@ -383,8 +382,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   }
 }
 
-const ApplyFormStepThreeWithRedux = connect(null, null)(ApplyFormStepThree);
-
 const mapStateToProps = store => {
   return {
     stepTwo: store.stepTwo,
@@ -395,5 +392,5 @@ const mapDispatchToProps = {
   updateStepThree,
 };
 export default withRedux(store, mapStateToProps, mapDispatchToProps)(
-  ApplyFormStepThreeWithRedux,
+  ApplyFormStepThree,
 );

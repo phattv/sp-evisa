@@ -2,7 +2,6 @@
 // vendor
 import * as React from 'react';
 import { Div } from 'glamorous';
-import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 // custom
@@ -144,8 +143,6 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   }
 }
 
-const ApplyFormStepTwoWithRedux = connect(null, null)(ApplyFormStepTwo);
-
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
@@ -156,5 +153,5 @@ const mapDispatchToProps = {
   resetStepTwo,
 };
 export default withRedux(store, mapStateToProps, mapDispatchToProps)(
-  ApplyFormStepTwoWithRedux,
+  ApplyFormStepTwo,
 );

@@ -2,7 +2,6 @@
 // vendor
 import * as React from 'react';
 import { Div } from 'glamorous';
-import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 // custom
@@ -30,11 +29,11 @@ class ApplyVisaOnline extends React.Component<Props, State> {
 
   finishForm = () => {
     // TODO: make API call to save order
-    console.log('xxx', 'form is finished')
+    console.log('xxx', 'form is finished');
   };
 
   componentDidMount() {
-    window.Intercom("update");
+    window.Intercom('update');
   }
 
   render() {
@@ -129,10 +128,8 @@ class CustomTab extends React.Component<CustomTabProps> {
   }
 }
 
-const ApplyVisaOnlineWithRedux = connect(null, null)(ApplyVisaOnline);
-
 const mapStateToProps = null;
 const mapDispatchToProps = {};
 export default withRedux(store, mapStateToProps, mapDispatchToProps)(
-  ApplyVisaOnlineWithRedux,
+  ApplyVisaOnline,
 );

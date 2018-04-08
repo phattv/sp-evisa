@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Div, Input } from 'glamorous';
 import Select from 'react-select';
 import get from 'lodash/get';
-import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 // custom
 import { Flexbox, Text } from '../components';
@@ -285,8 +284,6 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   }
 }
 
-const ApplyFormStepTwoWithRedux = connect(null, null)(ApplyFormStepTwoForm);
-
 const mapStateToProps = store => {
   return {};
 };
@@ -294,5 +291,5 @@ const mapDispatchToProps = {
   updateStepTwo,
 };
 export default withRedux(store, mapStateToProps, mapDispatchToProps)(
-  ApplyFormStepTwoWithRedux,
+  ApplyFormStepTwoForm,
 );

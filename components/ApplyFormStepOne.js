@@ -6,7 +6,6 @@ import { Form } from 'react-final-form';
 import { Input, Label } from 'glamorous';
 import ReactTooltip from 'react-tooltip';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import { connect } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 // custom
 import { Button, Flexbox, Text } from '../components';
@@ -532,8 +531,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   }
 }
 
-const ApplyFormStepOneWithRedux = connect(null, null)(ApplyFormStepOne);
-
 const mapStateToProps = store => {
   return {
     stepOne: store.stepOne,
@@ -544,5 +541,5 @@ const mapDispatchToProps = {
   updateFees,
 };
 export default withRedux(store, mapStateToProps, mapDispatchToProps)(
-  ApplyFormStepOneWithRedux,
+  ApplyFormStepOne,
 );
