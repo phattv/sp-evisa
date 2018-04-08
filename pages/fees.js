@@ -16,14 +16,16 @@ import {
   Text,
 } from '../components';
 import countryOptions from '../static/countries.json';
-import { updateFees } from '../actions';
-import { store } from '../store';
+import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
+import { configureStore } from '../redux/store';
 import { colors } from '../constants/ui';
 import { getFeesByCountryId } from '../utils/apiClient';
 
 type Props = {
+  countryId: number,
   fees: Array<Object>,
   updateFees: (Array<Object>) => void,
+  updateFeesSelectedCountry: number => void,
 };
 type State = {
   countryId: number,
@@ -39,10 +41,15 @@ class VisaFees extends React.Component<Props, State> {
 
   componentDidMount() {
     window.Intercom('update');
+    this.syncPropsToState(this.props, true);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.fees !== nextProps.fees) {
+    this.syncPropsToState(nextProps);
+  }
+
+  syncPropsToState = (nextProps: Props, isForced?: boolean) => {
+    if (isForced || this.props.fees !== nextProps.fees) {
       get(nextProps, 'fees', []).forEach(fees => {
         if (fees.type === 'tourist') {
           this.updateTouristFees(fees);
@@ -51,7 +58,13 @@ class VisaFees extends React.Component<Props, State> {
         }
       });
     }
-  }
+
+    if (isForced || this.props.countryId !== nextProps.countryId) {
+      this.setState({
+        countryId: nextProps.countryId,
+      });
+    }
+  };
 
   updateCountryId = (country: Object) => {
     this.setState(
@@ -60,7 +73,10 @@ class VisaFees extends React.Component<Props, State> {
         touristFees: {},
         businessFees: {},
       },
-      () => getFeesByCountryId({ countryId: country.value }, this.updateFees),
+      () => {
+        this.props.updateFeesSelectedCountry(country.value);
+        getFeesByCountryId({ countryId: country.value }, this.updateFees);
+      },
     );
   };
 
@@ -294,10 +310,14 @@ class VisaFees extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    fees: store.fees,
+    countryId: store.fees.countryId,
+    fees: store.fees.fees,
   };
 };
 const mapDispatchToProps = {
   updateFees,
+  updateFeesSelectedCountry,
 };
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(VisaFees);
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
+  VisaFees,
+);

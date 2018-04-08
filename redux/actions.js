@@ -7,11 +7,12 @@ import type { Dispatch } from 'redux';
  * +--------------+
  */
 const actionTypes = {
-  UPDATE_STEP_ONE: 'UPDATE_STEP_ONE',
-  RESET_STEP_TWO: 'RESET_STEP_TWO',
-  UPDATE_STEP_TWO: 'UPDATE_STEP_TWO',
-  UPDATE_STEP_THREE: 'UPDATE_STEP_THREE',
-  UPDATE_FEES: 'UPDATE_FEES',
+  UPDATE_STEP_ONE: 'FORM/UPDATE_STEP_ONE',
+  RESET_STEP_TWO: 'FORM/RESET_STEP_TWO',
+  UPDATE_STEP_TWO: 'FORM/UPDATE_STEP_TWO',
+  UPDATE_STEP_THREE: 'FORM/UPDATE_STEP_THREE',
+  UPDATE_FEES: 'FEES/UPDATE_FEES',
+  UPDATE_FEES_SELECTED_COUNTRY: 'FEES/UPDATE_FEES_SELECTED_COUNTRY',
 };
 
 /**
@@ -49,6 +50,12 @@ const updateFees = (params: Array<Object>) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
+const updateFeesSelectedCountry = (params: Object) => (dispatch: Dispatch) => {
+  return dispatch({
+    type: actionTypes.UPDATE_FEES_SELECTED_COUNTRY,
+    payload: params,
+  });
+};
 
 /**
  * +---------+
@@ -62,4 +69,5 @@ export {
   updateStepTwo,
   updateStepThree,
   updateFees,
+  updateFeesSelectedCountry,
 };

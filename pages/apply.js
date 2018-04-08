@@ -10,7 +10,7 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
-import { store } from '../store';
+import { configureStore } from '../redux/store';
 
 type Props = {};
 type State = {
@@ -130,6 +130,6 @@ class CustomTab extends React.Component<CustomTabProps> {
 
 const mapStateToProps = null;
 const mapDispatchToProps = {};
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyVisaOnline,
 );

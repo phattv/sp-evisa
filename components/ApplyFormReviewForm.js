@@ -9,7 +9,7 @@ import isEmpty from "lodash/isEmpty";
 // custom
 import { Flexbox, Text } from "../components";
 import { borderRadius, colors, spacingValues } from "../constants/ui";
-import { store } from "../store";
+import { configureStore } from "../redux/store";
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -312,11 +312,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.stepOne,
-    fees: store.fees
+    stepOne: store.form.stepOne,
+    fees: store.form.fees
   };
 };
 const mapDispatchToProps = {};
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm
 );

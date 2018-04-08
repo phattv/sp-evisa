@@ -7,12 +7,17 @@ import { Input, Label } from 'glamorous';
 import ReactTooltip from 'react-tooltip';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import withRedux from 'next-redux-wrapper';
+import get from 'lodash/get';
 // custom
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import countryOptions from '../static/countries.json';
-import { store } from '../store';
-import { updateStepOne, updateFees } from '../actions';
+import { configureStore } from '../redux/store';
+import {
+  updateStepOne,
+  updateFees,
+  updateFeesSelectedCountry
+} from '../redux/actions';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { getFeesByCountryId } from '../utils/apiClient';
 
@@ -52,13 +57,15 @@ const airportOptions = [
 ];
 
 type Props = {
+  countryId: number,
   onSubmit: () => void,
   stepOne: Object,
   updateStepOne: Object => void,
   updateFees: (Array<Object>) => void,
+  updateFeesSelectedCountry: number => void,
 };
 type State = {
-  country: string,
+  country: number | string,
   quantity: number | string,
   type: string,
   purpose: string,
@@ -117,11 +124,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         country: selectedOption.value,
       },
-      () =>
+      () => {
+        this.updateStepOneToStore();
+        this.props.updateFeesSelectedCountry(selectedOption.value)
         getFeesByCountryId(
           { countryId: selectedOption.value },
           this.updateFees,
-        ),
+        );
+      },
     );
   };
 
@@ -139,9 +149,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateType = (selectedOption: Object) =>
-    this.setState({
-      type: selectedOption ? (selectedOption ? selectedOption.value : '') : '',
-    });
+    this.setState(
+      {
+        type: selectedOption
+          ? selectedOption ? selectedOption.value : ''
+          : '',
+      },
+      () => this.updateStepOneToStore(),
+    );
 
   updateProcessingTime = (selectedOption: Object) =>
     this.setState(
@@ -238,8 +253,45 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    this.updateStepOneToStore();
+    this.syncPropsToState(this.props, true);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.stepOne !== nextProps.stepOne) {
+      this.syncPropsToState(nextProps);
+    }
+  }
+
+  syncPropsToState = (nextProps: Props, isForced?: boolean) => {
+    if (isForced || this.props.stepOne !== nextProps.stepOne) {
+      this.setState({
+        country: get(nextProps, 'stepOne.country', ''),
+        quantity: get(nextProps, 'stepOne.quantity', ''),
+        type: get(nextProps, 'stepOne.type', typeOptions[0].value),
+        purpose: get(nextProps, 'stepOne.purpose', purposeOptions[0].value),
+        processingTime: get(
+          nextProps,
+          'stepOne.processingTime',
+          processingTimeOptions[0].value,
+        ),
+        airport: get(nextProps, 'stepOne.airport', airportOptions[0].value),
+        arrivalDate: get(nextProps, 'stepOne.arrivalDate', ''),
+        departureDate: get(nextProps, 'stepOne.departureDate', ''),
+        extraServices: get(nextProps, 'stepOne.extraServices', {}),
+        shouldShowErrorMessage: get(
+          nextProps,
+          'stepOne.shouldShowErrorMessage',
+          false,
+        ),
+      });
+    }
+
+    if (isForced || this.props.countryId !== nextProps.countryId) {
+      this.setState({
+        country: nextProps.countryId,
+      });
+    }
+  };
 
   render() {
     const {
@@ -533,13 +585,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.stepOne,
+    countryId: get(store, 'fees.countryId', null),
+    stepOne: get(store, 'form.stepOne', {}),
   };
 };
 const mapDispatchToProps = {
   updateStepOne,
   updateFees,
+  updateFeesSelectedCountry,
 };
-export default withRedux(store, mapStateToProps, mapDispatchToProps)(
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepOne,
 );
