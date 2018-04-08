@@ -2,15 +2,26 @@
 // vendor
 import type { Store } from 'redux';
 // custom
-import { actionTypes } from './actions';
-import { initialState } from './store';
+import { actionTypes } from '../actions';
+
+/**
+ * +---------------+
+ * | INITIAL STATE |
+ * +---------------+
+ */
+const initialState = {
+  stepOne: {},
+  stepTwo: {},
+  stepThree: {},
+  fees: [],
+};
 
 /**
  * +----------+
  * | REDUCERS |
  * +----------+
  */
-const rootReducer = (state: Store = initialState, action: Object) => {
+const form = (state: Store = initialState, action: Object) => {
   switch (action.type) {
     case actionTypes.UPDATE_STEP_ONE: {
       return Object.assign({}, state, {
@@ -34,8 +45,8 @@ const rootReducer = (state: Store = initialState, action: Object) => {
     }
     case actionTypes.UPDATE_FEES: {
       return Object.assign({}, state, {
-        fees: action.payload
-      })
+        fees: action.payload,
+      });
     }
     default: {
       return state;
@@ -48,4 +59,4 @@ const rootReducer = (state: Store = initialState, action: Object) => {
  * | EXPORTS |
  * +---------+
  */
-export { rootReducer };
+export { form };

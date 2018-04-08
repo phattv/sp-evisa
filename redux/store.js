@@ -1,41 +1,36 @@
 // @flow
 // vendor
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import type { Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import localForage from 'localforage';
 // custom
-import { rootReducer } from './reducers';
-
-/**
- * +---------------+
- * | INITIAL STATE |
- * +---------------+
- */
-const initialState = {
-  stepOne: {},
-  stepTwo: {},
-  stepThree: {},
-  fees: [],
-};
+import { rootReducer } from './reducers/reducers';
 
 /**
  * +------------------------+
  * | MIDDLEWARE & ENHANCERS |
  * +------------------------+
  */
-// TODO: add enhancers for redux-persist
 const middleware = [];
 middleware.push(thunkMiddleware);
-const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware));
+const composedEnhancers = composeWithDevTools(
+  applyMiddleware(...middleware),
+  autoRehydrate(),
+);
 
 /**
  * +-------+
  * | STORE |
  * +-------+
  */
-const configureStore = (initialState: Store = initialState) => {
-  return createStore(rootReducer, initialState, composedEnhancers);
+const configureStore = (initialState: Store) => {
+  const store = createStore(rootReducer, initialState, composedEnhancers);
+  persistStore(store, { storage: localForage });
+
+  return store;
 };
 
 /**
@@ -43,4 +38,4 @@ const configureStore = (initialState: Store = initialState) => {
  * | EXPORTS |
  * +---------+
  */
-export { initialState, configureStore };
+export { configureStore };
