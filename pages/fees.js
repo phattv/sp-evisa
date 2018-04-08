@@ -41,10 +41,15 @@ class VisaFees extends React.Component<Props, State> {
 
   componentDidMount() {
     window.Intercom('update');
+    this.syncPropsToState(this.props, true);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.fees !== nextProps.fees) {
+    this.syncPropsToState(nextProps);
+  }
+
+  syncPropsToState = (nextProps: Props, isForced?: boolean) => {
+    if (isForced || this.props.fees !== nextProps.fees) {
       get(nextProps, 'fees', []).forEach(fees => {
         if (fees.type === 'tourist') {
           this.updateTouristFees(fees);
@@ -54,12 +59,12 @@ class VisaFees extends React.Component<Props, State> {
       });
     }
 
-    if (this.props.countryId !== nextProps.countryId) {
+    if (isForced || this.props.countryId !== nextProps.countryId) {
       this.setState({
         countryId: nextProps.countryId,
       });
     }
-  }
+  };
 
   updateCountryId = (country: Object) => {
     this.setState(
