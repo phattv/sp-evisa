@@ -16,14 +16,16 @@ import {
   Text,
 } from '../components';
 import countryOptions from '../static/countries.json';
-import { updateFees } from '../redux/actions';
+import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { configureStore } from '../redux/store';
 import { colors } from '../constants/ui';
 import { getFeesByCountryId } from '../utils/apiClient';
 
 type Props = {
+  countryId: number,
   fees: Array<Object>,
   updateFees: (Array<Object>) => void,
+  updateFeesSelectedCountry: Object => void,
 };
 type State = {
   countryId: number,
@@ -51,6 +53,12 @@ class VisaFees extends React.Component<Props, State> {
         }
       });
     }
+
+    if (this.props.countryId !== nextProps.countryId) {
+      this.setState({
+        countryId: nextProps.countryId,
+      });
+    }
   }
 
   updateCountryId = (country: Object) => {
@@ -60,7 +68,10 @@ class VisaFees extends React.Component<Props, State> {
         touristFees: {},
         businessFees: {},
       },
-      () => getFeesByCountryId({ countryId: country.value }, this.updateFees),
+      () => {
+        this.props.updateFeesSelectedCountry(country.value);
+        getFeesByCountryId({ countryId: country.value }, this.updateFees);
+      },
     );
   };
 
@@ -294,10 +305,14 @@ class VisaFees extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    fees: store.fees,
+    countryId: store.fees.countryId,
+    fees: store.fees.fees,
   };
 };
 const mapDispatchToProps = {
   updateFees,
+  updateFeesSelectedCountry,
 };
-export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(VisaFees);
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
+  VisaFees,
+);

@@ -3,11 +3,12 @@
 import { combineReducers } from 'redux';
 // custom
 import { form } from './form';
-import { persistStore } from '../persistStore';
+import { fees } from './fees';
+import { reducerNames } from '../../constants/reducerNames';
 
 const reducers = {
-  form,
-  persistStore,
+  [reducerNames.form]: form,
+  [reducerNames.fees]: fees,
 };
 const rootReducer = combineReducers({ ...reducers });
 

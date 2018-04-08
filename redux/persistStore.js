@@ -4,21 +4,32 @@ import { REHYDRATE } from 'redux-persist/constants';
 import type { Store } from 'redux';
 // custom
 
+/**
+ * +---------------+
+ * | INITIAL STATE |
+ * +---------------+
+ */
 const initialState = {};
 
+/**
+ * +----------+
+ * | REDUCERS |
+ * +----------+
+ */
 const persistStore = (state: Store = initialState, action: Object) => {
   switch (action.type) {
+    // any custom reducer rehydration logic here
     case REHYDRATE: {
-      const { form } = action.payload;
-      if (form) {
-        return Object.assign({}, state, form);
-      } else {
-        return state;
-      }
+      return state;
     }
     default:
       return state;
   }
 };
 
+/**
+ * +---------+
+ * | EXPORTS |
+ * +---------+
+ */
 export { persistStore };
