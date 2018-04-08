@@ -25,7 +25,7 @@ type Props = {
   countryId: number,
   fees: Array<Object>,
   updateFees: (Array<Object>) => void,
-  updateFeesSelectedCountry: Object => void,
+  updateFeesSelectedCountry: number => void,
 };
 type State = {
   countryId: number,
