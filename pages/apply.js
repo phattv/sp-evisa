@@ -10,7 +10,7 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
-import { configureStore } from '../store';
+import { configureStore } from '../redux/store';
 
 type Props = {};
 type State = {

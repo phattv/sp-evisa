@@ -6,11 +6,11 @@ import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 // custom
 import { Button, Flexbox, Text } from '../components';
-import { configureStore } from '../store';
+import { configureStore } from '../redux/store';
 import { spacingValues } from '../constants/ui';
 import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
-import { resetStepTwo } from '../actions';
+import { resetStepTwo } from '../redux/actions';
 
 type Props = {
   onSubmit: () => void,

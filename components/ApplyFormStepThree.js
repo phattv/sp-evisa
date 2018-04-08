@@ -5,8 +5,8 @@ import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 import { Div, Input, Label } from 'glamorous';
 // custom
-import { configureStore } from '../store';
-import { updateStepThree } from '../actions';
+import { configureStore } from '../redux/store';
+import { updateStepThree } from '../redux/actions';
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';

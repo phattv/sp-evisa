@@ -16,8 +16,8 @@ import {
   Text,
 } from '../components';
 import countryOptions from '../static/countries.json';
-import { updateFees } from '../actions';
-import { configureStore } from '../store';
+import { updateFees } from '../redux/actions';
+import { configureStore } from '../redux/store';
 import { colors } from '../constants/ui';
 import { getFeesByCountryId } from '../utils/apiClient';
 

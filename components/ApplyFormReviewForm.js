@@ -9,7 +9,7 @@ import isEmpty from "lodash/isEmpty";
 // custom
 import { Flexbox, Text } from "../components";
 import { borderRadius, colors, spacingValues } from "../constants/ui";
-import { configureStore } from "../store";
+import { configureStore } from "../redux/store";
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
