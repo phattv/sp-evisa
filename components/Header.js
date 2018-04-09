@@ -109,42 +109,45 @@ export default class Header extends React.PureComponent<null, HeaderState> {
             <Flexbox>
               <Flexbox>
                 <Anchor href={`tel:${companyInfo.phone}`}>
-                  <Flexbox column alignItems="flex-start">
-                    <Flexbox>
-                      <i
-                        className="fa fa-fw fa-phone"
-                        style={{
-                          color: colors.visaRed,
-                          marginRight: 5,
-                        }}
-                      />
-                      <Text color="visaRed" bold>
-                        HOTLINE
-                      </Text>
-                    </Flexbox>
-                    <Text color="visaRed" size="s" bold>
-                      {companyInfo.phoneString}
+                  <Flexbox
+                    border
+                    borderColor="visaRed"
+                    paddingHorizontal={2}
+                    paddingVertical={2}
+                    borderRadius
+                  >
+                    <i
+                      className="fa fa-fw fa-phone"
+                      style={{
+                        color: colors.visaRed,
+                        marginRight: 5,
+                      }}
+                    />
+                    <Text color="visaRed" bold>
+                      HOTLINE
                     </Text>
                   </Flexbox>
                 </Anchor>
               </Flexbox>
-              <Flexbox marginLeft={2}>
+              <Flexbox
+                border
+                borderColor="visaBlue"
+                paddingHorizontal={2}
+                paddingVertical={2}
+                borderRadius
+                marginLeft={2}
+              >
                 <Anchor href={`mailto:${companyInfo.email}`}>
-                  <Flexbox column alignItems="flex-start">
-                    <Flexbox>
-                      <i
-                        className="fa fa-fw fa-envelope"
-                        style={{
-                          color: colors.visaBlue,
-                          marginRight: 5,
-                        }}
-                      />
-                      <Text color="visaBlue" bold>
-                        EMAIL
-                      </Text>
-                    </Flexbox>
-                    <Text color="visaBlue" size="s" bold>
-                      {companyInfo.email}
+                  <Flexbox>
+                    <i
+                      className="fa fa-fw fa-envelope"
+                      style={{
+                        color: colors.visaBlue,
+                        marginRight: 5,
+                      }}
+                    />
+                    <Text color="visaBlue" bold>
+                      EMAIL
                     </Text>
                   </Flexbox>
                 </Anchor>
