@@ -1,66 +1,66 @@
 // @flow
 // Vendor
-import * as React from "react";
-import Media from "react-media";
-import Router from "next/router";
+import * as React from 'react';
+import Media from 'react-media';
+import Router from 'next/router';
 // Custom
-import { Anchor, Flexbox, Image, Text } from "../components/ui";
-import { colors, screenSizes } from "../constants/ui";
-import { companyInfo } from "../constants/companyInfo"
+import { Anchor, Flexbox, Image, Text } from '../components/ui';
+import { colors, screenSizes } from '../constants/ui';
+import { companyInfo } from '../constants/companyInfo';
 
 const headerHeight = 25;
-const blockId = "header";
+const blockId = 'header';
 const styleHtml = `<style>#${blockId} a.active {color: ${
   colors.visaRed
 }}</style>`;
 const menus = [
   {
-    text: "HOME",
-    url: "/"
+    text: 'HOME',
+    url: '/',
   },
   {
-    text: "APPLY VISA ONLINE",
-    url: "/apply"
+    text: 'APPLY VISA ONLINE',
+    url: '/apply',
   },
   {
-    text: "VISA FEES",
-    url: "/fees"
+    text: 'VISA FEES',
+    url: '/fees',
   },
   {
-    text: "HOW TO APPLY VISA",
-    url: "/how"
+    text: 'HOW TO APPLY VISA',
+    url: '/how',
   },
   {
-    text: "EXTRA SERVICES",
-    url: "/services"
+    text: 'EXTRA SERVICES',
+    url: '/services',
   },
   {
-    text: "INFORMATION",
-    url: "/news"
+    text: 'INFORMATION',
+    url: '/news',
   },
   {
-    text: "FEEDBACK",
-    url: "/feedback"
-  }
+    text: 'FEEDBACK',
+    url: '/feedback',
+  },
 ];
 
 type HeaderState = {
-  isMenuShowed?: boolean
+  isMenuShowed?: boolean,
 };
 export default class Header extends React.PureComponent<null, HeaderState> {
   state = {
-    isMenuShowed: false
+    isMenuShowed: false,
   };
 
   updateIsMenuShowed = () => {
     this.setState({
-      isMenuShowed: !this.state.isMenuShowed
+      isMenuShowed: !this.state.isMenuShowed,
     });
   };
 
   hideMenu = () => {
     this.setState({
-      isMenuShowed: false
+      isMenuShowed: false,
     });
   };
 
@@ -75,7 +75,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
       <Flexbox id={blockId} style={{ zIndex: 101 }}>
         <Text
           dangerouslySetInnerHTML={{
-            __html: styleHtml
+            __html: styleHtml,
           }}
         />
         <Flexbox
@@ -107,20 +107,48 @@ export default class Header extends React.PureComponent<null, HeaderState> {
               </Anchor>
             </Flexbox>
             <Flexbox>
-              <Anchor href={`tel:${companyInfo.phone}`}>
-                <Flexbox>
-                  <i
-                    className="fa fa-3x fa-fw fa-phone"
-                    style={{
-                      color: colors.visaRed
-                    }}
-                  />
+              <Flexbox>
+                <Anchor href={`tel:${companyInfo.phone}`}>
                   <Flexbox column alignItems="flex-start">
-                    <Text color="visaRed" bold>HOTLINE</Text>
-                    <Text size="s" bold>{companyInfo.phoneString}</Text>
+                    <Flexbox>
+                      <i
+                        className="fa fa-fw fa-phone"
+                        style={{
+                          color: colors.visaRed,
+                          marginRight: 5,
+                        }}
+                      />
+                      <Text color="visaRed" bold>
+                        HOTLINE
+                      </Text>
+                    </Flexbox>
+                    <Text color="visaRed" size="s" bold>
+                      {companyInfo.phoneString}
+                    </Text>
                   </Flexbox>
-                </Flexbox>
-              </Anchor>
+                </Anchor>
+              </Flexbox>
+              <Flexbox marginLeft={2}>
+                <Anchor href={`mailto:${companyInfo.email}`}>
+                  <Flexbox column alignItems="flex-start">
+                    <Flexbox>
+                      <i
+                        className="fa fa-fw fa-envelope"
+                        style={{
+                          color: colors.visaBlue,
+                          marginRight: 5,
+                        }}
+                      />
+                      <Text color="visaBlue" bold>
+                        EMAIL
+                      </Text>
+                    </Flexbox>
+                    <Text color="visaBlue" size="s" bold>
+                      {companyInfo.email}
+                    </Text>
+                  </Flexbox>
+                </Anchor>
+              </Flexbox>
               <Media query={`(max-width: ${screenSizes.tablet}px)`}>
                 <Flexbox onClick={this.updateIsMenuShowed} paddingLeft={4}>
                   <Image src="/static/images/line-hamburger.svg" alt="Menu" />
