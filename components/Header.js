@@ -19,7 +19,7 @@ const menus = [
     url: '/',
   },
   {
-    text: 'APPLY VISA ONLINE',
+    text: 'APPLY',
     url: '/apply',
   },
   {
@@ -34,10 +34,10 @@ const menus = [
     text: 'EXTRA SERVICES',
     url: '/services',
   },
-  {
-    text: 'INFORMATION',
-    url: '/news',
-  },
+  // {
+  //   text: 'INFORMATION',
+  //   url: '/news',
+  // },
   {
     text: 'FEEDBACK',
     url: '/feedback',

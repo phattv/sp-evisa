@@ -71,22 +71,22 @@ const extraServices = [
     image: "car-pickup",
     title: "Car pick-up service"
   },
-  {
-    image: "visa-renewal",
-    title: "Vietnam visa extension and renewal service"
-  },
-  {
-    image: "hotel-booking",
-    title: "Hotel booking service"
-  },
-  {
-    image: "domestic-flight",
-    title: "Vietnam domestic flights"
-  },
-  {
-    image: "travel-booking",
-    title: "Tour and travel booking"
-  }
+  // {
+  //   image: "visa-renewal",
+  //   title: "Vietnam visa extension and renewal service"
+  // },
+  // {
+  //   image: "hotel-booking",
+  //   title: "Hotel booking service"
+  // },
+  // {
+  //   image: "domestic-flight",
+  //   title: "Vietnam domestic flights"
+  // },
+  // {
+  //   image: "travel-booking",
+  //   title: "Tour and travel booking"
+  // }
 ];
 
 const typesOfVisa = [
