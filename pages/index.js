@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Anchor,
@@ -13,6 +14,7 @@ import {
   BlockHeader
 } from "../components";
 import { companyInfo } from "../constants/companyInfo";
+import { configureStore } from '../redux/store';
 
 const applyVisaSteps = [
   {
@@ -171,7 +173,7 @@ const applyWithConfidence = [
 
 type Props = {};
 type State = {};
-export default class Home extends React.Component<Props, State> {
+class Home extends React.Component<Props, State> {
   componentDidMount() {
     window.Intercom("update");
   }
@@ -618,3 +620,5 @@ export default class Home extends React.Component<Props, State> {
     );
   }
 }
+
+export default withRedux(configureStore, null, null)(Home)
