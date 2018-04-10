@@ -20,6 +20,7 @@ import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { configureStore } from '../redux/store';
 import { colors } from '../constants/ui';
 import { getFeesByCountryId } from '../utils/apiClient';
+import { reducerNames } from '../constants/reducerNames';
 
 type Props = {
   countryId: number,
@@ -310,8 +311,8 @@ class VisaFees extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    countryId: store.fees.countryId,
-    fees: store.fees.fees,
+    countryId: store[reducerNames.fees].countryId,
+    fees: store[reducerNames.fees].fees,
   };
 };
 const mapDispatchToProps = {

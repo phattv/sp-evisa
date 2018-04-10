@@ -10,6 +10,7 @@ import { updateStepThree } from '../redux/actions';
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
+import { reducerNames } from '../constants/reducerNames';
 
 type Props = {
   stepTwo: Object,
@@ -384,8 +385,8 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepTwo: store.form.stepTwo,
-    stepThree: store.form.stepThree,
+    stepTwo: store[reducerNames.form].stepTwo,
+    stepThree: store[reducerNames.form].stepThree,
   };
 };
 const mapDispatchToProps = {

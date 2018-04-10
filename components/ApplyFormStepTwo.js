@@ -11,6 +11,7 @@ import { spacingValues } from '../constants/ui';
 import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { resetStepTwo } from '../redux/actions';
+import { reducerNames } from '../constants/reducerNames';
 
 type Props = {
   onSubmit: () => void,
@@ -145,8 +146,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.form.stepOne,
-    stepTwo: store.form.stepTwo,
+    stepOne: store[reducerNames.form].stepOne,
+    stepTwo: store[reducerNames.form].stepTwo,
   };
 };
 const mapDispatchToProps = {

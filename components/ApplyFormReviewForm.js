@@ -10,6 +10,7 @@ import isEmpty from "lodash/isEmpty";
 import { Flexbox, Text } from "../components";
 import { borderRadius, colors, spacingValues } from "../constants/ui";
 import { configureStore } from "../redux/store";
+import { reducerNames } from '../constants/reducerNames'
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -312,8 +313,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store.form.stepOne,
-    fees: store.form.fees
+    stepOne: store[reducerNames.form].stepOne,
+    fees: store[reducerNames.form].fees
   };
 };
 const mapDispatchToProps = {};
