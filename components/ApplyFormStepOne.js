@@ -555,8 +555,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               flex={1}
               column
               width="100%"
-              marginLeft={spacingValues.xxs}
-              marginRight={spacingValues.xxs}
+              marginHorizontal={spacingValues.xxs}
+              marginVertical={spacingValues.xxs}
             >
               <ApplyFormReviewForm />
 

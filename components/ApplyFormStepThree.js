@@ -46,33 +46,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     isTermsAgreed: false,
   };
 
-  updateName = (event: Object) => {
-    this.setState(
-      {
-        name: event.target.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
-  updateEmail = (event: Object) => {
-    this.setState(
-      {
-        email: event.target.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
-  updatePhone = (event: Object) => {
-    this.setState(
-      {
-        phone: event.target.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
   toggleHasFlightInfo = () => {
     this.setState({
       hasFlightInfo: !this.state.hasFlightInfo,
@@ -195,77 +168,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 marginLeft={spacingValues.xxs}
                 marginRight={spacingValues.xxs}
               >
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <Text size="l" bold>
-                    CONTACT INFORMATION
-                  </Text>
-                </Flexbox>
-                <Flexbox
-                  alignItems="flex-start"
-                  paddingBottom={3}
-                  column
-                  width="100%"
-                >
-                  <Text bold>
-                    FULL NAME&nbsp;<Text color="visaRed">*</Text>
-                  </Text>
-                  <Input
-                    backgroundColor="white"
-                    padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                    borderRadius={borderRadius}
-                    border={`1px solid ${colors.lightGrey}`}
-                    width="100%"
-                    value={name}
-                    onChange={this.updateName}
-                    marginTop={2}
-                  />
-                </Flexbox>
-                <Flexbox
-                  alignItems="flex-start"
-                  paddingBottom={3}
-                  column
-                  width="100%"
-                >
-                  <Text bold>
-                    EMAIL&nbsp;<Text color="visaRed">*</Text>
-                  </Text>
-                  <Input
-                    type="email"
-                    backgroundColor="white"
-                    padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                    borderRadius={borderRadius}
-                    border={`1px solid ${colors.lightGrey}`}
-                    width="100%"
-                    value={email}
-                    onChange={this.updateEmail}
-                    marginTop={2}
-                  />
-                </Flexbox>
-                <Flexbox
-                  alignItems="flex-start"
-                  paddingBottom={3}
-                  column
-                  width="100%"
-                >
-                  <Text bold>
-                    PHONE NUMBER&nbsp;<Text color="visaRed">*</Text>
-                  </Text>
-                  <Input
-                    backgroundColor="white"
-                    padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                    borderRadius={borderRadius}
-                    border={`1px solid ${colors.lightGrey}`}
-                    width="100%"
-                    value={phone}
-                    onChange={this.updatePhone}
-                    marginTop={2}
-                  />
-                </Flexbox>
-
                 {/* Flight info */}
                 <Flexbox
                   alignItems="flex-start"
@@ -338,8 +240,8 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 flex={1}
                 column
                 width="100%"
-                marginLeft={spacingValues.xxs}
-                marginRight={spacingValues.xxs}
+                marginHorizontal={spacingValues.xxs}
+                marginVertical={spacingValues.xxs}
               >
                 <ApplyFormReviewForm
                   updatePaymentMethod={this.updatePaymentMethod}

@@ -105,7 +105,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   }
 }
 
-type CustomTabProps = {
+type CustomfTabProps = {
   children: React.Node,
   index: number,
   currentIndex: number,
