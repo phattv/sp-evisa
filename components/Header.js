@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Media from 'react-media';
 import Router from 'next/router';
-import { Button as GlamorousButton } from 'glamorous';
 import { connect } from 'react-redux';
 // Custom
 import { Anchor, Flexbox, Image, Text } from '../components/ui';
@@ -46,6 +45,7 @@ class Header extends React.PureComponent<Props, HeaderState> {
   };
 
   navigateToUrl = (url: string) => {
+    this.hideMenu();
     if (url === logoutUrl) {
       this.props.logout();
     } else {
@@ -185,16 +185,9 @@ class Header extends React.PureComponent<Props, HeaderState> {
                 </Anchor>
               </Flexbox>
               <Media query={`(max-width: ${screenSizes.tablet}px)`}>
-                <GlamorousButton
-                  outline="none"
-                  border="none"
-                  onClick={this.updateIsMenuShowed}
-                  onBlur={this.hideMenu}
-                >
-                  <Flexbox paddingLeft={4}>
-                    <Image src="/static/images/line-hamburger.svg" alt="Menu" />
-                  </Flexbox>
-                </GlamorousButton>
+                <Flexbox paddingLeft={4} onClick={this.updateIsMenuShowed}>
+                  <Image src="/static/images/line-hamburger.svg" alt="Menu" />
+                </Flexbox>
               </Media>
             </Flexbox>
           </Flexbox>
