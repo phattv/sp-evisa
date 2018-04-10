@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from 'react'
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   BlockHeader,
@@ -11,6 +12,7 @@ import {
   Layout,
   Text,
 } from '../components'
+import { configureStore } from '../redux/store'
 
 class Partners extends React.Component {
   componentDidMount() {
@@ -167,4 +169,4 @@ class Partners extends React.Component {
   }
 }
 
-export default Partners
+export default withRedux(configureStore, null, null)(Partners)

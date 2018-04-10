@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Button,
@@ -13,6 +14,7 @@ import {
   Text,
   Input
 } from "../components";
+import { configureStore } from '../redux/store'
 
 const faqs = [
   {
@@ -180,4 +182,4 @@ class Feedback extends React.Component<Props, State> {
   }
 }
 
-export default Feedback;
+export default withRedux(configureStore, null, null)(Feedback)

@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Anchor,
@@ -13,6 +14,7 @@ import {
   Layout,
   Text
 } from "../components";
+import { configureStore } from '../redux/store'
 
 const faqs = [
   {
@@ -174,4 +176,4 @@ class PrivacyPolicy extends React.Component<Props, State> {
   }
 }
 
-export default PrivacyPolicy;
+export default withRedux(configureStore, null, null)(PrivacyPolicy)

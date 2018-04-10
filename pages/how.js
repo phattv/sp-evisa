@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from 'react';
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Anchor,
@@ -13,6 +14,7 @@ import {
   Layout,
   Text,
 } from '../components';
+import { configureStore } from '../redux/store'
 
 class HowToApply extends React.Component {
   componentDidMount() {
@@ -163,4 +165,4 @@ class HowToApply extends React.Component {
   }
 }
 
-export default HowToApply;
+export default withRedux(configureStore, null, null)(HowToApply)

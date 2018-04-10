@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Button,
@@ -12,6 +13,7 @@ import {
   Layout,
   Text
 } from "../components";
+import { configureStore } from '../redux/store'
 
 const faqs = [
   {
@@ -159,4 +161,4 @@ class TermsAndCondition extends React.Component<Props, State> {
   }
 }
 
-export default TermsAndCondition;
+export default withRedux(configureStore, null, null)(TermsAndCondition)

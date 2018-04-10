@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Anchor,
@@ -13,6 +14,7 @@ import {
   Text
 } from "../components";
 import { companyInfo } from '../constants/companyInfo';
+import { configureStore } from '../redux/store';
 
 class AboutUs extends React.Component {
   componentDidMount() {
@@ -103,4 +105,4 @@ class AboutUs extends React.Component {
   }
 }
 
-export default AboutUs;
+export default withRedux(configureStore, null, null)(AboutUs)

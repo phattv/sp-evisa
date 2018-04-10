@@ -2,6 +2,7 @@
 // vendor
 import React from 'react';
 import { Div } from 'glamorous';
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Button,
@@ -13,6 +14,7 @@ import {
   Layout,
   Text,
 } from '../components';
+import { configureStore } from '../redux/store'
 
 class ExtraServices extends React.Component {
   componentDidMount() {
@@ -350,4 +352,4 @@ class ExtraServices extends React.Component {
   }
 }
 
-export default ExtraServices;
+export default withRedux(configureStore, null, null)(ExtraServices)

@@ -4,6 +4,7 @@ import React from 'react';
 import { Input } from 'glamorous';
 import Router from 'next/router';
 import Select from 'react-select';
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Anchor,
@@ -17,6 +18,7 @@ import {
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { register } from '../utils/apiClient';
 import countryOptions from '../static/countries.json';
+import { configureStore } from '../redux/store'
 
 const genderOptions = [
   { value: 'male', label: 'Male' },
@@ -345,4 +347,4 @@ class Register extends React.Component<Props, State> {
   }
 }
 
-export default Register;
+export default withRedux(configureStore, null, null)(Register)

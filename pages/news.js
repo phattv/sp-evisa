@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from 'react';
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   BlockHeader,
@@ -12,6 +13,7 @@ import {
   Text,
 } from '../components';
 import { colors } from '../constants/ui';
+import { configureStore } from '../redux/store'
 
 class News extends React.Component {
   componentDidMount() {
@@ -233,4 +235,4 @@ class News extends React.Component {
   }
 }
 
-export default News;
+export default withRedux(configureStore, null, null)(News)

@@ -1,6 +1,7 @@
 // @flow
 // vendor
 import React from "react";
+import withRedux from 'next-redux-wrapper'
 // custom
 import {
   Anchor,
@@ -13,6 +14,7 @@ import {
   Text
 } from "../components";
 import { companyInfo } from "../constants/companyInfo";
+import { configureStore } from '../redux/store'
 
 type Props = {};
 type State = {};
@@ -107,4 +109,4 @@ class Contact extends React.Component<Props, State> {
   }
 }
 
-export default Contact;
+export default withRedux(configureStore, null, null)(Contact)
