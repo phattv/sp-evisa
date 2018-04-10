@@ -21,6 +21,9 @@ const account = (state: Store = initialState, action: Object) => {
     case actionTypes.UPDATE_ACCOUNT: {
       return Object.assign({}, state, action.payload);
     }
+    case actionTypes.LOGOUT: {
+      return {}
+    }
     default: {
       return state;
     }

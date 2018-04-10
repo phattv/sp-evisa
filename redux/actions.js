@@ -13,7 +13,8 @@ const actionTypes = {
   UPDATE_STEP_THREE: 'FORM/UPDATE_STEP_THREE',
   UPDATE_FEES: 'FEES/UPDATE_FEES',
   UPDATE_FEES_SELECTED_COUNTRY: 'FEES/UPDATE_FEES_SELECTED_COUNTRY',
-  UPDATE_ACCOUNT: 'ACCOUNT/UPDATE_ACCOUNT'
+  UPDATE_ACCOUNT: 'ACCOUNT/UPDATE_ACCOUNT',
+  LOGOUT: 'ACCOUNT/LOGOUT'
 };
 
 /**
@@ -63,6 +64,12 @@ const updateAccount = (params: Object) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
+const logout = (params: Object) => (dispatch: Dispatch) => {
+  return dispatch({
+    type: actionTypes.LOGOUT,
+    payload: params,
+  });
+};
 
 /**
  * +---------+
@@ -78,4 +85,5 @@ export {
   updateFees,
   updateFeesSelectedCountry,
   updateAccount,
+  logout,
 };
