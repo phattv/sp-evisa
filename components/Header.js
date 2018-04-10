@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Media from 'react-media';
 import Router from 'next/router';
+import { Button as GlamorousButton } from 'glamorous';
 // Custom
 import { Anchor, Flexbox, Image, Text } from '../components/ui';
 import { colors, screenSizes } from '../constants/ui';
@@ -17,6 +18,10 @@ const menus = [
   {
     text: 'HOME',
     url: '/',
+  },
+  {
+    text: 'LOGIN',
+    url: '/login',
   },
   {
     text: 'APPLY',
@@ -113,17 +118,16 @@ export default class Header extends React.PureComponent<null, HeaderState> {
                     border
                     borderColor="visaRed"
                     paddingHorizontal={2}
-                    paddingVertical={2}
+                    paddingVertical={1}
                     borderRadius
                   >
                     <i
                       className="fa fa-fw fa-phone"
                       style={{
                         color: colors.visaRed,
-                        marginRight: 5,
                       }}
                     />
-                    <Text color="visaRed" bold>
+                    <Text color="visaRed" bold size="s">
                       HOTLINE
                     </Text>
                   </Flexbox>
@@ -133,7 +137,7 @@ export default class Header extends React.PureComponent<null, HeaderState> {
                 border
                 borderColor="visaBlue"
                 paddingHorizontal={2}
-                paddingVertical={2}
+                paddingVertical={1}
                 borderRadius
                 marginLeft={2}
               >
@@ -143,19 +147,25 @@ export default class Header extends React.PureComponent<null, HeaderState> {
                       className="fa fa-fw fa-envelope"
                       style={{
                         color: colors.visaBlue,
-                        marginRight: 5,
                       }}
                     />
-                    <Text color="visaBlue" bold>
+                    <Text color="visaBlue" bold size="s">
                       EMAIL
                     </Text>
                   </Flexbox>
                 </Anchor>
               </Flexbox>
               <Media query={`(max-width: ${screenSizes.tablet}px)`}>
-                <Flexbox onClick={this.updateIsMenuShowed} paddingLeft={4}>
-                  <Image src="/static/images/line-hamburger.svg" alt="Menu" />
-                </Flexbox>
+                <GlamorousButton
+                  outline="none"
+                  border="none"
+                  onClick={this.updateIsMenuShowed}
+                  onBlur={this.hideMenu}
+                >
+                  <Flexbox paddingLeft={4}>
+                    <Image src="/static/images/line-hamburger.svg" alt="Menu" />
+                  </Flexbox>
+                </GlamorousButton>
               </Media>
             </Flexbox>
           </Flexbox>
