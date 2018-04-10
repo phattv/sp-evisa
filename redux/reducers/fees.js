@@ -10,6 +10,7 @@ import { actionTypes } from '../actions';
  * +---------------+
  */
 const initialState = {
+  countryId: null,
   fees: [],
 };
 

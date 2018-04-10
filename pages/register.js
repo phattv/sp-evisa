@@ -79,7 +79,7 @@ class Register extends React.Component<Props, State> {
         errorMessage: 'Please fill in the required fields',
       });
     }
-    
+
     const params = {
       email: this.state.email,
       password: this.state.password,

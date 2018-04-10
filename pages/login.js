@@ -3,6 +3,7 @@
 import React from 'react';
 import { Input } from 'glamorous';
 import Router from 'next/router';
+import withRedux from 'next-redux-wrapper';
 // custom
 import {
   Anchor,
@@ -15,8 +16,14 @@ import {
 } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { login } from '../utils/apiClient';
+import { configureStore } from '../redux/store';
+import { updateAccount } from '../redux/actions';
+import { reducerNames } from '../constants/reducerNames';
 
-type Props = {};
+type Props = {
+  account: Object,
+  updateAccount: Object => void,
+};
 type State = {
   email: string,
   password: string,
@@ -30,7 +37,11 @@ class Login extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    window.Intercom('update');
+    if (this.props.account) {
+      Router.push('/').then(() => window.scrollTo(0, 0));
+    } else {
+      window.Intercom('update');
+    }
   }
 
   updateEmail = (event: Object) => {
@@ -65,6 +76,7 @@ class Login extends React.Component<Props, State> {
           this.setState({
             errorMessage: '',
           });
+          this.props.updateAccount(response);
           Router.push('/').then(() => window.scrollTo(0, 0));
         }
       },
@@ -158,4 +170,14 @@ class Login extends React.Component<Props, State> {
   }
 }
 
-export default Login;
+const mapStateToProps = store => {
+  return {
+    account: store[reducerNames.account],
+  };
+};
+const mapDispatchToProps = {
+  updateAccount,
+};
+export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
+  Login,
+);

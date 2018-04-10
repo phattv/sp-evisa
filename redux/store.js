@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import localForage from 'localforage';
 // custom
-import { rootReducer } from './reducers/reducers';
+import { rootReducer } from './reducers';
 
 /**
  * +------------------------+

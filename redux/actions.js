@@ -13,6 +13,7 @@ const actionTypes = {
   UPDATE_STEP_THREE: 'FORM/UPDATE_STEP_THREE',
   UPDATE_FEES: 'FEES/UPDATE_FEES',
   UPDATE_FEES_SELECTED_COUNTRY: 'FEES/UPDATE_FEES_SELECTED_COUNTRY',
+  UPDATE_ACCOUNT: 'ACCOUNT/UPDATE_ACCOUNT'
 };
 
 /**
@@ -56,6 +57,12 @@ const updateFeesSelectedCountry = (params: Object) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
+const updateAccount = (params: Object) => (dispatch: Dispatch) => {
+  return dispatch({
+    type: actionTypes.UPDATE_ACCOUNT,
+    payload: params,
+  });
+};
 
 /**
  * +---------+
@@ -70,4 +77,5 @@ export {
   updateStepThree,
   updateFees,
   updateFeesSelectedCountry,
+  updateAccount,
 };
