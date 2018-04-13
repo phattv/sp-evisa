@@ -11,11 +11,7 @@ import countryOptions from '../static/countries.json';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { updateStepTwo } from '../redux/actions';
 import { configureStore } from '../redux/store';
-
-const genderOptions = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-];
+import { genderOptions } from '../constants/dropDownOptions';
 
 type Props = {
   index: number,
