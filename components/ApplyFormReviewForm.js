@@ -98,24 +98,34 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     });
   };
 
+  componentDidMount() {
+    require('../static/paypal-checkout.min');
+    this.setState({
+      isPaypalLoaded: true,
+    });
+    this.syncStateAndCalculateTotalFee(this.props);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (
       this.props.fees !== nextProps.fees ||
       this.props.stepOne !== nextProps.stepOne
     ) {
-      const type = get(nextProps, 'stepOne.type', '');
-      const purpose = get(nextProps, 'stepOne.purpose', '');
-      const fees = get(nextProps, 'fees', []).find(
-        fees => fees.type === purpose,
-      );
-      this.setState(
-        {
-          costPerPerson: isEmpty(fees) ? 0 : fees[type],
-        },
-        () => this.calculateTotalFee(nextProps),
-      );
+      this.syncStateAndCalculateTotalFee(nextProps);
     }
   }
+
+  syncStateAndCalculateTotalFee = props => {
+    const type = get(props, 'stepOne.type', '');
+    const purpose = get(props, 'stepOne.purpose', '');
+    const fees = get(props, 'fees', []).find(fees => fees.type === purpose);
+    this.setState(
+      {
+        costPerPerson: isEmpty(fees) ? 0 : fees[type],
+      },
+      () => this.calculateTotalFee(props),
+    );
+  };
 
   //<editor-fold desc="Paypal configs">
   payment = (data, actions) => {
@@ -152,13 +162,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     console.error('paypal error', error);
   };
   //</editor-fold>
-
-  componentDidMount() {
-    require('../static/paypal-checkout.min');
-    this.setState({
-      isPaypalLoaded: true,
-    });
-  }
 
   renderType = (type: string) => {
     const selectedOption = (typeOptions || []).find(
@@ -328,11 +331,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
               </Text>
             )}
           </Flexbox>
-          <Flexbox paddingBottom={5} justifyContent="flex-start">
-            <Text>
-              Payment method&nbsp;<Text color="visaRed">*</Text>
-            </Text>
-          </Flexbox>
 
           {isPaypalLoaded && (
             <PayPalButton
@@ -372,7 +370,7 @@ const mapStateToProps = store => {
   return {
     account: store[reducerNames.account],
     stepOne: store[reducerNames.form].stepOne,
-    fees: store[reducerNames.form].fees,
+    fees: store[reducerNames.fees].fees,
   };
 };
 const mapDispatchToProps = {};
