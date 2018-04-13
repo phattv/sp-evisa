@@ -2,6 +2,7 @@
 // vendor
 import React from 'react';
 import withRedux from 'next-redux-wrapper';
+import Router from 'next/router';
 // custom
 import {
   Anchor,
@@ -67,7 +68,7 @@ const whyChooseUs = [
 const extraServices = [
   {
     image: 'airport-fast-track',
-    title: 'Air port fast-track Service',
+    title: 'Airport fast-track Service',
   },
   {
     image: 'car-pickup',
@@ -158,6 +159,10 @@ class Home extends React.Component<Props, State> {
     window.Intercom('update');
   }
 
+  navigateToServices = () => {
+    Router.push('/services').then(() => window.scrollTo(0, 0));
+  }
+
   render() {
     return (
       <Layout
@@ -185,14 +190,14 @@ class Home extends React.Component<Props, State> {
               <Flexbox column alignItems="center" justifyContent="center">
                 <Flexbox paddingBottom={2}>
                   <Text color="visaRed" size="xl" bold textAlign="center">
-                    VIETNAM VISA FORM
+                    Get your visa with 4 steps:
                   </Text>
                 </Flexbox>
-                <Text bold size="l">
-                  1. BEST PRICE GUARANTEE <br />
-                  2. Urgent Vietnam Visa <br />
-                  3. Vietnam Visa Extension <br />
-                  4. Online Payment
+                <Text bold size="l" textAlign="center">
+                  Scan or take a photo of your passport<br/>
+                  Get service-fee link <br/>
+                  Make payment online <br/>
+                  Get the Visa Approval Letter in 30 MINUTES.
                 </Text>
                 <Anchor href="/apply">
                   <Button solid marginTop={5}>
@@ -452,7 +457,7 @@ class Home extends React.Component<Props, State> {
               {extraServices.map(
                 (service, index) =>
                   index < 3 && (
-                    <Flexbox column flex={1} key={index}>
+                    <Flexbox column flex={1} key={index} clickable onClick={this.navigateToServices}>
                       <Image
                         src={`/static/images/${service.image}.png`}
                         alt={service.image}

@@ -174,7 +174,7 @@ class News extends React.Component {
                       color: colors.visaBlue,
                     }}
                   />
-                  Air port fast-track Service
+                  Airport fast-track Service
                 </Text>
                 <Text p bold>
                   <i
