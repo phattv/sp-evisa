@@ -1,7 +1,7 @@
 // @flow
 // vendor
 import * as React from 'react';
-import { Div, Input } from 'glamorous';
+import { Div, Input, Label } from 'glamorous';
 import Select from 'react-select';
 import get from 'lodash/get';
 import withRedux from 'next-redux-wrapper';
@@ -12,38 +12,42 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { updateStepTwo } from '../redux/actions';
 import { configureStore } from '../redux/store';
 import { genderOptions } from '../constants/dropDownOptions';
+import { reducerNames } from '../constants/reducerNames';
 
 type Props = {
   index: number,
   initialCountry: string,
   updateStepTwo: Object => void,
+  account: Object,
 };
 type State = {
   name: string,
-  country: string,
+  country_id: string,
   birthday: string,
   gender: string,
   passport: string,
-  passportExpiryDate: string,
+  passport_expiry: string,
   shouldShowStepTwoForm: boolean,
   isFilledIn: boolean,
+  thisIsMe: boolean,
 };
 class ApplyFormStepTwoForm extends React.Component<Props, State> {
   state = {
     name: '',
-    country: get(this, 'props.initialCountry', ''),
+    country_id: get(this, 'props.initialCountry', ''),
     birthday: '',
     gender: '',
     passport: '',
-    passportExpiryDate: '',
+    passport_expiry: '',
     shouldShowStepTwoForm: true,
     isFilledIn: false,
+    thisIsMe: false,
   };
 
-  updateName = (event: Object) => {
+  updateDefaultInput = (event: Object) => {
     this.setState(
       {
-        name: event.target.value,
+        [event.target.name]: event.target.value,
       },
       () => this.updateStore(),
     );
@@ -52,25 +56,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   updateCountry = (selectedOption: Object) => {
     this.setState(
       {
-        country: selectedOption.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
-  updateBirthday = (event: Object) => {
-    this.setState(
-      {
-        birthday: event.target.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
-  updatePassport = (event: Object) => {
-    this.setState(
-      {
-        passport: event.target.value,
+        country_id: selectedOption.value,
       },
       () => this.updateStore(),
     );
@@ -85,33 +71,24 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
     );
   };
 
-  updatePassportExpiryDate = (event: Object) => {
-    this.setState(
-      {
-        passportExpiryDate: event.target.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
   updateStore = () => {
     const {
       name,
-      country,
+      country_id,
       birthday,
       gender,
       passport,
-      passportExpiryDate,
+      passport_expiry,
     } = this.state;
     const { updateStepTwo, index } = this.props;
 
     const isFilledIn =
       !!name &&
-      !!country &&
+      !!country_id &&
       !!birthday &&
       !!gender &&
       !!passport &&
-      !!passportExpiryDate;
+      !!passport_expiry;
 
     this.setState(
       {
@@ -132,15 +109,59 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
     updateStepTwo({ [index]: this.state });
   }
 
+  updateThisIsMe = () => {
+    this.setState(
+      {
+        thisIsMe: !this.state.thisIsMe,
+      },
+      () => this.fillInMeData(),
+    );
+  };
+
+  fillInMeData = () => {
+    const { thisIsMe } = this.state;
+    if (thisIsMe) {
+      const {
+        account: {
+          name = '',
+          country_id = '',
+          birthday = '',
+          passport = '',
+          passport_expiry = '',
+          gender = '',
+        },
+      } = this.props;
+
+      this.setState({
+        name,
+        country_id,
+        birthday,
+        passport,
+        passport_expiry,
+        gender,
+      });
+    } else {
+      this.setState({
+        name: '',
+        country_id: '',
+        birthday: '',
+        passport: '',
+        passport_expiry: '',
+        gender: '',
+      });
+    }
+  };
+
   render() {
     const {
       name,
-      country,
+      country_id,
       birthday,
       gender,
       passport,
-      passportExpiryDate,
+      passport_expiry,
       shouldShowStepTwoForm,
+      thisIsMe,
     } = this.state;
     const { index } = this.props;
 
@@ -155,6 +176,17 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
         borderTop
         borderColor="darkGrey"
       >
+        {index === 0 && (
+          <Label display="flex" alignItems="center" cursor="pointer">
+            <Input
+              type="checkbox"
+              onChange={this.updateThisIsMe}
+              value={thisIsMe}
+              marginRight={spacingValues.s}
+            />
+            <Text bold size="l">This is me</Text>
+          </Label>
+        )}
         <Flexbox
           alignItems="flex-start"
           justifyContent="space-between"
@@ -181,13 +213,14 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>FULL NAME</Text>
               <Input
+                name="name"
                 backgroundColor="white"
                 padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                 borderRadius={borderRadius}
                 border={`1px solid ${colors.lightGrey}`}
                 width="100%"
                 value={name}
-                onChange={this.updateName}
+                onChange={this.updateDefaultInput}
                 marginTop={2}
               />
             </Flexbox>
@@ -199,7 +232,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>COUNTRY</Text>
               <Select
-                value={country}
+                value={country_id}
                 placeholder="Select..."
                 onChange={this.updateCountry}
                 options={countryOptions}
@@ -213,6 +246,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>DATE OF BIRTH</Text>
               <Input
+                name="birthday"
                 type="date"
                 value={birthday}
                 backgroundColor="white"
@@ -220,7 +254,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
                 borderRadius={borderRadius}
                 border={`1px solid ${colors.lightGrey}`}
                 width="100%"
-                onChange={this.updateBirthday}
+                onChange={this.updateDefaultInput}
               />
             </Flexbox>
             <Flexbox
@@ -231,13 +265,33 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
             >
               <Text bold>PASSPORT NUMBER</Text>
               <Input
+                name="passport"
                 backgroundColor="white"
                 padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                 borderRadius={borderRadius}
                 border={`1px solid ${colors.lightGrey}`}
                 width="100%"
                 value={passport}
-                onChange={this.updatePassport}
+                onChange={this.updateDefaultInput}
+              />
+            </Flexbox>
+            <Flexbox
+              alignItems="flex-start"
+              paddingBottom={3}
+              column
+              width="100%"
+            >
+              <Text bold>PASSPORT EXPIRY DATE</Text>
+              <Input
+                name="passport_expiry"
+                type="date"
+                value={passport_expiry}
+                backgroundColor="white"
+                padding={`${spacingValues.xs}px ${spacingValues.s}px`}
+                borderRadius={borderRadius}
+                border={`1px solid ${colors.lightGrey}`}
+                width="100%"
+                onChange={this.updateDefaultInput}
               />
             </Flexbox>
             <Flexbox
@@ -255,24 +309,6 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
                 options={genderOptions}
               />
             </Flexbox>
-            <Flexbox
-              alignItems="flex-start"
-              paddingBottom={3}
-              column
-              width="100%"
-            >
-              <Text bold>PASSPORT EXPIRY DATE</Text>
-              <Input
-                type="date"
-                value={passportExpiryDate}
-                backgroundColor="white"
-                padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                borderRadius={borderRadius}
-                border={`1px solid ${colors.lightGrey}`}
-                width="100%"
-                onChange={this.updatePassportExpiryDate}
-              />
-            </Flexbox>
           </Div>
         )}
       </Flexbox>
@@ -281,7 +317,9 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
 }
 
 const mapStateToProps = store => {
-  return {};
+  return {
+    account: store[reducerNames.account],
+  };
 };
 const mapDispatchToProps = {
   updateStepTwo,
