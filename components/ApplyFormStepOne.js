@@ -439,16 +439,18 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 width="100%"
               >
                 <Text bold>EXTRA SERVICES</Text>
-                <ReactTooltip multiline />
+                <ReactTooltip html />
                 <Label
-                  data-tip="All immigration procedures shall be handled by our staff in the most timely manner.
-                        <br/>
-                        You will not need to get in line and wait for visa stamping.
-                        <br/>
-                        Highly recommended if you don't want to waste time at the airport or/and you are visiting Vietnam for the first time.
-                        <br/>
-                        * Visa stamping fee shall be paid in cash and borne by you."
+                  data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>All immigration procedures shall be handled by our staff in the most timely manner.</p>
+                    <p>You will not need to get in line and wait for visa stamping.</p>
+                    <p>Highly recommended if you don't want to waste time at the airport or/and you are visiting Vietnam for the first time.</p>
+                    <p>* Visa stamping fee shall be paid in cash and borne by you.</p>
+                  </div>"
+                  data-html
                   display="flex"
+                  width="100%"
                   alignItems="center"
                   cursor="pointer"
                 >
@@ -463,12 +465,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 <ReactTooltip multiline />
                 <Label
                   data-tip="
-                        Highly recommended to accelerate immigration procedures at Vietnam airport.
-                        <br/>
-                        You will not need to pay this fee again upon arrival.
-                        <br/>
-                        * Only available when fast-track service is applied."
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>Highly recommended to accelerate immigration procedures at Vietnam airport.</p>
+                    <p>ou will not need to pay this fee again upon arrival.</p>
+                    <p>* Only available when fast-track service is applied.</p>
+                  </div>
+                  "
+                  data-html
                   display="flex"
+                  width="100%"
                   alignItems="center"
                   cursor="pointer"
                 >
@@ -483,11 +488,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 <ReactTooltip multiline />
                 <Label
                   data-tip="
-                        Private/confidential visa approval letter is efficient in case you want your visa approval letter to contain only your name or the name of your group
-                        <br/>
-                        because it is typical for a visa approval letter to contain a number of names of unacquainted people.
-                        "
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>Private/confidential visa approval letter is efficient in case you want your visa approval letter to contain only your name or the name of your group.</p>
+                    <p>because it is typical for a visa approval letter to contain a number of names of unacquainted people.</p>
+                  </div>
+                  "
+                  data-html
                   display="flex"
+                  width="100%"
                   alignItems="center"
                   cursor="pointer"
                 >
@@ -502,13 +510,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 <ReactTooltip multiline />
                 <Label
                   data-tip="
-                        You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.
-                        <br/>
-                        Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.
-                        <br />
-                        * Accompanying fast-track service is recommended so that the pick-up is as scheduled.
-                        "
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>
+                  "
+                  data-html
                   display="flex"
+                  width="100%"
                   alignItems="center"
                   cursor="pointer"
                 >
