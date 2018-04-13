@@ -11,6 +11,7 @@ import { Anchor, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { configureStore } from '../redux/store';
 import { reducerNames } from '../constants/reducerNames';
+import { typeOptions, airportOptions } from '../constants/dropDownOptions';
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -159,6 +160,24 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     });
   }
 
+  renderType = (type: string) => {
+    const selectedOption = (typeOptions || []).find(
+      option => option.value === type,
+    );
+    if (selectedOption) {
+      return selectedOption.label;
+    }
+  };
+
+  renderAirport = (airport: string) => {
+    const selectedOption = (airportOptions || []).find(
+      option => option.value === airport,
+    );
+    if (selectedOption) {
+      return selectedOption.label;
+    }
+  };
+
   render() {
     const {
       stepOne: {
@@ -235,7 +254,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Type of visa:</Text>
-            <Text>{type}</Text>
+            <Text>{this.renderType(type)}</Text>
           </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Purpose of visit:</Text>
@@ -243,7 +262,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Arrival airport:</Text>
-            <Text>{airport}</Text>
+            <Text textAlign="right" maxWidth={40}>
+              {this.renderAirport(airport)}
+            </Text>
           </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Arrival date:</Text>
@@ -267,25 +288,25 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           >
             <Text bold>Extra services:</Text>
           </Flexbox>
-          {get(extraServices, 'airportFastTrack') && (
+          {get(extraServices, 'airportFastTrack', false) && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Airport fast track</Text>
               <Text>{airportFastTrackCost}</Text>
             </Flexbox>
           )}
-          {get(extraServices, 'stampingFee') && (
+          {get(extraServices, 'stampingFee', false) && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Stamping fee</Text>
               <Text>{stampingFeeCost}</Text>
             </Flexbox>
           )}
-          {get(extraServices, 'privateVisaLetter') && (
+          {get(extraServices, 'privateVisaLetter', false) && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Private visa letter</Text>
               <Text>{privateVisaLetterCost}</Text>
             </Flexbox>
           )}
-          {get(extraServices, 'carPickUp') && (
+          {get(extraServices, 'carPickUp', false) && (
             <Flexbox display="flex" justifyContent="space-between">
               <Text bold>Car pick-up (4 seats)</Text>
               <Text>{carPickUpCost}</Text>

@@ -37,7 +37,7 @@ type Props = {
 };
 type State = {
   country: number | string,
-  quantity: number | string,
+  quantity: string,
   type: string,
   purpose: string,
   processingTime: string,
@@ -50,7 +50,7 @@ type State = {
 class ApplyFormStepOne extends React.Component<Props, State> {
   state = {
     country: '',
-    quantity: 1,
+    quantity: '1',
     type: typeOptions[0].value,
     purpose: purposeOptions[0].value,
     processingTime: processingTimeOptions[0].value,
@@ -237,7 +237,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     if (isForced || this.props.stepOne !== nextProps.stepOne) {
       this.setState({
         country: get(nextProps, 'stepOne.country', ''),
-        quantity: get(nextProps, 'stepOne.quantity', ''),
+        quantity: get(nextProps, 'stepOne.quantity', '1'),
         type: get(nextProps, 'stepOne.type', typeOptions[0].value),
         purpose: get(nextProps, 'stepOne.purpose', purposeOptions[0].value),
         processingTime: get(
@@ -249,11 +249,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         arrivalDate: get(nextProps, 'stepOne.arrivalDate', ''),
         departureDate: get(nextProps, 'stepOne.departureDate', ''),
         extraServices: get(nextProps, 'stepOne.extraServices', {}),
-        shouldShowErrorMessage: get(
-          nextProps,
-          'stepOne.shouldShowErrorMessage',
-          false,
-        ),
       });
     }
 
@@ -314,7 +309,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 width="100%"
               >
                 <Text bold>
-                  NUMBER OF APPLICANT&nbsp;<Text color="visaRed">*</Text>
+                  NUMBER OF APPLICANTS&nbsp;<Text color="visaRed">*</Text>
                 </Text>
                 <Input
                   backgroundColor="white"
