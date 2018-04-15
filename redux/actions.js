@@ -14,7 +14,8 @@ const actionTypes = {
   UPDATE_FEES: 'FEES/UPDATE_FEES',
   UPDATE_FEES_SELECTED_COUNTRY: 'FEES/UPDATE_FEES_SELECTED_COUNTRY',
   UPDATE_ACCOUNT: 'ACCOUNT/UPDATE_ACCOUNT',
-  LOGOUT: 'ACCOUNT/LOGOUT'
+  LOGOUT: 'ACCOUNT/LOGOUT',
+  UPDATE_GUEST: 'GUEST/UPDATE_GUEST',
 };
 
 /**
@@ -64,6 +65,12 @@ const updateAccount = (params: Object) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
+const updateGuest = (params: Object) => (dispatch: Dispatch) => {
+  return dispatch({
+    type: actionTypes.UPDATE_GUEST,
+    payload: params,
+  });
+};
 const logout = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
     type: actionTypes.LOGOUT,
@@ -85,5 +92,6 @@ export {
   updateFees,
   updateFeesSelectedCountry,
   updateAccount,
+  updateGuest,
   logout,
 };

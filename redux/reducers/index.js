@@ -6,6 +6,7 @@ import type { Store } from 'redux';
 import { form, formInitialState } from './form';
 import { fees, feesInitialState } from './fees';
 import { account, accountInitialState } from './account';
+import { guest, guestInitialState } from './guest';
 import { reducerNames } from '../../constants/reducerNames';
 import { actionTypes } from '../actions';
 
@@ -18,6 +19,7 @@ const initialState = {
   [reducerNames.form]: formInitialState,
   [reducerNames.fees]: feesInitialState,
   [reducerNames.account]: accountInitialState,
+  [reducerNames.guest]: guestInitialState,
 };
 
 /**
@@ -29,6 +31,7 @@ const reducers = {
   [reducerNames.form]: form,
   [reducerNames.fees]: fees,
   [reducerNames.account]: account,
+  [reducerNames.guest]: guest,
 };
 const combinedReducer = combineReducers(reducers);
 

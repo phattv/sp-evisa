@@ -11,6 +11,7 @@ import { Anchor, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { configureStore } from '../redux/store';
 import { reducerNames } from '../constants/reducerNames';
+import { updateGuest } from '../redux/actions';
 import {
   typeOptions,
   airportOptions,
@@ -20,6 +21,7 @@ import {
   airportFastTrackOptions,
   carPickUpOptions,
 } from '../constants/dropDownOptions';
+import { guestInitialState } from '../redux/reducers/guest';
 
 type Props = {
   stepOne: Object,
@@ -27,6 +29,7 @@ type Props = {
   updateIsTermsAgreed: boolean => void,
   fees: Array<Object>,
   account: Object,
+  updateGuest: Object => void,
 };
 type State = {
   costPerPerson: number,
@@ -40,9 +43,7 @@ type State = {
   carPickupObject: Object,
   shouldShowExtraServices: boolean,
 
-  contactName: string,
-  contactPhone: string,
-  contactEmail: string,
+  guest: Object,
 
   isPaypalLoaded: boolean,
   env: string,
@@ -64,9 +65,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     carPickupObject: {},
     shouldShowExtraServices: false,
 
-    contactName: '',
-    contactPhone: '',
-    contactEmail: '',
+    guest: {
+      name: '',
+      email: '',
+      phone: '',
+    },
 
     // Paypal configs:
     isPaypalLoaded: false,
@@ -85,10 +88,16 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     },
   };
 
-  updateTextField = (event: Object) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  updateGuestTextField = (event: Object) => {
+    this.setState(
+      {
+        guest: {
+          ...this.state.guest,
+          [event.target.name]: event.target.value,
+        },
+      },
+      () => this.props.updateGuest(this.state.guest),
+    );
   };
 
   updateIsTermsAgreed = (event: Object) => {
@@ -153,6 +162,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const purpose = get(props, 'stepOne.purpose', '');
     const fees = get(props, 'fees', []).find(fees => fees.type === purpose);
     const processingTime = get(props, 'stepOne.processingTime', '');
+    const guest = get(props, 'guest', guestInitialState);
 
     // Processing time
     const processingTimeObject = processingTimeOptions.find(
@@ -176,6 +186,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
     this.setState(
       {
+        guest,
         costPerPerson: isEmpty(fees) ? 0 : fees[type],
         processingTimeObject,
         shouldShowProcessingFees,
@@ -400,9 +411,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       client,
       style,
       isPaypalLoaded,
-      contactName,
-      contactPhone,
-      contactEmail,
+      guest: { name, email, phone },
     } = this.state;
     const isLoggedIn = account && Object.keys(account).length > 0;
 
@@ -437,14 +446,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
                   Name&nbsp;<Text color="visaRed">*</Text>
                 </Text>
                 <Input
-                  name="contactName"
+                  name="name"
                   backgroundColor="white"
                   padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                   borderRadius={borderRadius}
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
-                  value={contactName}
-                  onChange={this.updateTextField}
+                  value={name}
+                  onChange={this.updateGuestTextField}
                   marginTop={2}
                 />
               </Flexbox>
@@ -459,14 +468,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
                 </Text>
                 <Input
                   type="email"
-                  name="contactEmail"
+                  name="email"
                   backgroundColor="white"
                   padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                   borderRadius={borderRadius}
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
-                  value={contactEmail}
-                  onChange={this.updateTextField}
+                  value={email}
+                  onChange={this.updateGuestTextField}
                   marginTop={2}
                 />
               </Flexbox>
@@ -481,14 +490,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
                 </Text>
                 <Input
                   type="tel"
-                  name="contactPhone"
+                  name="phone"
                   backgroundColor="white"
                   padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                   borderRadius={borderRadius}
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
-                  value={contactPhone}
-                  onChange={this.updateTextField}
+                  value={phone}
+                  onChange={this.updateGuestTextField}
                   marginTop={2}
                 />
               </Flexbox>
@@ -587,11 +596,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 const mapStateToProps = store => {
   return {
     account: store[reducerNames.account],
+    guest: store[reducerNames.guest],
     stepOne: store[reducerNames.form].stepOne,
     fees: store[reducerNames.fees].fees,
   };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  updateGuest,
+};
 export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm,
 );

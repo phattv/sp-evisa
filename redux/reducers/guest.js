@@ -9,16 +9,20 @@ import { actionTypes } from '../actions';
  * | INITIAL STATE |
  * +---------------+
  */
-const accountInitialState = {};
+const guestInitialState = {
+  name: '',
+  email: '',
+  phone: '',
+};
 
 /**
  * +----------+
  * | REDUCERS |
  * +----------+
  */
-const account = (state: Store = accountInitialState, action: Object) => {
+const guest = (state: Store = guestInitialState, action: Object) => {
   switch (action.type) {
-    case actionTypes.UPDATE_ACCOUNT: {
+    case actionTypes.UPDATE_GUEST: {
       return action.payload;
     }
     default: {
@@ -32,4 +36,4 @@ const account = (state: Store = accountInitialState, action: Object) => {
  * | EXPORTS |
  * +---------+
  */
-export { account, accountInitialState };
+export { guest, guestInitialState };
