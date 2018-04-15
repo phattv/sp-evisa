@@ -40,6 +40,10 @@ type State = {
   carPickupObject: Object,
   shouldShowExtraServices: boolean,
 
+  contactName: string,
+  contactPhone: string,
+  contactEmail: string,
+
   isPaypalLoaded: boolean,
   env: string,
   client: Object,
@@ -60,6 +64,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     carPickupObject: {},
     shouldShowExtraServices: false,
 
+    contactName: '',
+    contactPhone: '',
+    contactEmail: '',
+
     // Paypal configs:
     isPaypalLoaded: false,
     env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
@@ -75,6 +83,12 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       label: 'pay',
       fundingicons: true,
     },
+  };
+
+  updateTextField = (event: Object) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   };
 
   updateIsTermsAgreed = (event: Object) => {
@@ -209,6 +223,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
   //</editor-fold>
 
+  //<editor-fold desc="render functions">
   renderType = (type: string) => {
     const selectedOption = (typeOptions || []).find(
       option => option.value === type,
@@ -372,13 +387,23 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       </Flexbox>
     );
   };
+  //</editor-fold>
 
   render() {
     const {
       stepOne: { airport, arrivalDate, departureDate, isTermsAgreed },
       account,
     } = this.props;
-    const { commit, env, client, style, isPaypalLoaded } = this.state;
+    const {
+      commit,
+      env,
+      client,
+      style,
+      isPaypalLoaded,
+      contactName,
+      contactPhone,
+      contactEmail,
+    } = this.state;
     const isLoggedIn = account && Object.keys(account).length > 0;
 
     let PayPalButton = React.Fragment;
@@ -401,7 +426,74 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           marginBottom={spacingValues.xl}
         >
           {!isLoggedIn ? (
-            <Anchor href="/login">Login</Anchor>
+            <Div>
+              <Flexbox
+                alignItems="flex-start"
+                paddingBottom={3}
+                column
+                width="100%"
+              >
+                <Text bold>
+                  Name&nbsp;<Text color="visaRed">*</Text>
+                </Text>
+                <Input
+                  name="contactName"
+                  backgroundColor="white"
+                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
+                  borderRadius={borderRadius}
+                  border={`1px solid ${colors.lightGrey}`}
+                  width="100%"
+                  value={contactName}
+                  onChange={this.updateTextField}
+                  marginTop={2}
+                />
+              </Flexbox>
+              <Flexbox
+                alignItems="flex-start"
+                paddingBottom={3}
+                column
+                width="100%"
+              >
+                <Text bold>
+                  Email&nbsp;<Text color="visaRed">*</Text>
+                </Text>
+                <Input
+                  type="email"
+                  name="contactEmail"
+                  backgroundColor="white"
+                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
+                  borderRadius={borderRadius}
+                  border={`1px solid ${colors.lightGrey}`}
+                  width="100%"
+                  value={contactEmail}
+                  onChange={this.updateTextField}
+                  marginTop={2}
+                />
+              </Flexbox>
+              <Flexbox
+                alignItems="flex-start"
+                paddingBottom={3}
+                column
+                width="100%"
+              >
+                <Text bold>
+                  Phone&nbsp;<Text color="visaRed">*</Text>
+                </Text>
+                <Input
+                  type="tel"
+                  name="contactPhone"
+                  backgroundColor="white"
+                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
+                  borderRadius={borderRadius}
+                  border={`1px solid ${colors.lightGrey}`}
+                  width="100%"
+                  value={contactPhone}
+                  onChange={this.updateTextField}
+                  marginTop={2}
+                />
+              </Flexbox>
+              <Anchor href="/login">Login</Anchor>
+            </Div>
           ) : (
             <Div>
               <Flexbox display="flex" justifyContent="space-between">

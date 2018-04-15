@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Div, Input, Label } from 'glamorous';
 import Select from 'react-select';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 import withRedux from 'next-redux-wrapper';
 // custom
 import { Flexbox, Text } from '../components';
@@ -162,7 +163,8 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
       shouldShowStepTwoForm,
       thisIsMe,
     } = this.state;
-    const { index } = this.props;
+    const { index, account } = this.props;
+    const isLoggedIn = !isEmpty(account);
 
     return (
       <Flexbox
@@ -175,17 +177,20 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
         borderTop
         borderColor="darkGrey"
       >
-        {index === 0 && (
-          <Label display="flex" alignItems="center" cursor="pointer">
-            <Input
-              type="checkbox"
-              onChange={this.updateThisIsMe}
-              value={thisIsMe}
-              marginRight={spacingValues.s}
-            />
-            <Text bold size="l">This is me</Text>
-          </Label>
-        )}
+        {index === 0 &&
+          isLoggedIn && (
+            <Label display="flex" alignItems="center" cursor="pointer">
+              <Input
+                type="checkbox"
+                onChange={this.updateThisIsMe}
+                value={thisIsMe}
+                marginRight={spacingValues.s}
+              />
+              <Text bold size="l">
+                This is me
+              </Text>
+            </Label>
+          )}
         <Flexbox
           alignItems="flex-start"
           justifyContent="space-between"

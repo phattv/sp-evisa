@@ -10,7 +10,9 @@ import { actionTypes } from '../actions';
  * +---------------+
  */
 const formInitialState = {
-  stepOne: {},
+  stepOne: {
+    quantity: '1',
+  },
   stepTwo: {},
   stepThree: {},
 };

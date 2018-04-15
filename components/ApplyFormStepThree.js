@@ -11,6 +11,7 @@ import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { reducerNames } from '../constants/reducerNames';
+import { countryOptions } from '../constants/dropDownOptions';
 
 type Props = {
   stepTwo: Object,
@@ -94,43 +95,50 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   renderApplicants = () => {
     const { stepTwo } = this.props;
-    return Object.keys(stepTwo).map(index => (
-      <Flexbox
-        key={index}
-        column
-        alignItems="flex-start"
-        border
-        borderRadius
-        borderColor="visaBlue"
-        width="100%"
-        paddingVertical={2}
-        paddingHorizontal={2}
-        marginVertical={1}
-        marginHorizontal={1}
-      >
-        <Div>
-          <Text bold>Full name:</Text> <Text>{stepTwo[index].name}</Text>
-        </Div>
-        <Div>
-          <Text bold>Country:</Text> <Text>{stepTwo[index].country}</Text>
-        </Div>
-        <Div>
-          <Text bold>Date of birth:</Text>{' '}
-          <Text>{stepTwo[index].birthday}</Text>
-        </Div>
-        <Div>
-          <Text bold>Passport number:</Text>{' '}
-          <Text>{stepTwo[index].passport}</Text>
-        </Div>
-        <Div>
-          <Text bold>Passport expiry date:</Text>{' '}
-          <Text>{stepTwo[index].passportExpiryDate}</Text>
-        </Div>
-        <Div>
-          <Text bold>Gender:</Text> <Text>{stepTwo[index].gender}</Text>
-        </Div>
-      </Flexbox>
-    ));
+
+    return Object.keys(stepTwo).map(index => {
+      const countryObject = countryOptions.find(
+        option => option.value === stepTwo[index].country_id,
+      );
+
+      return (
+        <Flexbox
+          key={index}
+          column
+          alignItems="flex-start"
+          border
+          borderRadius
+          borderColor="visaBlue"
+          width="100%"
+          paddingVertical={2}
+          paddingHorizontal={2}
+          marginVertical={1}
+          marginHorizontal={1}
+        >
+          <Div>
+            <Text bold>Full name:</Text> <Text>{stepTwo[index].name}</Text>
+          </Div>
+          <Div>
+            <Text bold>Country:</Text> <Text>{countryObject.label}</Text>
+          </Div>
+          <Div>
+            <Text bold>Date of birth:</Text>{' '}
+            <Text>{stepTwo[index].birthday}</Text>
+          </Div>
+          <Div>
+            <Text bold>Passport number:</Text>{' '}
+            <Text>{stepTwo[index].passport}</Text>
+          </Div>
+          <Div>
+            <Text bold>Passport expiry date:</Text>{' '}
+            <Text>{stepTwo[index].passport_expiry}</Text>
+          </Div>
+          <Div>
+            <Text bold>Gender:</Text> <Text>{stepTwo[index].gender}</Text>
+          </Div>
+        </Flexbox>
+      );
+    });
   };
 
   render() {
