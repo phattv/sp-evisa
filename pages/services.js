@@ -2,19 +2,20 @@
 // vendor
 import React from 'react';
 import { Div } from 'glamorous';
-import withRedux from 'next-redux-wrapper'
+import withRedux from 'next-redux-wrapper';
 // custom
 import {
-  Button,
+  Anchor,
   BlockHeader,
-  PageHeader,
+  Button,
   Content,
   Flexbox,
   Image,
   Layout,
+  PageHeader,
   Text,
 } from '../components';
-import { configureStore } from '../redux/store'
+import { configureStore } from '../redux/store';
 
 class ExtraServices extends React.Component {
   componentDidMount() {
@@ -85,7 +86,7 @@ class ExtraServices extends React.Component {
                         </tbody>
                       </table>
                     </Div>
-                    <Text p>
+                    <Text p paddingTop={2}>
                       A. Fast track: Our staff will meet you at the Visa Landing
                       Counter with your name on the welcome board and assist you
                       to get visa stamp and visa sticker without getting line as
@@ -101,9 +102,11 @@ class ExtraServices extends React.Component {
                       you go to luggage lounge to assist you take care of your
                       luggage as baggage porters.
                     </Text>
-                    <Button solid marginTop={3}>
-                      APPLY
-                    </Button>
+                    <Anchor href="/apply">
+                      <Button solid marginTop={3}>
+                        APPLY
+                      </Button>
+                    </Anchor>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
@@ -148,7 +151,7 @@ class ExtraServices extends React.Component {
                             <td>29 USD</td>
                           </tr>
                           <tr>
-                            <td>16 seats</td>
+                            <td>7 seats</td>
                             <td>34 USD</td>
                             <td>34 USD</td>
                             <td>34 USD</td>
@@ -171,9 +174,22 @@ class ExtraServices extends React.Component {
                         </tbody>
                       </table>
                     </Div>
-                    <Button solid marginTop={3}>
-                      APPLY
-                    </Button>
+                    <Text p paddingTop={2}>
+                      You will be picked up to inner city by our friendly driver
+                      who stands outside the airport with your name on the
+                      welcome sign to save your waiting time. Highly recommend
+                      if you are visiting Vietnam for the first time and/or your
+                      arrival is at night.
+                    </Text>
+                    <Text p>
+                      * Accompanying fast-track service is recommended so that
+                      the pick-up is as scheduled.
+                    </Text>
+                    <Anchor href="/apply">
+                      <Button solid marginTop={3}>
+                        APPLY
+                      </Button>
+                    </Anchor>
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
@@ -185,4 +201,4 @@ class ExtraServices extends React.Component {
   }
 }
 
-export default withRedux(configureStore, null, null)(ExtraServices)
+export default withRedux(configureStore, null, null)(ExtraServices);

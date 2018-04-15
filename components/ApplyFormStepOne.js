@@ -59,7 +59,11 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     departureDate: '',
     extraServices: {
       airportFastTrack: false,
-      carPickUp: false,
+      airportVipFastTrack: false,
+      carPickUp4Seats: false,
+      carPickUp7Seats: false,
+      carPickUp16Seats: false,
+      carPickUp24Seats: false,
     },
     shouldShowErrorMessage: false,
   };
@@ -108,15 +112,16 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     this.props.updateFees(data);
   };
 
-  updateQuantity = (event: Object) => {
+  updateDefaultInput = (event: Object) => {
     this.setState(
       {
-        quantity: event.target.value,
+        [event.target.name]: event.target.value,
       },
       () => this.updateStepOneToStore(),
     );
   };
 
+  //<editor-fold desc="Update <Select> inputs">
   updateType = (selectedOption: Object) =>
     this.setState(
       {
@@ -150,26 +155,22 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       },
       () => this.updateStepOneToStore(),
     );
+  //</editor-fold>
 
-  updateArrivalDate = (event: Object) => {
+  updateExtraService = (event: Object) => {
     this.setState(
       {
-        arrivalDate: event.target.value,
-      },
-      () => this.updateStepOneToStore(),
-    );
-  };
-
-  updateDepartureDate = (event: Object) => {
-    this.setState(
-      {
-        departureDate: event.target.value,
+        extraServices: {
+          ...this.state.extraServices,
+          [event.target.name]: !this.state.extraServices[event.target.name],
+        },
       },
       () => this.updateStepOneToStore(),
     );
   };
 
   updateStepOneToStore = () => {
+    console.log('xxx', this.state);
     this.props.updateStepOne(this.state);
   };
 
@@ -209,6 +210,169 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     }
   };
 
+  renderExtraServices = () => {
+    const { extraServices } = this.state;
+
+    return (
+      <Flexbox
+        borderColor="darkGrey"
+        borderTop
+        alignItems="flex-start"
+        paddingTop={1}
+        paddingBottom={3}
+        column
+        width="100%"
+      >
+        <Text bold>EXTRA SERVICES</Text>
+        <ReactTooltip html />
+        <Label
+          data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>Our staff will meet you at the Visa Landing Counter with your name on the welcome board and assist you to get visa stamp and visa sticker without getting line as others.</p>
+                    <p>Just 5 -10 minutes (it depends on the number of applicants at Visa Landing Counter) you will at the luggage lounge to wait for your belonging.</p>
+                  </div>"
+          data-html
+          display="flex"
+          width="100%"
+          alignItems="center"
+          cursor="pointer"
+        >
+          <Input
+            name="airportFastTrack"
+            type="checkbox"
+            onChange={this.updateExtraService}
+            value={extraServices.airportFastTrack}
+            marginRight={spacingValues.s}
+          />
+          <Text bold>Airport fast track</Text>
+        </Label>
+
+        <ReactTooltip html />
+        <Label
+          data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>Our staff will meet you at the Visa Landing Counter with your name on the welcome board and assist you to get visa stamp and visa sticker without getting line as others.</p>
+                    <p>After that, our staff will escort you go to luggage lounge to assist you take care of your luggage as baggage porters.</p>
+                  </div>"
+          data-html
+          display="flex"
+          width="100%"
+          alignItems="center"
+          cursor="pointer"
+        >
+          <Input
+            name="airportVipFastTrack"
+            type="checkbox"
+            onChange={this.updateExtraService}
+            value={extraServices.airportFastTrack}
+            marginRight={spacingValues.s}
+          />
+          <Text bold>Airport VIP fast track</Text>
+        </Label>
+
+        <ReactTooltip multiline />
+        <Label
+          data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>
+                  "
+          data-html
+          display="flex"
+          width="100%"
+          alignItems="center"
+          cursor="pointer"
+        >
+          <Input
+            name="carPickUp4Seats"
+            type="checkbox"
+            onChange={this.updateExtraService}
+            value={extraServices.carPickUp4Seats}
+            marginRight={spacingValues.s}
+          />
+          <Text bold>Car pick-up (4 seats)</Text>
+        </Label>
+
+        <ReactTooltip multiline />
+        <Label
+          data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>
+                  "
+          data-html
+          display="flex"
+          width="100%"
+          alignItems="center"
+          cursor="pointer"
+        >
+          <Input
+            name="carPickUp7Seats"
+            type="checkbox"
+            onChange={this.updateExtraService}
+            value={extraServices.carPickUp7Seats}
+            marginRight={spacingValues.s}
+          />
+          <Text bold>Car pick-up (7 seats)</Text>
+        </Label>
+
+        <ReactTooltip multiline />
+        <Label
+          data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>
+                  "
+          data-html
+          display="flex"
+          width="100%"
+          alignItems="center"
+          cursor="pointer"
+        >
+          <Input
+            name="carPickUp16Seats"
+            type="checkbox"
+            onChange={this.updateExtraService}
+            value={extraServices.carPickUp16Seats}
+            marginRight={spacingValues.s}
+          />
+          <Text bold>Car pick-up (16 seats)</Text>
+        </Label>
+
+        <ReactTooltip multiline />
+        <Label
+          data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>
+                  "
+          data-html
+          display="flex"
+          width="100%"
+          alignItems="center"
+          cursor="pointer"
+        >
+          <Input
+            name="carPickUp24Seats"
+            type="checkbox"
+            onChange={this.updateExtraService}
+            value={extraServices.carPickUp24Seats}
+            marginRight={spacingValues.s}
+          />
+          <Text bold>Car pick-up (24 seats)</Text>
+        </Label>
+      </Flexbox>
+    );
+  };
+
   render() {
     const {
       country,
@@ -219,7 +383,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       airport,
       arrivalDate,
       departureDate,
-      extraServices,
       shouldShowErrorMessage,
     } = this.state;
 
@@ -262,13 +425,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   NUMBER OF APPLICANTS&nbsp;<Text color="visaRed">*</Text>
                 </Text>
                 <Input
+                  name="quantity"
                   backgroundColor="white"
                   padding={`${spacingValues.xs}px ${spacingValues.s}px`}
                   borderRadius={borderRadius}
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
                   value={quantity}
-                  onChange={this.updateQuantity}
+                  onChange={this.updateDefaultInput}
                   marginTop={2}
                   type="number"
                   placeholder="1"
@@ -345,6 +509,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               >
                 <Text bold>ARRIVAL DATE</Text>
                 <Input
+                  name="arrivalDate"
                   type="date"
                   value={arrivalDate}
                   backgroundColor="white"
@@ -352,7 +517,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   borderRadius={borderRadius}
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
-                  onChange={this.updateArrivalDate}
+                  onChange={this.updateDefaultInput}
                 />
               </Flexbox>
               <Flexbox
@@ -363,6 +528,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               >
                 <Text bold>DEPARTURE DATE</Text>
                 <Input
+                  name="departureDate"
                   type="date"
                   value={departureDate}
                   backgroundColor="white"
@@ -370,67 +536,11 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   borderRadius={borderRadius}
                   border={`1px solid ${colors.lightGrey}`}
                   width="100%"
-                  onChange={this.updateDepartureDate}
+                  onChange={this.updateDefaultInput}
                 />
               </Flexbox>
 
-              {/*<Flexbox*/}
-                {/*borderColor="darkGrey"*/}
-                {/*borderTop*/}
-                {/*alignItems="flex-start"*/}
-                {/*paddingTop={1}*/}
-                {/*paddingBottom={3}*/}
-                {/*column*/}
-                {/*width="100%"*/}
-              {/*>*/}
-                {/*<Text bold>EXTRA SERVICES</Text>*/}
-                {/*<ReactTooltip html />*/}
-                {/*<Label*/}
-                  {/*data-tip="*/}
-                  {/*<div style='max-width: 250px; text-align: center;'>*/}
-                    {/*<p>All immigration procedures shall be handled by our staff in the most timely manner.</p>*/}
-                    {/*<p>You will not need to get in line and wait for visa stamping.</p>*/}
-                    {/*<p>Highly recommended if you don't want to waste time at the airport or/and you are visiting Vietnam for the first time.</p>*/}
-                    {/*<p>* Visa stamping fee shall be paid in cash and borne by you.</p>*/}
-                  {/*</div>"*/}
-                  {/*data-html*/}
-                  {/*display="flex"*/}
-                  {/*width="100%"*/}
-                  {/*alignItems="center"*/}
-                  {/*cursor="pointer"*/}
-                {/*>*/}
-                  {/*<Input*/}
-                    {/*type="checkbox"*/}
-                    {/*onChange={this.updateAirportFastTrack}*/}
-                    {/*value={extraServices.airportFastTrack}*/}
-                    {/*marginRight={spacingValues.s}*/}
-                  {/*/>*/}
-                  {/*<Text bold>Airport fast track</Text>*/}
-                {/*</Label>*/}
-                {/*<ReactTooltip multiline />*/}
-                {/*<Label*/}
-                  {/*data-tip="*/}
-                  {/*<div style='max-width: 250px; text-align: center;'>*/}
-                    {/*<p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>*/}
-                    {/*<p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>*/}
-                    {/*<p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>*/}
-                  {/*</div>*/}
-                  {/*"*/}
-                  {/*data-html*/}
-                  {/*display="flex"*/}
-                  {/*width="100%"*/}
-                  {/*alignItems="center"*/}
-                  {/*cursor="pointer"*/}
-                {/*>*/}
-                  {/*<Input*/}
-                    {/*type="checkbox"*/}
-                    {/*onChange={this.updateCarPickUp}*/}
-                    {/*value={extraServices.carPickUp}*/}
-                    {/*marginRight={spacingValues.s}*/}
-                  {/*/>*/}
-                  {/*<Text bold>Car pick-up (4 seats)</Text>*/}
-                {/*</Label>*/}
-              {/*</Flexbox>*/}
+              {this.renderExtraServices()}
             </Flexbox>
             <Flexbox
               flex={1}
