@@ -332,6 +332,22 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 width="100%"
               >
                 <Text bold>
+                  PURPOSE OF VISA&nbsp;<Text color="visaRed">*</Text>
+                </Text>
+                <Select
+                  value={purpose}
+                  placeholder="Select..."
+                  onChange={this.updatePurpose}
+                  options={purposeOptions}
+                />
+              </Flexbox>
+              <Flexbox
+                alignItems="flex-start"
+                paddingBottom={3}
+                column
+                width="100%"
+              >
+                <Text bold>
                   TYPE OF VISA&nbsp;<Text color="visaRed">*</Text>
                 </Text>
                 <Select
@@ -355,22 +371,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   placeholder="Normal"
                   onChange={this.updateProcessingTime}
                   options={processingTimeOptions}
-                />
-              </Flexbox>
-              <Flexbox
-                alignItems="flex-start"
-                paddingBottom={3}
-                column
-                width="100%"
-              >
-                <Text bold>
-                  PURPOSE OF VISA&nbsp;<Text color="visaRed">*</Text>
-                </Text>
-                <Select
-                  value={purpose}
-                  placeholder="Select..."
-                  onChange={this.updatePurpose}
-                  options={purposeOptions}
                 />
               </Flexbox>
               <Flexbox

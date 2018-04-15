@@ -14,7 +14,8 @@ import { reducerNames } from '../constants/reducerNames';
 import {
   typeOptions,
   airportOptions,
-  purposeOptions
+  purposeOptions,
+  processingTimeOptions,
 } from '../constants/dropDownOptions';
 
 // TODO: Handle extra services
@@ -36,6 +37,7 @@ type State = {
   isTermsAgreed: boolean,
   totalFee: number,
   shouldShowErrorMessage: boolean,
+  processingTimeObject: Object,
 
   isPaypalLoaded: boolean,
   env: string,
@@ -51,6 +53,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     isTermsAgreed: false,
     totalFee: 0,
     shouldShowErrorMessage: false,
+    processingTimeObject: {},
     // Paypal configs:
     isPaypalLoaded: false,
     env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
@@ -66,17 +69,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       label: 'pay',
       fundingicons: true,
     },
-  };
-
-  updatePaymentMethod = (event: Object) => {
-    const { updatePaymentMethod } = this.props;
-    this.setState(
-      {
-        paymentMethod: event.target.value,
-      },
-      () =>
-        updatePaymentMethod && updatePaymentMethod(this.state.paymentMethod),
-    );
   };
 
   updateIsTermsAgreed = (event: Object) => {
@@ -97,8 +89,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       get(this, 'props.stepOne.quantity'),
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
+    const { processingTimeObject } = this.state;
     this.setState({
-      totalFee: parsedQuantity * this.state.costPerPerson,
+      totalFee:
+        parsedQuantity * this.state.costPerPerson +
+        parsedQuantity * processingTimeObject.price,
     });
   };
 
@@ -123,9 +118,16 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const type = get(props, 'stepOne.type', '');
     const purpose = get(props, 'stepOne.purpose', '');
     const fees = get(props, 'fees', []).find(fees => fees.type === purpose);
+    const processingTime = get(props, 'stepOne.processingTime', '');
+
+    const processingTimeObject = processingTimeOptions.find(
+      option => option.value === processingTime,
+    );
+
     this.setState(
       {
         costPerPerson: isEmpty(fees) ? 0 : fees[type],
+        processingTimeObject,
       },
       () => this.calculateTotalFee(props),
     );
@@ -194,6 +196,90 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     }
   };
 
+  renderTotalFee = () => {
+    const { totalFee, costPerPerson, processingTimeObject } = this.state;
+    const { stepOne: { quantity, type, purpose } } = this.props;
+    const parsedQuantity = parseInt(quantity, 10);
+    const applicants = [];
+    for (let index = 0; index < parsedQuantity; index++) {
+      applicants.push(index);
+    }
+    const shouldShowProcessingFees =
+      processingTimeObject !== processingTimeOptions[0];
+
+    return (
+      <Flexbox
+        paddingTop={5}
+        paddingBottom={5}
+        display="flex"
+        column
+        borderTop
+        borderColor="darkGrey"
+      >
+        {/* Cost per person (quantity, type, purpose */}
+        <Flexbox display="flex" justifyContent="flex-start" width="100%">
+          <i
+            className="fa fa-circle fa-fw"
+            style={{
+              fontSize: 8,
+            }}
+          />
+          <Text paddingLeft={2}>
+            {quantity} Applicant{quantity > 1 && 's'} - {this.renderType(type)}{' '}
+            - {this.renderPurpose(purpose)}:
+          </Text>
+        </Flexbox>
+        <Flexbox display="flex" justifyContent="space-between" width="100%">
+          <Text size="l">
+            {quantity} x ${costPerPerson}
+          </Text>
+          <Text size="l" color="visaRed">
+            ${quantity * costPerPerson}
+          </Text>
+        </Flexbox>
+
+        {/* Processing time */}
+        {shouldShowProcessingFees && (
+          <Flexbox width="100%" column>
+            <Flexbox display="flex" justifyContent="flex-start" width="100%">
+              <i
+                className="fa fa-circle fa-fw"
+                style={{
+                  fontSize: 8,
+                }}
+              />
+              <Text paddingLeft={2}>Processing Time:</Text>
+            </Flexbox>
+            <Flexbox display="flex" justifyContent="space-between" width="100%">
+              <Text size="l">
+                {quantity} x ${get(processingTimeObject, 'price', 1)}
+              </Text>
+              <Text size="l" color="visaRed">
+                ${quantity * get(processingTimeObject, 'price', 1)}
+              </Text>
+            </Flexbox>
+          </Flexbox>
+        )}
+
+        <Flexbox
+          display="flex"
+          justifyContent="space-between"
+          width="100%"
+          paddingTop={2}
+        >
+          <Text color="visaRed" size="l" bold>
+            TOTAL FEE:
+          </Text>
+          {totalFee && (
+            <Text bold color="visaRed" size="xxl">
+              ${totalFee}
+            </Text>
+          )}
+        </Flexbox>
+      </Flexbox>
+    );
+  };
+
   render() {
     const {
       stepOne: {
@@ -208,7 +294,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       },
       account,
     } = this.props;
-    const { totalFee, commit, env, client, style, isPaypalLoaded } = this.state;
+    const { commit, env, client, style, isPaypalLoaded } = this.state;
     const isLoggedIn = account && Object.keys(account).length > 0;
 
     let PayPalButton = React.Fragment;
@@ -250,9 +336,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           )}
         </Div>
 
-        <Text size="l" bold>
-          REVIEW YOUR ORDER
-        </Text>
+        <Flexbox>
+          <Text size="xl" bold color="visaRed" textAlign="center">
+            REVIEW YOUR ORDER
+          </Text>
+        </Flexbox>
         <Div
           width="100%"
           marginTop={spacingValues.m}
@@ -261,11 +349,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           padding={spacingValues.xxl}
         >
           {/* Step One info */}
-          <Flexbox paddingBottom={spacingValues.xxs}>
-            <Text color="visaRed" size="l" bold>
-              Your Info
-            </Text>
-          </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Number of applicants:</Text>
             <Text>{quantity}</Text>
@@ -333,21 +416,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           )}
 
           {/* Total fee */}
-          <Flexbox
-            paddingTop={2}
-            paddingBottom={2}
-            display="flex"
-            justifyContent="space-between"
-            borderTop
-            borderColor="darkGrey"
-          >
-            <Text bold>TOTAL FEE:</Text>
-            {totalFee && (
-              <Text bold color="visaRed" size="xxl">
-                ${totalFee}
-              </Text>
-            )}
-          </Flexbox>
+          {this.renderTotalFee()}
 
           {/* Paypal */}
           {isPaypalLoaded && (
@@ -377,7 +446,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
               value={isTermsAgreed}
               marginRight={spacingValues.s}
             />
-            <Text bold>I have read and agreed with the Terms of Use</Text>
+            <Text bold textAlign="center">
+              I have read and agreed with the Terms of Use
+            </Text>
           </Label>
         </Div>
       </Div>

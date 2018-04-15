@@ -17,14 +17,16 @@ const purposeOptions = [
   { value: 'business', label: 'Business' },
 ];
 const processingTimeOptions = [
-  { value: 'normal', label: 'Normal (Guaranteed 2 working days)' },
+  { value: 'normal', label: 'Normal (Guaranteed 2 working days)', price: 1 },
   {
     value: 'urgent',
     label: 'Urgent (Guaranteed 4-8 working hours)',
+    price: 20,
   },
   {
     value: 'emergency',
     label: 'Emergency (Guaranteed 1 working hour)',
+    price: 180,
   },
 ];
 const airportOptions = [
