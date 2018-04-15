@@ -1,4 +1,5 @@
 // @flow
+import countryOptions from '../static/countries.json';
 
 const genderOptions = [
   { value: 'male', label: 'Male' },
@@ -45,4 +46,5 @@ export {
   purposeOptions,
   processingTimeOptions,
   airportOptions,
+  countryOptions,
 };

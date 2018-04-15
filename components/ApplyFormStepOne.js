@@ -11,7 +11,6 @@ import get from 'lodash/get';
 // custom
 import { Button, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
-import countryOptions from '../static/countries.json';
 import { configureStore } from '../redux/store';
 import {
   updateStepOne,
@@ -25,6 +24,7 @@ import {
   purposeOptions,
   processingTimeOptions,
   airportOptions,
+  countryOptions,
 } from '../constants/dropDownOptions';
 
 type Props = {

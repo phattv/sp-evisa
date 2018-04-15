@@ -16,8 +16,8 @@ import {
   airportOptions,
   purposeOptions,
   processingTimeOptions,
+  countryOptions,
 } from '../constants/dropDownOptions';
-import countryOptions from '../static/countries.json';
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;

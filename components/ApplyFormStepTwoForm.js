@@ -7,11 +7,10 @@ import get from 'lodash/get';
 import withRedux from 'next-redux-wrapper';
 // custom
 import { Flexbox, Text } from '../components';
-import countryOptions from '../static/countries.json';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { updateStepTwo } from '../redux/actions';
 import { configureStore } from '../redux/store';
-import { genderOptions } from '../constants/dropDownOptions';
+import { genderOptions, countryOptions } from '../constants/dropDownOptions';
 import { reducerNames } from '../constants/reducerNames';
 
 type Props = {

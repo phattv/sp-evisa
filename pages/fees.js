@@ -15,7 +15,7 @@ import {
   Layout,
   Text,
 } from '../components';
-import countryOptions from '../static/countries.json';
+import { countryOptions } from '../constants/dropDownOptions';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { configureStore } from '../redux/store';
 import { colors } from '../constants/ui';
