@@ -17,6 +17,7 @@ import {
   purposeOptions,
   processingTimeOptions,
 } from '../constants/dropDownOptions';
+import countryOptions from '../static/countries.json';
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -38,6 +39,7 @@ type State = {
   totalFee: number,
   shouldShowErrorMessage: boolean,
   processingTimeObject: Object,
+  shouldShowProcessingFees: boolean,
 
   isPaypalLoaded: boolean,
   env: string,
@@ -54,6 +56,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     totalFee: 0,
     shouldShowErrorMessage: false,
     processingTimeObject: {},
+    shouldShowProcessingFees: false,
+
     // Paypal configs:
     isPaypalLoaded: false,
     env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
@@ -89,11 +93,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       get(this, 'props.stepOne.quantity'),
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
-    const { processingTimeObject } = this.state;
+    const { processingTimeObject, shouldShowProcessingFees } = this.state;
+    const totalFee = shouldShowProcessingFees
+      ? parsedQuantity * this.state.costPerPerson +
+        parsedQuantity * get(processingTimeObject, 'price', 1)
+      : parsedQuantity * this.state.costPerPerson;
+
     this.setState({
-      totalFee:
-        parsedQuantity * this.state.costPerPerson +
-        parsedQuantity * processingTimeObject.price,
+      totalFee,
     });
   };
 
@@ -124,10 +131,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       option => option.value === processingTime,
     );
 
+    const shouldShowProcessingFees =
+      processingTimeObject !== processingTimeOptions[0];
+
     this.setState(
       {
         costPerPerson: isEmpty(fees) ? 0 : fees[type],
         processingTimeObject,
+        shouldShowProcessingFees,
       },
       () => this.calculateTotalFee(props),
     );
@@ -196,16 +207,65 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     }
   };
 
+  renderExtraServices = () => {
+    const { stepOne: { extraServices } } = this.props;
+
+    return (
+      <Flexbox>
+        <Flexbox
+          paddingTop={2}
+          display="flex"
+          justifyContent="space-between"
+          borderTop
+          borderColor="darkGrey"
+        >
+          <Text bold>Extra services:</Text>
+        </Flexbox>
+        {get(extraServices, 'airportFastTrack', false) && (
+          <Flexbox display="flex" justifyContent="space-between">
+            <Text bold>Airport fast track</Text>
+            <Text>{airportFastTrackCost}</Text>
+          </Flexbox>
+        )}
+        {/*{get(extraServices, 'stampingFee', false) && (*/}
+        {/*<Flexbox display="flex" justifyContent="space-between">*/}
+        {/*<Text bold>Stamping fee</Text>*/}
+        {/*<Text>{stampingFeeCost}</Text>*/}
+        {/*</Flexbox>*/}
+        {/*)}*/}
+        {/*{get(extraServices, 'privateVisaLetter', false) && (*/}
+        {/*<Flexbox display="flex" justifyContent="space-between">*/}
+        {/*<Text bold>Private visa letter</Text>*/}
+        {/*<Text>{privateVisaLetterCost}</Text>*/}
+        {/*</Flexbox>*/}
+        {/*)}*/}
+        {get(extraServices, 'carPickUp', false) && (
+          <Flexbox display="flex" justifyContent="space-between">
+            <Text bold>Car pick-up (4 seats)</Text>
+            <Text>{carPickUpCost}</Text>
+          </Flexbox>
+        )}
+      </Flexbox>
+    );
+  };
+
   renderTotalFee = () => {
-    const { totalFee, costPerPerson, processingTimeObject } = this.state;
-    const { stepOne: { quantity, type, purpose } } = this.props;
+    const {
+      totalFee,
+      costPerPerson,
+      processingTimeObject,
+      shouldShowProcessingFees,
+    } = this.state;
+    const { stepOne: { quantity, type, purpose, country } } = this.props;
+
     const parsedQuantity = parseInt(quantity, 10);
     const applicants = [];
     for (let index = 0; index < parsedQuantity; index++) {
       applicants.push(index);
     }
-    const shouldShowProcessingFees =
-      processingTimeObject !== processingTimeOptions[0];
+    const countryObject = countryOptions.find(
+      option => option.value === country,
+    );
 
     return (
       <Flexbox
@@ -226,7 +286,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           />
           <Text paddingLeft={2}>
             {quantity} Applicant{quantity > 1 && 's'} - {this.renderType(type)}{' '}
-            - {this.renderPurpose(purpose)}:
+            - {this.renderPurpose(purpose)} - {get(countryObject, 'label', '')}:
           </Text>
         </Flexbox>
         <Flexbox display="flex" justifyContent="space-between" width="100%">
@@ -283,13 +343,12 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   render() {
     const {
       stepOne: {
-        quantity,
-        type,
-        purpose,
+        // quantity,
+        // type,
+        // purpose,
         airport,
         arrivalDate,
         departureDate,
-        extraServices,
         isTermsAgreed,
       },
       account,
@@ -348,19 +407,18 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           borderRadius={borderRadius}
           padding={spacingValues.xxl}
         >
-          {/* Step One info */}
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Number of applicants:</Text>
-            <Text>{quantity}</Text>
-          </Flexbox>
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Type of visa:</Text>
-            <Text>{this.renderType(type)}</Text>
-          </Flexbox>
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Purpose of visit:</Text>
-            <Text>{this.renderPurpose(purpose)}</Text>
-          </Flexbox>
+          {/*<Flexbox display="flex" justifyContent="space-between">*/}
+          {/*<Text bold>Number of applicants:</Text>*/}
+          {/*<Text>{quantity}</Text>*/}
+          {/*</Flexbox>*/}
+          {/*<Flexbox display="flex" justifyContent="space-between">*/}
+          {/*<Text bold>Type of visa:</Text>*/}
+          {/*<Text>{this.renderType(type)}</Text>*/}
+          {/*</Flexbox>*/}
+          {/*<Flexbox display="flex" justifyContent="space-between">*/}
+          {/*<Text bold>Purpose of visit:</Text>*/}
+          {/*<Text>{this.renderPurpose(purpose)}</Text>*/}
+          {/*</Flexbox>*/}
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Arrival airport:</Text>
             <Text textAlign="right" maxWidth={40}>
@@ -381,39 +439,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           </Flexbox>
 
           {/* Extra services */}
-          <Flexbox
-            paddingTop={2}
-            display="flex"
-            justifyContent="space-between"
-            borderTop
-            borderColor="darkGrey"
-          >
-            <Text bold>Extra services:</Text>
-          </Flexbox>
-          {get(extraServices, 'airportFastTrack', false) && (
-            <Flexbox display="flex" justifyContent="space-between">
-              <Text bold>Airport fast track</Text>
-              <Text>{airportFastTrackCost}</Text>
-            </Flexbox>
-          )}
-          {get(extraServices, 'stampingFee', false) && (
-            <Flexbox display="flex" justifyContent="space-between">
-              <Text bold>Stamping fee</Text>
-              <Text>{stampingFeeCost}</Text>
-            </Flexbox>
-          )}
-          {get(extraServices, 'privateVisaLetter', false) && (
-            <Flexbox display="flex" justifyContent="space-between">
-              <Text bold>Private visa letter</Text>
-              <Text>{privateVisaLetterCost}</Text>
-            </Flexbox>
-          )}
-          {get(extraServices, 'carPickUp', false) && (
-            <Flexbox display="flex" justifyContent="space-between">
-              <Text bold>Car pick-up (4 seats)</Text>
-              <Text>{carPickUpCost}</Text>
-            </Flexbox>
-          )}
+          {/*{this.renderExtraServices()}*/}
 
           {/* Total fee */}
           {this.renderTotalFee()}

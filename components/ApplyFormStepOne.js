@@ -457,51 +457,51 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   />
                   <Text bold>Airport fast track</Text>
                 </Label>
-                <ReactTooltip multiline />
-                <Label
-                  data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                    <p>Highly recommended to accelerate immigration procedures at Vietnam airport.</p>
-                    <p>ou will not need to pay this fee again upon arrival.</p>
-                    <p>* Only available when fast-track service is applied.</p>
-                  </div>
-                  "
-                  data-html
-                  display="flex"
-                  width="100%"
-                  alignItems="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updateStampingFee}
-                    value={extraServices.stampingFee}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold>Stamping fee</Text>
-                </Label>
-                <ReactTooltip multiline />
-                <Label
-                  data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                    <p>Private/confidential visa approval letter is efficient in case you want your visa approval letter to contain only your name or the name of your group.</p>
-                    <p>because it is typical for a visa approval letter to contain a number of names of unacquainted people.</p>
-                  </div>
-                  "
-                  data-html
-                  display="flex"
-                  width="100%"
-                  alignItems="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updatePrivateVisaLetter}
-                    value={extraServices.privateVisaLetter}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold>Private visa letter</Text>
-                </Label>
+                {/*<ReactTooltip multiline />*/}
+                {/*<Label*/}
+                  {/*data-tip="*/}
+                  {/*<div style='max-width: 250px; text-align: center;'>*/}
+                    {/*<p>Highly recommended to accelerate immigration procedures at Vietnam airport.</p>*/}
+                    {/*<p>ou will not need to pay this fee again upon arrival.</p>*/}
+                    {/*<p>* Only available when fast-track service is applied.</p>*/}
+                  {/*</div>*/}
+                  {/*"*/}
+                  {/*data-html*/}
+                  {/*display="flex"*/}
+                  {/*width="100%"*/}
+                  {/*alignItems="center"*/}
+                  {/*cursor="pointer"*/}
+                {/*>*/}
+                  {/*<Input*/}
+                    {/*type="checkbox"*/}
+                    {/*onChange={this.updateStampingFee}*/}
+                    {/*value={extraServices.stampingFee}*/}
+                    {/*marginRight={spacingValues.s}*/}
+                  {/*/>*/}
+                  {/*<Text bold>Stamping fee</Text>*/}
+                {/*</Label>*/}
+                {/*<ReactTooltip multiline />*/}
+                {/*<Label*/}
+                  {/*data-tip="*/}
+                  {/*<div style='max-width: 250px; text-align: center;'>*/}
+                    {/*<p>Private/confidential visa approval letter is efficient in case you want your visa approval letter to contain only your name or the name of your group.</p>*/}
+                    {/*<p>because it is typical for a visa approval letter to contain a number of names of unacquainted people.</p>*/}
+                  {/*</div>*/}
+                  {/*"*/}
+                  {/*data-html*/}
+                  {/*display="flex"*/}
+                  {/*width="100%"*/}
+                  {/*alignItems="center"*/}
+                  {/*cursor="pointer"*/}
+                {/*>*/}
+                  {/*<Input*/}
+                    {/*type="checkbox"*/}
+                    {/*onChange={this.updatePrivateVisaLetter}*/}
+                    {/*value={extraServices.privateVisaLetter}*/}
+                    {/*marginRight={spacingValues.s}*/}
+                  {/*/>*/}
+                  {/*<Text bold>Private visa letter</Text>*/}
+                {/*</Label>*/}
                 <ReactTooltip multiline />
                 <Label
                   data-tip="
