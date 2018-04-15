@@ -26,8 +26,6 @@ const processingTimeOptions = [
     value: 'emergency',
     label: 'Emergency (Guaranteed 1 working hour)',
   },
-  { value: 'overtime', label: 'Overtime' },
-  { value: 'holiday', label: 'Holiday' },
 ];
 const airportOptions = [
   {
