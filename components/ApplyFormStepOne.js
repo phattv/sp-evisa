@@ -59,8 +59,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     departureDate: '',
     extraServices: {
       airportFastTrack: false,
-      stampingFee: false,
-      privateVisaLetter: false,
       carPickUp: false,
     },
     shouldShowErrorMessage: false,
@@ -166,54 +164,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     this.setState(
       {
         departureDate: event.target.value,
-      },
-      () => this.updateStepOneToStore(),
-    );
-  };
-
-  updateAirportFastTrack = (event: Object) => {
-    this.setState(
-      {
-        extraServices: {
-          ...this.state.extraServices,
-          airportFastTrack: !this.state.extraServices.airportFastTrack,
-        },
-      },
-      () => this.updateStepOneToStore(),
-    );
-  };
-
-  updateStampingFee = (event: Object) => {
-    this.setState(
-      {
-        extraServices: {
-          ...this.state.extraServices,
-          stampingFee: !this.state.extraServices.stampingFee,
-        },
-      },
-      () => this.updateStepOneToStore(),
-    );
-  };
-
-  updatePrivateVisaLetter = (event: Object) => {
-    this.setState(
-      {
-        extraServices: {
-          ...this.state.extraServices,
-          privateVisaLetter: !this.state.extraServices.privateVisaLetter,
-        },
-      },
-      () => this.updateStepOneToStore(),
-    );
-  };
-
-  updateCarPickUp = (event: Object) => {
-    this.setState(
-      {
-        extraServices: {
-          ...this.state.extraServices,
-          carPickUp: !this.state.extraServices.carPickUp,
-        },
       },
       () => this.updateStepOneToStore(),
     );
@@ -424,46 +374,46 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 />
               </Flexbox>
 
-              <Flexbox
-                borderColor="darkGrey"
-                borderTop
-                alignItems="flex-start"
-                paddingTop={1}
-                paddingBottom={3}
-                column
-                width="100%"
-              >
-                <Text bold>EXTRA SERVICES</Text>
-                <ReactTooltip html />
-                <Label
-                  data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                    <p>All immigration procedures shall be handled by our staff in the most timely manner.</p>
-                    <p>You will not need to get in line and wait for visa stamping.</p>
-                    <p>Highly recommended if you don't want to waste time at the airport or/and you are visiting Vietnam for the first time.</p>
-                    <p>* Visa stamping fee shall be paid in cash and borne by you.</p>
-                  </div>"
-                  data-html
-                  display="flex"
-                  width="100%"
-                  alignItems="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updateAirportFastTrack}
-                    value={extraServices.airportFastTrack}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold>Airport fast track</Text>
-                </Label>
+              {/*<Flexbox*/}
+                {/*borderColor="darkGrey"*/}
+                {/*borderTop*/}
+                {/*alignItems="flex-start"*/}
+                {/*paddingTop={1}*/}
+                {/*paddingBottom={3}*/}
+                {/*column*/}
+                {/*width="100%"*/}
+              {/*>*/}
+                {/*<Text bold>EXTRA SERVICES</Text>*/}
+                {/*<ReactTooltip html />*/}
+                {/*<Label*/}
+                  {/*data-tip="*/}
+                  {/*<div style='max-width: 250px; text-align: center;'>*/}
+                    {/*<p>All immigration procedures shall be handled by our staff in the most timely manner.</p>*/}
+                    {/*<p>You will not need to get in line and wait for visa stamping.</p>*/}
+                    {/*<p>Highly recommended if you don't want to waste time at the airport or/and you are visiting Vietnam for the first time.</p>*/}
+                    {/*<p>* Visa stamping fee shall be paid in cash and borne by you.</p>*/}
+                  {/*</div>"*/}
+                  {/*data-html*/}
+                  {/*display="flex"*/}
+                  {/*width="100%"*/}
+                  {/*alignItems="center"*/}
+                  {/*cursor="pointer"*/}
+                {/*>*/}
+                  {/*<Input*/}
+                    {/*type="checkbox"*/}
+                    {/*onChange={this.updateAirportFastTrack}*/}
+                    {/*value={extraServices.airportFastTrack}*/}
+                    {/*marginRight={spacingValues.s}*/}
+                  {/*/>*/}
+                  {/*<Text bold>Airport fast track</Text>*/}
+                {/*</Label>*/}
                 {/*<ReactTooltip multiline />*/}
                 {/*<Label*/}
                   {/*data-tip="*/}
                   {/*<div style='max-width: 250px; text-align: center;'>*/}
-                    {/*<p>Highly recommended to accelerate immigration procedures at Vietnam airport.</p>*/}
-                    {/*<p>ou will not need to pay this fee again upon arrival.</p>*/}
-                    {/*<p>* Only available when fast-track service is applied.</p>*/}
+                    {/*<p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>*/}
+                    {/*<p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>*/}
+                    {/*<p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>*/}
                   {/*</div>*/}
                   {/*"*/}
                   {/*data-html*/}
@@ -474,58 +424,13 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 {/*>*/}
                   {/*<Input*/}
                     {/*type="checkbox"*/}
-                    {/*onChange={this.updateStampingFee}*/}
-                    {/*value={extraServices.stampingFee}*/}
+                    {/*onChange={this.updateCarPickUp}*/}
+                    {/*value={extraServices.carPickUp}*/}
                     {/*marginRight={spacingValues.s}*/}
                   {/*/>*/}
-                  {/*<Text bold>Stamping fee</Text>*/}
+                  {/*<Text bold>Car pick-up (4 seats)</Text>*/}
                 {/*</Label>*/}
-                {/*<ReactTooltip multiline />*/}
-                {/*<Label*/}
-                  {/*data-tip="*/}
-                  {/*<div style='max-width: 250px; text-align: center;'>*/}
-                    {/*<p>Private/confidential visa approval letter is efficient in case you want your visa approval letter to contain only your name or the name of your group.</p>*/}
-                    {/*<p>because it is typical for a visa approval letter to contain a number of names of unacquainted people.</p>*/}
-                  {/*</div>*/}
-                  {/*"*/}
-                  {/*data-html*/}
-                  {/*display="flex"*/}
-                  {/*width="100%"*/}
-                  {/*alignItems="center"*/}
-                  {/*cursor="pointer"*/}
-                {/*>*/}
-                  {/*<Input*/}
-                    {/*type="checkbox"*/}
-                    {/*onChange={this.updatePrivateVisaLetter}*/}
-                    {/*value={extraServices.privateVisaLetter}*/}
-                    {/*marginRight={spacingValues.s}*/}
-                  {/*/>*/}
-                  {/*<Text bold>Private visa letter</Text>*/}
-                {/*</Label>*/}
-                <ReactTooltip multiline />
-                <Label
-                  data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>
-                  "
-                  data-html
-                  display="flex"
-                  width="100%"
-                  alignItems="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updateCarPickUp}
-                    value={extraServices.carPickUp}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold>Car pick-up (4 seats)</Text>
-                </Label>
-              </Flexbox>
+              {/*</Flexbox>*/}
             </Flexbox>
             <Flexbox
               flex={1}

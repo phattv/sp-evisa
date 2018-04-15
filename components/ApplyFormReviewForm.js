@@ -21,8 +21,6 @@ import {
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
-const stampingFeeCost = 8;
-const privateVisaLetterCost = 8;
 const carPickUpCost = 30;
 
 type Props = {
@@ -227,18 +225,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             <Text>{airportFastTrackCost}</Text>
           </Flexbox>
         )}
-        {/*{get(extraServices, 'stampingFee', false) && (*/}
-        {/*<Flexbox display="flex" justifyContent="space-between">*/}
-        {/*<Text bold>Stamping fee</Text>*/}
-        {/*<Text>{stampingFeeCost}</Text>*/}
-        {/*</Flexbox>*/}
-        {/*)}*/}
-        {/*{get(extraServices, 'privateVisaLetter', false) && (*/}
-        {/*<Flexbox display="flex" justifyContent="space-between">*/}
-        {/*<Text bold>Private visa letter</Text>*/}
-        {/*<Text>{privateVisaLetterCost}</Text>*/}
-        {/*</Flexbox>*/}
-        {/*)}*/}
         {get(extraServices, 'carPickUp', false) && (
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Car pick-up (4 seats)</Text>
