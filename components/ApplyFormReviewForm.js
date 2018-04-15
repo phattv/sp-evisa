@@ -11,7 +11,11 @@ import { Anchor, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { configureStore } from '../redux/store';
 import { reducerNames } from '../constants/reducerNames';
-import { typeOptions, airportOptions } from '../constants/dropDownOptions';
+import {
+  typeOptions,
+  airportOptions,
+  purposeOptions
+} from '../constants/dropDownOptions';
 
 // TODO: Handle extra services
 const airportFastTrackCost = 45;
@@ -172,6 +176,15 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     }
   };
 
+  renderPurpose = (type: string) => {
+    const selectedOption = (purposeOptions || []).find(
+      option => option.value === type,
+    );
+    if (selectedOption) {
+      return selectedOption.label;
+    }
+  };
+
   renderAirport = (airport: string) => {
     const selectedOption = (airportOptions || []).find(
       option => option.value === airport,
@@ -205,6 +218,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
     return (
       <Div>
+        {/* Contact information */}
         <Text size="l" bold>
           CONTACT INFORMATION
         </Text>
@@ -246,6 +260,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           borderRadius={borderRadius}
           padding={spacingValues.xxl}
         >
+          {/* Step One info */}
           <Flexbox paddingBottom={spacingValues.xxs}>
             <Text color="visaRed" size="l" bold>
               Your Info
@@ -261,7 +276,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Purpose of visit:</Text>
-            <Text>{purpose}</Text>
+            <Text>{this.renderPurpose(purpose)}</Text>
           </Flexbox>
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Arrival airport:</Text>
@@ -282,6 +297,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             <Text>{departureDate}</Text>
           </Flexbox>
 
+          {/* Extra services */}
           <Flexbox
             paddingTop={2}
             display="flex"
@@ -316,6 +332,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             </Flexbox>
           )}
 
+          {/* Total fee */}
           <Flexbox
             paddingTop={2}
             paddingBottom={2}
@@ -332,6 +349,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             )}
           </Flexbox>
 
+          {/* Paypal */}
           {isPaypalLoaded && (
             <PayPalButton
               commit={commit}
@@ -345,6 +363,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             />
           )}
 
+          {/* Terms checkbox */}
           <Label
             paddingTop={16}
             display="flex"
