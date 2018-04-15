@@ -17,11 +17,9 @@ import {
   purposeOptions,
   processingTimeOptions,
   countryOptions,
+  airportFastTrackOptions,
+  carPickUpOptions,
 } from '../constants/dropDownOptions';
-
-// TODO: Handle extra services
-const airportFastTrackCost = 45;
-const carPickUpCost = 30;
 
 type Props = {
   stepOne: Object,
@@ -38,6 +36,9 @@ type State = {
   shouldShowErrorMessage: boolean,
   processingTimeObject: Object,
   shouldShowProcessingFees: boolean,
+  fastTrackObject: Object,
+  carPickupObject: Object,
+  shouldShowExtraServices: boolean,
 
   isPaypalLoaded: boolean,
   env: string,
@@ -55,6 +56,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     shouldShowErrorMessage: false,
     processingTimeObject: {},
     shouldShowProcessingFees: false,
+    fastTrackObject: {},
+    carPickupObject: {},
+    shouldShowExtraServices: false,
 
     // Paypal configs:
     isPaypalLoaded: false,
@@ -91,11 +95,22 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       get(this, 'props.stepOne.quantity'),
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
-    const { processingTimeObject, shouldShowProcessingFees } = this.state;
-    const totalFee = shouldShowProcessingFees
-      ? parsedQuantity * this.state.costPerPerson +
-        parsedQuantity * get(processingTimeObject, 'price', 1)
-      : parsedQuantity * this.state.costPerPerson;
+    const {
+      processingTimeObject,
+      shouldShowProcessingFees,
+      shouldShowExtraServices,
+      fastTrackObject,
+      carPickupObject,
+    } = this.state;
+    const processingFees = shouldShowProcessingFees
+      ? parsedQuantity * get(processingTimeObject, 'price', 1)
+      : 0;
+    const extraFees = shouldShowExtraServices
+      ? fastTrackObject.price + carPickupObject.price
+      : 0;
+
+    const totalFee =
+      parsedQuantity * this.state.costPerPerson + processingFees + extraFees;
 
     this.setState({
       totalFee,
@@ -125,18 +140,34 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const fees = get(props, 'fees', []).find(fees => fees.type === purpose);
     const processingTime = get(props, 'stepOne.processingTime', '');
 
+    // Processing time
     const processingTimeObject = processingTimeOptions.find(
       option => option.value === processingTime,
     );
-
     const shouldShowProcessingFees =
       processingTimeObject !== processingTimeOptions[0];
+
+    // Extra services
+    const { fastTrack, carPickup } = get(props, 'stepOne.extraServices', {});
+    const fastTrackObject = airportFastTrackOptions.find(
+      option => option.value === fastTrack,
+    );
+    const carPickupObject = carPickUpOptions.find(
+      option => option.value === carPickup,
+    );
+    const shouldShowExtraServices =
+      (!isEmpty(fastTrackObject) &&
+        fastTrackObject !== airportFastTrackOptions[0]) ||
+      (!isEmpty(carPickupObject) && carPickupObject !== carPickUpOptions[0]);
 
     this.setState(
       {
         costPerPerson: isEmpty(fees) ? 0 : fees[type],
         processingTimeObject,
         shouldShowProcessingFees,
+        fastTrackObject,
+        carPickupObject,
+        shouldShowExtraServices,
       },
       () => this.calculateTotalFee(props),
     );
@@ -211,12 +242,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       costPerPerson,
       processingTimeObject,
       shouldShowProcessingFees,
+      fastTrackObject,
+      carPickupObject,
+      shouldShowExtraServices,
     } = this.state;
-    const {
-      stepOne: { quantity, type, purpose, country, extraServices },
-    } = this.props;
-
-    console.log('xxx', extraServices);
+    const { stepOne: { quantity, type, purpose, country } } = this.props;
 
     const parsedQuantity = parseInt(quantity, 10);
     const applicants = [];
@@ -282,6 +312,47 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         )}
 
         {/* Extra services */}
+        {shouldShowExtraServices && (
+          <Flexbox width="100%" column>
+            <Flexbox display="flex" justifyContent="flex-start" width="100%">
+              <i
+                className="fa fa-circle fa-fw"
+                style={{
+                  fontSize: 8,
+                }}
+              />
+              <Text paddingLeft={2}>Extra services:</Text>
+            </Flexbox>
+
+            {!isEmpty(fastTrackObject) &&
+              fastTrackObject !== airportFastTrackOptions[0] && (
+                <Flexbox
+                  display="flex"
+                  justifyContent="space-between"
+                  width="100%"
+                >
+                  <Text>- {fastTrackObject.label}</Text>
+                  <Text size="l" color="visaRed">
+                    ${fastTrackObject.price}
+                  </Text>
+                </Flexbox>
+              )}
+
+            {!isEmpty(carPickupObject) &&
+              carPickupObject !== carPickUpOptions[0] && (
+                <Flexbox
+                  display="flex"
+                  justifyContent="space-between"
+                  width="100%"
+                >
+                  <Text>- {carPickupObject.label}</Text>
+                  <Text size="l" color="visaRed">
+                    ${carPickupObject.price}
+                  </Text>
+                </Flexbox>
+              )}
+          </Flexbox>
+        )}
 
         <Flexbox
           display="flex"
@@ -304,15 +375,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
   render() {
     const {
-      stepOne: {
-        // quantity,
-        // type,
-        // purpose,
-        airport,
-        arrivalDate,
-        departureDate,
-        isTermsAgreed,
-      },
+      stepOne: { airport, arrivalDate, departureDate, isTermsAgreed },
       account,
     } = this.props;
     const { commit, env, client, style, isPaypalLoaded } = this.state;

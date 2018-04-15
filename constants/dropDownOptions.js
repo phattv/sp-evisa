@@ -40,16 +40,16 @@ const airportOptions = [
   { value: 'CRX', label: 'Cam Ranh International Airport (Khanh Hoa)' },
 ];
 const airportFastTrackOptions = [
-  { value: '', label: 'None' },
-  { value: 'airportFastTrack', label: 'Airport fast track' },
-  { value: 'airportVipFastTrack', label: 'Airport VIP fast track' },
+  { value: '', label: 'None', price: 0 },
+  { value: 'airportFastTrack', label: 'Airport fast track', price: 29 },
+  { value: 'airportVipFastTrack', label: 'Airport VIP fast track', price: 44 },
 ];
 const carPickUpOptions = [
-  { value: '', label: 'None' },
-  { value: 'fourSeats', label: 'Car pick-up (4 seats)' },
-  { value: 'sevenSeats', label: 'Car pick-up (7 seats)' },
-  { value: 'sixteenSeats', label: 'Car pick-up (16 seats)' },
-  { value: 'twentyFourSeats', label: 'Car pick-up (24 seats)' },
+  { value: '', label: 'None', price: 0 },
+  { value: 'fourSeats', label: 'Car pick-up (4 seats)', price: 29 },
+  { value: 'sevenSeats', label: 'Car pick-up (7 seats)', price: 34 },
+  { value: 'sixteenSeats', label: 'Car pick-up (16 seats)', price: 94 },
+  { value: 'twentyFourSeats', label: 'Car pick-up (24 seats)', price: 154 },
 ];
 
 export {
