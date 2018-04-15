@@ -58,12 +58,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     arrivalDate: '',
     departureDate: '',
     extraServices: {
-      airportFastTrack: false,
-      airportVipFastTrack: false,
-      carPickUp4Seats: false,
-      carPickUp7Seats: false,
-      carPickUp16Seats: false,
-      carPickUp24Seats: false,
+      fastTrack: '',
+      carPickup: '',
     },
     shouldShowErrorMessage: false,
   };
@@ -157,12 +153,12 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     );
   //</editor-fold>
 
-  updateExtraService = (event: Object) => {
+  updateRadioInput = event => {
     this.setState(
       {
         extraServices: {
           ...this.state.extraServices,
-          [event.target.name]: !this.state.extraServices[event.target.name],
+          [event.target.name]: event.target.value,
         },
       },
       () => this.updateStepOneToStore(),
@@ -170,7 +166,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateStepOneToStore = () => {
-    console.log('xxx', this.state);
     this.props.updateStepOne(this.state);
   };
 
@@ -238,10 +233,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           cursor="pointer"
         >
           <Input
-            name="airportFastTrack"
-            type="checkbox"
-            onChange={this.updateExtraService}
-            value={extraServices.airportFastTrack}
+            name="fastTrack"
+            type="radio"
+            onChange={this.updateRadioInput}
+            value="airportFastTrack"
             marginRight={spacingValues.s}
           />
           <Text bold>Airport fast track</Text>
@@ -261,24 +256,25 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           cursor="pointer"
         >
           <Input
-            name="airportVipFastTrack"
-            type="checkbox"
-            onChange={this.updateExtraService}
-            value={extraServices.airportFastTrack}
+            name="fastTrack"
+            type="radio"
+            onChange={this.updateRadioInput}
+            value="airportVipFastTrack"
             marginRight={spacingValues.s}
           />
           <Text bold>Airport VIP fast track</Text>
         </Label>
 
-        <ReactTooltip multiline />
+        <Flexbox paddingTop={2} />
+
+        <ReactTooltip html />
         <Label
           data-tip="
                   <div style='max-width: 250px; text-align: center;'>
-                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>
-                  "
+                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>"
           data-html
           display="flex"
           width="100%"
@@ -286,24 +282,23 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           cursor="pointer"
         >
           <Input
-            name="carPickUp4Seats"
-            type="checkbox"
-            onChange={this.updateExtraService}
-            value={extraServices.carPickUp4Seats}
+            name="carPickup"
+            type="radio"
+            onChange={this.updateRadioInput}
+            value="4Seats"
             marginRight={spacingValues.s}
           />
           <Text bold>Car pick-up (4 seats)</Text>
         </Label>
 
-        <ReactTooltip multiline />
+        <ReactTooltip html />
         <Label
           data-tip="
                   <div style='max-width: 250px; text-align: center;'>
-                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>
-                  "
+                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>"
           data-html
           display="flex"
           width="100%"
@@ -311,24 +306,23 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           cursor="pointer"
         >
           <Input
-            name="carPickUp7Seats"
-            type="checkbox"
-            onChange={this.updateExtraService}
-            value={extraServices.carPickUp7Seats}
+            name="carPickup"
+            type="radio"
+            onChange={this.updateRadioInput}
+            value="7Seats"
             marginRight={spacingValues.s}
           />
           <Text bold>Car pick-up (7 seats)</Text>
         </Label>
 
-        <ReactTooltip multiline />
+        <ReactTooltip html />
         <Label
           data-tip="
                   <div style='max-width: 250px; text-align: center;'>
-                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>
-                  "
+                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>"
           data-html
           display="flex"
           width="100%"
@@ -336,24 +330,23 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           cursor="pointer"
         >
           <Input
-            name="carPickUp16Seats"
-            type="checkbox"
-            onChange={this.updateExtraService}
-            value={extraServices.carPickUp16Seats}
+            name="carPickup"
+            type="radio"
+            onChange={this.updateRadioInput}
+            value="16Seats"
             marginRight={spacingValues.s}
           />
           <Text bold>Car pick-up (16 seats)</Text>
         </Label>
 
-        <ReactTooltip multiline />
+        <ReactTooltip html />
         <Label
           data-tip="
                   <div style='max-width: 250px; text-align: center;'>
-                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>
-                  "
+                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
+                  </div>"
           data-html
           display="flex"
           width="100%"
@@ -361,10 +354,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           cursor="pointer"
         >
           <Input
-            name="carPickUp24Seats"
-            type="checkbox"
-            onChange={this.updateExtraService}
-            value={extraServices.carPickUp24Seats}
+            name="carPickup"
+            type="radio"
+            onChange={this.updateRadioInput}
+            value="24Seats"
             marginRight={spacingValues.s}
           />
           <Text bold>Car pick-up (24 seats)</Text>
