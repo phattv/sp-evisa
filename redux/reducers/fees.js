@@ -9,7 +9,7 @@ import { actionTypes } from '../actions';
  * | INITIAL STATE |
  * +---------------+
  */
-const initialState = {
+const feesInitialState = {
   countryId: null,
   fees: [],
 };
@@ -19,7 +19,7 @@ const initialState = {
  * | REDUCERS |
  * +----------+
  */
-const fees = (state: Store = initialState, action: Object) => {
+const fees = (state: Store = feesInitialState, action: Object) => {
   switch (action.type) {
     case actionTypes.UPDATE_FEES: {
       return Object.assign({}, state, {
@@ -42,4 +42,4 @@ const fees = (state: Store = initialState, action: Object) => {
  * | EXPORTS |
  * +---------+
  */
-export { fees };
+export { fees, feesInitialState };

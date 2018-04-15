@@ -9,20 +9,17 @@ import { actionTypes } from '../actions';
  * | INITIAL STATE |
  * +---------------+
  */
-const initialState = {};
+const accountInitialState = {};
 
 /**
  * +----------+
  * | REDUCERS |
  * +----------+
  */
-const account = (state: Store = initialState, action: Object) => {
+const account = (state: Store = accountInitialState, action: Object) => {
   switch (action.type) {
     case actionTypes.UPDATE_ACCOUNT: {
       return Object.assign({}, state, action.payload);
-    }
-    case actionTypes.LOGOUT: {
-      return {}
     }
     default: {
       return state;
@@ -35,4 +32,4 @@ const account = (state: Store = initialState, action: Object) => {
  * | EXPORTS |
  * +---------+
  */
-export { account };
+export { account, accountInitialState };

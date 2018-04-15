@@ -9,7 +9,7 @@ import { actionTypes } from '../actions';
  * | INITIAL STATE |
  * +---------------+
  */
-const initialState = {
+const formInitialState = {
   stepOne: {},
   stepTwo: {},
   stepThree: {},
@@ -20,7 +20,7 @@ const initialState = {
  * | REDUCERS |
  * +----------+
  */
-const form = (state: Store = initialState, action: Object) => {
+const form = (state: Store = formInitialState, action: Object) => {
   switch (action.type) {
     case actionTypes.UPDATE_STEP_ONE: {
       return Object.assign({}, state, {
@@ -53,4 +53,4 @@ const form = (state: Store = initialState, action: Object) => {
  * | EXPORTS |
  * +---------+
  */
-export { form };
+export { form, formInitialState };
