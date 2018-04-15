@@ -4,6 +4,7 @@ import * as React from 'react';
 import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 import { Div, Input, Label } from 'glamorous';
+import isEmpty from 'lodash/get';
 // custom
 import { configureStore } from '../redux/store';
 import { updateStepThree } from '../redux/actions';
@@ -19,16 +20,14 @@ type Props = {
   updateStepThree: Object => void,
   onSubmit: () => void,
   goBack: Object => void,
+  contact: Object,
+  guest: Object,
 };
 type State = {
-  name: string,
-  phone: string,
-  email: string,
   hasFlightInfo: boolean,
   flightNumber: string,
   shouldShowErrorMessage: boolean,
   shouldShowSuccessMessage: boolean,
-  paymentMethod: string,
   isTermsAgreed: boolean,
 };
 
@@ -36,14 +35,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   static defaultProps: Props = {};
 
   state = {
-    name: '',
-    phone: '',
-    email: '',
     hasFlightInfo: false,
     flightNumber: '',
     shouldShowErrorMessage: false,
     shouldShowSuccessMessage: false,
-    paymentMethod: '',
     isTermsAgreed: false,
   };
 
@@ -66,12 +61,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.props.updateStepThree(this.state);
   };
 
-  updatePaymentMethod = (paymentMethod: string) => {
-    this.setState({
-      paymentMethod,
-    });
-  };
-
   updateIsTermsAgreed = (isTermsAgreed: boolean) => {
     this.setState({
       isTermsAgreed,
@@ -79,15 +68,21 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   onSubmit = () => {
-    const { name, phone, email, paymentMethod, isTermsAgreed } = this.state;
-    const shouldShowSuccessMessage =
-      !!name && !!phone && !!email && !!paymentMethod && isTermsAgreed;
+    const { isTermsAgreed } = this.state;
+    const { contact, guest } = this.props;
+
+    const shouldShowErrorMessage =
+      !isTermsAgreed ||
+      isEmpty(contact) ||
+      isEmpty(guest) ||
+      (!guest.name || !guest.email || !guest.phone);
+
     this.setState({
-      shouldShowSuccessMessage,
-      shouldShowErrorMessage: !shouldShowSuccessMessage,
+      shouldShowSuccessMessage: !shouldShowErrorMessage,
+      shouldShowErrorMessage,
     });
 
-    if (shouldShowSuccessMessage) {
+    if (!shouldShowErrorMessage) {
       const { onSubmit } = this.props;
       onSubmit && onSubmit();
     }
@@ -143,9 +138,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   render() {
     const {
-      name,
-      phone,
-      email,
       hasFlightInfo,
       flightNumber,
       shouldShowSuccessMessage,
@@ -252,7 +244,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 marginVertical={spacingValues.xxs}
               >
                 <ApplyFormReviewForm
-                  updatePaymentMethod={this.updatePaymentMethod}
                   updateIsTermsAgreed={this.updateIsTermsAgreed}
                 />
 
@@ -297,6 +288,8 @@ const mapStateToProps = store => {
   return {
     stepTwo: store[reducerNames.form].stepTwo,
     stepThree: store[reducerNames.form].stepThree,
+    contact: store[reducerNames.contact],
+    guest: store[reducerNames.guest],
   };
 };
 const mapDispatchToProps = {

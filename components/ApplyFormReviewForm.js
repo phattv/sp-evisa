@@ -25,7 +25,6 @@ import { guestInitialState } from '../redux/reducers/guest';
 
 type Props = {
   stepOne: Object,
-  updatePaymentMethod: string => void,
   updateIsTermsAgreed: boolean => void,
   fees: Array<Object>,
   account: Object,
