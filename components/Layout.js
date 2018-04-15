@@ -38,7 +38,7 @@ export default class Layout extends React.Component<Props> {
     return (
       <Flexbox {...rest}>
         <Head>
-          <title>{title || 'Vietam evisa'}</title>
+          <title>{title || 'Vietam visa'}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
