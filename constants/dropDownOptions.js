@@ -39,6 +39,18 @@ const airportOptions = [
   { value: 'DAD', label: 'Da Nang International Airport' },
   { value: 'CRX', label: 'Cam Ranh International Airport (Khanh Hoa)' },
 ];
+const airportFastTrackOptions = [
+  { value: '', label: 'None' },
+  { value: 'airportFastTrack', label: 'Airport fast track' },
+  { value: 'airportVipFastTrack', label: 'Airport VIP fast track' },
+];
+const carPickUpOptions = [
+  { value: '', label: 'None' },
+  { value: 'fourSeats', label: 'Car pick-up (4 seats)' },
+  { value: 'sevenSeats', label: 'Car pick-up (7 seats)' },
+  { value: 'sixteenSeats', label: 'Car pick-up (16 seats)' },
+  { value: 'twentyFourSeats', label: 'Car pick-up (24 seats)' },
+];
 
 export {
   genderOptions,
@@ -47,4 +59,6 @@ export {
   processingTimeOptions,
   airportOptions,
   countryOptions,
+  airportFastTrackOptions,
+  carPickUpOptions,
 };

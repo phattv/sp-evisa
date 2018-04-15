@@ -25,6 +25,8 @@ import {
   processingTimeOptions,
   airportOptions,
   countryOptions,
+  airportFastTrackOptions,
+  carPickUpOptions,
 } from '../constants/dropDownOptions';
 
 type Props = {
@@ -153,12 +155,24 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     );
   //</editor-fold>
 
-  updateRadioInput = event => {
+  updateAirportFastTrack = (selectedOption: Object) => {
     this.setState(
       {
         extraServices: {
           ...this.state.extraServices,
-          [event.target.name]: event.target.value,
+          fastTrack: selectedOption.value,
+        },
+      },
+      () => this.updateStepOneToStore(),
+    );
+  };
+
+  updateCarPickup = (selectedOption: Object) => {
+    this.setState(
+      {
+        extraServices: {
+          ...this.state.extraServices,
+          carPickup: selectedOption.value,
         },
       },
       () => this.updateStepOneToStore(),
@@ -218,150 +232,51 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         column
         width="100%"
       >
-        <Text bold>EXTRA SERVICES</Text>
+        <Text bold>EXTRA SERVICES (Optional)</Text>
         <ReactTooltip html />
-        <Label
-          data-tip="
+
+        <Flexbox alignItems="flex-start" paddingBottom={3} column width="100%">
+          <Text
+            bold
+            data-tip="
                   <div style='max-width: 250px; text-align: center;'>
                     <p>Our staff will meet you at the Visa Landing Counter with your name on the welcome board and assist you to get visa stamp and visa sticker without getting line as others.</p>
                     <p>Just 5 -10 minutes (it depends on the number of applicants at Visa Landing Counter) you will at the luggage lounge to wait for your belonging.</p>
                   </div>"
-          data-html
-          display="flex"
-          width="100%"
-          alignItems="center"
-          cursor="pointer"
-        >
-          <Input
-            name="fastTrack"
-            type="radio"
-            onChange={this.updateRadioInput}
-            value="airportFastTrack"
-            marginRight={spacingValues.s}
+            data-html
+          >
+            Airport fast track &nbsp;
+            <i className="fa fa-question-circle-o" />
+          </Text>
+          <Select
+            value={extraServices.fastTrack}
+            placeholder="Select..."
+            onChange={this.updateAirportFastTrack}
+            options={airportFastTrackOptions}
           />
-          <Text bold>Airport fast track</Text>
-        </Label>
+        </Flexbox>
 
-        <ReactTooltip html />
-        <Label
-          data-tip="
+        <Flexbox alignItems="flex-start" paddingBottom={3} column width="100%">
+          <Text
+            bold
+            data-tip="
                   <div style='max-width: 250px; text-align: center;'>
-                    <p>Our staff will meet you at the Visa Landing Counter with your name on the welcome board and assist you to get visa stamp and visa sticker without getting line as others.</p>
-                    <p>After that, our staff will escort you go to luggage lounge to assist you take care of your luggage as baggage porters.</p>
+                    <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
+                    <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
+                    <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
                   </div>"
-          data-html
-          display="flex"
-          width="100%"
-          alignItems="center"
-          cursor="pointer"
-        >
-          <Input
-            name="fastTrack"
-            type="radio"
-            onChange={this.updateRadioInput}
-            value="airportVipFastTrack"
-            marginRight={spacingValues.s}
+            data-html
+          >
+            Car pick-up &nbsp;
+            <i className="fa fa-question-circle-o" />
+          </Text>
+          <Select
+            value={extraServices.carPickup}
+            placeholder="Select..."
+            onChange={this.updateCarPickup}
+            options={carPickUpOptions}
           />
-          <Text bold>Airport VIP fast track</Text>
-        </Label>
-
-        <Flexbox paddingTop={2} />
-
-        <ReactTooltip html />
-        <Label
-          data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>"
-          data-html
-          display="flex"
-          width="100%"
-          alignItems="center"
-          cursor="pointer"
-        >
-          <Input
-            name="carPickup"
-            type="radio"
-            onChange={this.updateRadioInput}
-            value="4Seats"
-            marginRight={spacingValues.s}
-          />
-          <Text bold>Car pick-up (4 seats)</Text>
-        </Label>
-
-        <ReactTooltip html />
-        <Label
-          data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>"
-          data-html
-          display="flex"
-          width="100%"
-          alignItems="center"
-          cursor="pointer"
-        >
-          <Input
-            name="carPickup"
-            type="radio"
-            onChange={this.updateRadioInput}
-            value="7Seats"
-            marginRight={spacingValues.s}
-          />
-          <Text bold>Car pick-up (7 seats)</Text>
-        </Label>
-
-        <ReactTooltip html />
-        <Label
-          data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>"
-          data-html
-          display="flex"
-          width="100%"
-          alignItems="center"
-          cursor="pointer"
-        >
-          <Input
-            name="carPickup"
-            type="radio"
-            onChange={this.updateRadioInput}
-            value="16Seats"
-            marginRight={spacingValues.s}
-          />
-          <Text bold>Car pick-up (16 seats)</Text>
-        </Label>
-
-        <ReactTooltip html />
-        <Label
-          data-tip="
-                  <div style='max-width: 250px; text-align: center;'>
-                  <p>You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time.</p>
-                  <p>Highly recommend if you are visiting Vietnam for the first time and/or your arrival is at night.</p>
-                  <p>* Accompanying fast-track service is recommended so that the pick-up is as scheduled.</p>
-                  </div>"
-          data-html
-          display="flex"
-          width="100%"
-          alignItems="center"
-          cursor="pointer"
-        >
-          <Input
-            name="carPickup"
-            type="radio"
-            onChange={this.updateRadioInput}
-            value="24Seats"
-            marginRight={spacingValues.s}
-          />
-          <Text bold>Car pick-up (24 seats)</Text>
-        </Label>
+        </Flexbox>
       </Flexbox>
     );
   };
@@ -403,7 +318,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 </Text>
                 <Select
                   value={country}
-                  placeholder="Select.."
+                  placeholder="Select..."
                   onChange={this.updateCountry}
                   options={countryOptions}
                 />

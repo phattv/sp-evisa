@@ -205,36 +205,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     }
   };
 
-  renderExtraServices = () => {
-    const { stepOne: { extraServices } } = this.props;
-
-    return (
-      <Flexbox>
-        <Flexbox
-          paddingTop={2}
-          display="flex"
-          justifyContent="space-between"
-          borderTop
-          borderColor="darkGrey"
-        >
-          <Text bold>Extra services:</Text>
-        </Flexbox>
-        {get(extraServices, 'airportFastTrack', false) && (
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Airport fast track</Text>
-            <Text>{airportFastTrackCost}</Text>
-          </Flexbox>
-        )}
-        {get(extraServices, 'carPickUp', false) && (
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Car pick-up (4 seats)</Text>
-            <Text>{carPickUpCost}</Text>
-          </Flexbox>
-        )}
-      </Flexbox>
-    );
-  };
-
   renderTotalFee = () => {
     const {
       totalFee,
@@ -242,7 +212,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       processingTimeObject,
       shouldShowProcessingFees,
     } = this.state;
-    const { stepOne: { quantity, type, purpose, country } } = this.props;
+    const {
+      stepOne: { quantity, type, purpose, country, extraServices },
+    } = this.props;
+
+    console.log('xxx', extraServices);
 
     const parsedQuantity = parseInt(quantity, 10);
     const applicants = [];
@@ -306,6 +280,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             </Flexbox>
           </Flexbox>
         )}
+
+        {/* Extra services */}
 
         <Flexbox
           display="flex"
@@ -393,18 +369,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           borderRadius={borderRadius}
           padding={spacingValues.xxl}
         >
-          {/*<Flexbox display="flex" justifyContent="space-between">*/}
-          {/*<Text bold>Number of applicants:</Text>*/}
-          {/*<Text>{quantity}</Text>*/}
-          {/*</Flexbox>*/}
-          {/*<Flexbox display="flex" justifyContent="space-between">*/}
-          {/*<Text bold>Type of visa:</Text>*/}
-          {/*<Text>{this.renderType(type)}</Text>*/}
-          {/*</Flexbox>*/}
-          {/*<Flexbox display="flex" justifyContent="space-between">*/}
-          {/*<Text bold>Purpose of visit:</Text>*/}
-          {/*<Text>{this.renderPurpose(purpose)}</Text>*/}
-          {/*</Flexbox>*/}
           <Flexbox display="flex" justifyContent="space-between">
             <Text bold>Arrival airport:</Text>
             <Text textAlign="right" maxWidth={40}>
@@ -423,9 +387,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             <Text bold>Departure date:</Text>
             <Text>{departureDate}</Text>
           </Flexbox>
-
-          {/* Extra services */}
-          {/*{this.renderExtraServices()}*/}
 
           {/* Total fee */}
           {this.renderTotalFee()}
