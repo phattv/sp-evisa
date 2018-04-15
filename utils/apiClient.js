@@ -39,9 +39,21 @@ const register = (params: Object, callback: Function) => {
     });
 };
 
+const feedback = (params: Object, callback: Function) => {
+  return axios
+    .post(`${getApiServer()}/feedback`, params)
+    .then(response => {
+      return callback(response.data);
+    })
+    .catch(error => {
+      console.error('xxx', error);
+      return callback(error.response.data);
+    });
+}
+
 const getApiServer = () =>
   location.hostname.endsWith('evisa-vn.com')
     ? 'http://api.evisa-vn.com'
     : 'http://localhost:8001';
 
-export { getFeesByCountryId, login, register };
+export { getFeesByCountryId, login, register, feedback };

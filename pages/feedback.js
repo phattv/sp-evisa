@@ -2,6 +2,7 @@
 // vendor
 import React from 'react';
 import withRedux from 'next-redux-wrapper';
+import { Form } from 'react-final-form';
 // custom
 import {
   Button,
@@ -15,6 +16,7 @@ import {
   Input,
 } from '../components';
 import { configureStore } from '../redux/store';
+import { feedback } from '../utils/apiClient';
 
 const faqs = [
   {
@@ -55,10 +57,22 @@ const faqs = [
 type Props = {};
 type State = {
   shouldShowMore: boolean,
+  name: string,
+  email: string,
+  phone: string,
+  subject: string,
+  message: string,
+  responseMessage: string,
 };
 class Feedback extends React.Component<Props, State> {
   state = {
     shouldShowMore: false,
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+    responseMessage: '',
   };
 
   toggleShouldShowMore = () => {
@@ -71,8 +85,51 @@ class Feedback extends React.Component<Props, State> {
     window.Intercom('update');
   }
 
+  updateTextInput = (event: Object) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  onSubmit = () => {
+    this.setState({
+      responseMessage: '',
+    });
+
+    const { name, email, phone, subject, message } = this.state;
+    if (!message || !email) {
+      return this.setState({
+        responseMessage: 'Please fill in the required fields',
+      });
+    }
+    feedback(
+      {
+        name,
+        email,
+        phone,
+        subject,
+        message,
+      },
+      this.showMessage,
+    );
+  };
+
+  showMessage = (response: Object) => {
+    this.setState({
+      responseMessage: response.message,
+    });
+  };
+
   render() {
-    const { shouldShowMore } = this.state;
+    const {
+      shouldShowMore,
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      responseMessage,
+    } = this.state;
 
     return (
       <Layout>
@@ -123,55 +180,89 @@ class Feedback extends React.Component<Props, State> {
               )}
             </Button>
 
-            <Flexbox
-              widtd="100%"
-              column
-              paddingTop={10}
-              width="100%"
-              backgroundColor="lighterGrey"
-              paddingVertical={2}
-              paddingHorizontal={2}
-            >
-              <Text p bold color="visaBlue">
-                Still got question(s)? Fill in the below form to submit it to
-                our support center. Answers will be provided within 24 hours!
-              </Text>
-              <Flexbox width="100%" marginVertical={2}>
-                <Flexbox flex={1} marginRight={2}>
-                  <Input placeholder="Name" />
-                </Flexbox>
-                <Flexbox flex={1}>
-                  <Input placeholder="Email" />
-                </Flexbox>
-              </Flexbox>
-              <Flexbox width="100%" marginVertical={2}>
-                <Flexbox flex={1} marginRight={2}>
-                  <Input placeholder="Phone" />
-                </Flexbox>
-                <Flexbox flex={1}>
-                  <Input placeholder="Subject" />
-                </Flexbox>
-              </Flexbox>
-              <Flexbox width="100%" marginVertical={2}>
-                <textarea
-                  rows="5"
-                  placeholder="Message"
-                  style={{
-                    width: '100%',
-                    backgroundColor: 'white',
-                    borderColor: 'white',
-                    paddingTop: 10,
-                    paddingRight: 10,
-                    paddingLeft: 10,
-                    borderRadius: 6,
-                  }}
-                />
-              </Flexbox>
+            <Form
+              onSubmit={this.onSubmit}
+              render={({ handleSubmit, pristine, invalid }) => (
+                <Flexbox
+                  widtd="100%"
+                  column
+                  paddingTop={10}
+                  width="100%"
+                  backgroundColor="lighterGrey"
+                  paddingVertical={2}
+                  paddingHorizontal={2}
+                >
+                  <Text p bold color="visaBlue">
+                    Still got question(s)? Fill in the below form to submit it
+                    to our support center. Answers will be provided within 24
+                    hours!
+                  </Text>
+                  <Flexbox width="100%" marginVertical={2}>
+                    <Flexbox flex={1} marginRight={2}>
+                      <Input
+                        placeholder="Name"
+                        name="name"
+                        value={name}
+                        onChange={this.updateTextInput}
+                      />
+                    </Flexbox>
+                    <Flexbox flex={1}>
+                      <Input
+                        placeholder="Phone"
+                        name="phone"
+                        value={phone}
+                        onChange={this.updateTextInput}
+                      />
+                    </Flexbox>
+                  </Flexbox>
+                  <Flexbox width="100%" marginVertical={2}>
+                    <Flexbox flex={1} marginRight={2}>
+                      <Input
+                        type="email"
+                        placeholder="Email (Required)"
+                        name="email"
+                        value={email}
+                        onChange={this.updateTextInput}
+                      />
+                    </Flexbox>
+                    <Flexbox flex={1}>
+                      <Input
+                        placeholder="Subject"
+                        name="subject"
+                        value={subject}
+                        onChange={this.updateTextInput}
+                      />
+                    </Flexbox>
+                  </Flexbox>
+                  <Flexbox width="100%" marginVertical={2}>
+                    <textarea
+                      rows="5"
+                      placeholder="Message (Required)"
+                      name="message"
+                      value={message}
+                      onChange={this.updateTextInput}
+                      style={{
+                        width: '100%',
+                        backgroundColor: 'white',
+                        borderColor: 'white',
+                        paddingTop: 10,
+                        paddingRight: 10,
+                        paddingLeft: 10,
+                        borderRadius: 6,
+                      }}
+                    />
+                  </Flexbox>
 
-              <Button solid minWidth={30}>
-                SUBMIT
-              </Button>
-            </Flexbox>
+                  <Button solid minWidth={30} onClick={this.onSubmit}>
+                    SUBMIT
+                  </Button>
+
+                  {responseMessage && (
+                    <Text color="visaRed">{responseMessage} </Text>
+                  )}
+                </Flexbox>
+              )}
+            />
           </Flexbox>
         </Content>
       </Layout>
