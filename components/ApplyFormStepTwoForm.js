@@ -56,7 +56,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   updateCountry = (selectedOption: Object) => {
     this.setState(
       {
-        country_id: selectedOption.value,
+        country_id: selectedOption ? selectedOption.value : '',
       },
       () => this.updateStore(),
     );
@@ -65,7 +65,7 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   updateGender = (selectedOption: Object) => {
     this.setState(
       {
-        gender: selectedOption.value,
+        gender: selectedOption ? selectedOption.value : '',
       },
       () => this.updateStore(),
     );

@@ -93,7 +93,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   updateCountry = (selectedOption: Object) => {
     this.setState(
       {
-        country: selectedOption.value,
+        country: selectedOption ? selectedOption.value : '',
       },
       () => {
         this.updateStepOneToStore();
@@ -160,7 +160,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         extraServices: {
           ...this.state.extraServices,
-          fastTrack: selectedOption.value,
+          fastTrack: selectedOption ? selectedOption.value : '',
         },
       },
       () => this.updateStepOneToStore(),
@@ -172,7 +172,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       {
         extraServices: {
           ...this.state.extraServices,
-          carPickup: selectedOption.value,
+          carPickup: selectedOption ? selectedOption.value : '',
         },
       },
       () => this.updateStepOneToStore(),
