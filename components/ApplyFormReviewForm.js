@@ -125,10 +125,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       carPickupObject,
     } = this.state;
     const processingFees = shouldShowProcessingFees
-      ? parsedQuantity * get(processingTimeObject, 'price', 1)
+      ? parsedQuantity * get(processingTimeObject, 'price', 0)
       : 0;
     const extraFees = shouldShowExtraServices
-      ? fastTrackObject.price + carPickupObject.price
+      ? get(fastTrackObject, 'price', 0) + get(carPickupObject, 'price', 0)
       : 0;
 
     const totalFee =
@@ -182,11 +182,12 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       (!isEmpty(fastTrackObject) &&
         fastTrackObject !== airportFastTrackOptions[0]) ||
       (!isEmpty(carPickupObject) && carPickupObject !== carPickUpOptions[0]);
+    const costPerPerson = fees && fees[type] > 0 ? fees[type] : 0;
 
     this.setState(
       {
         guest,
-        costPerPerson: isEmpty(fees) ? 0 : fees[type],
+        costPerPerson,
         processingTimeObject,
         shouldShowProcessingFees,
         fastTrackObject,
@@ -292,26 +293,31 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         borderColor="darkGrey"
       >
         {/* Cost per person (quantity, type, purpose */}
-        <Flexbox display="flex" justifyContent="flex-start" width="100%">
-          <i
-            className="fa fa-circle fa-fw"
-            style={{
-              fontSize: 8,
-            }}
-          />
-          <Text paddingLeft={2}>
-            {quantity} Applicant{quantity > 1 && 's'} - {this.renderType(type)}{' '}
-            - {this.renderPurpose(purpose)} - {get(countryObject, 'label', '')}:
-          </Text>
-        </Flexbox>
-        <Flexbox display="flex" justifyContent="space-between" width="100%">
-          <Text size="l">
-            {quantity} x ${costPerPerson}
-          </Text>
-          <Text size="l" color="visaRed">
-            ${quantity * costPerPerson}
-          </Text>
-        </Flexbox>
+        {costPerPerson > 0 && (
+          <Flexbox width="100%" column>
+            <Flexbox display="flex" justifyContent="flex-start" width="100%">
+              <i
+                className="fa fa-circle fa-fw"
+                style={{
+                  fontSize: 8,
+                }}
+              />
+              <Text paddingLeft={2}>
+                {quantity} Applicant{quantity > 1 && 's'} -{' '}
+                {this.renderType(type)} - {this.renderPurpose(purpose)} -{' '}
+                {get(countryObject, 'label', '')}:
+              </Text>
+            </Flexbox>
+            <Flexbox display="flex" justifyContent="space-between" width="100%">
+              <Text size="l">
+                {quantity} x ${costPerPerson}
+              </Text>
+              <Text size="l" color="visaRed">
+                ${quantity * costPerPerson}
+              </Text>
+            </Flexbox>
+          </Flexbox>
+        )}
 
         {/* Processing time */}
         {shouldShowProcessingFees && (
@@ -327,10 +333,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             </Flexbox>
             <Flexbox display="flex" justifyContent="space-between" width="100%">
               <Text size="l">
-                {quantity} x ${get(processingTimeObject, 'price', 1)}
+                {quantity} x ${get(processingTimeObject, 'price', 0)}
               </Text>
               <Text size="l" color="visaRed">
-                ${quantity * get(processingTimeObject, 'price', 1)}
+                ${quantity * get(processingTimeObject, 'price', 0)}
               </Text>
             </Flexbox>
           </Flexbox>
@@ -388,7 +394,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           <Text color="visaRed" size="l" bold>
             TOTAL FEE:
           </Text>
-          {totalFee && (
+          {totalFee > 0 && (
             <Text bold color="visaRed" size="xxl">
               ${totalFee}
             </Text>
