@@ -67,12 +67,16 @@ const whyChooseUs = [
 ];
 const extraServices = [
   {
-    image: 'airport-fast-track',
+    image: 'airport-fast-track.png',
     title: 'Airport fast-track Service',
   },
   {
-    image: 'car-pickup',
+    image: 'car-pickup.png',
     title: 'Car pick-up service',
+  },
+  {
+    image: 'private-visa-letter.jpg',
+    title: 'Private visa letter',
   },
 ];
 
@@ -443,7 +447,7 @@ class Home extends React.Component<Props, State> {
                   index < 3 && (
                     <Flexbox column flex={1} key={index} clickable onClick={this.navigateToServices}>
                       <Image
-                        src={`/static/images/${service.image}.png`}
+                        src={`/static/images/${service.image}`}
                         alt={service.image}
                         paddingVertical={2}
                         paddingHorizontal={2}
@@ -462,7 +466,7 @@ class Home extends React.Component<Props, State> {
                   index >= 3 && (
                     <Flexbox column flex={1} key={index}>
                       <Image
-                        src={`/static/images/${service.image}.png`}
+                        src={`/static/images/${service.image}`}
                         alt={service.image}
                         paddingVertical={2}
                         paddingHorizontal={2}

@@ -48,7 +48,7 @@ class ExtraServices extends React.Component {
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/airport-fast-track.png"
-                      alt="passport"
+                      alt="airport fast track"
                       maxWidth={400}
                     />
                   </Flexbox>
@@ -122,7 +122,7 @@ class ExtraServices extends React.Component {
                   <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
                     <Image
                       src="/static/images/car-pickup.png"
-                      alt="passport"
+                      alt="car pickup"
                       maxWidth={400}
                     />
                   </Flexbox>
@@ -184,6 +184,40 @@ class ExtraServices extends React.Component {
                     <Text p>
                       * Accompanying fast-track service is recommended so that
                       the pick-up is as scheduled.
+                    </Text>
+                    <Anchor href="/apply">
+                      <Button solid marginTop={3}>
+                        APPLY
+                      </Button>
+                    </Anchor>
+                  </Flexbox>
+                </Flexbox>
+              </Flexbox>
+
+              <Flexbox
+                column
+                alignItems="flex-start"
+                paddingTop={10}
+                width="100%"
+              >
+                <BlockHeader header="PRIVATE LETTER" />
+                <Flexbox responsiveLayout width="100%">
+                  <Flexbox flex={1} paddingHorizontal={5} paddingVertical={2}>
+                    <Image
+                      src="/static/images/private-visa-letter.jpg"
+                      alt="private visa letter"
+                      maxWidth={400}
+                    />
+                  </Flexbox>
+                  <Flexbox flex={2} column alignItems="flex-start">
+                    <Div overflowX="auto" />
+                    <Text p paddingTop={2}>
+                      Because of Vietnam Immigration Office policy, they list a
+                      number of people on the same visa letter, so we offer
+                      private/confidential visa letter is showing your name or
+                      your group in 1 letter without others name on your letter.
+                      But you have to pay extra 8 USD/letter for you or your
+                      group.
                     </Text>
                     <Anchor href="/apply">
                       <Button solid marginTop={3}>

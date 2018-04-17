@@ -40,6 +40,7 @@ type State = {
   shouldShowProcessingFees: boolean,
   fastTrackObject: Object,
   carPickupObject: Object,
+  privateVisaLetter: boolean,
   shouldShowExtraServices: boolean,
 
   guest: Object,
@@ -62,6 +63,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     shouldShowProcessingFees: false,
     fastTrackObject: {},
     carPickupObject: {},
+    privateVisaLetter: false,
     shouldShowExtraServices: false,
 
     guest: {
@@ -123,6 +125,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       shouldShowExtraServices,
       fastTrackObject,
       carPickupObject,
+      privateVisaLetter,
     } = this.state;
     const processingFees = shouldShowProcessingFees
       ? parsedQuantity * get(processingTimeObject, 'price', 0)
@@ -130,9 +133,13 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const extraFees = shouldShowExtraServices
       ? get(fastTrackObject, 'price', 0) + get(carPickupObject, 'price', 0)
       : 0;
+    const privateVisaLetterCost = privateVisaLetter === true ? 8 : 0;
 
     const totalFee =
-      parsedQuantity * this.state.costPerPerson + processingFees + extraFees;
+      parsedQuantity * this.state.costPerPerson +
+      processingFees +
+      extraFees +
+      privateVisaLetterCost;
 
     this.setState({
       totalFee,
@@ -171,7 +178,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       processingTimeObject !== processingTimeOptions[0];
 
     // Extra services
-    const { fastTrack, carPickup } = get(props, 'stepOne.extraServices', {});
+    const { fastTrack, carPickup, privateVisaLetter } = get(
+      props,
+      'stepOne.extraServices',
+      {},
+    );
     const fastTrackObject = airportFastTrackOptions.find(
       option => option.value === fastTrack,
     );
@@ -181,7 +192,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const shouldShowExtraServices =
       (!isEmpty(fastTrackObject) &&
         fastTrackObject !== airportFastTrackOptions[0]) ||
-      (!isEmpty(carPickupObject) && carPickupObject !== carPickUpOptions[0]);
+      (!isEmpty(carPickupObject) && carPickupObject !== carPickUpOptions[0]) ||
+      privateVisaLetter;
     const costPerPerson = fees && fees[type] > 0 ? fees[type] : 0;
 
     this.setState(
@@ -192,6 +204,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         shouldShowProcessingFees,
         fastTrackObject,
         carPickupObject,
+        privateVisaLetter,
         shouldShowExtraServices,
       },
       () => this.calculateTotalFee(props),
@@ -270,6 +283,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       shouldShowProcessingFees,
       fastTrackObject,
       carPickupObject,
+      privateVisaLetter,
       shouldShowExtraServices,
     } = this.state;
     const { stepOne: { quantity, type, purpose, country } } = this.props;
@@ -382,6 +396,19 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
                   </Text>
                 </Flexbox>
               )}
+
+            {privateVisaLetter && (
+              <Flexbox
+                display="flex"
+                justifyContent="space-between"
+                width="100%"
+              >
+                <Text>- Private visa letter</Text>
+                <Text size="l" color="visaRed">
+                  $8
+                </Text>
+              </Flexbox>
+            )}
           </Flexbox>
         )}
 

@@ -62,6 +62,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     extraServices: {
       fastTrack: '',
       carPickup: '',
+      privateVisaLetter: false,
     },
     shouldShowErrorMessage: false,
   };
@@ -179,6 +180,18 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     );
   };
 
+  togglePrivateVisaLetter = () => {
+    this.setState(
+      {
+        extraServices: {
+          ...this.state.extraServices,
+          privateVisaLetter: !this.state.extraServices.privateVisaLetter,
+        },
+      },
+      () => this.updateStepOneToStore(),
+    );
+  };
+
   updateStepOneToStore = () => {
     this.props.updateStepOne(this.state);
   };
@@ -276,6 +289,31 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             onChange={this.updateCarPickup}
             options={carPickUpOptions}
           />
+        </Flexbox>
+
+        <Flexbox alignItems="flex-start" paddingBottom={3} column width="100%">
+          <Label
+            display="flex"
+            alignItems="center"
+            cursor="pointer"
+            data-tip="
+                  <div style='max-width: 250px; text-align: center;'>
+                    <p>Because of Vietnam Immigration Office policy, they list a number of people on the same visa letter, so we offer private/confidential visa letter is showing your name or your group in 1 letter without others name on your letter.</p>
+                    <p>But you have to pay extra 8 USD/letter for you or your group.</p>
+                  </div>"
+            data-html
+          >
+            <Input
+              type="checkbox"
+              onChange={this.togglePrivateVisaLetter}
+              value={extraServices.privateVisaLetter}
+              marginRight={spacingValues.s}
+            />
+            <Text>
+              Private visa letter&nbsp;
+              <i className="fa fa-question-circle-o" />
+            </Text>
+          </Label>
         </Flexbox>
       </Flexbox>
     );
