@@ -77,9 +77,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
     client: {
       sandbox:
-        'ARbpiltFosCc8bt1e1DnQvUeaWirbKNSdfNccETRH2cOnTn6jB5sg7tOTaHCMlyZngMBSgGIvZOCOk6S',
+        'AfrAzUUAV1ZrMzohzMi77Mrt0Nt8NWjX0YIm0kyWe3i2usiNKFyAi6kMtgvVcgITe4PNqh4p5xZyRJOa',
       production:
-        'AeposU75PsU1HDeKovqhb-komh_0cm5uJlbecPvnN4epIla8DyfOwTTvbrup8UWGv6vRiUMXPXFL-6kz',
+        'AY3OKXbVGVvkPFnhJjR3A95t7Cf2Dqdza6OB_W38fGZZ-CjIf-yMD4hqNieLT9-R9vTk2Z3gedfSh1hC',
     },
     commit: true,
     style: {
@@ -218,7 +218,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         transactions: [
           {
             // TODO: get amount from store
-            amount: { total: '1.00', currency: 'USD' },
+            amount: { total: '15.00', currency: 'USD' },
           },
         ],
       },
