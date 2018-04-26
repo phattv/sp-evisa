@@ -3,3 +3,7 @@
 
 - Add full-flow Apply form: 3 steps with Review form 
 - Fix bugs
+
+### v2.0.1 (April 27th, 2018)
+
+- Change to paypal business account, hard-code price for 15 usd
