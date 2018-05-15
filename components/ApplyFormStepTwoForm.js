@@ -121,24 +121,14 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
   fillInMeData = () => {
     const { thisIsMe } = this.state;
     if (thisIsMe) {
-      const {
-        account: {
-          name = '',
-          country_id = '',
-          birthday = '',
-          passport = '',
-          passport_expiry = '',
-          gender = '',
-        },
-      } = this.props;
-
+      const { account } = this.props;
       this.setState({
-        name,
-        country_id,
-        birthday,
-        passport,
-        passport_expiry,
-        gender,
+        name: account.name || '',
+        country_id: account.country_id || '',
+        birthday: account.birthday || '',
+        passport: account.passport || '',
+        passport_expiry: account.passport_expiry || '',
+        gender: account.gender || '',
       });
     } else {
       this.setState({
