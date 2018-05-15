@@ -20,7 +20,7 @@ type Props = {
   updateStepThree: Object => void,
   onSubmit: () => void,
   goBack: Object => void,
-  contact: Object,
+  account: Object,
   guest: Object,
 };
 type State = {
@@ -69,13 +69,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   onSubmit = () => {
     const { isTermsAgreed } = this.state;
-    const { contact, guest } = this.props;
+    const { account, guest } = this.props;
 
     const shouldShowErrorMessage =
-      !isTermsAgreed ||
-      isEmpty(contact) ||
-      isEmpty(guest) ||
-      (!guest.name || !guest.email || !guest.phone);
+      !isTermsAgreed || (isEmpty(account) && isEmpty(guest));
 
     this.setState({
       shouldShowSuccessMessage: !shouldShowErrorMessage,
@@ -288,7 +285,7 @@ const mapStateToProps = store => {
   return {
     stepTwo: store[reducerNames.form].stepTwo,
     stepThree: store[reducerNames.form].stepThree,
-    contact: store[reducerNames.contact],
+    account: store[reducerNames.account],
     guest: store[reducerNames.guest],
   };
 };
