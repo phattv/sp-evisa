@@ -92,19 +92,25 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateCountry = (selectedOption: Object) => {
-    this.setState(
-      {
-        country: selectedOption ? selectedOption.value : '',
-      },
-      () => {
-        this.updateStepOneToStore();
-        this.props.updateFeesSelectedCountry(selectedOption.value);
-        getFeesByCountryId(
-          { countryId: selectedOption.value },
-          this.updateFees,
-        );
-      },
-    );
+    if (selectedOption) {
+      this.setState(
+        {
+          country: selectedOption.value,
+        },
+        () => {
+          this.updateStepOneToStore();
+          this.props.updateFeesSelectedCountry(selectedOption.value);
+          getFeesByCountryId(
+            { countryId: selectedOption.value },
+            this.updateFees,
+          );
+        },
+      );
+    } else {
+      this.setState({
+        country: '',
+      });
+    }
   };
 
   updateFees = data => {
@@ -307,6 +313,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               type="checkbox"
               onChange={this.togglePrivateVisaLetter}
               value={extraServices.privateVisaLetter}
+              checked={extraServices.privateVisaLetter}
               marginRight={spacingValues.s}
             />
             <Text>
