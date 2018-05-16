@@ -15,6 +15,7 @@ const formInitialState = {
   },
   stepTwo: {},
   stepThree: {},
+  price: 0,
 };
 
 /**
@@ -42,6 +43,11 @@ const form = (state: Store = formInitialState, action: Object) => {
     case actionTypes.UPDATE_STEP_THREE: {
       return Object.assign({}, state, {
         stepThree: action.payload,
+      });
+    }
+    case actionTypes.UPDATE_PRICE: {
+      return Object.assign({}, state, {
+        price: action.payload,
       });
     }
     default: {

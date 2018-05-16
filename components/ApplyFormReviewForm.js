@@ -11,7 +11,7 @@ import { Anchor, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { configureStore } from '../redux/store';
 import { reducerNames } from '../constants/reducerNames';
-import { updateGuest } from '../redux/actions';
+import { updateGuest, updatePrice } from '../redux/actions';
 import {
   typeOptions,
   airportOptions,
@@ -29,6 +29,7 @@ type Props = {
   fees: Array<Object>,
   account: Object,
   updateGuest: Object => void,
+  updatePrice: number => void,
 };
 type State = {
   costPerPerson: number,
@@ -143,7 +144,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
     this.setState({
       totalFee,
-    });
+    }, () => this.props.updatePrice(totalFee));
   };
 
   componentDidMount() {
@@ -635,6 +636,7 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = {
   updateGuest,
+  updatePrice
 };
 export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm,
