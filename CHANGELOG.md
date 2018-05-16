@@ -7,3 +7,7 @@
 ### v2.0.1 (April 27th, 2018)
 
 - Change to paypal business account, hard-code price for 15 usd
+
+### v2.1.0 (May 16th, 2018)
+
+- Call `POST /order` to save order to database
