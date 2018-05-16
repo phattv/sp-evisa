@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Div } from 'glamorous';
 import withRedux from 'next-redux-wrapper';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import get from 'lodash/get';
 // custom
 import { Content, Flexbox, Layout, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
@@ -11,8 +12,16 @@ import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import { configureStore } from '../redux/store';
+import { order } from '../utils/apiClient';
+import { reducerNames } from '../constants/reducerNames';
 
-type Props = {};
+type Props = {
+  stepOne: Object,
+  stepTwo: Object,
+  stepThree: Object,
+  account: Object,
+  guest: Object,
+};
 type State = {
   currentTabIndex: number,
 };
@@ -28,8 +37,44 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   };
 
   finishForm = () => {
-    // TODO: make API call to save order
-    console.log('xxx', 'form is finished');
+    const { stepOne, stepTwo, stepThree, account, guest } = this.props;
+
+    const price = 9999;
+    let contact;
+    let applicants;
+    try {
+      contact = JSON.stringify(account || guest);
+      applicants = JSON.stringify(stepTwo);
+    } catch (exception) {
+      contact = '';
+      applicants = '';
+    }
+
+    // prepare params
+    const params = {
+      price,
+      country_id: get(stepOne, 'country', ''),
+      quantity: get(stepOne, 'quantity', ''),
+      type: get(stepOne, 'type', ''),
+      purpose: get(stepOne, 'purpose', ''),
+      processing_time: get(stepOne, 'processingTime', ''),
+      airport: get(stepOne, 'airport', ''),
+      arrival_date: get(stepOne, 'arrivalDate', ''),
+      departure_date: get(stepOne, 'departureDate', ''),
+      airport_fast_track: get(stepOne, 'extraServices.fastTrack', ''),
+      car_pick_up: get(stepOne, 'extraServices.carPickup', ''),
+      private_visa_letter: get(
+        stepOne,
+        'extraServices.privateVisaLetter',
+        false,
+      ),
+      contact,
+      applicants,
+      flight_number: get(stepThree, 'flightNumber', ''),
+    };
+    console.log('xxx', params);
+
+    order(params, () => console.log('xxx', 'form is finished'));
   };
 
   componentDidMount() {
@@ -128,7 +173,15 @@ class CustomTab extends React.Component<CustomTabProps> {
   }
 }
 
-const mapStateToProps = null;
+const mapStateToProps = store => {
+  return {
+    stepOne: store[reducerNames.form].stepOne,
+    stepTwo: store[reducerNames.form].stepTwo,
+    stepThree: store[reducerNames.form].stepThree,
+    account: store[reducerNames.account],
+    guest: store[reducerNames.guest],
+  };
+};
 const mapDispatchToProps = {};
 export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyVisaOnline,
