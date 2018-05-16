@@ -19,6 +19,7 @@ type Props = {
   stepOne: Object,
   stepTwo: Object,
   stepThree: Object,
+  price: number,
   account: Object,
   guest: Object,
 };
@@ -37,9 +38,8 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   };
 
   finishForm = () => {
-    const { stepOne, stepTwo, stepThree, account, guest } = this.props;
+    const { stepOne, stepTwo, stepThree, price, account, guest } = this.props;
 
-    const price = 9999;
     let contact;
     let applicants;
     try {
@@ -178,6 +178,7 @@ const mapStateToProps = store => {
     stepOne: store[reducerNames.form].stepOne,
     stepTwo: store[reducerNames.form].stepTwo,
     stepThree: store[reducerNames.form].stepThree,
+    price: store[reducerNames.form].price,
     account: store[reducerNames.account],
     guest: store[reducerNames.guest],
   };
