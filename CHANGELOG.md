@@ -15,3 +15,7 @@
 ### v2.2.0 (May 17th, 2018)
 
 - Get price from store and set for paypal checkout
+
+### v2.3.0 (May 17th, 2018)
+
+- Add crisp messenger app
