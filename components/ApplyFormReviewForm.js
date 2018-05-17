@@ -11,7 +11,7 @@ import { Anchor, Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { configureStore } from '../redux/store';
 import { reducerNames } from '../constants/reducerNames';
-import { updateGuest, updatePrice } from '../redux/actions';
+import { updateGuest, updatePrice, updatePaymentStatus } from '../redux/actions';
 import {
   typeOptions,
   airportOptions,
@@ -30,6 +30,7 @@ type Props = {
   account: Object,
   updateGuest: Object => void,
   updatePrice: number => void,
+  updatePaymentStatus: boolean => void,
   price: number,
 };
 type State = {
@@ -154,6 +155,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       isPaypalLoaded: true,
     });
     this.syncStateAndCalculateTotalFee(this.props);
+    this.props.updatePaymentStatus(false)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -215,6 +217,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
   //<editor-fold desc="Paypal configs">
   payment = (data, actions) => {
+    this.props.updatePaymentStatus(false)
     const { price } = this.props;
 
     return actions.payment.create({
@@ -234,6 +237,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     console.log('PayerID = ', data.payerID);
 
     return actions.payment.execute().then(function(payment) {
+      this.props.updatePaymentStatus(true)
       alert('Payment Succeeded!');
       // The payment is complete!
       // You can now show a confirmation message to the customer
@@ -241,11 +245,13 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
 
   onCancel = (data, actions) => {
+    this.props.updatePaymentStatus(false)
     console.log('The payment was cancelled!');
     console.log('Payment ID = ', data.paymentID);
   };
 
   onError = error => {
+    this.props.updatePaymentStatus(false)
     console.error('paypal error', error);
   };
   //</editor-fold>
@@ -639,7 +645,8 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = {
   updateGuest,
-  updatePrice
+  updatePrice,
+  updatePaymentStatus,
 };
 export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm,

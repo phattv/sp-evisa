@@ -72,7 +72,6 @@ class ApplyVisaOnline extends React.Component<Props, State> {
       applicants,
       flight_number: get(stepThree, 'flightNumber', ''),
     };
-    console.log('xxx', params);
 
     order(params, () => console.log('xxx', 'form is finished'));
   };
