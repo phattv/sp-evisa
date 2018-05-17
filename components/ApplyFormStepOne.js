@@ -68,7 +68,16 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   onSubmit = (event: Object) => {
-    const { country, quantity, type, processingTime, purpose } = this.state;
+    const {
+      country,
+      quantity,
+      type,
+      processingTime,
+      purpose,
+      airport,
+      arrivalDate,
+      departureDate,
+    } = this.state;
 
     // required fields
     const shouldShowErrorMessage =
@@ -76,7 +85,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       parseInt(quantity) <= 0 ||
       !type ||
       !processingTime ||
-      !purpose;
+      !purpose ||
+      !airport ||
+      !arrivalDate ||
+      !departureDate;
     this.setState({
       shouldShowErrorMessage,
     });
@@ -446,7 +458,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>ARRIVAL AIRPORT</Text>
+                <Text bold>
+                  ARRIVAL AIRPORT&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Select
                   value={airport}
                   placeholder="Select..."
@@ -460,7 +474,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>ARRIVAL DATE</Text>
+                <Text bold>
+                  ARRIVAL DATE&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Input
                   name="arrivalDate"
                   type="date"
@@ -479,7 +495,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                 column
                 width="100%"
               >
-                <Text bold>DEPARTURE DATE</Text>
+                <Text bold>
+                  DEPARTURE DATE&nbsp;<Text color="visaRed">*</Text>
+                </Text>
                 <Input
                   name="departureDate"
                   type="date"
