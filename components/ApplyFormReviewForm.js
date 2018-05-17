@@ -30,6 +30,7 @@ type Props = {
   account: Object,
   updateGuest: Object => void,
   updatePrice: number => void,
+  price: number,
 };
 type State = {
   costPerPerson: number,
@@ -214,12 +215,13 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
   //<editor-fold desc="Paypal configs">
   payment = (data, actions) => {
+    const { price } = this.props;
+
     return actions.payment.create({
       payment: {
         transactions: [
           {
-            // TODO: get amount from store
-            amount: { total: '15.00', currency: 'USD' },
+            amount: { total: price.toFixed(2), currency: 'USD' },
           },
         ],
       },
@@ -632,6 +634,7 @@ const mapStateToProps = store => {
     guest: store[reducerNames.guest],
     stepOne: store[reducerNames.form].stepOne,
     fees: store[reducerNames.fees].fees,
+    price: store[reducerNames.form].price,
   };
 };
 const mapDispatchToProps = {
