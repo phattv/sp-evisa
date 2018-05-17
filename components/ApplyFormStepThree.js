@@ -4,7 +4,7 @@ import * as React from 'react';
 import withRedux from 'next-redux-wrapper';
 import { Form } from 'react-final-form';
 import { Div, Input, Label } from 'glamorous';
-import isEmpty from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 // custom
 import { configureStore } from '../redux/store';
 import { updateStepThree } from '../redux/actions';
@@ -13,6 +13,7 @@ import { borderRadius, colors, spacingValues } from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { reducerNames } from '../constants/reducerNames';
 import { countryOptions } from '../constants/dropDownOptions';
+import { account } from '../redux/reducers/account';
 
 type Props = {
   stepTwo: Object,
@@ -70,9 +71,14 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   onSubmit = () => {
     const { isTermsAgreed } = this.state;
     const { account, guest } = this.props;
+    const contact = isEmpty(account) ? guest : account;
+    const isContactEmpty =
+      isEmpty(contact) ||
+      isEmpty(contact.name) ||
+      isEmpty(contact.email) ||
+      isEmpty(contact.phone);
 
-    const shouldShowErrorMessage =
-      !isTermsAgreed || (isEmpty(account) && isEmpty(guest));
+    const shouldShowErrorMessage = !isTermsAgreed || isContactEmpty;
 
     this.setState({
       shouldShowSuccessMessage: !shouldShowErrorMessage,
@@ -269,7 +275,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
                 {shouldShowErrorMessage && (
                   <Text color="visaRed" textAlign="center">
-                    Please fill in the required inputs & accept Terms of Use
+                    Please fill in the Contact information inputs & accept Terms of Use & pay
                   </Text>
                 )}
               </Flexbox>

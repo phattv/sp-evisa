@@ -5,6 +5,7 @@ import { Div } from 'glamorous';
 import withRedux from 'next-redux-wrapper';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
 // custom
 import { Content, Flexbox, Layout, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
@@ -43,7 +44,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     let contact;
     let applicants;
     try {
-      contact = JSON.stringify(account || guest);
+      contact = JSON.stringify(isEmpty(account) ? guest : account);
       applicants = JSON.stringify(stepTwo);
     } catch (exception) {
       contact = '';
