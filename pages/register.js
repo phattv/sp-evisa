@@ -47,10 +47,6 @@ class Register extends React.Component<Props, State> {
     errorMessage: '',
   };
 
-  componentDidMount() {
-    window.Intercom('update');
-  }
-
   updateTextField = (event: Object) => {
     this.setState({
       [event.target.name]: event.target.value,

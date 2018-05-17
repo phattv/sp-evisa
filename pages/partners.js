@@ -15,10 +15,6 @@ import {
 import { configureStore } from '../redux/store'
 
 class Partners extends React.Component {
-  componentDidMount() {
-    window.Intercom("update");
-  }
-
   render() {
     return (
       <Layout>

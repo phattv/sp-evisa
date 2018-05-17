@@ -77,10 +77,6 @@ class ApplyVisaOnline extends React.Component<Props, State> {
     order(params, () => console.log('xxx', 'form is finished'));
   };
 
-  componentDidMount() {
-    window.Intercom('update');
-  }
-
   render() {
     const { currentTabIndex } = this.state;
     return (
@@ -150,7 +146,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   }
 }
 
-type CustomfTabProps = {
+type CustomTabProps = {
   children: React.Node,
   index: number,
   currentIndex: number,

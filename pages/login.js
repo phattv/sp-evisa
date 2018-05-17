@@ -40,8 +40,6 @@ class Login extends React.Component<Props, State> {
     const { account } = this.props
     if (account && Object.keys(account).length > 0) {
       Router.push('/').then(() => window.scrollTo(0, 0));
-    } else {
-      window.Intercom('update');
     }
   }
 

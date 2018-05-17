@@ -17,10 +17,6 @@ import { companyInfo } from '../constants/companyInfo';
 import { configureStore } from '../redux/store';
 
 class AboutUs extends React.Component {
-  componentDidMount() {
-    window.Intercom("update");
-  }
-
   render() {
     return (
       <Layout>

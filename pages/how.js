@@ -17,10 +17,6 @@ import {
 import { configureStore } from '../redux/store'
 
 class HowToApply extends React.Component {
-  componentDidMount() {
-    window.Intercom('update');
-  }
-
   render() {
     return (
       <Layout>

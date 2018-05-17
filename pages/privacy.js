@@ -97,10 +97,6 @@ class PrivacyPolicy extends React.Component<Props, State> {
     });
   };
 
-  componentDidMount() {
-    window.Intercom("update");
-  }
-
   render() {
     const { shouldShowMore } = this.state;
 

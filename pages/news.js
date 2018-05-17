@@ -16,10 +16,6 @@ import { colors } from '../constants/ui';
 import { configureStore } from '../redux/store'
 
 class News extends React.Component {
-  componentDidMount() {
-    window.Intercom("update");
-  }
-
   render() {
     return (
       <Layout>

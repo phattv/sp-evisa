@@ -81,10 +81,6 @@ class Feedback extends React.Component<Props, State> {
     });
   };
 
-  componentDidMount() {
-    window.Intercom('update');
-  }
-
   updateTextInput = (event: Object) => {
     this.setState({
       [event.target.name]: event.target.value,

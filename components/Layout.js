@@ -24,11 +24,6 @@ export default class Layout extends React.Component<Props> {
         window.GA_INITIALIZED = true;
       }
       logPageView();
-
-      // Init intercom
-      window.Intercom('boot', {
-        app_id: 'a3ouns0a',
-      });
     }
   }
 
@@ -52,7 +47,6 @@ export default class Layout extends React.Component<Props> {
             }; text-align: center; }`}
           </style>
 
-          <script src="../static/intercom.js" />
           <script src="../static/crisp.js" />
         </Head>
 

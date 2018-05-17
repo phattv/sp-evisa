@@ -41,7 +41,6 @@ class VisaFees extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    window.Intercom('update');
     this.syncPropsToState(this.props, true);
   }
 

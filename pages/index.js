@@ -143,10 +143,6 @@ const applyWithConfidence = [
 type Props = {};
 type State = {};
 class Home extends React.Component<Props, State> {
-  componentDidMount() {
-    window.Intercom('update');
-  }
-
   navigateToServices = () => {
     Router.push('/services').then(() => window.scrollTo(0, 0));
   }
