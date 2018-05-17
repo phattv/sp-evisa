@@ -11,3 +11,7 @@
 ### v2.1.0 (May 16th, 2018)
 
 - Call `POST /order` to save order to database
+
+### v2.2.0 (May 17th, 2018)
+
+- Get price from store and set for paypal checkout
