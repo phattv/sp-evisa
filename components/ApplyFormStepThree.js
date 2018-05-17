@@ -261,10 +261,12 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                     &nbsp;&nbsp;BACK
                   </Button>
 
-                  <Button solid onClick={this.onSubmit}>
-                    FINISH&nbsp;&nbsp;
-                    <i className="fa fa-check" />
-                  </Button>
+                  {!shouldShowSuccessMessage && (
+                    <Button solid onClick={this.onSubmit}>
+                      FINISH&nbsp;&nbsp;
+                      <i className="fa fa-check" />
+                    </Button>
+                  )}
                 </Flexbox>
 
                 {shouldShowSuccessMessage && (
@@ -275,7 +277,8 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
                 {shouldShowErrorMessage && (
                   <Text color="visaRed" textAlign="center">
-                    Please fill in the Contact information inputs & accept Terms of Use & pay
+                    Please fill in the Contact information inputs & accept Terms
+                    of Use & pay
                   </Text>
                 )}
               </Flexbox>
