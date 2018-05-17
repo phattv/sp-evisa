@@ -18,6 +18,7 @@ import { account } from '../redux/reducers/account';
 type Props = {
   stepTwo: Object,
   stepThree: Object,
+  paid: boolean,
   updateStepThree: Object => void,
   onSubmit: () => void,
   goBack: Object => void,
@@ -70,7 +71,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   onSubmit = () => {
     const { isTermsAgreed } = this.state;
-    const { account, guest } = this.props;
+    const { account, guest, paid } = this.props;
     const contact = isEmpty(account) ? guest : account;
     const isContactEmpty =
       isEmpty(contact) ||
@@ -78,7 +79,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       isEmpty(contact.email) ||
       isEmpty(contact.phone);
 
-    const shouldShowErrorMessage = !isTermsAgreed || isContactEmpty;
+    const shouldShowErrorMessage = !isTermsAgreed || isContactEmpty || !paid;
 
     this.setState({
       shouldShowSuccessMessage: !shouldShowErrorMessage,
@@ -294,6 +295,7 @@ const mapStateToProps = store => {
   return {
     stepTwo: store[reducerNames.form].stepTwo,
     stepThree: store[reducerNames.form].stepThree,
+    paid: store[reducerNames.form].paid,
     account: store[reducerNames.account],
     guest: store[reducerNames.guest],
   };

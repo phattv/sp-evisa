@@ -39,7 +39,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   };
 
   finishForm = () => {
-    const { stepOne, stepTwo, stepThree, price, account, guest } = this.props;
+    const { stepOne, stepTwo, stepThree, price, paid, account, guest } = this.props;
 
     let contact;
     let applicants;
@@ -72,6 +72,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
       contact,
       applicants,
       flight_number: get(stepThree, 'flightNumber', ''),
+      paid: paid ? 'paid' : 'unpaid'
     };
 
     order(params, () => console.log('xxx', 'form is finished'));
@@ -175,6 +176,7 @@ const mapStateToProps = store => {
     stepTwo: store[reducerNames.form].stepTwo,
     stepThree: store[reducerNames.form].stepThree,
     price: store[reducerNames.form].price,
+    paid: store[reducerNames.form].paid,
     account: store[reducerNames.account],
     guest: store[reducerNames.guest],
   };
