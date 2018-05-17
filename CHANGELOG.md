@@ -19,3 +19,8 @@
 ### v2.3.0 (May 17th, 2018)
 
 - Add crisp messenger app
+
+### v2.4.0 (May 17th, 2018)
+
+- Fix empty contact bugs
+- Must pay to finish form
