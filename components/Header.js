@@ -104,6 +104,7 @@ class Header extends React.PureComponent<Props, HeaderState> {
 
   render() {
     const { isMenuShowed, menus } = this.state;
+
     return (
       // Paypal z-index: 100
       <Flexbox id={blockId} style={{ zIndex: 101 }}>
@@ -141,15 +142,16 @@ class Header extends React.PureComponent<Props, HeaderState> {
               </Anchor>
             </Flexbox>
             <Flexbox>
-              <Flexbox>
-                <Anchor href={`tel:${companyInfo.phone}`}>
-                  <Flexbox
-                    border
-                    borderColor="visaRed"
-                    paddingHorizontal={2}
-                    paddingVertical={1}
-                    borderRadius
-                  >
+              <Anchor href={`tel:${companyInfo.phone}`}>
+                <Flexbox
+                  border
+                  borderColor="visaRed"
+                  paddingHorizontal={2}
+                  paddingVertical={1}
+                  borderRadius
+                  column
+                >
+                  <Flexbox>
                     <i
                       className="fa fa-fw fa-phone"
                       style={{
@@ -160,30 +162,43 @@ class Header extends React.PureComponent<Props, HeaderState> {
                       HOTLINE
                     </Text>
                   </Flexbox>
-                </Anchor>
-              </Flexbox>
-              <Flexbox
-                border
-                borderColor="visaBlue"
-                paddingHorizontal={2}
-                paddingVertical={1}
-                borderRadius
-                marginLeft={2}
-              >
-                <Anchor href={`mailto:${companyInfo.email}`}>
-                  <Flexbox>
-                    <i
-                      className="fa fa-fw fa-envelope"
-                      style={{
-                        color: colors.visaBlue,
-                      }}
-                    />
-                    <Text color="visaBlue" bold size="s">
-                      EMAIL
+                  <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
+                    <Text color="visaRed" bold size="s">
+                      {companyInfo.phone}
                     </Text>
+                  </Media>
+                </Flexbox>
+              </Anchor>
+              <Anchor href={`mailto:${companyInfo.email}`}>
+                <Flexbox column>
+                  <Flexbox
+                    border
+                    borderColor="visaBlue"
+                    paddingHorizontal={2}
+                    paddingVertical={1}
+                    borderRadius
+                    marginLeft={2}
+                    column
+                  >
+                    <Flexbox>
+                      <i
+                        className="fa fa-fw fa-envelope"
+                        style={{
+                          color: colors.visaBlue,
+                        }}
+                      />
+                      <Text color="visaBlue" bold size="s">
+                        EMAIL
+                      </Text>
+                    </Flexbox>
+                    <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
+                      <Text color="visaBlue" bold size="s">
+                        {companyInfo.email}
+                      </Text>
+                    </Media>
                   </Flexbox>
-                </Anchor>
-              </Flexbox>
+                </Flexbox>
+              </Anchor>
               <Media query={`(max-width: ${screenSizes.tablet}px)`}>
                 <Flexbox paddingLeft={4} onClick={this.updateIsMenuShowed}>
                   <Image src="/static/images/line-hamburger.svg" alt="Menu" />
