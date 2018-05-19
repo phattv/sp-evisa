@@ -199,7 +199,7 @@ class Header extends React.PureComponent<Props, HeaderState> {
                   </Flexbox>
                 </Flexbox>
               </Anchor>
-              <Media query={`(max-width: ${screenSizes.tablet}px)`}>
+              <Media query={`(max-width: ${screenSizes.tablet + 1}px)`}>
                 <Flexbox paddingLeft={4} onClick={this.updateIsMenuShowed}>
                   <Image src="/static/images/line-hamburger.svg" alt="Menu" />
                 </Flexbox>

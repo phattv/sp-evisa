@@ -1,8 +1,8 @@
 // @flow
 const screenSizes = {
-  desktop: 1440 - 1,
-  tablet: 768 - 1,
-  mobile: 425 - 1,
+  desktop: 1440,
+  tablet: 768,
+  mobile: 425,
 };
 
 const spacingUnits = {
