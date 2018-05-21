@@ -17,20 +17,19 @@ import { reducerNames } from '../constants/reducerNames';
 import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
 
-let componentInstance
+let componentInstance;
 
 type Props = {
   stepOne: Object,
   stepTwo: Object,
   stepThree: Object,
   price: number,
-  paid: boolean,
   updateStepThree: Object => void,
   onSubmit: () => void,
   goBack: Object => void,
   account: Object,
   guest: Object,
-  updatePaymentStatus: boolean => void,
+  // updatePaymentStatus: boolean => void,
 };
 type State = {
   hasFlightInfo: boolean,
@@ -48,8 +47,6 @@ type State = {
 };
 
 class ApplyFormStepThree extends React.Component<Props, State> {
-  static defaultProps: Props = {};
-
   state = {
     hasFlightInfo: false,
     flightNumber: '',
@@ -99,30 +96,29 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     });
   };
 
-  onSubmit = () => {
+  shouldDisablePaypalButton = () => {
     const { isTermsAgreed } = this.state;
-    const { account, guest, paid } = this.props;
+    const { account, guest } = this.props;
     const contact = isEmpty(account) ? guest : account;
     const isContactEmpty =
       isEmpty(contact) ||
       isEmpty(contact.name) ||
       isEmpty(contact.email) ||
       isEmpty(contact.phone);
+    return !isTermsAgreed || isContactEmpty;
+  };
 
-    const shouldShowErrorMessage = !isTermsAgreed || isContactEmpty || !paid;
+  onSubmit = () => {
+    const shouldShowErrorMessage = this.shouldDisablePaypalButton();
 
     this.setState({
       shouldShowSuccessMessage: !shouldShowErrorMessage,
       shouldShowErrorMessage,
     });
-
-    if (!shouldShowErrorMessage) {
-      this.finishForm()
-    }
   };
 
   finishForm = () => {
-    const { stepOne, stepTwo, stepThree, price, paid, account, guest } = this.props;
+    const { stepOne, stepTwo, stepThree, price, account, guest } = this.props;
 
     let contact;
     let applicants;
@@ -155,7 +151,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       contact,
       applicants,
       flight_number: get(stepThree, 'flightNumber', ''),
-      status: 'paid'
+      status: 'paid',
     };
 
     order(params, () => console.log('xxx', 'form is finished'));
@@ -210,8 +206,32 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   //<editor-fold desc="Paypal configs">
+  onChangeCheckbox = handler => {
+    document.querySelector('#check').addEventListener('change', handler);
+  };
+
+  toggleButtons = actions => {
+    const shouldDisablePaypalButton = this.shouldDisablePaypalButton();
+
+    if (shouldDisablePaypalButton) {
+      console.log('xxx', 'disable');
+      actions.disable();
+    } else {
+      console.log('xxx', 'enable');
+      actions.enable();
+    }
+  };
+
+  validatePaypal = (actions: any) => {
+    this.toggleButtons(actions);
+
+    this.onChangeCheckbox(() => {
+      this.toggleButtons(actions);
+    });
+  };
+
   payment = (data, actions) => {
-    this.props.updatePaymentStatus(false);
+    // this.props.updatePaymentStatus(false);
     const { price } = this.props;
 
     return actions.payment.create({
@@ -231,29 +251,29 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     console.log('PayerID = ', data.payerID);
 
     return actions.payment.execute().then(function(payment) {
-      console.log('xxxxx', 'Payment Succeeded!');
-      componentInstance.props.updatePaymentStatus(true);
-      componentInstance.finishForm()
+      window.alert('xxxxx', 'Payment Succeeded!');
+      // componentInstance.props.updatePaymentStatus(true);
+      componentInstance.finishForm();
       // The payment is complete!
       // You can now show a confirmation message to the customer
     });
   };
 
   onCancel = (data, actions) => {
-    this.props.updatePaymentStatus(false);
+    // this.props.updatePaymentStatus(false);
     console.log('The payment was cancelled!');
     console.log('Payment ID = ', data.paymentID);
   };
 
   onError = error => {
-    this.props.updatePaymentStatus(false);
+    // this.props.updatePaymentStatus(false);
     console.error('paypal error', error);
   };
   //</editor-fold>
 
   componentDidMount() {
-    componentInstance = this
-    require('../static/paypal-checkout.min');
+    componentInstance = this;
+    require('../static/checkout');
     this.setState({
       isPaypalLoaded: true,
     });
@@ -265,6 +285,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       flightNumber,
       shouldShowSuccessMessage,
       shouldShowErrorMessage,
+      isTermsAgreed,
 
       isPaypalLoaded,
       commit,
@@ -292,7 +313,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
           </Text>
         </Flexbox>
         <Form
-          onSubmit={this.onSubmit}
+          onSubmit={() => {}}
           render={({ handleSubmit, pristine, invalid }) => (
             <Flexbox alignItems="flex-start" flex={1} responsiveLayout>
               <Flexbox
@@ -355,7 +376,27 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                   />
                 </Div>
 
-                <Div width="100%" marginTop={25}>
+                {/* Terms checkbox */}
+                <Label
+                  paddingTop={25}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  cursor="pointer"
+                >
+                  <Input
+                    id="check"
+                    type="checkbox"
+                    onChange={this.updateIsTermsAgreed}
+                    value={isTermsAgreed}
+                    marginRight={spacingValues.s}
+                  />
+                  <Text bold textAlign="center">
+                    I have read and agreed with the Terms of Use
+                  </Text>
+                </Label>
+
+                <Div width="100%" marginTop={10}>
                   {/* Paypal */}
                   {isPaypalLoaded && (
                     <PayPalButton
@@ -363,6 +404,8 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                       env={env}
                       client={client}
                       style={style}
+                      onClick={this.onSubmit}
+                      validate={actions => this.validatePaypal(actions)}
                       payment={(data, actions) => this.payment(data, actions)}
                       onAuthorize={(data, actions) =>
                         this.onAuthorize(data, actions)
@@ -398,9 +441,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                 marginHorizontal={spacingValues.xxs}
                 marginVertical={spacingValues.xxs}
               >
-                <ApplyFormReviewForm
-                  updateIsTermsAgreed={this.updateIsTermsAgreed}
-                />
+                <ApplyFormReviewForm />
 
                 <Flexbox
                   width="100%"
@@ -412,13 +453,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                     <i className="fa fa-arrow-left" />
                     &nbsp;&nbsp;BACK
                   </Button>
-
-                  {/*{!shouldShowSuccessMessage && (*/}
-                    {/*<Button solid onClick={this.onSubmit}>*/}
-                      {/*FINISH&nbsp;&nbsp;*/}
-                      {/*<i className="fa fa-check" />*/}
-                    {/*</Button>*/}
-                  {/*)}*/}
                 </Flexbox>
 
                 {shouldShowSuccessMessage && (
@@ -449,14 +483,13 @@ const mapStateToProps = store => {
     stepThree: store[reducerNames.form].stepThree,
     fees: store[reducerNames.fees].fees,
     price: store[reducerNames.form].price,
-    paid: store[reducerNames.form].paid,
     account: store[reducerNames.account],
     guest: store[reducerNames.guest],
   };
 };
 const mapDispatchToProps = {
   updateStepThree,
-  updatePaymentStatus,
+  // updatePaymentStatus,
 };
 export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormStepThree,
