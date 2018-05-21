@@ -13,7 +13,6 @@ import { reducerNames } from '../constants/reducerNames';
 import {
   updateGuest,
   updatePrice,
-  updatePaymentStatus,
 } from '../redux/actions';
 import {
   typeOptions,
@@ -28,18 +27,15 @@ import { guestInitialState } from '../redux/reducers/guest';
 
 type Props = {
   stepOne: Object,
-  updateIsTermsAgreed: boolean => void,
   fees: Array<Object>,
   account: Object,
   updateGuest: Object => void,
   updatePrice: number => void,
-  updatePaymentStatus: boolean => void,
   price: number,
 };
 type State = {
   costPerPerson: number,
   paymentMethod: string,
-  isTermsAgreed: boolean,
   totalFee: number,
   shouldShowErrorMessage: boolean,
   processingTimeObject: Object,
@@ -56,7 +52,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   state = {
     costPerPerson: 0,
     paymentMethod: '',
-    isTermsAgreed: false,
     totalFee: 0,
     shouldShowErrorMessage: false,
     processingTimeObject: {},
@@ -82,17 +77,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         },
       },
       () => this.props.updateGuest(this.state.guest),
-    );
-  };
-
-  updateIsTermsAgreed = (event: Object) => {
-    const { updateIsTermsAgreed } = this.props;
-    this.setState(
-      {
-        isTermsAgreed: !this.state.isTermsAgreed,
-      },
-      () =>
-        updateIsTermsAgreed && updateIsTermsAgreed(this.state.isTermsAgreed),
     );
   };
 
@@ -135,7 +119,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
   componentDidMount() {
     this.syncStateAndCalculateTotalFee(this.props);
-    this.props.updatePaymentStatus(false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -248,7 +231,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     return (
       <Flexbox
         paddingTop={5}
-        paddingBottom={5}
         display="flex"
         column
         borderTop
@@ -384,7 +366,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
   render() {
     const {
-      stepOne: { airport, arrivalDate, departureDate, isTermsAgreed },
+      stepOne: { airport, arrivalDate, departureDate },
       account,
     } = this.props;
     const { guest: { name, email, phone } } = this.state;
@@ -524,25 +506,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
           {/* Total fee */}
           {this.renderTotalFee()}
-
-          {/* Terms checkbox */}
-          <Label
-            paddingTop={5}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            cursor="pointer"
-          >
-            <Input
-              type="checkbox"
-              onChange={this.updateIsTermsAgreed}
-              value={isTermsAgreed}
-              marginRight={spacingValues.s}
-            />
-            <Text bold textAlign="center">
-              I have read and agreed with the Terms of Use
-            </Text>
-          </Label>
         </Div>
       </Div>
     );
@@ -561,7 +524,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   updateGuest,
   updatePrice,
-  updatePaymentStatus,
 };
 export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm,
