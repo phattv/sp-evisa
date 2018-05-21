@@ -18,6 +18,7 @@ import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
 
 let componentInstance;
+let paypalActions;
 
 type Props = {
   stepOne: Object,
@@ -25,7 +26,6 @@ type Props = {
   stepThree: Object,
   price: number,
   updateStepThree: Object => void,
-  onSubmit: () => void,
   goBack: Object => void,
   account: Object,
   guest: Object,
@@ -90,31 +90,26 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.props.updateStepThree(this.state);
   };
 
-  updateIsTermsAgreed = (isTermsAgreed: boolean) => {
-    this.setState({
-      isTermsAgreed,
-    });
+  updateIsTermsAgreed = () => {
+    this.setState(
+      {
+        isTermsAgreed: !this.state.isTermsAgreed,
+      },
+      () => this.togglePaypalButton(paypalActions),
+    );
   };
 
   shouldDisablePaypalButton = () => {
     const { isTermsAgreed } = this.state;
     const { account, guest } = this.props;
     const contact = isEmpty(account) ? guest : account;
+
     const isContactEmpty =
       isEmpty(contact) ||
       isEmpty(contact.name) ||
       isEmpty(contact.email) ||
       isEmpty(contact.phone);
     return !isTermsAgreed || isContactEmpty;
-  };
-
-  onSubmit = () => {
-    const shouldShowErrorMessage = this.shouldDisablePaypalButton();
-
-    this.setState({
-      shouldShowSuccessMessage: !shouldShowErrorMessage,
-      shouldShowErrorMessage,
-    });
   };
 
   finishForm = () => {
@@ -154,7 +149,12 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       status: 'paid',
     };
 
-    order(params, () => console.log('xxx', 'form is finished'));
+    order(params, () => {
+      this.setState({
+        shouldShowSuccessMessage: true,
+      });
+      console.log('xxx', 'form is finished');
+    });
   };
 
   renderApplicants = () => {
@@ -206,11 +206,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   //<editor-fold desc="Paypal configs">
-  onChangeCheckbox = handler => {
-    document.querySelector('#check').addEventListener('change', handler);
-  };
-
-  toggleButtons = actions => {
+  togglePaypalButton = (actions, callback) => {
     const shouldDisablePaypalButton = this.shouldDisablePaypalButton();
 
     if (shouldDisablePaypalButton) {
@@ -220,14 +216,35 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       console.log('xxx', 'enable');
       actions.enable();
     }
+
+    /**
+     * TODO: update contact information doesn't call togglePaypalButton immediately
+     * REPRODUCE:
+     * - tick accept terms, fill in contact info
+     * - close paypal popup
+     * - remove contact info
+     * - click paypal button
+     * + EXPECTATION: should't be able to click, second time ok
+     * + ACTUAL RESULT: able to click
+     */
+    setTimeout(() => {
+      callback && callback();
+    }, 500);
+  };
+
+  onPaypalClick = () => {
+    this.togglePaypalButton(paypalActions, () => {
+      const shouldShowErrorMessage = this.shouldDisablePaypalButton();
+
+      this.setState({
+        shouldShowErrorMessage,
+      });
+    });
   };
 
   validatePaypal = (actions: any) => {
-    this.toggleButtons(actions);
-
-    this.onChangeCheckbox(() => {
-      this.toggleButtons(actions);
-    });
+    paypalActions = actions;
+    this.togglePaypalButton(actions);
   };
 
   payment = (data, actions) => {
@@ -251,7 +268,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     console.log('PayerID = ', data.payerID);
 
     return actions.payment.execute().then(function(payment) {
-      window.alert('xxxxx', 'Payment Succeeded!');
+      window.alert('Payment Succeeded!');
       // componentInstance.props.updatePaymentStatus(true);
       componentInstance.finishForm();
       // The payment is complete!
@@ -385,7 +402,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                   cursor="pointer"
                 >
                   <Input
-                    id="check"
                     type="checkbox"
                     onChange={this.updateIsTermsAgreed}
                     value={isTermsAgreed}
@@ -404,7 +420,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
                       env={env}
                       client={client}
                       style={style}
-                      onClick={this.onSubmit}
+                      onClick={this.onPaypalClick}
                       validate={actions => this.validatePaypal(actions)}
                       payment={(data, actions) => this.payment(data, actions)}
                       onAuthorize={(data, actions) =>
