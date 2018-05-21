@@ -154,6 +154,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         shouldShowSuccessMessage: true,
       });
       console.log('xxx', 'form is finished');
+
+      setTimeout(() => {
+        window.location = '/'
+      }, 1000)
     });
   };
 
@@ -209,7 +213,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   togglePaypalButton = (actions, callback) => {
     const shouldDisablePaypalButton = this.shouldDisablePaypalButton();
 
-    if (shouldDisablePaypalButton) {
+    if (shouldDisablePaypalButton && actions) {
       console.log('xxx', 'disable');
       actions.disable();
     } else {
