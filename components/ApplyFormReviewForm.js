@@ -48,11 +48,11 @@ type State = {
 
   guest: Object,
 
-  isPaypalLoaded: boolean,
-  env: string,
-  client: Object,
-  commit: boolean,
-  style: Object,
+  // isPaypalLoaded: boolean,
+  // env: string,
+  // client: Object,
+  // commit: boolean,
+  // style: Object,
 };
 
 class ApplyFormReviewForm extends React.Component<Props, State> {
@@ -75,21 +75,21 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       phone: '',
     },
 
-    // Paypal configs:
-    isPaypalLoaded: false,
-    env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
-    client: {
-      sandbox:
-        'AfrAzUUAV1ZrMzohzMi77Mrt0Nt8NWjX0YIm0kyWe3i2usiNKFyAi6kMtgvVcgITe4PNqh4p5xZyRJOa',
-      production:
-        'AY3OKXbVGVvkPFnhJjR3A95t7Cf2Dqdza6OB_W38fGZZ-CjIf-yMD4hqNieLT9-R9vTk2Z3gedfSh1hC',
-    },
-    commit: true,
-    style: {
-      size: 'responsive',
-      label: 'pay',
-      fundingicons: true,
-    },
+    // // Paypal configs:
+    // isPaypalLoaded: false,
+    // env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
+    // client: {
+    //   sandbox:
+    //     'AfrAzUUAV1ZrMzohzMi77Mrt0Nt8NWjX0YIm0kyWe3i2usiNKFyAi6kMtgvVcgITe4PNqh4p5xZyRJOa',
+    //   production:
+    //     'AY3OKXbVGVvkPFnhJjR3A95t7Cf2Dqdza6OB_W38fGZZ-CjIf-yMD4hqNieLT9-R9vTk2Z3gedfSh1hC',
+    // },
+    // commit: true,
+    // style: {
+    //   size: 'responsive',
+    //   label: 'pay',
+    //   fundingicons: true,
+    // },
   };
 
   updateGuestTextField = (event: Object) => {
@@ -150,10 +150,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    require('../static/paypal-checkout.min');
-    this.setState({
-      isPaypalLoaded: true,
-    });
+    // require('../static/paypal-checkout.min');
+    // this.setState({
+    //   isPaypalLoaded: true,
+    // });
     this.syncStateAndCalculateTotalFee(this.props);
     this.props.updatePaymentStatus(false)
   }
@@ -215,46 +215,46 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     );
   };
 
-  //<editor-fold desc="Paypal configs">
-  payment = (data, actions) => {
-    this.props.updatePaymentStatus(false)
-    const { price } = this.props;
-
-    return actions.payment.create({
-      payment: {
-        transactions: [
-          {
-            amount: { total: price.toFixed(2), currency: 'USD' },
-          },
-        ],
-      },
-    });
-  };
-
-  onAuthorize = (data, actions) => {
-    console.log('The payment was authorized!');
-    console.log('Payment ID = ', data.paymentID);
-    console.log('PayerID = ', data.payerID);
-
-    return actions.payment.execute().then(function(payment) {
-      this.props.updatePaymentStatus(true)
-      alert('Payment Succeeded!');
-      // The payment is complete!
-      // You can now show a confirmation message to the customer
-    });
-  };
-
-  onCancel = (data, actions) => {
-    this.props.updatePaymentStatus(false)
-    console.log('The payment was cancelled!');
-    console.log('Payment ID = ', data.paymentID);
-  };
-
-  onError = error => {
-    this.props.updatePaymentStatus(false)
-    console.error('paypal error', error);
-  };
-  //</editor-fold>
+  // //<editor-fold desc="Paypal configs">
+  // payment = (data, actions) => {
+  //   this.props.updatePaymentStatus(false)
+  //   const { price } = this.props;
+  //
+  //   return actions.payment.create({
+  //     payment: {
+  //       transactions: [
+  //         {
+  //           amount: { total: price.toFixed(2), currency: 'USD' },
+  //         },
+  //       ],
+  //     },
+  //   });
+  // };
+  //
+  // onAuthorize = (data, actions) => {
+  //   console.log('The payment was authorized!');
+  //   console.log('Payment ID = ', data.paymentID);
+  //   console.log('PayerID = ', data.payerID);
+  //
+  //   return actions.payment.execute().then(function(payment) {
+  //     this.props.updatePaymentStatus(true)
+  //     alert('Payment Succeeded!');
+  //     // The payment is complete!
+  //     // You can now show a confirmation message to the customer
+  //   });
+  // };
+  //
+  // onCancel = (data, actions) => {
+  //   this.props.updatePaymentStatus(false)
+  //   console.log('The payment was cancelled!');
+  //   console.log('Payment ID = ', data.paymentID);
+  // };
+  //
+  // onError = error => {
+  //   this.props.updatePaymentStatus(false)
+  //   console.error('paypal error', error);
+  // };
+  // //</editor-fold>
 
   //<editor-fold desc="render functions">
   renderType = (type: string) => {
@@ -447,19 +447,19 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       account,
     } = this.props;
     const {
-      commit,
-      env,
-      client,
-      style,
-      isPaypalLoaded,
+      // commit,
+      // env,
+      // client,
+      // style,
+      // isPaypalLoaded,
       guest: { name, email, phone },
     } = this.state;
     const isLoggedIn = account && Object.keys(account).length > 0;
 
-    let PayPalButton = React.Fragment;
-    if (isPaypalLoaded) {
-      PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
-    }
+    // let PayPalButton = React.Fragment;
+    // if (isPaypalLoaded) {
+    //   PayPalButton = paypal.Button.driver('react', { React, ReactDOM });
+    // }
 
     return (
       <Div>
@@ -596,23 +596,23 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           {/* Total fee */}
           {this.renderTotalFee()}
 
-          {/* Paypal */}
-          {isPaypalLoaded && (
-            <PayPalButton
-              commit={commit}
-              env={env}
-              client={client}
-              style={style}
-              payment={(data, actions) => this.payment(data, actions)}
-              onAuthorize={(data, actions) => this.onAuthorize(data, actions)}
-              onCanccel={(data, actions) => this.onCancel(data, actions)}
-              onError={error => this.onError(error)}
-            />
-          )}
+          {/*/!* Paypal *!/*/}
+          {/*{isPaypalLoaded && (*/}
+            {/*<PayPalButton*/}
+              {/*commit={commit}*/}
+              {/*env={env}*/}
+              {/*client={client}*/}
+              {/*style={style}*/}
+              {/*payment={(data, actions) => this.payment(data, actions)}*/}
+              {/*onAuthorize={(data, actions) => this.onAuthorize(data, actions)}*/}
+              {/*onCanccel={(data, actions) => this.onCancel(data, actions)}*/}
+              {/*onError={error => this.onError(error)}*/}
+            {/*/>*/}
+          {/*)}*/}
 
           {/* Terms checkbox */}
           <Label
-            paddingTop={16}
+            paddingTop={5}
             display="flex"
             alignItems="center"
             justifyContent="center"
