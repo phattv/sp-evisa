@@ -6,6 +6,7 @@ import Select from 'react-select';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import withRedux from 'next-redux-wrapper';
+import dayjs from 'dayjs';
 // custom
 import { Flexbox, Text } from '../components';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
@@ -122,23 +123,35 @@ class ApplyFormStepTwoForm extends React.Component<Props, State> {
     const { thisIsMe } = this.state;
     if (thisIsMe) {
       const { account } = this.props;
-      this.setState({
-        name: account.name || '',
-        country_id: account.country_id || '',
-        birthday: account.birthday || '',
-        passport: account.passport || '',
-        passport_expiry: account.passport_expiry || '',
-        gender: account.gender || '',
-      });
+      this.setState(
+        {
+          name: account.name || '',
+          country_id: account.country_id || '',
+          birthday:
+            (account.birthday &&
+              dayjs(account.birthday).format('YYYY-MM-DD')) ||
+            '',
+          passport: account.passport || '',
+          passport_expiry:
+            (account.passport_expiry &&
+              dayjs(account.passport_expiry).format('YYYY-MM-DD')) ||
+            '',
+          gender: account.gender || '',
+        },
+        () => this.updateStore(),
+      );
     } else {
-      this.setState({
-        name: '',
-        country_id: '',
-        birthday: '',
-        passport: '',
-        passport_expiry: '',
-        gender: '',
-      });
+      this.setState(
+        {
+          name: '',
+          country_id: '',
+          birthday: '',
+          passport: '',
+          passport_expiry: '',
+          gender: '',
+        },
+        () => this.updateStore(),
+      );
     }
   };
 

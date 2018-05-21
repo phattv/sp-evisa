@@ -17,6 +17,7 @@
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "dayjs": "^1.6.2",
     "express": "^4.16.2",
     "final-form": "^3.0.0",
     "glamor": "^2.20.40",
