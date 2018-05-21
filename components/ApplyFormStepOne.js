@@ -149,13 +149,26 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       () => this.updateStepOneToStore(),
     );
 
-  updateProcessingTime = (selectedOption: Object) =>
+  updateProcessingTime = (selectedOption: Object) => {
+    if (selectedOption.value === 'emergency') {
+      this.setState(
+        {
+          extraServices: {
+            ...this.state.extraServices,
+            fastTrack: airportFastTrackOptions[1].value,
+          },
+        },
+        () => this.updateStepOneToStore(),
+      );
+    }
+
     this.setState(
       {
         processingTime: selectedOption ? selectedOption.value : '',
       },
       () => this.updateStepOneToStore(),
     );
+  }
 
   updatePurpose = (selectedOption: Object) =>
     this.setState(
