@@ -25,8 +25,12 @@
 - Fix empty contact bugs
 - Must pay to finish form
 
-### v2.5.0 (May 21th, 2018)
+### v2.5.0 (May 21st, 2018)
 
 - Move paypal button to step 3
 - Enable/Disable paypal button based on terms checkbox & contact information
 - Auto apply airport fast track serivce if processing time is emergency 
+
+### v2.5.1 (May 31st, 2018)
+
+- Update title & meta tags 
