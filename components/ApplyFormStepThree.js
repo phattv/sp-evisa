@@ -7,11 +7,17 @@ import { Div, Input, Label } from 'glamorous';
 import ReactDOM from 'react-dom';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import dayjs from 'dayjs';
 // custom
 import { configureStore } from '../redux/store';
 import { updatePaymentStatus, updateStepThree } from '../redux/actions';
 import { Button, Flexbox, Text } from '../components';
-import { borderRadius, colors, spacingValues } from '../constants/ui';
+import {
+  borderRadius,
+  colors,
+  postgresDateFormat,
+  spacingValues,
+} from '../constants/ui';
 import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { reducerNames } from '../constants/reducerNames';
 import { countryOptions } from '../constants/dropDownOptions';
@@ -125,6 +131,13 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       applicants = '';
     }
 
+    const arrivalDate = get(stepOne, 'arrivalDate', '')
+      ? dayjs(stepOne.arrivalDate).format(postgresDateFormat)
+      : '';
+    const departureDate = get(stepOne, 'departureDate', '')
+      ? dayjs(stepOne.departureDate).format(postgresDateFormat)
+      : '';
+
     // prepare params
     const params = {
       price,
@@ -134,8 +147,8 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       purpose: get(stepOne, 'purpose', ''),
       processing_time: get(stepOne, 'processingTime', ''),
       airport: get(stepOne, 'airport', ''),
-      arrival_date: get(stepOne, 'arrivalDate', ''),
-      departure_date: get(stepOne, 'departureDate', ''),
+      arrival_date: arrivalDate,
+      departure_date: departureDate,
       airport_fast_track: get(stepOne, 'extraServices.fastTrack', ''),
       car_pick_up: get(stepOne, 'extraServices.carPickup', ''),
       private_visa_letter: get(
@@ -213,12 +226,14 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   togglePaypalButton = (actions, callback) => {
     const shouldDisablePaypalButton = this.shouldDisablePaypalButton();
 
-    if (shouldDisablePaypalButton && actions) {
-      console.log('xxx', 'disable');
-      actions.disable();
-    } else {
-      console.log('xxx', 'enable');
-      actions.enable();
+    if (actions) {
+      if (shouldDisablePaypalButton) {
+        console.log('xxx', 'disable');
+        actions.disable();
+      } else {
+        console.log('xxx', 'enable');
+        actions.enable();
+      }
     }
 
     /**
