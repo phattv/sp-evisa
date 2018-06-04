@@ -30,7 +30,7 @@ class ApplyVisaOnline extends React.Component<Props, State> {
   render() {
     const { currentTabIndex } = this.state;
     return (
-      <Layout>
+      <Layout title="Apply">
         <Content>
           <Div
             display="flex"

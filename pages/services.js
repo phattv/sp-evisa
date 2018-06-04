@@ -20,7 +20,7 @@ import { configureStore } from '../redux/store';
 class ExtraServices extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Services">
         <Image src="/static/images/services-background.png" />
         <PageHeader header="EXTRA SERVICES" />
         <Content>

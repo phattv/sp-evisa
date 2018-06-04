@@ -96,7 +96,7 @@ class TermsAndCondition extends React.Component<Props, State> {
     const { shouldShowMore } = this.state;
 
     return (
-      <Layout>
+      <Layout title="Terms and Conditions">
         <Image src="/static/images/terms-background.png" />
         <PageHeader header="TERM OF USE" />
         <Content>

@@ -128,7 +128,7 @@ class Feedback extends React.Component<Props, State> {
     } = this.state;
 
     return (
-      <Layout>
+      <Layout title="Feedback">
         <Image src="/static/images/feedback-background.png" />
         <PageHeader header="FEEDBACK" />
         <Content>

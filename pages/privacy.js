@@ -101,7 +101,7 @@ class PrivacyPolicy extends React.Component<Props, State> {
     const { shouldShowMore } = this.state;
 
     return (
-      <Layout>
+      <Layout title="Privacy Policy">
         <Image src="/static/images/privacy-background.png" />
         <PageHeader header="PRIVACY POLICY" />
         <Content>

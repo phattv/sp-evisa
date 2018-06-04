@@ -85,7 +85,7 @@ class Login extends React.Component<Props, State> {
   render() {
     const { email, password, errorMessage } = this.state;
     return (
-      <Layout>
+      <Layout title="Login">
         <Content>
           <Flexbox width="100%">
             <Flexbox

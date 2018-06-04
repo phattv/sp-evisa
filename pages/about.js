@@ -19,7 +19,7 @@ import { configureStore } from '../redux/store';
 class AboutUs extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="About">
         <Image src="/static/images/about-us-background.png" />
         <PageHeader header="ABOUT US" />
         <Content>

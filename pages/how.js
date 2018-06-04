@@ -19,7 +19,7 @@ import { configureStore } from '../redux/store'
 class HowToApply extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="How to Apply">
         <Image src="/static/images/how-to-apply-background.png" />
         <PageHeader header="HOW TO APPLY VISA?" />
         <Content>

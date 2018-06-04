@@ -18,7 +18,7 @@ import { configureStore } from '../redux/store'
 class News extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="News">
         <Image src="/static/images/news-background.png" />
         <PageHeader header="NEWS" />
         <Content>

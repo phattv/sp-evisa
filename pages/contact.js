@@ -30,7 +30,7 @@ class Contact extends React.Component<Props, State> {
 
   render() {
     return (
-      <Layout>
+      <Layout title="Contact">
         <Image src="/static/images/contact-us-background.png" />
         <PageHeader header="CONTACT US" />
         <Content>

@@ -100,7 +100,7 @@ class VisaFees extends React.Component<Props, State> {
     const { countryId, touristFees, businessFees } = this.state;
 
     return (
-      <Layout>
+      <Layout title="Visa Fees">
         <Image src="/static/images/fees-background.png" />
         <PageHeader header="VISA FEES" />
         <Content>

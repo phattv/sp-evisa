@@ -112,7 +112,7 @@ class Register extends React.Component<Props, State> {
       errorMessage,
     } = this.state;
     return (
-      <Layout>
+      <Layout title="Register">
         <Content>
           <Flexbox width="100%">
             <Flexbox

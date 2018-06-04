@@ -17,7 +17,7 @@ import { configureStore } from '../redux/store'
 class Partners extends React.Component {
   render() {
     return (
-      <Layout>
+      <Layout title="Partners">
         <Image src="/static/images/partners-background.png" />
         <PageHeader header="LOCAL PARTNERS" />
         <Content>

@@ -9,6 +9,7 @@ import { Header, Footer } from '../components';
 import { initGA, logPageView } from '../utils/analytics';
 import { colors } from '../constants/ui';
 
+const defaultTitle = 'Trusted & Instant Vietnam Visa Service'
 type Props = {
   children: string | React.Node,
   title?: string,
@@ -33,7 +34,7 @@ export default class Layout extends React.Component<Props> {
     return (
       <Flexbox {...rest}>
         <Head>
-          <title>{title || 'Trusted & Instant Vietnam Visa Service'}</title>
+          <title>{title ? `${defaultTitle} - ${title}` : defaultTitle}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <meta name="application-name" content="evisa-vn.com" />
