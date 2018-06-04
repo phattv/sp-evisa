@@ -6,7 +6,7 @@ const genderOptions = [
   { value: 'female', label: 'Female' },
 ];
 const typeOptions = [
-  { value: 'one_month_single', label: '1 Month single' },
+  { value: 'one_month_single', label: '1 month single' },
   { value: 'one_month_multiple', label: '1 month multiple' },
   { value: 'three_month_single', label: '3 months single' },
   { value: 'three_month_multiple', label: '3 months multiple' },

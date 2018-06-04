@@ -168,7 +168,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       },
       () => this.updateStepOneToStore(),
     );
-  }
+  };
 
   updatePurpose = (selectedOption: Object) =>
     this.setState(
@@ -364,6 +364,13 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       shouldShowErrorMessage,
     } = this.state;
 
+    let typeOptionsByPurpose = [];
+    if (purpose === purposeOptions[0].value) {
+      typeOptionsByPurpose = typeOptions.slice(0, 4);
+    } else {
+      typeOptionsByPurpose = typeOptions;
+    }
+
     return (
       <Form
         onSubmit={this.onSubmit}
@@ -446,7 +453,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   value={type}
                   placeholder="Select..."
                   onChange={this.updateType}
-                  options={typeOptions}
+                  options={typeOptionsByPurpose}
                 />
               </Flexbox>
               <Flexbox
