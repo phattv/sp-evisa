@@ -18,7 +18,7 @@ const purposeOptions = [
   { value: 'business', label: 'Business' },
 ];
 const processingTimeOptions = [
-  { value: 'normal', label: 'Normal (Guaranteed 2 working days)', price: 0 },
+  { value: 'normal', label: 'Normal (Guaranteed 1 working day)', price: 0 },
   {
     value: 'urgent',
     label: 'Urgent (Guaranteed 4-8 working hours)',
