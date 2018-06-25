@@ -2,7 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: evisa-ing
+  annotations:
+    kubernetes.io/tls-acme: "true"
 spec:
+  tls:
+    - secretName: evisa-vn-tls
+      hosts:
+        - evisa-vn.com
   rules:
     - host: evisa-vn.com
       http:
