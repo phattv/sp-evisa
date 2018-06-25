@@ -33,3 +33,6 @@
 
 ### v2.5.3 (June 25th, 2018)
 - Change processing_time from 2 days to 1 day
+
+### v2.5.4 (June 26th, 2018)
+- Enable rollbar & crisp only on production
