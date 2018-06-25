@@ -30,3 +30,6 @@
 ### v2.5.2 (June 5th, 2018)
 - Add & format date & time
 - Hide "6 months multiple" & "1 year multiple" for tourist visa
+
+### v2.5.3 (June 25th, 2018)
+- Change processing_time from 2 days to 1 day
