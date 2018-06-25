@@ -25,6 +25,12 @@ export default class Layout extends React.Component<Props> {
         window.GA_INITIALIZED = true;
       }
       logPageView();
+
+      // Init Crisp
+      import('../static/crisp')
+
+      // Enable Rollbar
+      import('../static/rollbar')
     }
   }
 
@@ -52,8 +58,6 @@ export default class Layout extends React.Component<Props> {
               colors.lightGrey
             }; text-align: center; }`}
           </style>
-
-          <script src="../static/crisp.js" />
         </Head>
 
         <Flexbox column flex={1} minHeight="100vh">
