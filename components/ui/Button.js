@@ -1,11 +1,8 @@
 // @flow
-import styled from "styled-components";
-import Flexbox from "./Flexbox";
-import { colors, screenSizes, spacingUnits } from "../../constants/ui";
-import {
-  generateCommonProps,
-  getSpacingValue
-} from "./generateCommonProps";
+import styled from 'styled-components';
+import Flexbox from './Flexbox';
+import { colors, screenSizes, spacingUnits } from '../../constants/ui';
+import { generateCommonProps, getSpacingValue } from './generateCommonProps';
 
 const Button = styled(Flexbox)`
   user-select: none;
@@ -19,25 +16,25 @@ const Button = styled(Flexbox)`
   ${props =>
     props.solid
       ? `
-color: ${colors[props.color || "white"]};
-background-color: ${colors[props.backgroundColor || "visaRed"]};
-border-color: ${colors[props.backgroundColor || "visaRed"]};
+color: ${colors[props.color || 'white']};
+background-color: ${colors[props.backgroundColor || 'visaRed']};
+border-color: ${colors[props.backgroundColor || 'visaRed']};
         
 &:hover {
-  color: ${colors[props.backgroundColor || "white"]};
-  background-color: ${colors[props.color || "darkRed"]};
-  border-color: ${colors[props.color || "darkRed"]};
+  color: ${colors[props.backgroundColor || 'white']};
+  background-color: ${colors[props.color || 'darkRed']};
+  border-color: ${colors[props.color || 'darkRed']};
 }
 `
       : `
-color: ${colors[props.color || "white"]};
+color: ${colors[props.color || 'white']};
 background-color: transparent;
-border-color: ${colors[props.borderColor || "white"]};
+border-color: ${colors[props.borderColor || 'white']};
 
 &:hover {
-  color: ${colors[props.invertColor || "visaRed"]};
-  background-color: ${colors[props.invertBorderColor || "white"]};
-  border-color: ${colors[props.invertColor || "visaRed"]};
+  color: ${colors[props.invertColor || 'visaRed']};
+  background-color: ${colors[props.invertBorderColor || 'white']};
+  border-color: ${colors[props.invertColor || 'visaRed']};
 }
 `};
   ${props =>
@@ -49,13 +46,14 @@ border-color: ${colors[props.borderColor || "white"]};
       !props.solid && `padding: ${getSpacingValue(3, spacingUnits.desktop)};`};
   }
 
-  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop}px) {
+  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop -
+      1}px) {
     ${props => generateCommonProps(props, spacingUnits.tablet)};
     ${props =>
       !props.solid && `padding: ${getSpacingValue(3, spacingUnits.tablet)};`};
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet}px) {
+  @media only screen and (max-width: ${screenSizes.tablet - 1}px) {
     ${props => generateCommonProps(props, spacingUnits.mobile)};
     ${props =>
       !props.solid && `padding: ${getSpacingValue(3, spacingUnits.mobile)};`};

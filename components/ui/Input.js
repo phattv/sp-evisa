@@ -1,7 +1,7 @@
 // @flow
-import styled from "styled-components";
-import { screenSizes, spacingUnits } from "../../constants/ui";
-import { generateCommonProps } from "./generateCommonProps";
+import styled from 'styled-components';
+import { screenSizes, spacingUnits } from '../../constants/ui';
+import { generateCommonProps } from './generateCommonProps';
 
 const Input = styled.input`
   background-color: white;
@@ -16,11 +16,12 @@ const Input = styled.input`
     ${props => generateCommonProps(props, spacingUnits.desktop)};
   }
 
-  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop}px) {
+  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop -
+      1}px) {
     ${props => generateCommonProps(props, spacingUnits.tablet)};
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet}px) {
+  @media only screen and (max-width: ${screenSizes.tablet - 1}px) {
     ${props => generateCommonProps(props, spacingUnits.mobile)};
   }
 `;
