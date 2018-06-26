@@ -7,7 +7,7 @@ import { logPageView } from '../utils/analytics';
 type Props = {};
 type State = {};
 
-class Home extends Component<Props, State> {
+class About extends Component<Props, State> {
   static defaultProps: Props = {};
 
   state = {};
@@ -17,8 +17,8 @@ class Home extends Component<Props, State> {
   }
 
   render() {
-    return <div>Home page</div>;
+    return <div>About</div>;
   }
 }
 
-export default Home;
+export default About;
