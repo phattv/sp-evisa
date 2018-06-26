@@ -3,15 +3,15 @@ import {
   borderRadius,
   colors,
   fontSizes,
-  spacingUnits
-} from "../../constants/ui";
+  spacingUnits,
+} from '../../constants/ui';
 
 // <editor-fold desc="Helper functions">
 // Convention: all spacing/metric values is based on "spacingUnit"
 export const getSpacingValue = (
   unit: number,
   spacingUnit: number,
-  halve?: boolean
+  halve?: boolean,
 ) => `${halve ? unit * spacingUnit / 2 : unit * spacingUnit}px;`;
 
 export const getLineHeightValue = (unit: number) =>
@@ -19,26 +19,26 @@ export const getLineHeightValue = (unit: number) =>
 
 export const standardizeMetricProp = (
   prop: number | string,
-  spacingUnit: number
+  spacingUnit: number,
 ) =>
-  typeof prop === "number" ? `${getSpacingValue(prop, spacingUnit)}` : prop;
+  typeof prop === 'number' ? `${getSpacingValue(prop, spacingUnit)}` : prop;
 
 const setResponsiveFontSize = (
   fontSize?: string,
-  spacingUnit: number
+  spacingUnit: number,
 ): string => {
   let actualFontSize;
   switch (spacingUnit) {
     case spacingUnits.desktop: {
-      actualFontSize = fontSizes[fontSize || "default"];
+      actualFontSize = fontSizes[fontSize || 'default'];
       break;
     }
     case spacingUnits.tablet: {
-      actualFontSize = fontSizes[fontSize || "default"] - 1;
+      actualFontSize = fontSizes[fontSize || 'default'] - 1;
       break;
     }
     case spacingUnits.mobile: {
-      actualFontSize = fontSizes[fontSize || "default"] - 2;
+      actualFontSize = fontSizes[fontSize || 'default'] - 2;
       break;
     }
     default: {
@@ -54,7 +54,7 @@ const setResponsiveNoPaddingHorizontal = (
   paddingHorizontal: number,
   spacingUnit: number,
   responsiveNoPaddingHorizontal?: boolean,
-  responsivePaddingHorizontal?: boolean
+  responsivePaddingHorizontal?: boolean,
 ) => {
   if (spacingUnit === spacingUnits.mobile) {
     if (responsiveNoPaddingHorizontal) {
@@ -78,7 +78,7 @@ padding-left: ${getSpacingValue(paddingHorizontal, spacingUnit)};
 
 export const generateCommonProps = (
   props: Object,
-  spacingUnit: number
+  spacingUnit: number,
 ): string => {
   return `
 ${setResponsiveFontSize(props.size, spacingUnit)};
@@ -93,7 +93,7 @@ ${props.minWidth &&
 ${props.maxWidth &&
     `max-width: ${
       props.responsiveLayout
-        ? "100%"
+        ? '100%'
         : standardizeMetricProp(props.maxWidth, spacingUnit)
     }`};
 
@@ -122,7 +122,7 @@ ${props.paddingHorizontal &&
       props.paddingHorizontal,
       spacingUnit,
       props.responsiveNoPaddingHorizontal,
-      props.responsivePaddingHorizontal
+      props.responsivePaddingHorizontal,
     )};
   
 ${props.marginTop &&
@@ -145,15 +145,15 @@ ${props.marginHorizontal &&
   `};
 
 ${props.border &&
-    `border: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+    `border: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
 ${props.borderTop &&
-    `border-top: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+    `border-top: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
 ${props.borderRight &&
-    `border-right: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+    `border-right: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
 ${props.borderBottom &&
-    `border-bottom: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+    `border-bottom: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
 ${props.borderLeft &&
-    `border-left: 1px solid ${colors[props.borderColor || "lightGrey"]}`};
+    `border-left: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
 ${props.borderRadius && `border-radius: ${borderRadius}px`};
 ${props.borderTopRightRadius && `border-top-right-radius: ${borderRadius}px`};
 ${props.borderBottomRightRadius &&
@@ -165,22 +165,22 @@ ${props.borderBottomLeftRadius &&
 ${props.overflow && `overflow: ${props.overflow}`};
 ${props.position && `position: ${props.position}`};
 ${
-    typeof props.top === "number"
+    typeof props.top === 'number'
       ? `top: ${getSpacingValue(props.top, spacingUnit)}`
       : null
   };
 ${
-    typeof props.right === "number"
+    typeof props.right === 'number'
       ? `right: ${getSpacingValue(props.right, spacingUnit)}`
       : null
   };
 ${
-    typeof props.bottom === "number"
+    typeof props.bottom === 'number'
       ? `bottom: ${getSpacingValue(props.bottom, spacingUnit)}`
       : null
   };
 ${
-    typeof props.left === "number"
+    typeof props.left === 'number'
       ? `left: ${getSpacingValue(props.left, spacingUnit)}`
       : null
   };
