@@ -10,7 +10,8 @@
     "dev": "next -p 8000",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export -o dist"
+    "export": "next build && next export -o dist",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "axios": "^0.18.0",
