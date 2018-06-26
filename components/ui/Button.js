@@ -5,7 +5,7 @@ import { colors, screenSizes, spacingUnits } from "../../constants/ui";
 import {
   generateCommonProps,
   getSpacingValue
-} from "../utils/generateCommonProps";
+} from "./generateCommonProps";
 
 const Button = styled(Flexbox)`
   user-select: none;

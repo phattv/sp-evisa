@@ -82,10 +82,6 @@ export const generateCommonProps = (
 ): string => {
   return `
 ${setResponsiveFontSize(props.size, spacingUnit)};
-font-family: ${
-    props.bold ? "Lato_Bold" : "Lato_Regular"
-  };
-
 ${props.backgroundColor &&
     `background-color: ${colors[props.backgroundColor]}`};
 

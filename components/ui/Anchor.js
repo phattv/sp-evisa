@@ -8,12 +8,12 @@ import { colors } from '../../constants/ui';
 
 const StyledLink = styled.a`
   text-decoration: none;
-  color: ${props => colors[props.color || 'visaBlue']};
+  color: ${props => colors[props.color || 'green']};
   &:hover {
-    color: ${props => colors[props.activeColor || 'visaRed']};
+    color: ${props => colors[props.activeColor || 'red']};
   }
   &.active {
-    color: ${props => colors[props.activeColor || 'visaRed']};
+    color: ${props => colors[props.activeColor || 'red']};
   }
 `;
 

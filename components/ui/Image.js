@@ -1,7 +1,7 @@
 // @flow
 import styled from "styled-components";
 import { screenSizes, spacingUnits } from "../../constants/ui";
-import generateCommonProps from "../utils/generateCommonProps";
+import generateCommonProps from "./generateCommonProps";
 
 const Image = styled.img`
   width: ${props => (props.fixedWidth ? props.width : props.width || "100%")};

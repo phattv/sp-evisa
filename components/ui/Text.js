@@ -4,16 +4,16 @@ import { colors, screenSizes, spacingUnits } from "../../constants/ui";
 import {
   generateCommonProps,
   getLineHeightValue
-} from "../utils/generateCommonProps";
+} from "./generateCommonProps";
 
 // https://www.w3schools.com/css/css_text.asp
 const Text = styled.span`
-  color: ${props => colors[props.color || "darkGrey"]};
-  line-height: ${props =>
-    getLineHeightValue(props.lineHeight || props.size || "default")};
-
+  color: ${props => colors[props.color || "mediumBlue"]};
+  
   ${props =>
     props.letterSpacing && `letter-spacing: ${props.letterSpacing}px`}};
+  ${props =>
+    props.lineHeight && `line-height: ${props.lineHeight}px`}};
   ${props => props.fontStyle && `font-style: ${props.fontStyle}`}};
   ${props => props.p && `margin-bottom: 15px`}};
   ${props => props.wordSpacing && `word-spacing: ${props.wordSpacing}px`}};

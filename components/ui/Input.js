@@ -1,7 +1,7 @@
 // @flow
 import styled from "styled-components";
 import { screenSizes, spacingUnits } from "../../constants/ui";
-import { generateCommonProps } from "../utils/generateCommonProps";
+import { generateCommonProps } from "./generateCommonProps";
 
 const Input = styled.input`
   background-color: white;
