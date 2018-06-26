@@ -49,7 +49,8 @@ const spacingValues = {
   xxxl: 32,
 };
 
-const headerHeight = 140;
+const headerHeight = 140 / 5;
+const contentMaxWidth = 1440 / 5;
 
 /**
  * NOTES using dayjs library:
@@ -72,4 +73,5 @@ export {
   postgresDateFormat,
   dateTimeFormat,
   headerHeight,
+  contentMaxWidth,
 };

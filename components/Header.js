@@ -6,16 +6,12 @@ import Router from 'next/router';
 import { connect } from 'react-redux';
 // Custom
 import { Anchor, Flexbox, Image, Text } from '../components/ui';
-import { colors, screenSizes } from '../constants/ui';
+import { colors, screenSizes, contentMaxWidth } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { reducerNames } from '../constants/reducerNames';
 import { logout } from '../redux/actions';
 
-const headerHeight = 25;
 const blockId = 'header';
-const styleHtml = `<style>#${blockId} a.active {color: ${
-  colors.visaRed
-}}</style>`;
 const logoutUrl = '/logout';
 
 type Props = {
@@ -107,156 +103,39 @@ class Header extends React.PureComponent<Props, HeaderState> {
 
     return (
       // Paypal z-index: 100
-      <Flexbox id={blockId} style={{ zIndex: 101 }}>
-        <Text
-          dangerouslySetInnerHTML={{
-            __html: styleHtml,
-          }}
-        />
-        <Flexbox
-          width="100%"
-          border
-          position="fixed"
-          top={0}
-          left={0}
-          backgroundColor="white"
-          height={headerHeight}
-          column
-        >
+      <Flexbox style={{ zIndex: 101 }} column>
+        <Flexbox flex={1} height={12} justifyContent={'center'}>
           <Flexbox
-            maxWidth={288}
             width="100%"
-            justifyContent="space-between"
+            maxWidth={contentMaxWidth}
             alignItems="center"
-            paddingVertical={2}
-            paddingHorizontal={6}
+            justifyContent="space-between"
           >
             <Flexbox>
-              <Anchor href="/" as="/">
-                <Image
-                  src="/static/images/logo.png"
-                  alt="evisa logo"
-                  maxWidth={30}
-                  clickable
-                />
-              </Anchor>
+              logo
             </Flexbox>
             <Flexbox>
-              <Anchor href={`tel:${companyInfo.phone}`}>
-                <Flexbox
-                  border
-                  borderColor="visaRed"
-                  paddingHorizontal={2}
-                  paddingVertical={1}
-                  borderRadius
-                  column
-                >
-                  <Flexbox>
-                    <i
-                      className="fa fa-fw fa-phone"
-                      style={{
-                        color: colors.visaRed,
-                      }}
-                    />
-                    <Text color="visaRed" bold size="s">
-                      HOTLINE
-                    </Text>
-                  </Flexbox>
-                  <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
-                    <Text color="visaRed" bold size="s">
-                      {companyInfo.phone}
-                    </Text>
-                  </Media>
-                </Flexbox>
-              </Anchor>
-              <Anchor href={`mailto:${companyInfo.email}`}>
-                <Flexbox column>
-                  <Flexbox
-                    border
-                    borderColor="visaBlue"
-                    paddingHorizontal={2}
-                    paddingVertical={1}
-                    borderRadius
-                    marginLeft={2}
-                    column
-                  >
-                    <Flexbox>
-                      <i
-                        className="fa fa-fw fa-envelope"
-                        style={{
-                          color: colors.visaBlue,
-                        }}
-                      />
-                      <Text color="visaBlue" bold size="s">
-                        EMAIL
-                      </Text>
-                    </Flexbox>
-                    <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
-                      <Text color="visaBlue" bold size="s">
-                        {companyInfo.email}
-                      </Text>
-                    </Media>
-                  </Flexbox>
-                </Flexbox>
-              </Anchor>
-              <Media query={`(max-width: ${screenSizes.tablet + 1}px)`}>
-                <Flexbox paddingLeft={4} onClick={this.updateIsMenuShowed}>
-                  <Image src="/static/images/line-hamburger.svg" alt="Menu" />
-                </Flexbox>
-              </Media>
+              phone number
             </Flexbox>
           </Flexbox>
-          <Flexbox backgroundColor="visaBlue" width="100%">
-            <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
-              <Flexbox>
-                {menus.map((menu, index) => (
-                  <Flexbox
-                    paddingVertical={3}
-                    paddingHorizontal={3}
-                    key={index}
-                  >
-                    <Text
-                      size="m"
-                      color="white"
-                      textAlign="center"
-                      onClick={() => this.navigateToUrl(menu.url)}
-                      clickable
-                    >
-                      {menu.text}
-                    </Text>
-                  </Flexbox>
-                ))}
-              </Flexbox>
-            </Media>
+        </Flexbox>
+        <Flexbox
+          flex={1}
+          height={16}
+          backgroundColor="darkBlue"
+          justifyContent={'center'}
+        >
+          <Flexbox
+            width="100%"
+            maxWidth={contentMaxWidth}
+            aligniItems="center"
+            justifyContent="flex-end"
+          >
+            <Anchor href="/about" color="white" activeColor="green">
+              About
+            </Anchor>
+            <Anchor href="/about">red</Anchor>
           </Flexbox>
-
-          {isMenuShowed ? (
-            <Flexbox
-              column
-              position="fixed"
-              width="100%"
-              top={headerHeight}
-              left={0}
-              backgroundColor="white"
-            >
-              {menus.map((menu, index) => (
-                <Text
-                  key={index}
-                  paddingVertical={3}
-                  paddingHorizontal={3}
-                  clickable
-                  textAlign="center"
-                  width="100%"
-                  borderBottom
-                  bold
-                  color="visaBlue"
-                  onClick={() => this.navigateToUrl(menu.url)}
-                >
-                  {menu.text}
-                </Text>
-              ))}
-            </Flexbox>
-          ) : null}
         </Flexbox>
       </Flexbox>
     );
@@ -269,4 +148,5 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   logout,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+// export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
