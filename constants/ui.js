@@ -4,11 +4,12 @@ const colors = {
   darkGreen: '#28A86D',
   red: '#D53A4D',
   darkRed: '#B83040',
-  blue: '#2C3F60',
+  darkBlue: '#2C3F60',
   mediumBlue: '#5B6C94',
   lightBlue: '#8193A9',
   bgGrey: '#F8F9FC',
   bgGrey2: '#F2F7FF',
+  white: '#FFFFFF'
 };
 
 const fontSizes = {
