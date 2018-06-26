@@ -151,5 +151,4 @@ const mapStateToProps = store => {
 const mapDispatchToProps = {
   logout,
 };
-// export default connect(mapStateToProps, mapDispatchToProps)(Header);
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

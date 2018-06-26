@@ -1,12 +1,16 @@
 // @flow
 // vendor
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
+import withRedux from 'next-redux-wrapper';
 // custom
 import Layout from '../components/Layout';
 import { initGA } from '../utils/analytics';
+import { configureStore } from '../redux/store';
 
-export default class MyApp extends App {
+class MyApp extends App {
   componentDidCatch(error, errorInfo) {
     console.log('CUSTOM ERROR HANDLING', error);
     // This is needed to render errors correctly in development / production
@@ -31,20 +35,26 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
+
     return (
       <Container>
-        <Layout>
-          <style jsx global>{`
-            body {
-              font-family: 'Rubik', -apple-system, system-ui, BlinkMacSystemFont,
-                'SegoeUI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif';
-              font-size: 16px;
-            }
-          `}</style>
-          <Component {...pageProps} />
-        </Layout>
+        <Provider store={store}>
+          <Layout>
+            <style jsx global>{`
+              body {
+                font-family: 'Rubik', -apple-system, system-ui,
+                  BlinkMacSystemFont, 'SegoeUI', 'Roboto', 'Helvetica Neue',
+                  'Arial', 'sans-serif';
+                font-size: 16px;
+              }
+            `}</style>
+            <Component {...pageProps} />
+          </Layout>
+        </Provider>
       </Container>
     );
   }
 }
+
+export default withRedux(configureStore)(MyApp);
