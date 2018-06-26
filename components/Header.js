@@ -4,6 +4,7 @@ import * as React from 'react';
 import Media from 'react-media';
 import Router from 'next/router';
 import { connect } from 'react-redux';
+import NProgress from 'nprogress';
 // Custom
 import { Anchor, Flexbox, Image, Text } from '../components/ui';
 import { colors, screenSizes, contentMaxWidth } from '../constants/ui';
@@ -13,6 +14,10 @@ import { logout } from '../redux/actions';
 
 const blockId = 'header';
 const logoutUrl = '/logout';
+
+Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 type Props = {
   account: Object,
@@ -111,12 +116,10 @@ class Header extends React.PureComponent<Props, HeaderState> {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Flexbox>
-              logo
-            </Flexbox>
-            <Flexbox>
-              phone number
-            </Flexbox>
+            <Anchor href="/">
+              <Flexbox>logo</Flexbox>
+            </Anchor>
+            <Flexbox>phone number</Flexbox>
           </Flexbox>
         </Flexbox>
         <Flexbox
