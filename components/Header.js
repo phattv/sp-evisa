@@ -3,95 +3,47 @@
 import * as React from 'react';
 import Media from 'react-media';
 import Router from 'next/router';
-import { connect } from 'react-redux';
 import NProgress from 'nprogress';
 // Custom
-import { Anchor, Flexbox, Image, Text } from '../components/ui';
-import { colors, screenSizes, contentMaxWidth } from '../constants/ui';
+import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
+import { contentMaxWidth } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
-import { reducerNames } from '../constants/reducerNames';
-import { logout } from '../redux/actions';
 
-const blockId = 'header';
-const logoutUrl = '/logout';
-
-Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-type Props = {
-  account: Object,
-  logout: () => void,
-};
+const menus = [
+  {
+    text: 'About',
+    url: '/',
+  },
+  {
+    text: 'Fees',
+    url: '/fees',
+  },
+  {
+    text: 'How to Apply',
+    url: '/how',
+  },
+  {
+    text: 'Other services',
+    url: '/services',
+  },
+  {
+    text: 'Contact Us',
+    url: '/contact',
+  },
+];
+
+type Props = {};
 type HeaderState = {
   isMenuShowed?: boolean,
-  menus: Array<Object>,
 };
 class Header extends React.PureComponent<Props, HeaderState> {
-  state = {
-    isMenuShowed: false,
-    menus: [],
-  };
-
-  updateIsMenuShowed = () => {
-    this.setState({
-      isMenuShowed: !this.state.isMenuShowed,
-    });
-  };
-
-  hideMenu = () => {
-    this.setState({
-      isMenuShowed: false,
-    });
-  };
-
-  navigateToUrl = (url: string) => {
-    this.hideMenu();
-    if (url === logoutUrl) {
-      this.props.logout();
-    } else {
-      Router.push(url).then(() => window.scrollTo(0, 0));
-    }
-  };
-
-  componentWillReceiveProps(nextProps: Props) {
-    this.setMenus(nextProps);
-  }
-
-  componentDidMount() {
-    this.setMenus(this.props);
-  }
-
-  setMenus = (props: Props) => {
-    this.setState({
-      menus: [
-        {
-          text: 'About',
-          url: '/',
-        },
-        {
-          text: 'Fees',
-          url: '/fees',
-        },
-        {
-          text: 'How to Apply',
-          url: '/how',
-        },
-        {
-          text: 'Other services',
-          url: '/services',
-        },
-        {
-          text: 'Apply',
-          url: '/apply',
-        },
-      ],
-    });
-  };
+  state = {};
 
   render() {
-    const { isMenuShowed, menus } = this.state;
-
     return (
       // Paypal z-index: 100
       <Flexbox style={{ zIndex: 101 }} column>
@@ -151,17 +103,27 @@ class Header extends React.PureComponent<Props, HeaderState> {
           height={16}
           backgroundColor="darkBlue"
           justifyContent={'center'}
+          alignItems={'center'}
         >
           <Flexbox
             width="100%"
             maxWidth={contentMaxWidth}
-            aligniItems="center"
+            aligniItems="baseline"
             justifyContent="flex-end"
           >
-            <Anchor href="/about" color="white" activeColor="green">
-              About
-            </Anchor>
-            <Anchor href="/about">red</Anchor>
+            {menus.map((menu, index) => (
+              <Anchor
+                key={index}
+                href={menu.url}
+                color="white"
+                activeColor="green"
+              >
+                <Flexbox paddingHorizontal={4} paddingVertical={2}>
+                  {menu.text}
+                </Flexbox>
+              </Anchor>
+            ))}
+            <Button onClick={() => Router.push('/apply')}>Apply</Button>
           </Flexbox>
         </Flexbox>
       </Flexbox>
@@ -169,10 +131,4 @@ class Header extends React.PureComponent<Props, HeaderState> {
   }
 }
 
-const mapStateToProps = store => {
-  return { account: store[reducerNames.account] };
-};
-const mapDispatchToProps = {
-  logout,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
