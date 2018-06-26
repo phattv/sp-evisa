@@ -11,6 +11,9 @@ const StyledLink = styled.a`
   color: ${props => colors[props.color || 'green']};
   &:hover {
     color: ${props => colors[props.activeColor || 'red']};
+    ${props =>
+      props.changeBackground &&
+      `background-color: ${colors[props.activeColor || 'bgGrey2']}`};
   }
   &.active {
     color: ${props => colors[props.activeColor || 'red']};
