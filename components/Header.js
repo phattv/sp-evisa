@@ -63,41 +63,27 @@ class Header extends React.PureComponent<Props, HeaderState> {
   }
 
   setMenus = (props: Props) => {
-    const { account } = props;
-    const isLoggedIn = account && Object.keys(account).length > 0;
     this.setState({
       menus: [
         {
-          text: 'HOME',
+          text: 'About',
           url: '/',
         },
         {
-          text: isLoggedIn ? 'LOGOUT' : 'LOGIN',
-          url: isLoggedIn ? logoutUrl : '/login',
-        },
-        {
-          text: 'APPLY',
-          url: '/apply',
-        },
-        {
-          text: 'VISA FEES',
+          text: 'Fees',
           url: '/fees',
         },
         {
-          text: 'HOW TO APPLY VISA',
+          text: 'How to Apply',
           url: '/how',
         },
         {
-          text: 'EXTRA SERVICES',
+          text: 'Other services',
           url: '/services',
         },
-        // {
-        //   text: 'INFORMATION',
-        //   url: '/news',
-        // },
         {
-          text: 'FEEDBACK',
-          url: '/feedback',
+          text: 'Apply',
+          url: '/apply',
         },
       ],
     });
@@ -116,10 +102,48 @@ class Header extends React.PureComponent<Props, HeaderState> {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Anchor href="/">
-              <Flexbox>logo</Flexbox>
+            <Anchor href="/" changeBackground>
+              <Image
+                src="../static/logo/logo-horizontal.svg"
+                alt={'logo-horizontal'}
+                width={32}
+              />
             </Anchor>
-            <Flexbox>phone number</Flexbox>
+            <Flexbox alignItems={'center'}>
+              <Anchor href={`tel:${companyInfo.phone}`} changeBackground>
+                <Flexbox
+                  alignItems={'center'}
+                  paddingHorizontal={1}
+                  paddingVertical={1}
+                >
+                  <Image
+                    src={'../static/icons/phone-ico.svg'}
+                    width={5}
+                    alt={'phone'}
+                  />
+                  <Text fonsize={'l'} color="darkBlue" paddingLeft={2}>
+                    {companyInfo.phoneString}
+                  </Text>
+                </Flexbox>
+              </Anchor>
+              <Flexbox borderRight height={7} marginHorizontal={3} />
+              <Anchor href={`mailto:${companyInfo.email}`} changeBackground>
+                <Flexbox
+                  alignItems={'center'}
+                  paddingHorizontal={1}
+                  paddingVertical={1}
+                >
+                  <Image
+                    src={'../static/icons/email-ico.svg'}
+                    width={5}
+                    alt={'mail'}
+                  />
+                  <Text fonsize={'l'} color="darkBlue" paddingLeft={2}>
+                    {companyInfo.email}
+                  </Text>
+                </Flexbox>
+              </Anchor>
+            </Flexbox>
           </Flexbox>
         </Flexbox>
         <Flexbox
