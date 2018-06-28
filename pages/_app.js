@@ -1,7 +1,6 @@
 // @flow
 // vendor
 import React from 'react';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
