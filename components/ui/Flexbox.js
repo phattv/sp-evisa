@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import { generateCommonProps } from './generateCommonProps';
 import { screenSizes, spacingUnits } from '../../constants/ui';
 
+/**
+ * Set responsive flex-direction:
+ * on mobile screen, if responsiveLayout prop is true,
+ * switch value between 'column' & 'row'
+ * @param props
+ * @param spacingUnit
+ * @returns {string}
+ */
 const setResponsiveFlexDirection = (props, spacingUnit) => {
   if (spacingUnit === spacingUnits.mobile) {
     if (props.responsiveLayout) {

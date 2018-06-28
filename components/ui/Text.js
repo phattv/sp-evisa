@@ -9,6 +9,7 @@ const Text = styled.span`
 
   ${props =>
     props.letterSpacing && `letter-spacing: ${props.letterSpacing}px`}};
+  ${props => props.bold && `font-weight: bold`}};
   ${props => props.lineHeight && `line-height: ${props.lineHeight}px`}};
   ${props => props.fontStyle && `font-style: ${props.fontStyle}`}};
   ${props => props.p && `margin-bottom: 15px`}};

@@ -1,10 +1,9 @@
 // @flow
 import styled from 'styled-components';
-import Flexbox from './Flexbox';
 import { colors, screenSizes, spacingUnits } from '../../constants/ui';
 import { generateCommonProps } from './generateCommonProps';
 
-const Button = styled(Flexbox)`
+const Button = styled.button`
   user-select: none;
   border: none;
   cursor: pointer;
