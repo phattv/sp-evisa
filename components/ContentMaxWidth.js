@@ -24,7 +24,8 @@ class ContentMaxWidth extends React.Component<Props, State> {
         }}
       >
         <Flexbox
-          width={'100%'}
+          width="100%"
+          justifyContent="center"
           maxWidth={contentMaxWidth}
           style={{ margin: 'auto' }}
         >
@@ -33,7 +34,8 @@ class ContentMaxWidth extends React.Component<Props, State> {
       </Flexbox>
     ) : (
       <Flexbox
-        width={'100%'}
+        width="100%"
+        justifyContent="center"
         maxWidth={contentMaxWidth}
         style={{ margin: 'auto' }}
       >
