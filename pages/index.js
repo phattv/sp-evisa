@@ -27,7 +27,7 @@ class Home extends React.Component<Props, State> {
     logPageView();
   }
 
-  navigateToHowToApply = () => {
+  navigateApplyPage = () => {
     Router.push(pageNames.apply);
   };
 
@@ -52,7 +52,7 @@ class Home extends React.Component<Props, State> {
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </Text>
-              <Button onClick={this.navigateToHowToApply}>Get Started</Button>
+              <Button onClick={this.navigateApplyPage}>Get Started</Button>
             </Flexbox>
             <Flexbox flex={1} column paddingHorizontal={5} paddingTop={5}>
               <Image
@@ -81,7 +81,7 @@ class Home extends React.Component<Props, State> {
             </Text>
             <Text
               fontSize="xxl"
-              paddingBottom={8}
+              paddingBottom={3}
               color="darkBlue"
               textAlign={'center'}
             >
@@ -183,6 +183,87 @@ class Home extends React.Component<Props, State> {
             </Card>
             <Flexbox flex={1} />
             <Flexbox flex={1} />
+          </Flexbox>
+        </ContentMaxWidth>
+
+        <ContentMaxWidth>
+          <Flexbox
+            paddingVertical={spacingValues.blockPaddingTop}
+            column
+            width="100%"
+          >
+            <Text
+              bold
+              fontSize="xxl"
+              paddingBottom={2}
+              noDoubleLineHeight
+              color="darkBlue"
+              textAlign={'center'}
+            >
+              Why choose us?
+            </Text>
+            <Card marginTop={7}>
+              <Flexbox responsiveLayout>
+                <Flexbox flex={1} column marginHorizontal={5}>
+                  <Flexbox>
+                    <Image
+                      src="../static/icons/development.svg"
+                      alt="development"
+                      width={iconSizes.default}
+                    />
+                  </Flexbox>
+                  <Text fontSize="m" semibold>
+                    Prompt response, strictly confidential information
+                  </Text>
+                  <Divider small />
+                  <Text paddingTop={6}>
+                    You will get responses within 5 minutes when contacting
+                    evisa-vn.com Your information is kept confidentially
+                  </Text>
+                </Flexbox>
+                <Flexbox flex={1} column marginHorizontal={5}>
+                  <Flexbox>
+                    <Image
+                      src="../static/icons/medal.svg"
+                      alt="medal"
+                      width={iconSizes.default}
+                    />
+                  </Flexbox>
+                  <Text fontSize="m" semibold>
+                    Quality and reliability
+                  </Text>
+                  <Divider small />
+                  <Text paddingTop={6}>
+                    Evisa-vn.com is trusted by clients from all over the world.
+                    We guarantee to return all your fee in case your application
+                    is rejected.
+                  </Text>
+                </Flexbox>
+                <Flexbox flex={1} column marginHorizontal={5}>
+                  <Flexbox>
+                    <Image
+                      src="../static/icons/stopwatch.svg"
+                      alt="stopwatch"
+                      width={iconSizes.default}
+                    />
+                  </Flexbox>
+                  <Text fontSize="m" semibold>
+                    Punctuality guarantee and full-fee return
+                  </Text>
+                  <Divider small />
+                  <Text paddingTop={6}>
+                    We guarantee you will get your visa approval letter within 2
+                    working days/or within 1 working day depending on the
+                    services chosen. You get all-your- fee return if your
+                    application is rejected and our services do not satisfy your
+                    demands.
+                  </Text>
+                </Flexbox>
+              </Flexbox>
+              <Button marginTop={8} onClick={this.navigateApplyPage}>
+                Get Started
+              </Button>
+            </Card>
           </Flexbox>
         </ContentMaxWidth>
       </Fragment>
