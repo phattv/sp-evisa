@@ -54,6 +54,7 @@ export const standardizeMetricProp = (
 const setResponsiveFontSize = (
   fontSize?: string,
   spacingUnit: number,
+  noDoubleLineHeight?: boolean,
 ): string => {
   let actualFontSize;
   switch (spacingUnit) {
@@ -75,8 +76,9 @@ const setResponsiveFontSize = (
     }
   }
 
-  return `font-size: ${actualFontSize}px; line-height: ${actualFontSize *
-    2}px;`;
+  return `font-size: ${actualFontSize}px; line-height: ${
+    noDoubleLineHeight ? actualFontSize : actualFontSize * 2
+  }px;`;
 };
 
 /**
@@ -126,7 +128,7 @@ export const generateCommonProps = (
   spacingUnit: number,
 ): string => {
   return `
-${setResponsiveFontSize(props.fontSize, spacingUnit)};
+${setResponsiveFontSize(props.fontSize, spacingUnit, props.noDoubleLineHeight)};
 ${props.backgroundColor &&
     `background-color: ${colors[props.backgroundColor]}`};
 
