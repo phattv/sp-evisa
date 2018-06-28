@@ -1,11 +1,10 @@
 // @flow
 // vendor
-import * as React from 'react';
+import React from 'react';
 // custom
 import { Flexbox } from '../components/ui';
 import Header from './Header';
 import Footer from './Footer';
-import { contentMaxWidth } from '../constants/ui';
 
 type Props = {
   children: string | React.Node,
@@ -22,14 +21,10 @@ export default class Layout extends React.Component<Props> {
         <Flexbox column flex={1} minHeight="100vh">
           <Header />
 
-          <Flexbox
-            maxWidth={contentMaxWidth}
-            flex={1}
-            width="100%"
-            column
-            {...rest}
-          >
-            {children}
+          <Flexbox flex={1} width="100%" backgroundColor="bgGrey2">
+            <Flexbox width="100%" {...rest} column alignItems="center">
+              {children}
+            </Flexbox>
           </Flexbox>
 
           <Footer />
