@@ -13,14 +13,13 @@ const colors = {
 };
 
 const fontSizes = {
-  xs: 12,
-  s: 14,
-  default: 16,
-  m: 18,
-  l: 22,
-  xl: 32,
-  xxl: 40,
-  xxxl: 48,
+  xs: 14,
+  s: 16,
+  default: 18,
+  m: 22,
+  l: 32,
+  xl: 42,
+  xxl: 48,
 };
 
 const screenSizes = {
@@ -37,6 +36,7 @@ const spacingUnits = {
 
 const borderRadius = 6;
 
+// TODO: remove s m l, use semantic text instead,
 const spacingValues = {
   xxs: 4,
   xs: 8,
@@ -46,6 +46,12 @@ const spacingValues = {
   xl: 24,
   xxl: 28,
   xxxl: 32,
+  blockPaddingTop: 20,
+};
+
+const iconSizes = {
+  small: 30 / 5,
+  default: 60 / 5,
 };
 
 const headerHeight = 140 / 5;
@@ -98,4 +104,5 @@ export {
   paddingAll,
   paddingAllLarge,
   pageNames,
+  iconSizes,
 };

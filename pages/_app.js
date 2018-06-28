@@ -45,7 +45,7 @@ class MyApp extends App {
                 font-family: 'Rubik', -apple-system, system-ui,
                   BlinkMacSystemFont, 'SegoeUI', 'Roboto', 'Helvetica Neue',
                   'Arial', 'sans-serif';
-                font-size: 16px;
+                font-size: 18px;
               }
             `}</style>
             <Component {...pageProps} />
