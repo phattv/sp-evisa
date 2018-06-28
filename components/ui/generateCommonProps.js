@@ -7,7 +7,13 @@ import {
 } from '../../constants/ui';
 
 // <editor-fold desc="Helper functions">
-// Convention: all spacing/metric values is based on "spacingUnit"
+/**
+ * Implementation of unit * spacingUnit (based on screen size)
+ * @param unit
+ * @param spacingUnit
+ * @param halve
+ * @returns {string}
+ */
 export const getSpacingValue = (
   unit: number,
   spacingUnit: number,
@@ -17,12 +23,34 @@ export const getSpacingValue = (
 export const getLineHeightValue = (unit: number) =>
   `${fontSizes[unit] + 10}px;`;
 
+/**
+ * Standardize metric props:
+ * If input is a number, apply spacingUnit constant based on screen size,
+ * else return the original input
+ * e.g.:
+ * - input is 5
+ * - on desktop screen  => spacingUnit is 5 => returns 25
+ * - on tablet screen   => spacingUnit is 4 => returns 20
+ * - on tablet screen   => spacingUnit is 3 => returns 15
+ * @param prop
+ * @param spacingUnit
+ * @returns {string}
+ */
 export const standardizeMetricProp = (
   prop: number | string,
   spacingUnit: number,
 ) =>
   typeof prop === 'number' ? `${getSpacingValue(prop, spacingUnit)}` : prop;
 
+/**
+ * Set font size for different screen sizes:
+ * there's a set of font sizes for desktop,
+ * on tablet layout: desktop font size -1px,
+ * on mobile layout: desktop font size -2px.
+ * @param fontSize
+ * @param spacingUnit
+ * @returns {string}
+ */
 const setResponsiveFontSize = (
   fontSize?: string,
   spacingUnit: number,
@@ -47,9 +75,20 @@ const setResponsiveFontSize = (
     }
   }
 
-  return `font-size: ${actualFontSize}px;`;
+  return `font-size: ${actualFontSize}px; line-height: ${actualFontSize *
+    2}px;`;
 };
 
+/**
+ * Set padding-left & padding-right for some edge cases on mobile screen:
+ * - if responsiveNoPaddingHorizontal prop is true, set no padding-left & padding-right
+ * - if responsivePaddingHorizontal props is true, reduce padding-left & padding-right by half
+ * @param paddingHorizontal
+ * @param spacingUnit
+ * @param responsiveNoPaddingHorizontal
+ * @param responsivePaddingHorizontal
+ * @returns {*}
+ */
 const setResponsiveNoPaddingHorizontal = (
   paddingHorizontal: number,
   spacingUnit: number,
@@ -76,12 +115,18 @@ padding-left: ${getSpacingValue(paddingHorizontal, spacingUnit)};
 };
 // </editor-fold>
 
+/**
+ * Generate common css properties as string
+ * @param props
+ * @param spacingUnit
+ * @returns {string}
+ */
 export const generateCommonProps = (
   props: Object,
   spacingUnit: number,
 ): string => {
   return `
-${setResponsiveFontSize(props.size, spacingUnit)};
+${setResponsiveFontSize(props.fontSize, spacingUnit)};
 ${props.backgroundColor &&
     `background-color: ${colors[props.backgroundColor]}`};
 
