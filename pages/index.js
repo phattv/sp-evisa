@@ -14,6 +14,7 @@ import {
 import Card from '../components/Card';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Divider from '../components/Divider';
+import Heading from '../components/Heading';
 
 type Props = {};
 type State = {};
@@ -37,15 +38,11 @@ class Home extends React.Component<Props, State> {
         <ContentMaxWidth backgroundImage="url('../static/images/bg-banner.jpg')">
           <Flexbox paddingTop={spacingValues.blockPaddingTop} responsiveLayout>
             <Flexbox flex={1} column {...paddingAll}>
-              <Text
-                bold
+              <Heading
                 color="white"
-                fontSize="xxl"
-                paddingBottom={8}
-                noDoubleLineHeight
-              >
-                Easiest way to get your Visa.
-              </Text>
+                text="Easiest way to get your Visa."
+                textAlign="left"
+              />
               <Text color="white" paddingBottom={7}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -69,24 +66,10 @@ class Home extends React.Component<Props, State> {
             column
             width="100%"
           >
-            <Text
-              bold
-              fontSize="xxl"
-              paddingBottom={2}
-              noDoubleLineHeight
-              color="darkBlue"
-              textAlign={'center'}
-            >
-              Fast, Cheap and Simple
-            </Text>
-            <Text
-              fontSize="xxl"
-              paddingBottom={3}
-              color="darkBlue"
-              textAlign={'center'}
-            >
-              3 steps to get your Visa
-            </Text>
+            <Flexbox paddingBottom={3} column>
+              <Heading text="Fast, Cheap and Simple" />
+              <Heading text="3 steps to get your Visa" secondary />
+            </Flexbox>
             <Flexbox responsiveLayout>
               <Card flex={1} marginHorizontal={5}>
                 <Flexbox>
@@ -192,16 +175,7 @@ class Home extends React.Component<Props, State> {
             column
             width="100%"
           >
-            <Text
-              bold
-              fontSize="xxl"
-              paddingBottom={2}
-              noDoubleLineHeight
-              color="darkBlue"
-              textAlign={'center'}
-            >
-              Why choose us?
-            </Text>
+            <Heading text="Why choose us?" />
             <Card marginTop={7}>
               <Flexbox responsiveLayout>
                 <Flexbox flex={1} column marginHorizontal={5}>
@@ -264,6 +238,12 @@ class Home extends React.Component<Props, State> {
                 Get Started
               </Button>
             </Card>
+          </Flexbox>
+        </ContentMaxWidth>
+
+        <ContentMaxWidth>
+          <Flexbox>
+            <Heading text="Other services" />
           </Flexbox>
         </ContentMaxWidth>
       </Fragment>

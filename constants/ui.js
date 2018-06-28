@@ -18,7 +18,7 @@ const fontSizes = {
   default: 18,
   m: 22,
   l: 32,
-  xl: 42,
+  xl: 40,
   xxl: 48,
 };
 
