@@ -6,7 +6,12 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 // Custom
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
-import { colors, screenSizes, contentMaxWidth } from '../constants/ui';
+import {
+  colors,
+  screenSizes,
+  contentMaxWidth,
+  pageNames,
+} from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 
 Router.onRouteChangeStart = () => NProgress.start();
@@ -16,23 +21,23 @@ Router.onRouteChangeError = () => NProgress.done();
 const menus = [
   {
     text: 'About',
-    url: '/',
+    url: pageNames.home,
   },
   {
     text: 'Fees',
-    url: '/fees',
+    url: pageNames.fees,
   },
   {
     text: 'How to Apply',
-    url: '/how',
+    url: pageNames.how,
   },
   {
     text: 'Other services',
-    url: '/services',
+    url: pageNames.services,
   },
   {
     text: 'Contact Us',
-    url: '/contact',
+    url: pageNames.contact,
   },
 ];
 
@@ -116,7 +121,7 @@ class Header extends React.PureComponent<Props, State> {
             </Flexbox>
           </Anchor>
         ))}
-        <Button onClick={() => Router.push('/apply')}>Apply</Button>
+        <Button onClick={() => Router.push(pageNames.apply)}>Apply</Button>
       </Flexbox>
     </Flexbox>
   );
@@ -195,7 +200,7 @@ class Header extends React.PureComponent<Props, State> {
       ))}
 
       <Anchor
-        href={'/apply'}
+        href={pageNames.apply}
         color={'white'}
         activeColor={'green'}
         style={{

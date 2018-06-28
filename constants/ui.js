@@ -9,7 +9,7 @@ const colors = {
   lightBlue: '#8193A9',
   bgGrey: '#F8F9FC',
   bgGrey2: '#F2F7FF',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
 };
 
 const fontSizes = {
@@ -36,7 +36,6 @@ const spacingUnits = {
 };
 
 const borderRadius = 6;
-const bigBorderRadius = 10;
 
 const spacingValues = {
   xxs: 4,
@@ -52,6 +51,29 @@ const spacingValues = {
 const headerHeight = 140 / 5;
 const contentMaxWidth = 1440 / 5;
 
+const paddingAll = {
+  paddingHorizontal: 5,
+  paddingVertical: 5,
+};
+const paddingAllLarge = {
+  paddingHorizontal: 10,
+  paddingVertical: 10,
+};
+
+/**
+ * TODO: domain name is https://evisa-vn.com, how the page urls should be?
+ * should page names have "visa-" prefix for SEO purposes?
+ * like "visa-fees", "how-to-apply", "other-services", "contact-us"..
+ */
+const pageNames = {
+  home: '/',
+  apply: '/apply',
+  fees: '/fees',
+  how: '/how',
+  services: '/services',
+  contact: '/contact',
+};
+
 /**
  * NOTES using dayjs library:
  * - `dayjs('2018-12-31').format('DD/MM/YYYY')` // console: "31/12/2018"
@@ -65,7 +87,6 @@ export {
   screenSizes,
   spacingUnits,
   borderRadius,
-  bigBorderRadius,
   colors,
   fontSizes,
   spacingValues,
@@ -74,4 +95,7 @@ export {
   dateTimeFormat,
   headerHeight,
   contentMaxWidth,
+  paddingAll,
+  paddingAllLarge,
+  pageNames,
 };

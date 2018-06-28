@@ -1,12 +1,13 @@
 // @flow
-import { Component } from 'react';
+import React from 'react';
 import { Anchor, Flexbox, Text } from '../components/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { contentMaxWidth } from '../constants/ui';
 
 const currentYear = new Date().getFullYear();
 
-export default class Footer extends Component<null> {
+type Props = {};
+export default class Footer extends React.Component<Props> {
   render() {
     return (
       <Flexbox
