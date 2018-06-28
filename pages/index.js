@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
 import Router from 'next/router';
 // custom
-import { Flexbox, Text, Image, Button } from '../components/ui';
+import { Anchor, Flexbox, Text, Image, Button } from '../components/ui';
 import {
   paddingAll,
   pageNames,
@@ -96,7 +96,9 @@ class Home extends React.Component<Props, State> {
                     width={iconSizes.default}
                   />
                 </Flexbox>
-                <Text fontSize="m">Submit your application</Text>
+                <Text fontSize="m" semibold>
+                  Submit your application
+                </Text>
                 <Divider />
                 <Text paddingTop={6}>
                   Fill in the secured online application online. You are
@@ -112,7 +114,9 @@ class Home extends React.Component<Props, State> {
                     width={iconSizes.default}
                   />
                 </Flexbox>
-                <Text fontSize="m">Pay for service fee</Text>
+                <Text fontSize="m" semibold>
+                  Pay for service fee
+                </Text>
                 <Divider />
                 <Text paddingTop={6}>
                   You can make payment with your Credit/ Debit Card via
@@ -135,7 +139,9 @@ class Home extends React.Component<Props, State> {
                     width={iconSizes.default}
                   />
                 </Flexbox>
-                <Text fontSize="m">Get your approval letter</Text>
+                <Text fontSize="m" semibold>
+                  Get your approval letter
+                </Text>
                 <Divider />
                 <Text paddingTop={6}>
                   Check your email for your visa approval letter. Print the
@@ -145,6 +151,38 @@ class Home extends React.Component<Props, State> {
                 </Text>
               </Card>
             </Flexbox>
+          </Flexbox>
+        </ContentMaxWidth>
+
+        <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
+          <Flexbox paddingVertical={spacingValues.blockPaddingTop} width="100%">
+            <Card flex={1} marginHorizontal={5}>
+              <Text fontSize="m" semibold>
+                Get your approval letter
+              </Text>
+              <Divider />
+              <Text paddingTop={6}>
+                <Text semibold>Visa service fee:</Text> Applicants have to pay
+                for the visa processing conducting by evisa-vn.com to get the
+                visa approval letter according to the service chosen.
+              </Text>
+              <Text paddingTop={2}>
+                <Text semibold>Stamping fee:</Text> Applicants must pay in cash
+                (in VND or USD) at the landing visa counter on arrival. The fee
+                is ruled by Immigration Department and publicly announces on
+                governmental websites. Applicants will get the receipt after
+                paying for the fee.
+              </Text>
+              <Flexbox paddingTop={4}>
+                <Anchor href={pageNames.fees} changeBackground>
+                  <Text color="green" fontSize="m" bold paddingHorizontal={1}>
+                    More info >
+                  </Text>
+                </Anchor>
+              </Flexbox>
+            </Card>
+            <Flexbox flex={1} />
+            <Flexbox flex={1} />
           </Flexbox>
         </ContentMaxWidth>
       </Fragment>
