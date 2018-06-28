@@ -6,10 +6,10 @@ import { generateCommonProps, getLineHeightValue } from './generateCommonProps';
 // https://www.w3schools.com/css/css_text.asp
 const Text = styled.span`
   color: ${props => colors[props.color || 'mediumBlue']};
+  font-weight: ${props => (props.bold ? 700 : props.semibold ? 500 : 400)};
 
   ${props =>
     props.letterSpacing && `letter-spacing: ${props.letterSpacing}px`}};
-  ${props => props.bold && `font-weight: bold`}};
   ${props => props.fontStyle && `font-style: ${props.fontStyle}`}};
   ${props => props.p && `margin-bottom: 15px`}};
   ${props => props.wordSpacing && `word-spacing: ${props.wordSpacing}px`}};

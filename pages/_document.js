@@ -63,7 +63,7 @@ export default class MyDocument extends Document {
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/nprogress.css" rel="stylesheet" />
           <link
-            href="https://fonts.googleapis.com/css?family=Rubik:400,700"
+            href="https://fonts.googleapis.com/css?family=Rubik:400,500,700"
             rel="stylesheet"
           />
         </Head>
