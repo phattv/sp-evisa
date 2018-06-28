@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { screenSizes, spacingUnits } from '../../constants/ui';
 import { generateCommonProps } from './generateCommonProps';
 
+/**
+ * Input component acts as a <input> tag with pre-defined styles.
+ */
 const Input = styled.input`
   background-color: white;
   border: 2px solid white;

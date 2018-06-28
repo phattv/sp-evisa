@@ -7,10 +7,12 @@ import { Flexbox } from '../components/ui';
 import Header from './Header';
 import Footer from './Footer';
 
+/**
+ * Layout component layouts where and how the header, content and footer show
+ */
 type Props = {
   children: Node,
 };
-
 export default class Layout extends React.Component<Props> {
   render() {
     const { children } = this.props;

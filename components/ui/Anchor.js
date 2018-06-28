@@ -20,6 +20,10 @@ const StyledLink = styled.a`
   }
 `;
 
+/**
+ * Anchor component acts as <a> tag with customizable styles,
+ * set "prefetch" prop to true for maximum performance on production
+ */
 type Props = {
   href: string,
   children: string | React.Node,

@@ -49,6 +49,10 @@ const mobileAnchorStyles = {
   paddingBottom: 15,
 };
 
+/**
+ * Header component that acts as the fixed top part in the application layout,
+ * and shows logo, contact information and navigation.
+ */
 type Props = {};
 type State = {
   shouldShowMobileMenus?: boolean,

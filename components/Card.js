@@ -6,6 +6,9 @@ import type { Node } from 'react';
 import { Flexbox } from './ui';
 import { borderRadius } from '../constants/ui';
 
+/**
+ * Card component is a pre-styled container, mostly to show text and icons.
+ */
 type Props = {
   children: Node,
   flexDirection?: string,

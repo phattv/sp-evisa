@@ -4,6 +4,10 @@ import React from 'react';
 // custom
 import { Text } from './ui';
 
+/**
+ * Heading component that shows heading, act as <h1> tag,
+ * set "secondary" prop to true to set secondary heading, act as <h2> tag
+ */
 type Props = {
   text: string,
   color?: string,

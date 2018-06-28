@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { colors, screenSizes, spacingUnits } from '../../constants/ui';
 import { generateCommonProps, getLineHeightValue } from './generateCommonProps';
 
-// https://www.w3schools.com/css/css_text.asp
+/**
+ * Text component acts as a <span> tag with customizable styles.
+ */
 const Text = styled.span`
   color: ${props => colors[props.color || 'mediumBlue']};
   font-weight: ${props => (props.bold ? 700 : props.semibold ? 500 : 400)};

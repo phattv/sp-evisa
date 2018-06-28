@@ -6,6 +6,10 @@ import { contentMaxWidth } from '../constants/ui';
 
 const currentYear = new Date().getFullYear();
 
+/**
+ * Footer component that acts as the bottom part in the application layout,
+ * and shows copyright, contact information, social media platforms and disclaimers.
+ */
 type Props = {};
 export default class Footer extends React.Component<Props> {
   render() {

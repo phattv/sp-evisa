@@ -23,7 +23,9 @@ const setResponsiveFlexDirection = (props, spacingUnit) => {
   }
 };
 
-// https://www.w3schools.com/css/css3_flexbox.asp
+/**
+ * Flexbox component acts as a <div> tag with "display: flex" pre-defined.
+ */
 const Flexbox = styled.div`
   display: flex;
   ${props =>

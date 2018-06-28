@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { screenSizes, spacingUnits } from '../../constants/ui';
 import generateCommonProps from './generateCommonProps';
 
+/**
+ * Image component act as a <img> tag.
+ * TODO: https://github.com/cyrilwanner/next-optimized-images
+ */
 const Image = styled.img`
   width: ${props => (props.fixedWidth ? props.width : props.width || '100%')};
   height: ${props => props.height || 'auto'};

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { colors, screenSizes, spacingUnits } from '../../constants/ui';
 import { generateCommonProps } from './generateCommonProps';
 
+/**
+ * Button component act as a <button> tag with customizable styles.
+ */
 const Button = styled.button`
   user-select: none;
   border: none;

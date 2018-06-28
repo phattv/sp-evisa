@@ -6,6 +6,11 @@ import type { Node } from 'react';
 import { Flexbox } from './ui';
 import { contentMaxWidth } from '../constants/ui';
 
+/**
+ * ContentMaxWidth component as a container for the content part,
+ * limits the content inside a max-width,
+ * set "backgroundImage" prop to set full width background image.
+ */
 type Props = {
   backgroundImage?: string,
   children: Node,
