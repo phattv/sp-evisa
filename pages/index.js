@@ -17,6 +17,7 @@ import Divider from '../components/Divider';
 import Heading from '../components/Heading';
 import FeesCard from '../components/FeesCard';
 import ServicesCard from '../components/ServicesCard';
+import PaymentMethodImages from '../components/PaymentMethodImages';
 
 type Props = {};
 type State = {};
@@ -209,6 +210,8 @@ class Home extends React.Component<Props, State> {
         </ContentMaxWidth>
 
         <ServicesCard />
+
+        <PaymentMethodImages />
       </Fragment>
     );
   }
