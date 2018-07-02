@@ -241,10 +241,16 @@ class Header extends React.PureComponent<Props, State> {
               />
             </Anchor>
 
-            <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
+            <Media
+              query={`(min-width: ${screenSizes.tablet + 1}px)`}
+              defaultMatches={true}
+            >
               {this.renderDesktopPhoneAndEmail()}
             </Media>
-            <Media query={`(max-width: ${screenSizes.tablet}px)`}>
+            <Media
+              query={`(max-width: ${screenSizes.tablet}px)`}
+              defaultMatches={false}
+            >
               {this.renderMobileMenuIcon()}
             </Media>
           </Flexbox>
@@ -252,7 +258,10 @@ class Header extends React.PureComponent<Props, State> {
 
         {shouldShowMobileMenus && this.renderMobileMenus()}
 
-        <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
+        <Media
+          query={`(min-width: ${screenSizes.tablet + 1}px)`}
+          defaultMatches={true}
+        >
           {this.renderDesktopHorizontalMenus()}
         </Media>
       </Flexbox>
