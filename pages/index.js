@@ -4,26 +4,22 @@ import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
 import Router from 'next/router';
 // custom
-import { Anchor, Flexbox, Text, Image, Button } from '../components/ui';
+import { Flexbox, Text, Image, Button } from '../components/ui';
 import {
   paddingAll,
   pageNames,
   spacingValues,
   iconSizes,
 } from '../constants/ui';
-import Card from '../components/Card';
 import ContentMaxWidth from '../components/ContentMaxWidth';
+import Card from '../components/Card';
 import Divider from '../components/Divider';
 import Heading from '../components/Heading';
+import FeesCard from '../components/FeesCard';
 
 type Props = {};
 type State = {};
-
 class Home extends React.Component<Props, State> {
-  static defaultProps: Props = {};
-
-  state = {};
-
   componentDidMount() {
     logPageView();
   }
@@ -137,37 +133,7 @@ class Home extends React.Component<Props, State> {
           </Flexbox>
         </ContentMaxWidth>
 
-        <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
-          <Flexbox paddingVertical={spacingValues.blockPaddingTop} width="100%">
-            <Card flex={1} marginHorizontal={5}>
-              <Text fontSize="m" semibold>
-                Get your approval letter
-              </Text>
-              <Divider />
-              <Text paddingTop={6}>
-                <Text semibold>Visa service fee:</Text> Applicants have to pay
-                for the visa processing conducting by evisa-vn.com to get the
-                visa approval letter according to the service chosen.
-              </Text>
-              <Text paddingTop={2}>
-                <Text semibold>Stamping fee:</Text> Applicants must pay in cash
-                (in VND or USD) at the landing visa counter on arrival. The fee
-                is ruled by Immigration Department and publicly announces on
-                governmental websites. Applicants will get the receipt after
-                paying for the fee.
-              </Text>
-              <Flexbox paddingTop={4}>
-                <Anchor href={pageNames.fees} changeBackground>
-                  <Text color="green" fontSize="m" bold paddingHorizontal={1}>
-                    More info >
-                  </Text>
-                </Anchor>
-              </Flexbox>
-            </Card>
-            <Flexbox flex={1} />
-            <Flexbox flex={1} />
-          </Flexbox>
-        </ContentMaxWidth>
+        <FeesCard />
 
         <ContentMaxWidth>
           <Flexbox
