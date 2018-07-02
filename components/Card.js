@@ -34,6 +34,7 @@ class Card extends React.Component<Props, State> {
         paddingHorizontal={6}
         paddingVertical={6}
         marginVertical={6}
+        marginHorizontal={6}
         borderRadius={borderRadius}
         style={{
           boxShadow: '8px 8px 40px 0 rgba(91, 108, 148, 0.2)',

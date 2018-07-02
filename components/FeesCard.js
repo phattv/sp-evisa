@@ -9,7 +9,7 @@ import Divider from '../components/Divider';
 import { pageNames, spacingValues } from '../constants/ui';
 
 /**
- * FeesCard show cards with a background image
+ * FeesCard show fees as Card layout with a background image
  */
 type Props = {};
 type State = {};
@@ -19,7 +19,7 @@ class FeesCard extends React.Component<Props, State> {
     return (
       <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
         <Flexbox paddingVertical={spacingValues.blockPaddingTop} width="100%">
-          <Card flex={1} marginHorizontal={5}>
+          <Card flex={1}>
             <Text fontSize="m" semibold>
               Get your approval letter
             </Text>

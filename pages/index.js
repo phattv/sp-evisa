@@ -16,6 +16,7 @@ import Card from '../components/Card';
 import Divider from '../components/Divider';
 import Heading from '../components/Heading';
 import FeesCard from '../components/FeesCard';
+import ServicesCard from '../components/ServicesCard';
 
 type Props = {};
 type State = {};
@@ -67,7 +68,7 @@ class Home extends React.Component<Props, State> {
               <Heading text="3 steps to get your Visa" secondary />
             </Flexbox>
             <Flexbox responsiveLayout>
-              <Card flex={1} marginHorizontal={5}>
+              <Card flex={1}>
                 <Flexbox>
                   <Image
                     src="../static/icons/step-1.svg"
@@ -85,7 +86,7 @@ class Home extends React.Component<Props, State> {
                   appears on your passport.
                 </Text>
               </Card>
-              <Card flex={1} marginHorizontal={5}>
+              <Card flex={1}>
                 <Flexbox>
                   <Image
                     src="../static/icons/step-2.svg"
@@ -110,7 +111,7 @@ class Home extends React.Component<Props, State> {
                   <Text paddingLeft={2}>Money-back guarantee</Text>
                 </Flexbox>
               </Card>
-              <Card flex={1} marginHorizontal={5}>
+              <Card flex={1}>
                 <Flexbox>
                   <Image
                     src="../static/icons/step-3.svg"
@@ -142,7 +143,7 @@ class Home extends React.Component<Props, State> {
             width="100%"
           >
             <Heading text="Why choose us?" />
-            <Card marginTop={7}>
+            <Card>
               <Flexbox responsiveLayout>
                 <Flexbox flex={1} column marginHorizontal={5}>
                   <Flexbox>
@@ -207,11 +208,7 @@ class Home extends React.Component<Props, State> {
           </Flexbox>
         </ContentMaxWidth>
 
-        <ContentMaxWidth>
-          <Flexbox>
-            <Heading text="Other services" />
-          </Flexbox>
-        </ContentMaxWidth>
+        <ServicesCard />
       </Fragment>
     );
   }
