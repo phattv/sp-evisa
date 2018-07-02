@@ -1,8 +1,11 @@
 // @flow
+// vendor
 import React from 'react';
-import { Anchor, Flexbox, Text } from '../components/ui';
+// custom
+import { Flexbox, Text } from '../components/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { contentMaxWidth } from '../constants/ui';
+import PhoneAndEmail from './PhoneAndEmail';
 
 const currentYear = new Date().getFullYear();
 
@@ -14,20 +17,33 @@ type Props = {};
 export default class Footer extends React.Component<Props> {
   render() {
     return (
-      <Flexbox
-        width="100%"
-        column
-        alignItems="center"
-        backgroundColor="bgGrey2"
-      >
+      <Flexbox width="100%" justifyContent="center" backgroundColor="bgGrey2">
         <Flexbox
           width="100%"
           maxWidth={contentMaxWidth / 2}
           paddingTop={20}
           paddingBottom={6}
-          justifyContent={'center'}
+          alignItems="center"
+          column
         >
           <Text>Copyright © {currentYear} evisa-vn</Text>
+          <Text paddingTop={4} semibold>
+            CONTACT US
+          </Text>
+          <PhoneAndEmail />
+          <Text paddingTop={2} textAlign="center">
+            {companyInfo.address}
+          </Text>
+          <Flexbox paddingTop={10} justifyContent="center">
+            Facebook / Terms of Use / Privacy Policy
+          </Flexbox>
+          <Text paddingTop={2} textAlign="center" fontSize="xs">
+            Disclaimers: evisa-vn.com is a non-government site (managed by a
+            private agency) providing visa approval letter service for travelers
+            to Vietnam for a fee and whilst every effort is made to ensure the
+            information is correct and up to date, there may be changes which we
+            are not aware of.
+          </Text>
         </Flexbox>
       </Flexbox>
     );

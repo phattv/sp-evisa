@@ -13,6 +13,7 @@ import {
   pageNames,
 } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
+import PhoneAndEmail from './PhoneAndEmail';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -67,40 +68,6 @@ class Header extends React.PureComponent<Props, State> {
       shouldShowMobileMenus: !this.state.shouldShowMobileMenus,
     });
   };
-
-  renderDesktopPhoneAndEmail = () => (
-    <Flexbox alignItems={'center'}>
-      <Anchor href={`tel:${companyInfo.phone}`} changeBackground>
-        <Flexbox
-          alignItems={'center'}
-          paddingHorizontal={1}
-          paddingVertical={1}
-        >
-          <Image
-            src={'../static/icons/phone-ico.svg'}
-            width={5}
-            alt={'phone'}
-          />
-          <Text fonsize={'l'} color="darkBlue" paddingLeft={2}>
-            {companyInfo.phoneString}
-          </Text>
-        </Flexbox>
-      </Anchor>
-      <Flexbox borderRight height={7} marginHorizontal={3} />
-      <Anchor href={`mailto:${companyInfo.email}`} changeBackground>
-        <Flexbox
-          alignItems={'center'}
-          paddingHorizontal={1}
-          paddingVertical={1}
-        >
-          <Image src={'../static/icons/email-ico.svg'} width={5} alt={'mail'} />
-          <Text fonsize={'l'} color="darkBlue" paddingLeft={2}>
-            {companyInfo.email}
-          </Text>
-        </Flexbox>
-      </Anchor>
-    </Flexbox>
-  );
 
   renderDesktopHorizontalMenus = () => (
     <Flexbox
@@ -245,7 +212,7 @@ class Header extends React.PureComponent<Props, State> {
               query={`(min-width: ${screenSizes.tablet + 1}px)`}
               defaultMatches={true}
             >
-              {this.renderDesktopPhoneAndEmail()}
+              <PhoneAndEmail />
             </Media>
             <Media
               query={`(max-width: ${screenSizes.tablet}px)`}
