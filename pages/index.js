@@ -48,7 +48,7 @@ class Home extends React.Component<Props, State> {
                 visa in just 3 simple steps with evisa-vn, so you would have
                 more time planning your trips.
               </Text>
-              <Button onClick={this.navigateApplyPage}>Get Started</Button>
+              <Button onClick={this.navigateApplyPage}>Apply Now!</Button>
             </Flexbox>
             <Flexbox flex={1} column paddingHorizontal={5} paddingTop={5}>
               <Image
@@ -65,86 +65,7 @@ class Home extends React.Component<Props, State> {
             column
             width="100%"
           >
-            <Flexbox paddingBottom={3} column>
-              <Heading text="Fast, Cheap and Simple" />
-              <Heading text="3 steps to get your Visa" secondary />
-            </Flexbox>
-            <Flexbox responsiveLayout>
-              <Card flex={1}>
-                <Flexbox>
-                  <Image
-                    src="../static/icons/step-1.svg"
-                    alt="step-1"
-                    width={iconSizes.default}
-                  />
-                </Flexbox>
-                <Text fontSize="m" semibold>
-                  Submit your application
-                </Text>
-                <Divider />
-                <Text paddingTop={6}>
-                  Fill in the secured online application online. You are
-                  required to enter the precise personal information which
-                  appears on your passport.
-                </Text>
-              </Card>
-              <Card flex={1}>
-                <Flexbox>
-                  <Image
-                    src="../static/icons/step-2.svg"
-                    alt="step-2"
-                    width={iconSizes.default}
-                  />
-                </Flexbox>
-                <Text fontSize="m" semibold>
-                  Pay for service fee
-                </Text>
-                <Divider />
-                <Text paddingTop={6}>
-                  You can make payment with your Credit/ Debit Card via
-                  OnePay/PayPal or pay via Western Union
-                </Text>
-                <Flexbox paddingTop={4}>
-                  <Image
-                    src="../static/icons/shield-ico.svg"
-                    alt="shield"
-                    width={iconSizes.small}
-                  />
-                  <Text paddingLeft={2}>Money-back guarantee</Text>
-                </Flexbox>
-              </Card>
-              <Card flex={1}>
-                <Flexbox>
-                  <Image
-                    src="../static/icons/step-3.svg"
-                    alt="step-3"
-                    width={iconSizes.default}
-                  />
-                </Flexbox>
-                <Text fontSize="m" semibold>
-                  Get your approval letter
-                </Text>
-                <Divider />
-                <Text paddingTop={6}>
-                  Check your email for your visa approval letter. Print the
-                  documents out and fill in the entry and exit form. Prepare 2
-                  passport sized photos (4x6cm) and stamping fee which is $25
-                  for single entry or $50 for multiple entry visa
-                </Text>
-              </Card>
-            </Flexbox>
-          </Flexbox>
-        </ContentMaxWidth>
-
-        <FeesCard />
-
-        <ContentMaxWidth>
-          <Flexbox
-            paddingVertical={spacingValues.blockPaddingTop}
-            column
-            width="100%"
-          >
-            <Heading text="Why choose us?" />
+            <Heading text="Why evisa-vn?" />
             <Card>
               <Flexbox responsiveLayout>
                 <Flexbox flex={1} column marginHorizontal={5}>
@@ -156,12 +77,11 @@ class Home extends React.Component<Props, State> {
                     />
                   </Flexbox>
                   <Text fontSize="m" semibold>
-                    Prompt response, strictly confidential information
+                    24/7 customer service
                   </Text>
                   <Divider small />
                   <Text paddingTop={6}>
-                    You will get responses within 5 minutes when contacting
-                    evisa-vn.com Your information is kept confidentially
+                    We reply to all enquiries within 5 minutes.
                   </Text>
                 </Flexbox>
                 <Flexbox flex={1} column marginHorizontal={5}>
@@ -173,13 +93,12 @@ class Home extends React.Component<Props, State> {
                     />
                   </Flexbox>
                   <Text fontSize="m" semibold>
-                    Quality and reliability
+                    Confidentiality
                   </Text>
                   <Divider small />
                   <Text paddingTop={6}>
-                    Evisa-vn.com is trusted by clients from all over the world.
-                    We guarantee to return all your fee in case your application
-                    is rejected.
+                    All information provided to us will be kept confidential and
+                    secured.
                   </Text>
                 </Flexbox>
                 <Flexbox flex={1} column marginHorizontal={5}>
@@ -191,24 +110,101 @@ class Home extends React.Component<Props, State> {
                     />
                   </Flexbox>
                   <Text fontSize="m" semibold>
-                    Punctuality guarantee and full-fee return
+                    Reliability
                   </Text>
                   <Divider small />
                   <Text paddingTop={6}>
-                    We guarantee you will get your visa approval letter within 2
-                    working days/or within 1 working day depending on the
-                    services chosen. You get all-your- fee return if your
-                    application is rejected and our services do not satisfy your
-                    demands.
+                    All applications will be processed in 1 working day or less.
                   </Text>
                 </Flexbox>
               </Flexbox>
-              <Button marginTop={8} onClick={this.navigateApplyPage}>
-                Get Started
-              </Button>
             </Card>
           </Flexbox>
         </ContentMaxWidth>
+
+        <ContentMaxWidth>
+          <Flexbox column alignItems="center">
+            <Flexbox paddingTop={4}>
+              <Image
+                src="../static/icons/shield-ico.svg"
+                alt="shield"
+                width={iconSizes.small}
+              />
+              <Text paddingLeft={2}>Money-back guarantee</Text>
+            </Flexbox>
+            <Text>
+              All service fee will be reimbursed if your application is rejected
+              or we don't deliver your applications on time.
+            </Text>
+          </Flexbox>
+        </ContentMaxWidth>
+
+        <ContentMaxWidth>
+          <Flexbox
+            paddingVertical={spacingValues.blockPaddingTop}
+            column
+            width="100%"
+          >
+            <Flexbox paddingBottom={3} column>
+              <Heading text="How to apply?" />
+              <Heading text="Fast, Cheap and Simple" secondary />
+            </Flexbox>
+            <Flexbox responsiveLayout>
+              <Card flex={1}>
+                <Flexbox>
+                  <Image
+                    src="../static/icons/step-1.svg"
+                    alt="step-1"
+                    width={iconSizes.default}
+                  />
+                </Flexbox>
+                <Text fontSize="m" semibold>
+                  5 minutes to finish your application
+                </Text>
+                <Divider />
+                <Text paddingTop={6}>
+                  Fill in our secured online application. You are required to
+                  enter the precise information which appears on your passport.
+                </Text>
+              </Card>
+              <Card flex={1}>
+                <Flexbox>
+                  <Image
+                    src="../static/icons/step-2.svg"
+                    alt="step-2"
+                    width={iconSizes.default}
+                  />
+                </Flexbox>
+                <Text fontSize="m" semibold>
+                  Secured online payment
+                </Text>
+                <Divider />
+                <Text paddingTop={6}>
+                  You can make payment via PayPal or your Credit/Debit Card.
+                </Text>
+              </Card>
+              <Card flex={1}>
+                <Flexbox>
+                  <Image
+                    src="../static/icons/step-3.svg"
+                    alt="step-3"
+                    width={iconSizes.default}
+                  />
+                </Flexbox>
+                <Text fontSize="m" semibold>
+                  Approval Result within 24 hours
+                </Text>
+                <Divider />
+                <Text paddingTop={6}>
+                  Check your email for your approval letter. Please follow the
+                  instructions to prepare all your supporting documents.
+                </Text>
+              </Card>
+            </Flexbox>
+          </Flexbox>
+        </ContentMaxWidth>
+
+        <FeesCard />
 
         <ServicesCard />
 

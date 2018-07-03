@@ -123,13 +123,13 @@ class Fees extends React.Component<Props, State> {
               />
               <Flexbox paddingTop={3}>
                 <Heading
-                  text="Select your country to see the price in details"
+                  text="Select your country to see the Service Fees in details"
                   secondary
                 />
               </Flexbox>
 
               <Flexbox paddingTop={6} width={tableWidth}>
-                {/* TODO: coutnry flag */}
+                {/* TODO: country flag */}
                 <Dropdown
                   value={countryId}
                   placeholder="Select Country"
