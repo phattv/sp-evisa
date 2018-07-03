@@ -57,6 +57,8 @@ const iconSizes = {
 
 const headerHeight = 140 / spacingUnits.desktop;
 const contentMaxWidth = 1440 / spacingUnits.desktop;
+const tableWidth = 380 / spacingUnits.desktop;
+const textMaxWidth = 580 / spacingUnits.desktop;
 
 const paddingAll = {
   paddingHorizontal: 5,
@@ -102,6 +104,8 @@ export {
   dateTimeFormat,
   headerHeight,
   contentMaxWidth,
+  tableWidth,
+  textMaxWidth,
   paddingAll,
   paddingAllLarge,
   pageNames,

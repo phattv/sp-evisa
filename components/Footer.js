@@ -17,12 +17,7 @@ type Props = {};
 class Footer extends React.Component<Props> {
   render() {
     return (
-      <Flexbox
-        width="100%"
-        justifyContent="center"
-        backgroundColor="bgGrey2"
-        marginTop={30}
-      >
+      <Flexbox width="100%" justifyContent="center" backgroundColor="bgGrey2">
         <Flexbox
           width="100%"
           maxWidth={contentMaxWidth / 2}

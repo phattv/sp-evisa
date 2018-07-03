@@ -15,7 +15,12 @@ import PaymentMethodImages from '../components/PaymentMethodImages';
 
 import { logPageView } from '../utils/analytics';
 import { reducerNames } from '../constants/reducerNames';
-import { spacingValues, iconSizes, pageNames } from '../constants/ui';
+import {
+  spacingValues,
+  iconSizes,
+  pageNames,
+  tableWidth,
+} from '../constants/ui';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
 import { countryOptionsSemantic } from '../constants/dropDownOptions';
@@ -28,7 +33,6 @@ const fieldsToBind = [
   'six_month_multiple',
   'one_year_multiple',
 ];
-const tableWidth = 76;
 
 /**
  * Fees show all the fees a person must pay to apply visa
@@ -109,7 +113,7 @@ class Fees extends React.Component<Props, State> {
       <Fragment>
         <FeesCard />
         <ContentMaxWidth>
-          <Flexbox column>
+          <Flexbox column maxWidth={tableWidth * 2 + 4}>
             <Flexbox
               column
               paddingTop={spacingValues.blockPaddingTop}
@@ -152,6 +156,8 @@ class Fees extends React.Component<Props, State> {
         </ContentMaxWidth>
 
         <PaymentMethodImages />
+
+        <Flexbox paddingBottom={30} />
       </Fragment>
     );
   }
@@ -174,9 +180,10 @@ class Fees extends React.Component<Props, State> {
         borderColor="green"
         marginHorizontal={2}
         marginVertical={4}
+        minWidth={tableWidth}
+        width="100%"
       >
         <Flexbox
-          width={tableWidth}
           paddingVertical={6}
           column
           alignItems="center"

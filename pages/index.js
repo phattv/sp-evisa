@@ -209,6 +209,8 @@ class Home extends React.Component<Props, State> {
         <ServicesCard />
 
         <PaymentMethodImages />
+
+        <Flexbox paddingBottom={30} />
       </Fragment>
     );
   }

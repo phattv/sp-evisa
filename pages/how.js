@@ -28,6 +28,7 @@ class How extends React.Component<Props, State> {
   componentDidMount() {
     logPageView();
   }
+
   render() {
     return (
       <Fragment>
@@ -173,6 +174,8 @@ class How extends React.Component<Props, State> {
         </ContentMaxWidth>
 
         <PaymentMethodImages />
+
+        <Flexbox paddingBottom={30} />
       </Fragment>
     );
   }
