@@ -13,7 +13,7 @@ import Footer from './Footer';
 type Props = {
   children: Node,
 };
-export default class Layout extends React.Component<Props> {
+class Layout extends React.Component<Props> {
   render() {
     const { children } = this.props;
 
@@ -34,3 +34,5 @@ export default class Layout extends React.Component<Props> {
     );
   }
 }
+
+export default Layout;

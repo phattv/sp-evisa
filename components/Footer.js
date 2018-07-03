@@ -14,7 +14,7 @@ const currentYear = new Date().getFullYear();
  * and shows copyright, contact information, social media platforms and disclaimers.
  */
 type Props = {};
-export default class Footer extends React.Component<Props> {
+class Footer extends React.Component<Props> {
   render() {
     return (
       <Flexbox width="100%" justifyContent="center" backgroundColor="bgGrey2">
@@ -49,3 +49,5 @@ export default class Footer extends React.Component<Props> {
     );
   }
 }
+
+export default Footer;

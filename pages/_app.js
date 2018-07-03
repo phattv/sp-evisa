@@ -10,6 +10,14 @@ import { initGA } from '../utils/analytics';
 import { configureStore } from '../redux/store';
 
 class MyApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    debugger;
+    const pageProps = Component.getInitialProps
+      ? await Component.getInitialProps(ctx)
+      : {};
+    return { pageProps };
+  }
+
   componentDidCatch(error, errorInfo) {
     console.log('CUSTOM ERROR HANDLING', error);
     // This is needed to render errors correctly in development / production
