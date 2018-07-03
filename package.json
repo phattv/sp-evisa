@@ -11,13 +11,15 @@
     "build": "next build",
     "start": "next start",
     "export": "next build && next export -o dist",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "analyze": "cross-env ANALYZE=1 next build"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "cross-env": "^5.2.0",
     "dayjs": "^1.6.2",
     "express": "^4.16.2",
     "final-form": "^3.0.0",
@@ -42,6 +44,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-persist": "4.10.1",
     "redux-thunk": "^2.2.0",
+    "semantic-ui-react": "^0.81.3",
     "styled-components": "^2.2.3"
   },
   "devDependencies": {
@@ -50,7 +53,8 @@
     "flow-bin": "^0.59.0",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
-    "prettier": "^1.8.2"
+    "prettier": "^1.8.2",
+    "webpack-bundle-analyzer": "^2.13.1"
   },
   "lint-staged": {
     "*.js": [
