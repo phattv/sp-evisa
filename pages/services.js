@@ -4,13 +4,13 @@ import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
 import Router from 'next/router';
 // custom
-import { Flexbox, Text, Image, Button } from '../components/ui';
+import { Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import {
+  iconSizes,
   pageNames,
   spacingValues,
-  iconSizes,
   tableWidth,
   textMaxWidth,
 } from '../constants/ui';

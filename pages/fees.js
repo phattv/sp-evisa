@@ -7,7 +7,7 @@ import _isEmpty from 'lodash/isEmpty';
 import { Dropdown } from 'semantic-ui-react';
 import Router from 'next/router';
 // custom
-import { Flexbox, Button, Image, Text } from '../components/ui';
+import { Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import FeesCard from '../components/FeesCard';
@@ -16,9 +16,9 @@ import PaymentMethodImages from '../components/PaymentMethodImages';
 import { logPageView } from '../utils/analytics';
 import { reducerNames } from '../constants/reducerNames';
 import {
-  spacingValues,
   iconSizes,
   pageNames,
+  spacingValues,
   tableWidth,
 } from '../constants/ui';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';

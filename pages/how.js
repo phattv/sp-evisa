@@ -2,21 +2,14 @@
 // vendor
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import _get from 'lodash/get';
-import _isEmpty from 'lodash/isEmpty';
-import { Dropdown } from 'semantic-ui-react';
 // custom
 import { Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import ServicesCard from '../components/ServicesCard';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 
 import { logPageView } from '../utils/analytics';
-import { spacingValues, iconSizes, paddingAllLarge } from '../constants/ui';
-import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
-import { getFeesByCountryId } from '../utils/apiClient';
-import { countryOptionsSemantic } from '../constants/dropDownOptions';
+import { iconSizes, paddingAllLarge } from '../constants/ui';
 
 /**
  * How show how to apply
