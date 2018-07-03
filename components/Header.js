@@ -186,7 +186,7 @@ class Header extends React.PureComponent<Props, State> {
 
     return (
       // Paypal z-index: 100
-      <Flexbox style={{ zIndex: 101 }} column>
+      <Flexbox style={{ zIndex: 101 }} column backgroundColor="white">
         <Flexbox flex={1} height={12} justifyContent={'center'}>
           <Flexbox
             width="100%"

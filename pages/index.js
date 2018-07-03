@@ -38,14 +38,15 @@ class Home extends React.Component<Props, State> {
             <Flexbox flex={1} column {...paddingAll}>
               <Heading
                 color="white"
-                text="Easiest way to get your Visa."
+                text="Easiest way to get your Vietnam Visa."
                 textAlign="left"
               />
               <Text color="white" paddingBottom={7}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Visa application can be intimidate to everyone and bothersome to
+                even the most seasoned travelers. If you are traveling to
+                Vietnam, let evisa-vn take care of all the hassles. Get your
+                visa in just 3 simple steps with evisa-vn, so you would have
+                more time planning your trips.
               </Text>
               <Button onClick={this.navigateApplyPage}>Get Started</Button>
             </Flexbox>

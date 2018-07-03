@@ -5,17 +5,17 @@ import { connect } from 'react-redux';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import { Dropdown } from 'semantic-ui-react';
+import Router from 'next/router';
 // custom
-import { Flexbox, Image, Text } from '../components/ui';
+import { Flexbox, Button, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import FeesCard from '../components/FeesCard';
-import ServicesCard from '../components/ServicesCard';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 
 import { logPageView } from '../utils/analytics';
 import { reducerNames } from '../constants/reducerNames';
-import { spacingValues, iconSizes } from '../constants/ui';
+import { spacingValues, iconSizes, pageNames } from '../constants/ui';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
 import { countryOptionsSemantic } from '../constants/dropDownOptions';
@@ -100,6 +100,8 @@ class Fees extends React.Component<Props, State> {
     this.props.updateFees(data);
   };
 
+  navigateToApply = () => Router.push(pageNames.apply);
+
   render() {
     const { countryId, touristFees, businessFees } = this.state;
 
@@ -107,44 +109,47 @@ class Fees extends React.Component<Props, State> {
       <Fragment>
         <FeesCard />
         <ContentMaxWidth>
-          <Flexbox
-            column
-            paddingTop={spacingValues.blockPaddingTop}
-            alignItems="center"
-          >
-            <Image
-              width={iconSizes.large}
-              src="../static/icons/world.svg"
-              alt="world icon"
-            />
-            <Flexbox paddingTop={3}>
-              <Heading
-                text="Select your country to see the price in details"
-                secondary
+          <Flexbox column>
+            <Flexbox
+              column
+              paddingTop={spacingValues.blockPaddingTop}
+              paddingBottom={2}
+              alignItems="center"
+            >
+              <Image
+                width={iconSizes.large}
+                src="../static/icons/world.svg"
+                alt="world icon"
               />
+              <Flexbox paddingTop={3}>
+                <Heading
+                  text="Select your country to see the price in details"
+                  secondary
+                />
+              </Flexbox>
+
+              <Flexbox paddingTop={6} width={tableWidth}>
+                {/* TODO: coutnry flag */}
+                <Dropdown
+                  value={countryId}
+                  placeholder="Select Country"
+                  fluid
+                  search
+                  selection
+                  options={countryOptionsSemantic}
+                  onChange={this.updateCountryId}
+                />
+              </Flexbox>
+
+              <Flexbox responsiveLayout paddingTop={6}>
+                {!_isEmpty(touristFees) && this.renderTouristFees()}
+                {!_isEmpty(businessFees) && this.renderBusinessFees()}
+              </Flexbox>
             </Flexbox>
 
-            <Flexbox paddingTop={6} width={tableWidth}>
-              {/* TODO: coutnry flag */}
-              <Dropdown
-                value={countryId}
-                placeholder="Select Country"
-                fluid
-                search
-                selection
-                options={countryOptionsSemantic}
-                onChange={this.updateCountryId}
-              />
-            </Flexbox>
-
-            <Flexbox responsiveLayout paddingTop={6} paddingBottom={20}>
-              {!_isEmpty(touristFees) && this.renderTouristFees()}
-              {!_isEmpty(businessFees) && this.renderBusinessFees()}
-            </Flexbox>
+            <Button onClick={this.navigateToApply}>Apply Now!</Button>
           </Flexbox>
         </ContentMaxWidth>
-
-        <ServicesCard />
 
         <PaymentMethodImages />
       </Fragment>
@@ -168,7 +173,7 @@ class Fees extends React.Component<Props, State> {
         borderWidth={3}
         borderColor="green"
         marginHorizontal={2}
-        marginVertical={2}
+        marginVertical={4}
       >
         <Flexbox
           width={tableWidth}
