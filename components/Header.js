@@ -25,15 +25,15 @@ const menus = [
     url: pageNames.home,
   },
   {
-    text: 'Fees',
-    url: pageNames.fees,
-  },
-  {
     text: 'How to Apply',
     url: pageNames.how,
   },
   {
-    text: 'Other services',
+    text: 'Fees',
+    url: pageNames.fees,
+  },
+  {
+    text: 'Services',
     url: pageNames.services,
   },
   {

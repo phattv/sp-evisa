@@ -13,6 +13,7 @@ import FeesCard from '../components/FeesCard';
 import ServicesCard from '../components/ServicesCard';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 
+import { logPageView } from '../utils/analytics';
 import { reducerNames } from '../constants/reducerNames';
 import { spacingValues, iconSizes } from '../constants/ui';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
@@ -51,6 +52,7 @@ class Fees extends React.Component<Props, State> {
   };
 
   componentDidMount() {
+    logPageView();
     this.syncPropsToState(this.props, true);
   }
 
