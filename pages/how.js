@@ -1,7 +1,6 @@
 // @flow
 // vendor
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
 // custom
 import { Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';

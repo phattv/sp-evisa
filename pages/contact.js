@@ -3,24 +3,85 @@
 import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
 import { Form } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 // custom
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import { iconSizes } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
+import { feedback } from '../utils/apiClient';
 
 /**
  * Contact show company contact information
  */
 type Props = {};
-type State = {};
+type State = {
+  shouldShowMore: boolean,
+  name: string,
+  email: string,
+  subject: string,
+  message: string,
+  responseMessage: string,
+};
 class Contact extends React.Component<Props, State> {
+  state = {
+    shouldShowMore: false,
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    responseMessage: '',
+  };
+
   componentDidMount() {
     logPageView();
   }
 
+  updateTextInput = (event: Object) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  onSubmit = () => {
+    this.setState({
+      responseMessage: '',
+    });
+
+    const { name, email, subject, message } = this.state;
+    if (!message || !email) {
+      return this.setState({
+        responseMessage: 'Please fill in the required fields',
+      });
+    }
+    feedback(
+      {
+        name,
+        email,
+        subject,
+        message,
+      },
+      this.showMessage,
+    );
+  };
+
+  showMessage = (response: Object) => {
+    this.setState({
+      responseMessage: response.message,
+    });
+  };
+
   render() {
+    const {
+      shouldShowMore,
+      name,
+      email,
+      subject,
+      message,
+      responseMessage,
+    } = this.state;
+
     return (
       <Fragment>
         <ContentMaxWidth>
@@ -115,21 +176,47 @@ class Contact extends React.Component<Props, State> {
                   />
                 </Flexbox>
                 <Flexbox column>
-                  <Form>
+                  <Form onSubmit={this.onSubmit}>
                     <Form.Field>
-                      <input placeholder="Name" />
+                      <input
+                        name="name"
+                        value={name}
+                        placeholder="Name"
+                        onChange={this.updateTextInput}
+                      />
                     </Form.Field>
                     <Form.Field>
-                      <input type="email" placeholder="Email" />
+                      <input
+                        type="email"
+                        name="email"
+                        value={email}
+                        placeholder="Email"
+                        onChange={this.updateTextInput}
+                      />
                     </Form.Field>
                     <Form.Field>
-                      <input placeholder="Subject" />
+                      <input
+                        name="subject"
+                        value={subject}
+                        placeholder="Subject"
+                        onChange={this.updateTextInput}
+                      />
                     </Form.Field>
                     <Form.Field>
-                      <textarea placeholder="Message" rows={5} />
+                      <textarea
+                        name="message"
+                        value={message}
+                        placeholder="Message"
+                        onChange={this.updateTextInput}
+                        rows={5}
+                      />
                     </Form.Field>
                     <Button type="submit">Send Message</Button>
                   </Form>
+
+                  {responseMessage && (
+                    <Text paddingTop={4}>{responseMessage}</Text>
+                  )}
                 </Flexbox>
               </Flexbox>
             </Flexbox>
@@ -140,4 +227,4 @@ class Contact extends React.Component<Props, State> {
   }
 }
 
-export default Contact;
+export default connect(null, null)(Contact);
