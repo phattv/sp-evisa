@@ -1,5 +1,6 @@
 // @flow
 import countryOptions from '../static/countries.json';
+import countryOptionsSemantic from '../static/countries.semantic.json';
 
 const genderOptions = [
   { value: 'male', label: 'Male' },
@@ -59,6 +60,7 @@ export {
   processingTimeOptions,
   airportOptions,
   countryOptions,
+  countryOptionsSemantic,
   airportFastTrackOptions,
   carPickUpOptions,
 };
