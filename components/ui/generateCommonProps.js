@@ -123,6 +123,7 @@ padding-left: ${getSpacingValue(paddingHorizontal, spacingUnit)};
  * @param spacingUnit
  * @returns {string}
  */
+// TODO: a lot of undefined props
 export const generateCommonProps = (
   props: Object,
   spacingUnit: number,
@@ -192,15 +193,25 @@ ${props.marginHorizontal &&
   `};
 
 ${props.border &&
-    `border: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
+    `border: ${props.borderWidth || 1}px solid ${
+      colors[props.borderColor || 'darkBlue']
+    }`};
 ${props.borderTop &&
-    `border-top: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
+    `border-top: ${props.borderWidth || 1}px solid ${
+      colors[props.borderColor || 'darkBlue']
+    }`};
 ${props.borderRight &&
-    `border-right: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
+    `border-right: ${props.borderWidth || 1}px solid ${
+      colors[props.borderColor || 'darkBlue']
+    }`};
 ${props.borderBottom &&
-    `border-bottom: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
+    `border-bottom: ${props.borderWidth || 1}px solid ${
+      colors[props.borderColor || 'darkBlue']
+    }`};
 ${props.borderLeft &&
-    `border-left: 1px solid ${colors[props.borderColor || 'darkBlue']}`};
+    `border-left: ${props.borderWidth || 1}px solid ${
+      colors[props.borderColor || 'darkBlue']
+    }`};
 ${props.borderRadius && `border-radius: ${borderRadius}px`};
 ${props.borderTopRightRadius && `border-top-right-radius: ${borderRadius}px`};
 ${props.borderBottomRightRadius &&
