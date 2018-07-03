@@ -4,7 +4,7 @@ import React from 'react';
 // custom
 import { Flexbox, Text } from '../components/ui';
 import { companyInfo } from '../constants/companyInfo';
-import { contentMaxWidth } from '../constants/ui';
+import { contentMaxWidth, spacingValues } from '../constants/ui';
 import PhoneAndEmail from './PhoneAndEmail';
 
 const currentYear = new Date().getFullYear();
@@ -21,7 +21,7 @@ class Footer extends React.Component<Props> {
         <Flexbox
           width="100%"
           maxWidth={contentMaxWidth / 2}
-          paddingTop={20}
+          paddingTop={spacingValues.blockPaddingTop}
           paddingBottom={6}
           alignItems="center"
           column

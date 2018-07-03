@@ -8,7 +8,7 @@ import Heading from '../components/Heading';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 
 import { logPageView } from '../utils/analytics';
-import { iconSizes, paddingAllLarge } from '../constants/ui';
+import { iconSizes, paddingAllLarge, spacingValues } from '../constants/ui';
 
 /**
  * How show how to apply
@@ -67,7 +67,7 @@ class How extends React.Component<Props, State> {
               No documents to send off. No need to stand in line at the
               consulate.
             </Text>
-            <Flexbox paddingTop={20}>
+            <Flexbox paddingTop={spacingValues.blockPaddingTop}>
               <Flexbox column flex={1}>
                 <Flexbox column paddingVertical={5}>
                   <Flexbox alignItems="center" paddingBottom={2}>

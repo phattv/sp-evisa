@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import { iconSizes } from '../constants/ui';
+import FAQ from '../components/FAQ';
+import { iconSizes, spacingValues } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { feedback } from '../utils/apiClient';
 
@@ -17,7 +18,6 @@ import { feedback } from '../utils/apiClient';
  */
 type Props = {};
 type State = {
-  shouldShowMore: boolean,
   name: string,
   email: string,
   subject: string,
@@ -26,7 +26,6 @@ type State = {
 };
 class Contact extends React.Component<Props, State> {
   state = {
-    shouldShowMore: false,
     name: '',
     email: '',
     subject: '',
@@ -73,14 +72,7 @@ class Contact extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      shouldShowMore,
-      name,
-      email,
-      subject,
-      message,
-      responseMessage,
-    } = this.state;
+    const { name, email, subject, message, responseMessage } = this.state;
 
     return (
       <Fragment>
@@ -220,6 +212,8 @@ class Contact extends React.Component<Props, State> {
                 </Flexbox>
               </Flexbox>
             </Flexbox>
+
+            <FAQ />
           </Flexbox>
         </ContentMaxWidth>
       </Fragment>
