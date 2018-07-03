@@ -11,7 +11,6 @@ import { configureStore } from '../redux/store';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
-    debugger;
     const pageProps = Component.getInitialProps
       ? await Component.getInitialProps(ctx)
       : {};

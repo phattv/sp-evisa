@@ -19,10 +19,10 @@ class Layout extends React.Component<Props> {
 
     return (
       <Flexbox>
-        <Flexbox column flex={1} minHeight="100vh">
+        <Flexbox column flex={1} minHeight="100vh" backgroundColor="bgGrey">
           <Header />
 
-          <Flexbox flex={1} width="100%" backgroundColor="bgGrey2">
+          <Flexbox flex={1} width="100%">
             <Flexbox width="100%" column alignItems="center">
               {children}
             </Flexbox>
