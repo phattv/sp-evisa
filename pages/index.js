@@ -5,12 +5,6 @@ import { logPageView } from '../utils/analytics';
 import Router from 'next/router';
 // custom
 import { Flexbox, Text, Image, Button } from '../components/ui';
-import {
-  paddingAll,
-  pageNames,
-  spacingValues,
-  iconSizes,
-} from '../constants/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Card from '../components/Card';
 import Divider from '../components/Divider';
@@ -18,6 +12,12 @@ import Heading from '../components/Heading';
 import FeesCard from '../components/FeesCard';
 import ServicesCard from '../components/ServicesCard';
 import PaymentMethodImages from '../components/PaymentMethodImages';
+import {
+  paddingAll,
+  pageNames,
+  spacingValues,
+  iconSizes,
+} from '../constants/ui';
 
 type Props = {};
 type State = {};
