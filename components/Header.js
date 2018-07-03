@@ -128,11 +128,7 @@ class Header extends React.PureComponent<Props, State> {
           paddingHorizontal={1}
           paddingVertical={1}
         >
-          <Image
-            src={'../static/icons/phone-ico.svg'}
-            width={5}
-            alt={'phone'}
-          />
+          <Image src="../static/icons/phone-ico.svg" width={5} alt={'phone'} />
           <Text fonsize={'l'} color={'white'} paddingLeft={2}>
             {companyInfo.phoneString}
           </Text>
@@ -151,7 +147,7 @@ class Header extends React.PureComponent<Props, State> {
           paddingHorizontal={1}
           paddingVertical={1}
         >
-          <Image src={'../static/icons/email-ico.svg'} width={5} alt={'mail'} />
+          <Image src="../static/icons/email-ico.svg" width={5} alt={'mail'} />
           <Text fonsize={'l'} color="white" paddingLeft={2}>
             {companyInfo.email}
           </Text>

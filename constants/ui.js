@@ -50,12 +50,13 @@ const spacingValues = {
 };
 
 const iconSizes = {
-  small: 30 / 5,
-  default: 60 / 5,
+  small: 30 / spacingUnits.desktop,
+  default: 60 / spacingUnits.desktop,
+  large: 100 / spacingUnits.desktop,
 };
 
-const headerHeight = 140 / 5;
-const contentMaxWidth = 1440 / 5;
+const headerHeight = 140 / spacingUnits.desktop;
+const contentMaxWidth = 1440 / spacingUnits.desktop;
 
 const paddingAll = {
   paddingHorizontal: 5,
