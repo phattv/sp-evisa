@@ -48,6 +48,7 @@ const mobileAnchorStyles = {
   justifyContent: 'center',
   paddingTop: 15,
   paddingBottom: 15,
+  backgroundColor: 'white',
 };
 
 /**

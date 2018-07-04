@@ -46,6 +46,10 @@ const faqsConstants = [
     showAnswer: false,
   },
 ];
+// is this the official Government Website?
+// how fast i get approved
+// we’ve made the payment. Now what?
+
 /**
  * FAQ
  */
