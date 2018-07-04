@@ -15,7 +15,6 @@ import {
 import { getFeesByCountryId } from '../utils/apiClient';
 import {
   airportFastTrackOptions,
-  airportOptions,
   carPickUpOptions,
   countryOptionsSemantic,
   processingTimeOptions,
@@ -33,26 +32,18 @@ type Props = {
 };
 type State = {
   countryId: number | string,
-  quantity: string,
-  type: string,
   purpose: string,
+  type: string,
   processingTime: string,
-  airport: string,
-  arrivalDate: string,
-  departureDate: string,
   extraServices: Object,
   shouldShowErrorMessage: boolean,
 };
 class ApplyFormStepOne extends React.Component<Props, State> {
   state = {
     countryId: '',
-    quantity: '1',
-    type: typeOptions[0].value,
     purpose: purposeOptions[0].value,
+    type: typeOptions[0].value,
     processingTime: processingTimeOptions[0].value,
-    airport: airportOptions[0].value,
-    arrivalDate: '',
-    departureDate: '',
     extraServices: {
       fastTrack: '',
       carPickup: '',
@@ -62,30 +53,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   onSubmit = (event: Object) => {
-    const {
-      countryId,
-      quantity,
-      type,
-      processingTime,
-      purpose,
-      airport,
-      arrivalDate,
-      departureDate,
-    } = this.state;
+    const { countryId, purpose, type, processingTime } = this.state;
 
     // required fields
-    const shouldShowErrorMessage =
-      !countryId ||
-      parseInt(quantity) <= 0 ||
-      !type ||
+    const shouldShowErrorMessage = !countryId || !purpose;
+    !type ||
       !processingTime ||
-      !purpose ||
-      !airport ||
-      !arrivalDate ||
-      !departureDate;
-    this.setState({
-      shouldShowErrorMessage,
-    });
+      this.setState({
+        shouldShowErrorMessage,
+      });
 
     // save to store
     this.props.updateStepOne(this.state);
@@ -213,7 +189,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     if (isForced || this.props.stepOne !== nextProps.stepOne) {
       this.setState({
         countryId: _get(nextProps, 'stepOne.countryId', ''),
-        quantity: _get(nextProps, 'stepOne.quantity', '1'),
         type: _get(nextProps, 'stepOne.type', typeOptions[0].value),
         purpose: _get(nextProps, 'stepOne.purpose', purposeOptions[0].value),
         processingTime: _get(
@@ -221,9 +196,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           'stepOne.processingTime',
           processingTimeOptions[0].value,
         ),
-        airport: _get(nextProps, 'stepOne.airport', airportOptions[0].value),
-        arrivalDate: _get(nextProps, 'stepOne.arrivalDate', ''),
-        departureDate: _get(nextProps, 'stepOne.departureDate', ''),
         extraServices: _get(nextProps, 'stepOne.extraServices', {}),
       });
     }
