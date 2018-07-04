@@ -3,13 +3,12 @@
 import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
 import { Form } from 'semantic-ui-react';
-import { connect } from 'react-redux';
 // custom
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import FAQ from '../components/FAQ';
-import { iconSizes, spacingValues } from '../constants/ui';
+import { iconSizes } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { feedback } from '../utils/apiClient';
 
@@ -221,4 +220,4 @@ class Contact extends React.Component<Props, State> {
   }
 }
 
-export default connect(null, null)(Contact);
+export default Contact;

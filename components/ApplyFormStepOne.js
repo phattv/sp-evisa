@@ -5,11 +5,10 @@ import Select from 'react-select';
 import { Form } from 'react-final-form';
 import { Input, Label } from 'glamorous';
 import ReactTooltip from 'react-tooltip';
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import withRedux from 'next-redux-wrapper';
 import get from 'lodash/get';
 // custom
-import { Button, Flexbox, Text } from '../components';
+import { Button, Flexbox, Text } from './ui';
 import { borderRadius, colors, spacingValues } from '../constants/ui';
 import { configureStore } from '../redux/store';
 import {

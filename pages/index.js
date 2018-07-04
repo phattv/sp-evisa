@@ -159,7 +159,7 @@ class Home extends React.Component<Props, State> {
                   />
                 </Flexbox>
                 <Text fontSize="m" semibold>
-                  5 minutes to finish your application
+                  5 minutes to finish application
                 </Text>
                 <Divider />
                 <Text paddingTop={6}>
@@ -192,7 +192,7 @@ class Home extends React.Component<Props, State> {
                   />
                 </Flexbox>
                 <Text fontSize="m" semibold>
-                  Approval Result within 24 hours
+                  Approval result within 24 hours
                 </Text>
                 <Divider />
                 <Text paddingTop={6}>
