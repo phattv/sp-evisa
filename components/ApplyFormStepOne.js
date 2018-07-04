@@ -225,123 +225,121 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     }
 
     return (
-      <Flexbox width="100%">
-        <Form
-          onSubmit={this.onSubmit}
-          style={{
-            width: '100%',
-          }}
-        >
-          <Flexbox paddingBottom={3} column>
-            <Text fontSize="m">Visa Requirements</Text>
-            <Divider />
-          </Flexbox>
-          <Form.Field required>
-            <label>Country</label>
-            <Dropdown
-              value={countryId}
-              placeholder="Select..."
-              fluid
-              search
-              selection
-              options={countryOptionsSemantic}
-              onChange={this.updateCountryId}
-            />
-          </Form.Field>
-          <Form.Field required>
-            <label>Purpose of Visa</label>
-            <Dropdown
-              value={purpose}
-              placeholder="Select..."
-              fluid
-              search
-              selection
-              options={purposeOptions}
-              onChange={this.updatePurpose}
-            />
-          </Form.Field>
-          <Form.Field required>
-            <label>Type of Visa</label>
-            <Dropdown
-              value={type}
-              placeholder="Select..."
-              fluid
-              search
-              selection
-              options={typeOptionsByPurpose}
-              onChange={this.updateType}
-            />
-          </Form.Field>
-          <Form.Field required>
-            <label>Processing Time</label>
-            <Dropdown
-              value={processingTime}
-              placeholder="Select..."
-              fluid
-              search
-              selection
-              options={processingTimeOptions}
-              onChange={this.updateProcessingTime}
-            />
-          </Form.Field>
-          <Flexbox paddingBottom={3} paddingTop={6} column>
-            <Text fontSize="m">Other Services</Text>
-            <Divider />
-          </Flexbox>
-          <Form.Field>
-            <label>Airport Fast Track</label>
-            <Dropdown
-              value={extraServices.fastTrack}
-              placeholder="Select..."
-              fluid
-              search
-              selection
-              options={airportFastTrackOptions}
-              onChange={this.updateAirportFastTrack}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Car Pick Up</label>
-            <Dropdown
-              value={extraServices.carPickup}
-              placeholder="Select..."
-              fluid
-              search
-              selection
-              options={carPickUpOptions}
-              onChange={this.updateCarPickup}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Car Pick Up</label>
-            <Checkbox
-              checked={extraServices.privateVisaLetter}
-              onChange={this.togglePrivateVisaLetter}
-              label="Private Visa Letter"
-            />
-          </Form.Field>
+      <Form
+        onSubmit={this.onSubmit}
+        style={{
+          width: '100%',
+        }}
+      >
+        <Flexbox paddingBottom={3} column>
+          <Text fontSize="m">Visa Requirements</Text>
+          <Divider />
+        </Flexbox>
+        <Form.Field required>
+          <label>Country</label>
+          <Dropdown
+            value={countryId}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={countryOptionsSemantic}
+            onChange={this.updateCountryId}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Purpose of Visa</label>
+          <Dropdown
+            value={purpose}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={purposeOptions}
+            onChange={this.updatePurpose}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Type of Visa</label>
+          <Dropdown
+            value={type}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={typeOptionsByPurpose}
+            onChange={this.updateType}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Processing Time</label>
+          <Dropdown
+            value={processingTime}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={processingTimeOptions}
+            onChange={this.updateProcessingTime}
+          />
+        </Form.Field>
+        <Flexbox paddingBottom={3} paddingTop={6} column>
+          <Text fontSize="m">Other Services</Text>
+          <Divider />
+        </Flexbox>
+        <Form.Field>
+          <label>Airport Fast Track</label>
+          <Dropdown
+            value={extraServices.fastTrack}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={airportFastTrackOptions}
+            onChange={this.updateAirportFastTrack}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Car Pick Up</label>
+          <Dropdown
+            value={extraServices.carPickup}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={carPickUpOptions}
+            onChange={this.updateCarPickup}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Car Pick Up</label>
+          <Checkbox
+            checked={extraServices.privateVisaLetter}
+            onChange={this.togglePrivateVisaLetter}
+            label="Private Visa Letter"
+          />
+        </Form.Field>
 
-          <Flexbox paddingTop={6} column>
-            {shouldShowErrorMessage && (
-              <Flexbox
-                width="100%"
-                backgroundColor="bgRed"
-                paddingVertical={2}
-                justifyContent="center"
-                marginBottom={4}
-              >
-                <Text color="red" fontSize="s">
-                  Please fill in the required inputs!
-                </Text>
-              </Flexbox>
-            )}
+        <Flexbox paddingTop={6} column>
+          {shouldShowErrorMessage && (
+            <Flexbox
+              width="100%"
+              backgroundColor="bgRed"
+              paddingVertical={2}
+              justifyContent="center"
+              marginBottom={4}
+            >
+              <Text color="red" fontSize="s">
+                Please fill in the required inputs!
+              </Text>
+            </Flexbox>
+          )}
 
-            <Button type="submit" width="100%">
-              Next
-            </Button>
-          </Flexbox>
-        </Form>
-      </Flexbox>
+          <Button type="submit" width="100%">
+            Next
+          </Button>
+        </Flexbox>
+      </Form>
     );
   }
 }

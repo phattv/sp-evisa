@@ -9,6 +9,7 @@ const colors = {
   lightBlue: '#8193A9',
   bgGrey: '#F8F9FC',
   bgGrey2: '#F2F7FF',
+  bgRed: '#FFD1D7',
   white: '#FFFFFF',
 };
 
