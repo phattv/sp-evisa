@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // custom
 import { Button, Flexbox, Text } from './ui';
 import Divider from './Divider';
+import FormErrorMessage from './FormErrorMessage';
 import {
   updateFees,
   updateFeesSelectedCountry,
@@ -321,19 +322,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         </Form.Field>
 
         <Flexbox paddingTop={6} column>
-          {shouldShowErrorMessage && (
-            <Flexbox
-              width="100%"
-              backgroundColor="bgRed"
-              paddingVertical={2}
-              justifyContent="center"
-              marginBottom={4}
-            >
-              <Text color="red" fontSize="s">
-                Please fill in the required inputs!
-              </Text>
-            </Flexbox>
-          )}
+          {shouldShowErrorMessage && <FormErrorMessage />}
 
           <Button type="submit" width="100%">
             Next
