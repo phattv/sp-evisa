@@ -1,19 +1,15 @@
 // @flow
 // vendor
-import * as React from 'react';
-import { Div, Input, Label } from 'glamorous';
-import withRedux from 'next-redux-wrapper';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
+import React, { Fragment } from 'react';
+import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
+import { connect } from 'react-redux';
 // custom
-import { Anchor, Flexbox, Text } from '../components';
-import { borderRadius, colors, spacingValues } from '../constants/ui';
-import { configureStore } from '../redux/store';
+import { Image, Flexbox, Text } from './ui';
+import Divider from './Divider';
+import { boxShadow, iconSizes } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
-import {
-  updateGuest,
-  updatePrice,
-} from '../redux/actions';
+import { updateGuest, updatePrice } from '../redux/actions';
 import {
   typeOptions,
   airportOptions,
@@ -81,10 +77,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
 
   calculateTotalFee = (nextProps: Object) => {
-    const quantity = get(
+    const quantity = _get(
       nextProps,
       'stepOne.quantity',
-      get(this, 'props.stepOne.quantity'),
+      _get(this, 'props.stepOne.quantity'),
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
     const {
@@ -96,10 +92,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       privateVisaLetter,
     } = this.state;
     const processingFees = shouldShowProcessingFees
-      ? parsedQuantity * get(processingTimeObject, 'price', 0)
+      ? parsedQuantity * _get(processingTimeObject, 'price', 0)
       : 0;
     const extraFees = shouldShowExtraServices
-      ? get(fastTrackObject, 'price', 0) + get(carPickupObject, 'price', 0)
+      ? _get(fastTrackObject, 'price', 0) + _get(carPickupObject, 'price', 0)
       : 0;
     const privateVisaLetterCost = privateVisaLetter === true ? 8 : 0;
 
@@ -131,11 +127,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   }
 
   syncStateAndCalculateTotalFee = props => {
-    const type = get(props, 'stepOne.type', '');
-    const purpose = get(props, 'stepOne.purpose', '');
-    const fees = get(props, 'fees', []).find(fees => fees.type === purpose);
-    const processingTime = get(props, 'stepOne.processingTime', '');
-    const guest = get(props, 'guest', guestInitialState);
+    const type = _get(props, 'stepOne.type', '');
+    const purpose = _get(props, 'stepOne.purpose', '');
+    const fees = _get(props, 'fees', []).find(fees => fees.type === purpose);
+    const processingTime = _get(props, 'stepOne.processingTime', '');
+    const guest = _get(props, 'guest', guestInitialState);
 
     // Processing time
     const processingTimeObject = processingTimeOptions.find(
@@ -145,7 +141,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       processingTimeObject !== processingTimeOptions[0];
 
     // Extra services
-    const { fastTrack, carPickup, privateVisaLetter } = get(
+    const { fastTrack, carPickup, privateVisaLetter } = _get(
       props,
       'stepOne.extraServices',
       {},
@@ -157,9 +153,9 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       option => option.value === carPickup,
     );
     const shouldShowExtraServices =
-      (!isEmpty(fastTrackObject) &&
+      (!_isEmpty(fastTrackObject) &&
         fastTrackObject !== airportFastTrackOptions[0]) ||
-      (!isEmpty(carPickupObject) && carPickupObject !== carPickUpOptions[0]) ||
+      (!_isEmpty(carPickupObject) && carPickupObject !== carPickUpOptions[0]) ||
       privateVisaLetter;
     const costPerPerson = fees && fees[type] > 0 ? fees[type] : 0;
 
@@ -178,33 +174,83 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     );
   };
 
-  //<editor-fold desc="render functions">
-  renderType = (type: string) => {
-    const selectedOption = (typeOptions || []).find(
-      option => option.value === type,
-    );
-    if (selectedOption) {
-      return selectedOption.label;
-    }
-  };
+  render() {
+    const {
+      stepOne: { airport, arrivalDate, departureDate },
+      account,
+    } = this.props;
+    const { guest: { name, email, phone } } = this.state;
+    const isLoggedIn = account && Object.keys(account).length > 0;
 
-  renderPurpose = (type: string) => {
-    const selectedOption = (purposeOptions || []).find(
-      option => option.value === type,
-    );
-    if (selectedOption) {
-      return selectedOption.label;
-    }
-  };
+    return (
+      <Flexbox
+        backgroundColor="bgGrey2"
+        column
+        width="100%"
+        alignItems="center"
+        paddingVertical={6}
+        paddingHorizontal={6}
+        style={{
+          boxShadow,
+        }}
+      >
+        <Text fontSize="m" semibold color="darkBlue">
+          Review Your Order
+        </Text>
+        <Divider />
 
-  renderAirport = (airport: string) => {
+        {airport && this.renderAirport({ airport })}
+
+        {arrivalDate &&
+          departureDate &&
+          this.renderFlightDates({ arrivalDate, departureDate })}
+
+        {this.renderTotalFee()}
+      </Flexbox>
+    );
+  }
+
+  renderAirport = ({ airport }) => {
     const selectedOption = (airportOptions || []).find(
       option => option.value === airport,
     );
     if (selectedOption) {
-      return selectedOption.label;
+      return (
+        <Flexbox column alignItems="center" paddingTop={4}>
+          <Text fontSize="xs" noDoubleLineHeight>
+            Arrival Airport
+          </Text>
+          <Text fontSize="s" color="2c3f60" textAlign="center">
+            {selectedOption.label}
+          </Text>
+        </Flexbox>
+      );
+    } else {
+      return null;
     }
   };
+
+  renderFlightDates = ({ arrivalDate, departureDate }) => (
+    <Flexbox justifyContent="space-between" paddingTop={4} width="100%">
+      <Flexbox column alignItems="center" flex={1}>
+        <Text fontSize="xs" noDoubleLineHeight>
+          Arrival Date
+        </Text>
+        <Text fontSize="s" color="2c3f60" textAlign="center">
+          {arrivalDate}
+        </Text>
+      </Flexbox>
+      <Flexbox border borderRight={1} />
+      <Flexbox column alignItems="center" flex={1}>
+        <Text fontSize="xs" noDoubleLineHeight>
+          Departure Date
+        </Text>
+        <Text fontSize="s" color="2c3f60" textAlign="center">
+          {departureDate}
+        </Text>
+      </Flexbox>
+    </Flexbox>
+  );
 
   renderTotalFee = () => {
     const {
@@ -227,289 +273,175 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const countryObject = countryOptions.find(
       option => option.value === country,
     );
+    const countryString = _get(countryObject, 'label', '');
 
     return (
-      <Flexbox
-        paddingTop={5}
-        display="flex"
-        column
-        borderTop
-        borderColor="darkGrey"
-      >
-        {/* Cost per person (quantity, type, purpose */}
-        {costPerPerson > 0 && (
-          <Flexbox width="100%" column>
-            <Flexbox display="flex" justifyContent="flex-start" width="100%">
-              <i
-                className="fa fa-circle fa-fw"
-                style={{
-                  fontSize: 8,
-                }}
-              />
-              <Text paddingLeft={2}>
-                {quantity} Applicant{quantity > 1 && 's'} -{' '}
-                {this.renderType(type)} - {this.renderPurpose(purpose)} -{' '}
-                {get(countryObject, 'label', '')}:
-              </Text>
-            </Flexbox>
-            <Flexbox display="flex" justifyContent="space-between" width="100%">
-              <Text size="l">
-                {quantity} x ${costPerPerson}
-              </Text>
-              <Text size="l" color="visaRed">
-                ${quantity * costPerPerson}
-              </Text>
-            </Flexbox>
-          </Flexbox>
-        )}
+      <Flexbox paddingTop={4} column width="100%">
+        {this.renderBasicOrderInfo({
+          quantity,
+          countryString,
+          purpose,
+          costPerPerson,
+          type,
+        })}
 
-        {/* Processing time */}
-        {shouldShowProcessingFees && (
-          <Flexbox width="100%" column>
-            <Flexbox display="flex" justifyContent="flex-start" width="100%">
-              <i
-                className="fa fa-circle fa-fw"
-                style={{
-                  fontSize: 8,
-                }}
-              />
-              <Text paddingLeft={2}>
-                Processing Time: {get(processingTimeObject, 'label', '')}
-              </Text>
-            </Flexbox>
-            <Flexbox display="flex" justifyContent="space-between" width="100%">
-              <Text size="l">
-                {quantity} x ${get(processingTimeObject, 'price', 0)}
-              </Text>
-              <Text size="l" color="visaRed">
-                ${quantity * get(processingTimeObject, 'price', 0)}
-              </Text>
-            </Flexbox>
-          </Flexbox>
-        )}
+        {shouldShowProcessingFees &&
+          this.renderProcessingFees({ processingTimeObject })}
 
-        {/* Extra services */}
-        {shouldShowExtraServices && (
-          <Flexbox width="100%" column>
-            <Flexbox display="flex" justifyContent="flex-start" width="100%">
-              <i
-                className="fa fa-circle fa-fw"
-                style={{
-                  fontSize: 8,
-                }}
-              />
-              <Text paddingLeft={2}>Extra services:</Text>
-            </Flexbox>
-
-            {!isEmpty(fastTrackObject) &&
-              fastTrackObject !== airportFastTrackOptions[0] && (
-                <Flexbox
-                  display="flex"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <Text>- {fastTrackObject.label}</Text>
-                  <Text size="l" color="visaRed">
-                    ${fastTrackObject.price}
-                  </Text>
-                </Flexbox>
-              )}
-
-            {!isEmpty(carPickupObject) &&
-              carPickupObject !== carPickUpOptions[0] && (
-                <Flexbox
-                  display="flex"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <Text>- {carPickupObject.label}</Text>
-                  <Text size="l" color="visaRed">
-                    ${carPickupObject.price}
-                  </Text>
-                </Flexbox>
-              )}
-
-            {privateVisaLetter && (
-              <Flexbox
-                display="flex"
-                justifyContent="space-between"
-                width="100%"
-              >
-                <Text>- Private visa letter</Text>
-                <Text size="l" color="visaRed">
-                  $8
-                </Text>
-              </Flexbox>
-            )}
-          </Flexbox>
-        )}
+        {shouldShowExtraServices &&
+          this.renderExtraServices({
+            fastTrackObject,
+            carPickupObject,
+            privateVisaLetter,
+          })}
 
         <Flexbox
-          display="flex"
+          backgroundColor="darkBlue"
+          paddingHorizontal={3}
+          paddingVertical={2}
+          marginTop={4}
           justifyContent="space-between"
-          width="100%"
-          paddingTop={2}
         >
-          <Text color="visaRed" size="l" bold>
-            TOTAL FEE:
+          <Text color="white">Total Fee</Text>
+          <Text bold color="white">
+            ${totalFee}
           </Text>
-          {totalFee > 0 && (
-            <Text bold color="visaRed" size="xxl">
-              ${totalFee}
-            </Text>
-          )}
         </Flexbox>
       </Flexbox>
     );
   };
-  //</editor-fold>
 
-  render() {
-    const {
-      stepOne: { airport, arrivalDate, departureDate },
-      account,
-    } = this.props;
-    const { guest: { name, email, phone } } = this.state;
-    const isLoggedIn = account && Object.keys(account).length > 0;
+  renderType = (type: string) => {
+    const selectedOption = (typeOptions || []).find(
+      option => option.value === type,
+    );
+    if (selectedOption) {
+      return selectedOption.label;
+    }
+  };
 
-    return (
-      <Div>
-        {/* Contact information */}
-        <Text size="l" bold>
-          CONTACT INFORMATION
+  renderPurpose = (type: string) => {
+    const selectedOption = (purposeOptions || []).find(
+      option => option.value === type,
+    );
+    if (selectedOption) {
+      return selectedOption.label;
+    }
+  };
+
+  renderBasicOrderInfo = ({
+    quantity,
+    countryString,
+    purpose,
+    costPerPerson,
+    type,
+  }) => (
+    <Fragment>
+      <Flexbox alignItems="center">
+        <Image
+          src="../static/icons/applicants-ico.svg"
+          alt="applicants ico"
+          width={iconSizes.small}
+        />
+        <Text paddingLeft={3} color="darkBlue">
+          {quantity} Applicant{quantity > 1 && 's'}
+          {countryString && ` / ${countryString}`}
         </Text>
-        <Div
-          width="100%"
-          marginTop={spacingValues.m}
-          border={`3px solid ${colors.visaBlue}`}
-          borderRadius={borderRadius}
-          padding={spacingValues.xxl}
-          marginBottom={spacingValues.xl}
-        >
-          {!isLoggedIn ? (
-            <Div>
-              <Flexbox
-                alignItems="flex-start"
-                paddingBottom={3}
-                column
-                width="100%"
-              >
-                <Text bold>
-                  Name&nbsp;<Text color="visaRed">*</Text>
-                </Text>
-                <Input
-                  name="name"
-                  backgroundColor="white"
-                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                  borderRadius={borderRadius}
-                  border={`1px solid ${colors.lightGrey}`}
-                  width="100%"
-                  value={name}
-                  onChange={this.updateGuestTextField}
-                  marginTop={2}
-                />
-              </Flexbox>
-              <Flexbox
-                alignItems="flex-start"
-                paddingBottom={3}
-                column
-                width="100%"
-              >
-                <Text bold>
-                  Email&nbsp;<Text color="visaRed">*</Text>
-                </Text>
-                <Input
-                  type="email"
-                  name="email"
-                  backgroundColor="white"
-                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                  borderRadius={borderRadius}
-                  border={`1px solid ${colors.lightGrey}`}
-                  width="100%"
-                  value={email}
-                  onChange={this.updateGuestTextField}
-                  marginTop={2}
-                />
-              </Flexbox>
-              <Flexbox
-                alignItems="flex-start"
-                paddingBottom={3}
-                column
-                width="100%"
-              >
-                <Text bold>
-                  Phone&nbsp;<Text color="visaRed">*</Text>
-                </Text>
-                <Input
-                  type="tel"
-                  name="phone"
-                  backgroundColor="white"
-                  padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                  borderRadius={borderRadius}
-                  border={`1px solid ${colors.lightGrey}`}
-                  width="100%"
-                  value={phone}
-                  onChange={this.updateGuestTextField}
-                  marginTop={2}
-                />
-              </Flexbox>
-              <Anchor href="/login">Login</Anchor>
-            </Div>
-          ) : (
-            <Div>
-              <Flexbox display="flex" justifyContent="space-between">
-                <Text bold>Name:</Text>
-                <Text>{account.name}</Text>
-              </Flexbox>
-              <Flexbox display="flex" justifyContent="space-between">
-                <Text bold>Email:</Text>
-                <Text>{account.email}</Text>
-              </Flexbox>
-              <Flexbox display="flex" justifyContent="space-between">
-                <Text bold>Phone:</Text>
-                <Text>{account.phone}</Text>
-              </Flexbox>
-            </Div>
-          )}
-        </Div>
+      </Flexbox>
 
-        <Flexbox>
-          <Text size="xl" bold color="visaRed" textAlign="center">
-            REVIEW YOUR ORDER
+      <Flexbox alignItems="center" paddingTop={2}>
+        <Image
+          src="../static/icons/doc-ico.svg"
+          alt="doc ico"
+          width={iconSizes.small}
+        />
+        <Text paddingLeft={3} color="darkBlue">
+          {this.renderType(type)} / {this.renderPurpose(purpose)}
+        </Text>
+      </Flexbox>
+
+      {this.renderSpaceBetweenBlock({
+        leftContent: `${quantity} x $${costPerPerson}`,
+        rightContent: `$${quantity * costPerPerson}`,
+      })}
+    </Fragment>
+  );
+
+  renderProcessingFees = ({ processingTimeObject }) => (
+    <Fragment>
+      <Flexbox alignItems="center" paddingTop={4}>
+        <Image
+          src="../static/icons/time-ico.svg"
+          alt="time ico"
+          width={iconSizes.small}
+        />
+        <Text paddingLeft={3} fontSize="s">
+          Processing Time
+        </Text>
+      </Flexbox>
+      {this.renderSpaceBetweenBlock({
+        leftContent: _get(processingTimeObject, 'label', ''),
+        rightContent: `$${_get(processingTimeObject, 'price', 0)}`,
+      })}
+    </Fragment>
+  );
+
+  renderExtraServices = ({
+    fastTrackObject,
+    carPickupObject,
+    privateVisaLetter,
+  }) => (
+    <Fragment>
+      <Flexbox alignItems="center" paddingTop={4}>
+        <Image
+          src="../static/icons/others-ico.svg"
+          alt="others ico"
+          width={iconSizes.small}
+        />
+        <Text paddingLeft={3} fontSize="s">
+          Other Services
+        </Text>
+      </Flexbox>
+
+      {!_isEmpty(fastTrackObject) &&
+        fastTrackObject !== airportFastTrackOptions[0] &&
+        this.renderSpaceBetweenBlock({
+          leftContent: fastTrackObject.label,
+          rightContent: `$${fastTrackObject.price}`,
+        })}
+
+      {!_isEmpty(carPickupObject) &&
+        carPickupObject !== carPickUpOptions[0] &&
+        this.renderSpaceBetweenBlock({
+          leftContent: carPickupObject.label,
+          rightContent: `$${carPickupObject.price}`,
+        })}
+
+      {privateVisaLetter && (
+        <Flexbox display="flex" justifyContent="space-between" width="100%">
+          <Text color="darkBlue">Private visa letter</Text>
+          <Text size="l" color="visaRed">
+            $8
           </Text>
         </Flexbox>
-        <Div
-          width="100%"
-          marginTop={spacingValues.m}
-          border={`3px solid ${colors.visaBlue}`}
-          borderRadius={borderRadius}
-          padding={spacingValues.xxl}
-        >
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Arrival airport:</Text>
-            <Text textAlign="right" maxWidth={40}>
-              {this.renderAirport(airport)}
-            </Text>
-          </Flexbox>
-          <Flexbox display="flex" justifyContent="space-between">
-            <Text bold>Arrival date:</Text>
-            <Text>{arrivalDate}</Text>
-          </Flexbox>
-          <Flexbox
-            display="flex"
-            justifyContent="space-between"
-            paddingBottom={2}
-          >
-            <Text bold>Departure date:</Text>
-            <Text>{departureDate}</Text>
-          </Flexbox>
+      )}
+    </Fragment>
+  );
 
-          {/* Total fee */}
-          {this.renderTotalFee()}
-        </Div>
-      </Div>
-    );
-  }
+  renderSpaceBetweenBlock = ({ leftContent, rightContent }) => (
+    <Flexbox
+      backgroundColor="white"
+      paddingHorizontal={3}
+      paddingVertical={2}
+      marginTop={2}
+      justifyContent="space-between"
+    >
+      <Text color="darkBlue">{leftContent}</Text>
+      <Text bold color="green">
+        {rightContent}
+      </Text>
+    </Flexbox>
+  );
 }
 
 const mapStateToProps = store => {
@@ -525,6 +457,6 @@ const mapDispatchToProps = {
   updateGuest,
   updatePrice,
 };
-export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
+export default connect(mapStateToProps, mapDispatchToProps)(
   ApplyFormReviewForm,
 );
