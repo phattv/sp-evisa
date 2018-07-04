@@ -59,6 +59,7 @@ const headerHeight = 140 / spacingUnits.desktop;
 const contentMaxWidth = 1440 / spacingUnits.desktop;
 const tableWidth = 380 / spacingUnits.desktop;
 const textMaxWidth = 580 / spacingUnits.desktop;
+const formMaxWidth = 950 / spacingUnits.desktop;
 
 const paddingAll = {
   paddingHorizontal: 5,
@@ -69,6 +70,7 @@ const paddingAllLarge = {
   paddingVertical: 10,
 };
 
+const boxShadow = '8px 8px 40px 0 rgba(91, 108, 148, 0.2)';
 /**
  * TODO: domain name is https://evisa-vn.com, how the page urls should be?
  * should page names have "visa-" prefix for SEO purposes?
@@ -106,8 +108,10 @@ export {
   contentMaxWidth,
   tableWidth,
   textMaxWidth,
+  formMaxWidth,
   paddingAll,
   paddingAllLarge,
+  boxShadow,
   pageNames,
   iconSizes,
 };

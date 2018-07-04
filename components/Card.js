@@ -4,7 +4,7 @@ import React from 'react';
 import type { Node } from 'react';
 // custom
 import { Flexbox } from './ui';
-import { borderRadius } from '../constants/ui';
+import { borderRadius, boxShadow } from '../constants/ui';
 
 /**
  * Card component is a pre-styled container, mostly to show text and icons.
@@ -37,7 +37,7 @@ class Card extends React.Component<Props, State> {
         marginHorizontal={6}
         borderRadius={borderRadius}
         style={{
-          boxShadow: '8px 8px 40px 0 rgba(91, 108, 148, 0.2)',
+          boxShadow,
         }}
         {...rest}
       >
