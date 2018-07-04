@@ -3,54 +3,54 @@ import countryOptions from '../static/countries.json';
 import countryOptionsSemantic from '../static/countries.semantic.json';
 
 const genderOptions = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
+  { value: 'male', text: 'Male' },
+  { value: 'female', text: 'Female' },
 ];
 const typeOptions = [
-  { value: 'one_month_single', label: '1 month - single entry' },
-  { value: 'one_month_multiple', label: '1 month - multiple entries' },
-  { value: 'three_month_single', label: '3 months - single entry' },
-  { value: 'three_month_multiple', label: '3 months - multiple entries' },
-  { value: 'six_month_multiple', label: '6 months - multiple entries' },
-  { value: 'one_year_multiple', label: '1 year - multiple entries' },
+  { value: 'one_month_single', text: '1 month - single entry' },
+  { value: 'one_month_multiple', text: '1 month - multiple entries' },
+  { value: 'three_month_single', text: '3 months - single entry' },
+  { value: 'three_month_multiple', text: '3 months - multiple entries' },
+  { value: 'six_month_multiple', text: '6 months - multiple entries' },
+  { value: 'one_year_multiple', text: '1 year - multiple entries' },
 ];
 const purposeOptions = [
-  { value: 'tourist', label: 'Tourist' },
-  { value: 'business', label: 'Business' },
+  { value: 'tourist', text: 'Tourist' },
+  { value: 'business', text: 'Business' },
 ];
 const processingTimeOptions = [
-  { value: 'normal', label: 'Normal (Guaranteed 1 working day)', price: 0 },
+  { value: 'normal', text: 'Normal (Guaranteed 1 working day)', price: 0 },
   {
     value: 'urgent',
-    label: 'Urgent (Guaranteed 4-8 working hours)',
+    text: 'Urgent (Guaranteed 4-8 working hours)',
     price: 20,
   },
   {
     value: 'emergency',
-    label: 'Emergency (Guaranteed 1 working hour)',
+    text: 'Emergency (Guaranteed 1 working hour)',
     price: 180,
   },
 ];
 const airportOptions = [
   {
     value: 'SGN',
-    label: 'Tan Son Nhat International Airport (Ho Chi Minh City)',
+    text: 'Tan Son Nhat International Airport (Ho Chi Minh City)',
   },
-  { value: 'HAN', label: 'Noi Bai International Airport (Ha Noi)' },
-  { value: 'DAD', label: 'Da Nang International Airport' },
-  { value: 'CRX', label: 'Cam Ranh International Airport (Khanh Hoa)' },
+  { value: 'HAN', text: 'Noi Bai International Airport (Ha Noi)' },
+  { value: 'DAD', text: 'Da Nang International Airport' },
+  { value: 'CRX', text: 'Cam Ranh International Airport (Khanh Hoa)' },
 ];
 const airportFastTrackOptions = [
-  { value: '', label: 'None', price: 0 },
-  { value: 'airportFastTrack', label: 'Airport fast track', price: 29 },
-  { value: 'airportVipFastTrack', label: 'Airport VIP fast track', price: 44 },
+  { value: '', text: 'None', price: 0 },
+  { value: 'airportFastTrack', text: 'Airport fast track', price: 29 },
+  { value: 'airportVipFastTrack', text: 'Airport VIP fast track', price: 44 },
 ];
 const carPickUpOptions = [
-  { value: '', label: 'None', price: 0 },
-  { value: 'fourSeats', label: 'Car pick-up (4 seats)', price: 29 },
-  { value: 'sevenSeats', label: 'Car pick-up (7 seats)', price: 34 },
-  { value: 'sixteenSeats', label: 'Car pick-up (16 seats)', price: 94 },
-  { value: 'twentyFourSeats', label: 'Car pick-up (24 seats)', price: 154 },
+  { value: '', text: 'None', price: 0 },
+  { value: 'fourSeats', text: 'Car pick-up (4 seats)', price: 29 },
+  { value: 'sevenSeats', text: 'Car pick-up (7 seats)', price: 34 },
+  { value: 'sixteenSeats', text: 'Car pick-up (16 seats)', price: 94 },
+  { value: 'twentyFourSeats', text: 'Car pick-up (24 seats)', price: 154 },
 ];
 
 export {
