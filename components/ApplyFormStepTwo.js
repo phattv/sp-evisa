@@ -1,30 +1,37 @@
 // @flow
 // vendor
-import * as React from 'react';
-import { Div } from 'glamorous';
-import withRedux from 'next-redux-wrapper';
-import { Form } from 'react-final-form';
+import React from 'react';
+import { Form, Dropdown, Input } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 // custom
-import { Button, Flexbox, Text } from '../components';
-import { configureStore } from '../redux/store';
-import { spacingValues } from '../constants/ui';
-import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
-import ApplyFormReviewForm from './ApplyFormReviewForm';
-import { resetStepTwo } from '../redux/actions';
+import { Button, Flexbox, Text } from './ui';
+// import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
+import { resetStepTwo, updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
+import { airportOptions } from '../constants/dropDownOptions';
+import Divider from './Divider';
 
 type Props = {
   onSubmit: () => void,
   stepOne: Object,
   stepTwo: Object,
+  updateStepTwo: Object => void,
   resetStepTwo: () => void,
   goBack: () => void,
 };
 type State = {
+  quantity: number | string,
+  airport: string,
+  arrivalDate: string | Date,
+  departureDate: string | Date,
   shouldShowErrorMessage: boolean,
 };
 class ApplyFormStepTwo extends React.Component<Props, State> {
   state = {
+    quantity: 1,
+    airport: airportOptions[0].value,
+    arrivalDate: '',
+    departureDate: '',
     shouldShowErrorMessage: false,
   };
 
@@ -52,13 +59,41 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
   goBack = () => {
     const { resetStepTwo, goBack } = this.props;
-    resetStepTwo();
+    // resetStepTwo();
     goBack();
   };
 
+  updateQuantity = (event: Object) => {
+    this.setState(
+      {
+        quantity: event.target.value,
+      },
+      () => this.updateStepTwoToStore(),
+    );
+  };
+
+  updateAirport = (event: Object, selectedOption: Object) => {
+    this.setState(
+      {
+        airport: selectedOption ? selectedOption.value : '',
+      },
+      () => this.updateStepTwoToStore(),
+    );
+  };
+
+  updateStepTwoToStore = () => {
+    this.props.updateStepTwo(this.state);
+  };
+
   render() {
-    const { stepOne: { quantity, country } } = this.props;
-    const { shouldShowErrorMessage } = this.state;
+    const { stepOne: { country } } = this.props;
+    const {
+      quantity,
+      airport,
+      arrivalDate,
+      departureDate,
+      shouldShowErrorMessage,
+    } = this.state;
 
     const applicants = [];
     for (let index = 0; index < quantity; index++) {
@@ -66,80 +101,40 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     }
 
     return (
-      <Div>
-        <Flexbox
-          marginLeft={spacingValues.xxs}
-          marginRight={spacingValues.xxs}
-          paddingBottom={5}
-        >
-          <Text>
-            Please fill out all required information below to process Vietnam
-            visa approval letter right now OR just select applicant's
-            nationality, then &nbsp;<Text
-              color="visaRed"
-              onClick={this.onSubmit}
-              clickable
-            >
-              SKIP THIS STEP
-            </Text>. An application form will be sent to your registered email
-            for later fulfilling.
-          </Text>
+      <Form
+        onSubmit={this.onSubmit}
+        style={{
+          width: '100%',
+        }}
+      >
+        <Flexbox paddingBottom={3} column>
+          <Text fontSize="m">Applicants</Text>
+          <Divider />
         </Flexbox>
-        <Form
-          onSubmit={this.onSubmit}
-          render={({ handleSubmit, pristine, invalid }) => (
-            <Flexbox alignItems="flex-start" flex={1} responsiveLayout>
-              <Flexbox
-                flex={1}
-                column
-                width="100%"
-                marginLeft={spacingValues.xxs}
-                marginRight={spacingValues.xxs}
-              >
-                {applicants.map(index => (
-                  <ApplyFormStepTwoForm
-                    key={index}
-                    index={index}
-                    initialCountry={country}
-                  />
-                ))}
-              </Flexbox>
-              <Flexbox
-                flex={1}
-                column
-                width="100%"
-                marginHorizontal={spacingValues.xxs}
-                marginVertical={spacingValues.xxs}
-              >
-                <ApplyFormReviewForm />
 
-                <Flexbox
-                  width="100%"
-                  justifyContent="space-around"
-                  marginTop={5}
-                  marginBottom={5}
-                >
-                  <Button solid onClick={this.goBack}>
-                    <i className="fa fa-arrow-left" />
-                    &nbsp;&nbsp;BACK
-                  </Button>
-
-                  <Button solid onClick={this.onSubmit}>
-                    NEXT&nbsp;&nbsp;
-                    <i className="fa fa-arrow-right" />
-                  </Button>
-                </Flexbox>
-
-                {shouldShowErrorMessage && (
-                  <Text color="visaRed" bold>
-                    Please fill in applicant(s) information!
-                  </Text>
-                )}
-              </Flexbox>
-            </Flexbox>
-          )}
-        />
-      </Div>
+        <Form.Field required>
+          <label>Number of Applicants</label>
+          <Input
+            value={quantity}
+            type="number"
+            min={1}
+            onChange={this.updateQuantity}
+            placeholder="Enter..."
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Airport</label>
+          <Dropdown
+            value={airport}
+            placeholder="Select..."
+            fluid
+            search
+            selection
+            options={airportOptions}
+            onChange={this.updateAirport}
+          />
+        </Form.Field>
+      </Form>
     );
   }
 }
@@ -151,8 +146,7 @@ const mapStateToProps = store => {
   };
 };
 const mapDispatchToProps = {
+  updateStepTwo,
   resetStepTwo,
 };
-export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
-  ApplyFormStepTwo,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ApplyFormStepTwo);

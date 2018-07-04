@@ -10,10 +10,10 @@ import { actionTypes } from '../actions';
  * +---------------+
  */
 const formInitialState = {
-  stepOne: {
+  stepOne: {},
+  stepTwo: {
     quantity: '1',
   },
-  stepTwo: {},
   stepThree: {},
   price: 0,
   paid: false,

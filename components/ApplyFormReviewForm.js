@@ -23,6 +23,7 @@ import { guestInitialState } from '../redux/reducers/guest';
 
 type Props = {
   stepOne: Object,
+  stepTwo: Object,
   fees: Array<Object>,
   account: Object,
   updateGuest: Object => void,
@@ -79,8 +80,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   calculateTotalFee = (nextProps: Object) => {
     const quantity = _get(
       nextProps,
-      'stepOne.quantity',
-      _get(this, 'props.stepOne.quantity'),
+      'stepTwo.quantity',
+      _get(this, 'props.stepTwo.quantity'),
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
     const {
@@ -176,7 +177,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
   render() {
     const {
-      stepOne: { airport, arrivalDate, departureDate },
+      stepTwo: { airport, arrivalDate, departureDate },
       account,
     } = this.props;
     const { guest: { name, email, phone } } = this.state;
@@ -264,7 +265,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       privateVisaLetter,
       shouldShowExtraServices,
     } = this.state;
-    const { stepOne: { quantity, type, purpose, countryId } } = this.props;
+    const {
+      stepOne: { type, purpose, countryId },
+      stepTwo: { quantity },
+    } = this.props;
 
     const parsedQuantity = parseInt(quantity, 10);
     const applicants = [];
@@ -452,6 +456,7 @@ const mapStateToProps = store => {
     account: store[reducerNames.account],
     guest: store[reducerNames.guest],
     stepOne: store[reducerNames.form].stepOne,
+    stepTwo: store[reducerNames.form].stepTwo,
     fees: store[reducerNames.fees].fees,
     price: store[reducerNames.form].price,
   };
