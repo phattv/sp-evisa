@@ -2,17 +2,19 @@
 // vendor
 import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
-import { Form, Step } from 'semantic-ui-react';
+import { Step } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 // custom
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-// import ApplyFormStepOne from '../components/ApplyFormStepOne';
+import ApplyFormStepOne from '../components/ApplyFormStepOne';
 // import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 // import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
 import { spacingValues, formMaxWidth } from '../constants/ui';
+
+const formPaddingHorizontal = 3;
 
 /**
  * Apply show the form to apply for visa
@@ -59,18 +61,35 @@ class Apply extends React.Component<Props, State> {
           <Flexbox
             paddingVertical={spacingValues.blockPaddingTop}
             column
-            width="100%"
-            maxWidth={formMaxWidth}
+            alignItems="center"
           >
-            <Heading secondary text="Get your Visa in 3 steps" />
+            <Flexbox
+              column
+              width="100%"
+              maxWidth={formMaxWidth - formPaddingHorizontal * 4}
+            >
+              <Heading secondary text="Get your Visa in 3 steps" />
 
-            <Step.Group size="large" link ordered items={steps} />
+              <Step.Group size="large" ordered items={steps} />
+            </Flexbox>
 
-            <Flexbox justifyContent="space-between" paddingTop={6}>
-              <Flexbox flex={1}>
-                <Text>Step 1 or 2 or 3</Text>
+            <Flexbox
+              justifyContent="space-between"
+              paddingTop={6}
+              responsiveLayout
+            >
+              <Flexbox
+                flex={1}
+                paddingVertical={5}
+                paddingHorizontal={formPaddingHorizontal}
+              >
+                <ApplyFormStepOne />
               </Flexbox>
-              <Flexbox flex={1}>
+              <Flexbox
+                flex={1}
+                paddingVertical={5}
+                paddingHorizontal={formPaddingHorizontal}
+              >
                 <ApplyFormReviewForm />
               </Flexbox>
             </Flexbox>

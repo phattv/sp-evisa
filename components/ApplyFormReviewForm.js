@@ -15,7 +15,7 @@ import {
   airportOptions,
   purposeOptions,
   processingTimeOptions,
-  countryOptions,
+  countryOptionsSemantic,
   airportFastTrackOptions,
   carPickUpOptions,
 } from '../constants/dropDownOptions';
@@ -186,6 +186,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       <Flexbox
         backgroundColor="bgGrey2"
         column
+        alignSelf="flex-start"
         width="100%"
         alignItems="center"
         paddingVertical={6}
@@ -221,7 +222,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             Arrival Airport
           </Text>
           <Text fontSize="s" color="2c3f60" textAlign="center">
-            {selectedOption.label}
+            {selectedOption.text}
           </Text>
         </Flexbox>
       );
@@ -263,17 +264,17 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       privateVisaLetter,
       shouldShowExtraServices,
     } = this.state;
-    const { stepOne: { quantity, type, purpose, country } } = this.props;
+    const { stepOne: { quantity, type, purpose, countryId } } = this.props;
 
     const parsedQuantity = parseInt(quantity, 10);
     const applicants = [];
     for (let index = 0; index < parsedQuantity; index++) {
       applicants.push(index);
     }
-    const countryObject = countryOptions.find(
-      option => option.value === country,
+    const countryObject = countryOptionsSemantic.find(
+      option => option.value === countryId,
     );
-    const countryString = _get(countryObject, 'label', '');
+    const countryString = _get(countryObject, 'text', '');
 
     return (
       <Flexbox paddingTop={4} column width="100%">
@@ -316,7 +317,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       option => option.value === type,
     );
     if (selectedOption) {
-      return selectedOption.label;
+      return selectedOption.text;
     }
   };
 
@@ -325,7 +326,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       option => option.value === type,
     );
     if (selectedOption) {
-      return selectedOption.label;
+      return selectedOption.text;
     }
   };
 
@@ -356,7 +357,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           width={iconSizes.small}
         />
         <Text paddingLeft={3} color="darkBlue">
-          {this.renderType(type)} / {this.renderPurpose(purpose)}
+          {this.renderPurpose(purpose)} / {this.renderType(type)}
         </Text>
       </Flexbox>
 
@@ -380,7 +381,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         </Text>
       </Flexbox>
       {this.renderSpaceBetweenBlock({
-        leftContent: _get(processingTimeObject, 'label', ''),
+        leftContent: _get(processingTimeObject, 'text', ''),
         rightContent: `$${_get(processingTimeObject, 'price', 0)}`,
       })}
     </Fragment>
@@ -406,38 +407,40 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       {!_isEmpty(fastTrackObject) &&
         fastTrackObject !== airportFastTrackOptions[0] &&
         this.renderSpaceBetweenBlock({
-          leftContent: fastTrackObject.label,
+          leftContent: fastTrackObject.text,
           rightContent: `$${fastTrackObject.price}`,
+          noMarginTop: true,
         })}
 
       {!_isEmpty(carPickupObject) &&
         carPickupObject !== carPickUpOptions[0] &&
         this.renderSpaceBetweenBlock({
-          leftContent: carPickupObject.label,
+          leftContent: carPickupObject.text,
           rightContent: `$${carPickupObject.price}`,
+          noMarginTop: true,
         })}
 
-      {privateVisaLetter && (
-        <Flexbox display="flex" justifyContent="space-between" width="100%">
-          <Text color="darkBlue">Private visa letter</Text>
-          <Text size="l" color="visaRed">
-            $8
-          </Text>
-        </Flexbox>
-      )}
+      {privateVisaLetter &&
+        this.renderSpaceBetweenBlock({
+          leftContent: 'Private visa letter',
+          rightContent: '$8',
+          noMarginTop: true,
+        })}
     </Fragment>
   );
 
-  renderSpaceBetweenBlock = ({ leftContent, rightContent }) => (
+  // TODO: noMarginTop: Property not found in objcet literal
+  renderSpaceBetweenBlock = ({ leftContent, rightContent, noMarginTop }) => (
     <Flexbox
       backgroundColor="white"
       paddingHorizontal={3}
       paddingVertical={2}
-      marginTop={2}
+      marginTop={noMarginTop ? 0 : 2}
       justifyContent="space-between"
+      alignItems="center"
     >
       <Text color="darkBlue">{leftContent}</Text>
-      <Text bold color="green">
+      <Text bold color="green" paddingLeft={2}>
         {rightContent}
       </Text>
     </Flexbox>
