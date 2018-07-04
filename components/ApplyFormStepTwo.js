@@ -2,7 +2,9 @@
 // vendor
 import React from 'react';
 import { Form, Dropdown, Input } from 'semantic-ui-react';
+import { DateInput } from 'semantic-ui-calendar-react';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 // custom
 import { Button, Flexbox, Text } from './ui';
 // import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
@@ -10,6 +12,7 @@ import { resetStepTwo, updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
 import { airportOptions } from '../constants/dropDownOptions';
 import Divider from './Divider';
+import FormErrorMessage from './FormErrorMessage';
 
 type Props = {
   onSubmit: () => void,
@@ -81,6 +84,15 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     );
   };
 
+  updateDatePicker = (event: Object, selectedDate: Object) => {
+    this.setState(
+      {
+        [selectedDate.name]: selectedDate ? selectedDate.value : '',
+      },
+      () => this.updateStepTwoToStore(),
+    );
+  };
+
   updateStepTwoToStore = () => {
     this.props.updateStepTwo(this.state);
   };
@@ -101,12 +113,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     }
 
     return (
-      <Form
-        onSubmit={this.onSubmit}
-        style={{
-          width: '100%',
-        }}
-      >
+      <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
         <Flexbox paddingBottom={3} column>
           <Text fontSize="m">Applicants</Text>
           <Divider />
@@ -122,7 +129,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             placeholder="Enter..."
           />
         </Form.Field>
-        <Form.Field required>
+        <Form.Field>
           <label>Airport</label>
           <Dropdown
             value={airport}
@@ -134,6 +141,35 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             onChange={this.updateAirport}
           />
         </Form.Field>
+        <Form.Field>
+          <label>Arrival Date</label>
+          <DateInput
+            name="arrivalDate"
+            placeholder="Select..."
+            value={arrivalDate}
+            onChange={this.updateDatePicker}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Departure Date</label>
+          <DateInput
+            name="departureDate"
+            placeholder="Select..."
+            value={departureDate}
+            onChange={this.updateDatePicker}
+          />
+        </Form.Field>
+
+        <Flexbox paddingTop={6} column>
+          {shouldShowErrorMessage && <FormErrorMessage />}
+
+          <Flexbox justifyContent="space-between" width="100%">
+            <Button onClick={this.goBack} backgroundColor="mediumBlue">
+              Back
+            </Button>
+            <Button type="submit">Next</Button>
+          </Flexbox>
+        </Flexbox>
       </Form>
     );
   }
