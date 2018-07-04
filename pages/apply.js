@@ -9,7 +9,7 @@ import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
-// import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
+import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 // import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
 import { spacingValues, formMaxWidth } from '../constants/ui';
@@ -52,6 +52,48 @@ class Apply extends React.Component<Props, State> {
     ],
   };
 
+  showStepOne = () => {
+    let { steps } = this.state;
+    steps[0].active = true;
+    steps[0].completed = false;
+    steps[1].active = false;
+    steps[1].completed = false;
+    steps[2].active = false;
+    steps[2].completed = false;
+
+    this.setState({
+      steps,
+    });
+  };
+
+  showStepTwo = () => {
+    let { steps } = this.state;
+    steps[0].active = false;
+    steps[0].completed = true;
+    steps[1].active = true;
+    steps[1].completed = false;
+    steps[2].active = false;
+    steps[2].completed = false;
+
+    this.setState({
+      steps,
+    });
+  };
+
+  showStepThree = () => {
+    let { steps } = this.state;
+    steps[0].active = false;
+    steps[0].completed = true;
+    steps[1].active = false;
+    steps[1].completed = true;
+    steps[2].active = true;
+    steps[2].completed = false;
+
+    this.setState({
+      steps,
+    });
+  };
+
   render() {
     const { steps } = this.state;
 
@@ -77,13 +119,24 @@ class Apply extends React.Component<Props, State> {
               justifyContent="space-between"
               paddingTop={6}
               responsiveLayout
+              width="100%"
             >
               <Flexbox
                 flex={1}
                 paddingVertical={5}
                 paddingHorizontal={formPaddingHorizontal}
+                width="100%"
               >
-                <ApplyFormStepOne />
+                {steps[0].active && (
+                  <ApplyFormStepOne onSubmit={this.showStepTwo} />
+                )}
+                {steps[1].active && (
+                  <ApplyFormStepTwo
+                    onSubmit={this.showStepThree}
+                    goBack={this.showStepOne}
+                  />
+                )}
+                {steps[2].active && <Text>Step 3</Text>}
               </Flexbox>
               <Flexbox
                 flex={1}
