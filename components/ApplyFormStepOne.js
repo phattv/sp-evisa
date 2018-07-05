@@ -284,8 +284,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             onChange={this.updateProcessingTime}
           />
         </Form.Field>
+
+        {/* TODO: collapse by default on mobile */}
         <Flexbox paddingBottom={3} paddingTop={6} column>
-          <Text fontSize="m">Other Services</Text>
+          <Text fontSize="m">Other Services (Optional)</Text>
           <Divider />
         </Flexbox>
         <Form.Field>

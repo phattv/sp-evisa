@@ -44,7 +44,6 @@ type State = {
 
   guest: Object,
 };
-
 class ApplyFormReviewForm extends React.Component<Props, State> {
   state = {
     costPerPerson: 0,
@@ -175,6 +174,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     );
   };
 
+  // TODO: check UI when data is empty
+  // TODO: flight number
   render() {
     const {
       stepTwo: { airport, arrivalDate, departureDate },
@@ -219,10 +220,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     if (selectedOption) {
       return (
         <Flexbox column alignItems="center" paddingTop={4}>
-          <Text fontSize="xs" noDoubleLineHeight>
+          <Text fontSize="s" noDoubleLineHeight>
             Arrival Airport
           </Text>
-          <Text fontSize="s" color="2c3f60" textAlign="center">
+          <Text color="2c3f60" textAlign="center">
             {selectedOption.text}
           </Text>
         </Flexbox>
@@ -235,19 +236,19 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   renderFlightDates = ({ arrivalDate, departureDate }) => (
     <Flexbox justifyContent="space-between" paddingTop={4} width="100%">
       <Flexbox column alignItems="center" flex={1}>
-        <Text fontSize="xs" noDoubleLineHeight>
+        <Text fontSize="s" noDoubleLineHeight>
           Arrival Date
         </Text>
-        <Text fontSize="s" color="2c3f60" textAlign="center">
+        <Text color="2c3f60" textAlign="center">
           {arrivalDate}
         </Text>
       </Flexbox>
       <Flexbox border borderRight={1} />
       <Flexbox column alignItems="center" flex={1}>
-        <Text fontSize="xs" noDoubleLineHeight>
+        <Text fontSize="s" noDoubleLineHeight>
           Departure Date
         </Text>
-        <Text fontSize="s" color="2c3f60" textAlign="center">
+        <Text color="2c3f60" textAlign="center">
           {departureDate}
         </Text>
       </Flexbox>
@@ -291,7 +292,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         })}
 
         {shouldShowProcessingFees &&
-          this.renderProcessingFees({ processingTimeObject })}
+          this.renderProcessingFees({ quantity, processingTimeObject })}
 
         {shouldShowExtraServices &&
           this.renderExtraServices({
@@ -372,24 +373,30 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     </Fragment>
   );
 
-  renderProcessingFees = ({ processingTimeObject }) => (
-    <Fragment>
-      <Flexbox alignItems="center" paddingTop={4}>
-        <Image
-          src="../static/icons/time-ico.svg"
-          alt="time ico"
-          width={iconSizes.small}
-        />
-        <Text paddingLeft={3} fontSize="s">
-          Processing Time
-        </Text>
-      </Flexbox>
-      {this.renderSpaceBetweenBlock({
-        leftContent: _get(processingTimeObject, 'text', ''),
-        rightContent: `$${_get(processingTimeObject, 'price', 0)}`,
-      })}
-    </Fragment>
-  );
+  renderProcessingFees = ({ quantity, processingTimeObject }) => {
+    const processingTimePrice = _get(processingTimeObject, 'price', 0);
+    return (
+      <Fragment>
+        <Flexbox alignItems="center" paddingTop={4}>
+          <Image
+            src="../static/icons/time-ico.svg"
+            alt="time ico"
+            width={iconSizes.small}
+          />
+          <Flexbox column paddingLeft={3}>
+            <Text fontSize="s">Processing Time</Text>
+            <Text color="darkBlue">
+              {_get(processingTimeObject, 'text', '')}
+            </Text>
+          </Flexbox>
+        </Flexbox>
+        {this.renderSpaceBetweenBlock({
+          leftContent: `${quantity} x $${processingTimePrice}`,
+          rightContent: `$${quantity * processingTimePrice}`,
+        })}
+      </Fragment>
+    );
+  };
 
   renderExtraServices = ({
     fastTrackObject,
@@ -433,8 +440,15 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     </Fragment>
   );
 
-  // TODO: noMarginTop: Property not found in objcet literal
-  renderSpaceBetweenBlock = ({ leftContent, rightContent, noMarginTop }) => (
+  renderSpaceBetweenBlock = ({
+    leftContent,
+    rightContent,
+    noMarginTop,
+  }: {
+    leftContent: string,
+    rightContent: string,
+    noMarginTop?: boolean,
+  }) => (
     <Flexbox
       backgroundColor="white"
       paddingHorizontal={3}
