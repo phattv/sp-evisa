@@ -13,6 +13,16 @@ const formInitialState = {
   stepOne: {},
   stepTwo: {
     quantity: '1',
+    applicants: [
+      {
+        name: '',
+        countryId: 0,
+        birthday: '',
+        gender: '',
+        passport: '',
+        passportExpiry: '',
+      },
+    ],
   },
   stepThree: {},
   price: 0,
