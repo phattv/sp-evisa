@@ -5,36 +5,60 @@ import { Form, Dropdown, Input } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { connect } from 'react-redux';
 import dayjs from 'dayjs';
+import _get from 'lodash/get';
 // custom
 import { Button, Flexbox, Text } from './ui';
 // import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 import { resetStepTwo, updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
-import { airportOptions } from '../constants/dropDownOptions';
+import {
+  airportOptions,
+  countryOptionsSemantic,
+  genderOptions,
+} from '../constants/dropDownOptions';
 import Divider from './Divider';
 import FormErrorMessage from './FormErrorMessage';
 
+const emptyApplicant = {
+  name: '',
+  countryId: 0,
+  birthday: '',
+  gender: '',
+  passport: '',
+  passportExpiry: '',
+};
+
 type Props = {
   onSubmit: () => void,
-  stepOne: Object,
+  countryId: number,
   stepTwo: Object,
   updateStepTwo: Object => void,
   resetStepTwo: () => void,
   goBack: () => void,
 };
+type Applicant = {
+  name: string,
+  countryId: number,
+  birthday: string,
+  gender: string,
+  passport: string,
+  passportExpiry: string,
+};
 type State = {
-  quantity: number | string,
+  applicants: Array<Applicant>,
   airport: string,
-  arrivalDate: string | Date,
-  departureDate: string | Date,
+  arrivalDate: string,
+  departureDate: string,
+  flightNumber: string,
   shouldShowErrorMessage: boolean,
 };
 class ApplyFormStepTwo extends React.Component<Props, State> {
   state = {
-    quantity: 1,
-    airport: airportOptions[0].value,
+    applicants: [emptyApplicant],
+    airport: '',
     arrivalDate: '',
     departureDate: '',
+    flightNumber: '',
     shouldShowErrorMessage: false,
   };
 
@@ -60,21 +84,20 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     }
   };
 
+  // TODO: remove resetStepTwo
   goBack = () => {
     const { resetStepTwo, goBack } = this.props;
     // resetStepTwo();
     goBack();
   };
 
-  updateQuantity = (event: Object) => {
-    this.setState(
-      {
-        quantity: event.target.value,
-      },
-      () => this.updateStepTwoToStore(),
-    );
+  addApplicant = () => {
+    this.setState({
+      applicants: this.state.applicants.concat(emptyApplicant),
+    });
   };
 
+  // Flight info
   updateAirport = (event: Object, selectedOption: Object) => {
     this.setState(
       {
@@ -84,7 +107,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     );
   };
 
-  updateDatePicker = (event: Object, selectedDate: Object) => {
+  updateFlightDate = (event: Object, selectedDate: Object) => {
     this.setState(
       {
         [selectedDate.name]: selectedDate ? selectedDate.value : '',
@@ -93,48 +116,103 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     );
   };
 
+  updateFlightNumber = (event: Object) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // Applicant info
+  updateTextInput = (event, index) => {
+    let { applicants } = this.state;
+    applicants[index][event.target.name] = event.target.value;
+    this.updateApplicantsToStateAndStore(applicants);
+  };
+
+  updateDatePicker = (event: Object, selectedDate: Object, index) => {
+    let { applicants } = this.state;
+    applicants[index][selectedDate.name] = selectedDate
+      ? selectedDate.value
+      : '';
+    this.updateApplicantsToStateAndStore(applicants);
+  };
+
+  updateCountry = (event: Object, selectedOption: Object, index: number) => {
+    let { applicants } = this.state;
+    applicants[index].countryId = selectedOption ? selectedOption.value : 0;
+    this.updateApplicantsToStateAndStore(applicants);
+  };
+
+  updateGender = (event: Object, selectedOption: Object, index: number) => {
+    let { applicants } = this.state;
+    applicants[index].gender = selectedOption ? selectedOption.value : '';
+    this.updateApplicantsToStateAndStore(applicants);
+  };
+
+  updateApplicantsToStateAndStore = applicants => {
+    this.setState(
+      {
+        applicants,
+      },
+      () => this.updateStepTwoToStore(),
+    );
+  };
+
   updateStepTwoToStore = () => {
-    this.props.updateStepTwo(this.state);
+    this.props.updateStepTwo({
+      ...this.state,
+      quantity: this.state.applicants.length,
+    });
+  };
+
+  // Life cycle functions
+  componentWillReceiveProps(nextProps) {
+    if (this.props.stepTwo !== nextProps.stepTwo) {
+      this.syncPropsToState(nextProps);
+    }
+  }
+
+  componentDidMount() {
+    this.syncPropsToState(this.props);
+  }
+
+  syncPropsToState = (nextProps: Props) => {
+    const { countryId } = this.props;
+    let applicants = _get(nextProps, 'stepTwo.applicants', []);
+    if (countryId) {
+      applicants.forEach(applicant => (applicant.countryId = countryId));
+    }
+
+    this.setState({
+      applicants,
+      airport: _get(nextProps, 'stepTwo.airport', ''),
+      arrivalDate: _get(nextProps, 'stepTwo.arrivalDate', ''),
+      departureDate: _get(nextProps, 'stepTwo.departureDate', ''),
+      flightNumber: _get(nextProps, 'stepTwo.flightNumber', ''),
+    });
   };
 
   render() {
-    const { stepOne: { country } } = this.props;
     const {
-      quantity,
+      applicants,
       airport,
       arrivalDate,
       departureDate,
+      flightNumber,
       shouldShowErrorMessage,
     } = this.state;
-
-    const applicants = [];
-    for (let index = 0; index < quantity; index++) {
-      applicants.push(index);
-    }
 
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
         <Flexbox paddingBottom={3} column>
-          <Text fontSize="m">Applicants</Text>
+          <Text fontSize="m">Flight Info</Text>
           <Divider />
         </Flexbox>
-
-        <Form.Field required>
-          <label>Number of Applicants</label>
-          <Input
-            value={quantity}
-            type="number"
-            min={1}
-            onChange={this.updateQuantity}
-            placeholder="Enter..."
-          />
-        </Form.Field>
         <Form.Field>
           <label>Airport</label>
           <Dropdown
             value={airport}
             placeholder="Select..."
-            fluid
             search
             selection
             options={airportOptions}
@@ -147,7 +225,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             name="arrivalDate"
             placeholder="Select..."
             value={arrivalDate}
-            onChange={this.updateDatePicker}
+            onChange={this.updateFlightDate}
           />
         </Form.Field>
         <Form.Field>
@@ -156,9 +234,113 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             name="departureDate"
             placeholder="Select..."
             value={departureDate}
-            onChange={this.updateDatePicker}
+            onChange={this.updateFlightDate}
           />
         </Form.Field>
+        <Form.Field>
+          <label>Flight Number</label>
+          <Input
+            name="flightNumber"
+            placeholder="Enter..."
+            value={flightNumber}
+            onChange={event => this.updateFlightNumber(event)}
+          />
+        </Form.Field>
+        <Text fontStyle="italic" fontSize="s" p>
+          Note: If you have different flight information for different
+          applicants, please submit another application
+        </Text>
+
+        {applicants.map((applicant, index) => (
+          <Flexbox column paddingBottom={6} key={index}>
+            <Flexbox paddingBottom={3} column>
+              <Text fontSize="m">Applicant {index + 1}</Text>
+              <Divider />
+            </Flexbox>
+
+            <Form.Field required>
+              <label>Full name</label>
+              <Input
+                name="name"
+                placeholder="Enter..."
+                value={applicant.name}
+                onChange={event => this.updateTextInput(event, index)}
+              />
+            </Form.Field>
+            <Form.Field required>
+              <label>Nationality</label>
+              <Dropdown
+                value={applicant.countryId}
+                placeholder="Select..."
+                search
+                selection
+                options={countryOptionsSemantic}
+                onChange={(event, option) =>
+                  this.updateCountry(event, option, index)
+                }
+              />
+            </Form.Field>
+            <Flexbox>
+              <Flexbox flex={1}>
+                <Form.Field required>
+                  <label>Date of Birth</label>
+                  <DateInput
+                    name="birthday"
+                    placeholder="Select..."
+                    value={applicant.birthday}
+                    onChange={(event, option) =>
+                      this.updateDatePicker(event, option, index)
+                    }
+                  />
+                </Form.Field>
+              </Flexbox>
+              <Flexbox flex={1}>
+                <Form.Field required>
+                  <label>Gender</label>
+                  <Dropdown
+                    value={applicant.gender}
+                    placeholder="Select..."
+                    search
+                    selection
+                    options={genderOptions}
+                    onChange={(event, option) =>
+                      this.updateGender(event, option, index)
+                    }
+                  />
+                </Form.Field>
+              </Flexbox>
+            </Flexbox>
+
+            <Flexbox>
+              <Form.Field required>
+                <label>Passport No.</label>
+                <Input
+                  name="passport"
+                  placeholder="Enter..."
+                  value={applicant.passport}
+                  onChange={event => this.updateTextInput(event, index)}
+                />
+              </Form.Field>
+              <Flexbox flex={1}>
+                <Form.Field required>
+                  <label>Expiry Date</label>
+                  <DateInput
+                    name="passportExpiry"
+                    placeholder="Select..."
+                    value={applicant.passportExpiry}
+                    onChange={(event, option) =>
+                      this.updateDatePicker(event, option, index)
+                    }
+                  />
+                </Form.Field>
+              </Flexbox>
+            </Flexbox>
+          </Flexbox>
+        ))}
+
+        <Text color="green" clickable onClick={this.addApplicant}>
+          Add Applicant
+        </Text>
 
         <Flexbox paddingTop={6} column>
           {shouldShowErrorMessage && <FormErrorMessage />}
@@ -177,8 +359,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    stepOne: store[reducerNames.form].stepOne,
-    stepTwo: store[reducerNames.form].stepTwo,
+    countryId: _get(store, `${reducerNames.form}.stepOne.countryId`, 0),
+    stepTwo: _get(store, `${reducerNames.form}.stepTwo`, {}),
   };
 };
 const mapDispatchToProps = {
