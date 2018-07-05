@@ -30,24 +30,24 @@ class Apply extends React.Component<Props, State> {
     steps: [
       {
         key: 'options',
-        href: '/apply#step1',
         active: true,
         completed: false,
         title: 'Visa Options',
+        onClick: () => this.showStepOne(),
       },
       {
         key: 'billing',
-        href: '/apply#step2',
         active: false,
         completed: false,
         title: 'Applicant Details',
+        onClick: () => this.showStepTwo(),
       },
       {
         key: 'confirm',
-        href: '/apply#step3',
         active: false,
         completed: false,
         title: 'Review & Finalize',
+        onClick: () => this.showStepThree(),
       },
     ],
   };
@@ -94,6 +94,10 @@ class Apply extends React.Component<Props, State> {
     });
   };
 
+  componentDidMount() {
+    logPageView();
+  }
+
   render() {
     const { steps } = this.state;
 
@@ -104,12 +108,9 @@ class Apply extends React.Component<Props, State> {
             paddingVertical={spacingValues.blockPaddingTop}
             column
             alignItems="center"
+            maxWidth={formMaxWidth - formPaddingHorizontal * 4}
           >
-            <Flexbox
-              column
-              width="100%"
-              maxWidth={formMaxWidth - formPaddingHorizontal * 4}
-            >
+            <Flexbox column width="100%">
               <Heading secondary text="Get your Visa in 3 steps" />
 
               <Step.Group size="large" ordered items={steps} />
@@ -119,13 +120,11 @@ class Apply extends React.Component<Props, State> {
               justifyContent="space-between"
               paddingTop={6}
               responsiveLayout
-              width="100%"
             >
               <Flexbox
                 flex={1}
                 paddingVertical={5}
                 paddingHorizontal={formPaddingHorizontal}
-                width="100%"
               >
                 {steps[0].active && (
                   <ApplyFormStepOne onSubmit={this.showStepTwo} />
