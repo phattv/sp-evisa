@@ -8,7 +8,6 @@ import dayjs from 'dayjs';
 import _get from 'lodash/get';
 // custom
 import { Button, Flexbox, Text } from './ui';
-// import ApplyFormStepTwoForm from './ApplyFormStepTwoForm';
 import { resetStepTwo, updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
 import {

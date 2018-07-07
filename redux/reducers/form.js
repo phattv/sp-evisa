@@ -10,9 +10,11 @@ import { actionTypes } from '../actions';
  * +---------------+
  */
 const formInitialState = {
-  stepOne: {},
+  stepOne: {
+    countryId: 0,
+  },
   stepTwo: {
-    quantity: '1',
+    quantity: 1,
     applicants: [
       {
         name: '',
@@ -24,7 +26,9 @@ const formInitialState = {
       },
     ],
   },
-  stepThree: {},
+  stepThree: {
+    contact: {},
+  },
   price: 0,
   paid: false,
 };

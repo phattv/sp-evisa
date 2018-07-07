@@ -6,7 +6,7 @@ import { Flexbox, Text } from './ui';
 import Divider from './Divider';
 
 /**
- * FormHeading
+ * FormHeading shows Form heading with a divider below
  */
 type Props = {
   text: string,
