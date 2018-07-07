@@ -122,6 +122,7 @@ class Apply extends React.Component<Props, State> {
               responsiveLayout
             >
               <Flexbox
+                maxWidth="50%"
                 flex={1}
                 paddingVertical={5}
                 paddingHorizontal={formPaddingHorizontal}
@@ -138,6 +139,7 @@ class Apply extends React.Component<Props, State> {
                 {steps[2].active && <Text>Step 3</Text>}
               </Flexbox>
               <Flexbox
+                maxWidth="50%"
                 flex={1}
                 paddingVertical={5}
                 paddingHorizontal={formPaddingHorizontal}

@@ -74,7 +74,7 @@ const setResponsiveFontSize = (
   }
 
   return `font-size: ${actualFontSize}px;line-height: ${
-    noDoubleLineHeight ? actualFontSize : actualFontSize * 2
+    noDoubleLineHeight ? actualFontSize * 1.25 : actualFontSize * 2
   }px;`;
 };
 

@@ -246,10 +246,12 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             onChange={event => this.updateFlightNumber(event)}
           />
         </Form.Field>
-        <Text fontStyle="italic" fontSize="s" p>
-          Note: If you have different flight information for different
-          applicants, please submit another application
-        </Text>
+        <Flexbox paddingBottom={4}>
+          <Text fontStyle="italic" fontSize="s" noDoubleLineHeight>
+            Note: If you have different flight information for different
+            applicants, please submit another application
+          </Text>
+        </Flexbox>
 
         {applicants.map((applicant, index) => (
           <Flexbox column paddingBottom={6} key={index}>
