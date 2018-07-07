@@ -5,12 +5,12 @@ import { logPageView } from '../utils/analytics';
 import { Step } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 // custom
-import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
+import { Flexbox, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
-// import ApplyFormStepThree from '../components/ApplyFormStepThree';
+import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
 import { spacingValues, formMaxWidth } from '../constants/ui';
 
@@ -132,11 +132,13 @@ class Apply extends React.Component<Props, State> {
                 )}
                 {steps[1].active && (
                   <ApplyFormStepTwo
-                    onSubmit={this.showStepThree}
                     goBack={this.showStepOne}
+                    onSubmit={this.showStepThree}
                   />
                 )}
-                {steps[2].active && <Text>Step 3</Text>}
+                {steps[2].active && (
+                  <ApplyFormStepThree goBack={this.showStepTwo} />
+                )}
               </Flexbox>
               <Flexbox
                 maxWidth="50%"
