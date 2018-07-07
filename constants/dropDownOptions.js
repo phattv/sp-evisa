@@ -1,6 +1,7 @@
 // @flow
 import countryOptions from '../static/countries.json';
 import countryOptionsSemantic from '../static/countries.semantic.json';
+import { fees } from '../constants/fees';
 
 const genderOptions = [
   { value: 'male', text: 'Male' },
@@ -19,16 +20,20 @@ const purposeOptions = [
   { value: 'business', text: 'Business' },
 ];
 const processingTimeOptions = [
-  { value: 'normal', text: 'Normal (Guaranteed 1 working day)', price: 0 },
+  {
+    value: 'normal',
+    text: 'Normal (Guaranteed 1 working day)',
+    price: fees.processingTimeNormal,
+  },
   {
     value: 'urgent',
     text: 'Urgent (Guaranteed 4-8 working hours)',
-    price: 20,
+    price: fees.processingTimeUrgent,
   },
   {
     value: 'emergency',
     text: 'Emergency (Guaranteed 1 working hour)',
-    price: 180,
+    price: fees.processingTimeEmergency,
   },
 ];
 const airportOptions = [
@@ -42,15 +47,39 @@ const airportOptions = [
 ];
 const airportFastTrackOptions = [
   { value: '', text: 'None', price: 0 },
-  { value: 'airportFastTrack', text: 'Airport fast track', price: 29 },
-  { value: 'airportVipFastTrack', text: 'Airport VIP fast track', price: 44 },
+  {
+    value: 'airportFastTrack',
+    text: 'Airport Fast Track',
+    price: fees.airportFastTrackSingle,
+  },
+  {
+    value: 'airportVipFastTrack',
+    text: 'Airport VIP Fast Track',
+    price: fees.airportVipFastTrackSingle,
+  },
 ];
 const carPickUpOptions = [
   { value: '', text: 'None', price: 0 },
-  { value: 'fourSeats', text: 'Car pick-up (4 seats)', price: 29 },
-  { value: 'sevenSeats', text: 'Car pick-up (7 seats)', price: 34 },
-  { value: 'sixteenSeats', text: 'Car pick-up (16 seats)', price: 94 },
-  { value: 'twentyFourSeats', text: 'Car pick-up (24 seats)', price: 154 },
+  {
+    value: 'fourSeats',
+    text: 'Car Pick Up (4 seats)',
+    price: fees.carPickUpFourSeats,
+  },
+  {
+    value: 'sevenSeats',
+    text: 'Car Pick Up (7 seats)',
+    price: fees.carPickUpSevenSeats,
+  },
+  {
+    value: 'sixteenSeats',
+    text: 'Car Pick Up (16 seats)',
+    price: fees.carPickUpSixteenSeats,
+  },
+  {
+    value: 'twentyFourSeats',
+    text: 'Car Pick Up (24 seats)',
+    price: fees.carPickUpTwentyFourSeats,
+  },
 ];
 
 export {

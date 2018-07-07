@@ -315,7 +315,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           />
         </Form.Field>
         <Form.Field>
-          <label>Car Pick Up</label>
           <Checkbox
             checked={extraServices.privateVisaLetter}
             onChange={this.togglePrivateVisaLetter}

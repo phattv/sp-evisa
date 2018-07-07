@@ -9,7 +9,6 @@ import { Image, Flexbox, Text } from './ui';
 import Divider from './Divider';
 import { boxShadow, iconSizes } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
-import { updateGuest, updatePrice } from '../redux/actions';
 import {
   typeOptions,
   airportOptions,
@@ -19,6 +18,8 @@ import {
   airportFastTrackOptions,
   carPickUpOptions,
 } from '../constants/dropDownOptions';
+import { fees } from '../constants/fees';
+import { updateGuest, updatePrice } from '../redux/actions';
 import { guestInitialState } from '../redux/reducers/guest';
 
 type Props = {
@@ -97,7 +98,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const extraFees = shouldShowExtraServices
       ? _get(fastTrackObject, 'price', 0) + _get(carPickupObject, 'price', 0)
       : 0;
-    const privateVisaLetterCost = privateVisaLetter === true ? 8 : 0;
+    const privateVisaLetterCost =
+      privateVisaLetter === true ? fees.privateVisaLetter : 0;
 
     const totalFee =
       parsedQuantity * this.state.costPerPerson +
@@ -434,7 +436,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       {privateVisaLetter &&
         this.renderSpaceBetweenBlock({
           leftContent: 'Private visa letter',
-          rightContent: '$8',
+          rightContent: `$${fees.privateVisaLetter}`,
           noMarginTop: true,
         })}
     </Fragment>

@@ -14,18 +14,19 @@ import {
   tableWidth,
   textMaxWidth,
 } from '../constants/ui';
+import { fees } from '../constants/fees';
 
 const cities = ['Ha Noi', 'Cam Ranh', 'Da Nang', 'Ho Chi Minh'];
 const airportFastTrackTables = [
   {
     title: 'Fast Track',
-    price: 29,
+    price: fees.airportFastTrackSingle,
     note:
       'Our staff will greet you at the Visa Landing Counter and assist you to get visa stamp and sticker without queuing in line with others. Just 5 -10 minutes and you will at the luggage lounge to wait for your belonging.',
   },
   {
     title: 'VIP Fast Track',
-    price: 44,
+    price: fees.airportVipFastTrackSingle,
     note:
       'Same as Fast Track, but our staff will also escort you to the luggage lounge and take care of your luggage.',
   },
@@ -33,19 +34,19 @@ const airportFastTrackTables = [
 const pickupAtTheAirportTables = [
   {
     title: '4 Seats',
-    price: 29,
+    price: fees.carPickUpFourSeats,
   },
   {
     title: '7 Seats',
-    price: 34,
+    price: fees.carPickUpSevenSeats,
   },
   {
     title: '16 Seats',
-    price: 94,
+    price: fees.carPickUpSixteenSeats,
   },
   {
     title: '24 Seats',
-    price: 154,
+    price: fees.carPickUpTwentyFourSeats,
   },
 ];
 
@@ -253,9 +254,9 @@ class Services extends React.Component<Props, State> {
                 Office policy, all names for people getting visas on the same
                 day will be on the same letter. We offer a private letter
                 service so your name and the names of all members in your group
-                will in a a private letter. The fee for each private letter is 8
-                USD per letter (one letter can be for one person or for a
-                group).
+                will in a a private letter. The fee for each private letter is{' '}
+                <Text semibold>{`${fees.privateVisaLetter} USD`}</Text> per
+                letter (one letter can be for one person or for a group).
               </Text>
             </Flexbox>
 
