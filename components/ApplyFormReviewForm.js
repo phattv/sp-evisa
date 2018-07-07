@@ -422,7 +422,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         this.renderSpaceBetweenBlock({
           leftContent: fastTrackObject.text,
           rightContent: `$${fastTrackObject.price}`,
-          noMarginTop: true,
         })}
 
       {!_isEmpty(carPickupObject) &&
