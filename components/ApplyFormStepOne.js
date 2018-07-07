@@ -6,7 +6,7 @@ import _get from 'lodash/get';
 import { connect } from 'react-redux';
 // custom
 import { Button, Flexbox, Text } from './ui';
-import Divider from './Divider';
+import FormHeading from './FormHeading';
 import FormErrorMessage from './FormErrorMessage';
 import {
   updateFees,
@@ -232,10 +232,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           width: '100%',
         }}
       >
-        <Flexbox paddingBottom={3} column>
-          <Text fontSize="m">Visa Requirements</Text>
-          <Divider />
-        </Flexbox>
+        <FormHeading text="Visa Requirements" />
         <Form.Field required>
           <label>Country</label>
           <Dropdown
@@ -286,10 +283,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         </Form.Field>
 
         {/* TODO: collapse by default on mobile */}
-        <Flexbox paddingBottom={3} paddingTop={6} column>
-          <Text fontSize="m">Other Services (Optional)</Text>
-          <Divider />
-        </Flexbox>
+        <FormHeading text="Other Services (Optional)" hasPaddingTop />
         <Form.Field>
           <label>Airport Fast Track</label>
           <Dropdown

@@ -2,7 +2,7 @@
 // vendor
 import * as React from 'react';
 import withRedux from 'next-redux-wrapper';
-import { Form } from 'react-final-form';
+import { Form } from 'semantic-ui-react';
 import { Div, Input, Label } from 'glamorous';
 import ReactDOM from 'react-dom';
 import get from 'lodash/get';
@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 // custom
 import { configureStore } from '../redux/store';
 import { updatePaymentStatus, updateStepThree } from '../redux/actions';
-import { Button, Flexbox, Text } from '../components';
+import { Button, Flexbox, Text } from './ui';
 import {
   borderRadius,
   colors,
@@ -22,6 +22,7 @@ import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { reducerNames } from '../constants/reducerNames';
 import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
+import FormHeading from './FormHeading';
 
 let componentInstance;
 let paypalActions;
@@ -169,9 +170,13 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       console.log('xxx', 'form is finished');
 
       setTimeout(() => {
-        window.location = '/'
-      }, 1000)
+        window.location = '/';
+      }, 1000);
     });
+  };
+
+  onSubmit = () => {
+    console.log('xxx', 'onSubmit');
   };
 
   renderApplicants = () => {
@@ -337,176 +342,14 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     }
 
     return (
-      <Div>
-        <Flexbox
-          marginLeft={spacingValues.xxs}
-          marginRight={spacingValues.xxs}
-          paddingBottom={5}
-        >
-          <Text>
-            Please review your application details below before starting visa
-            processing with Vietnam Immigration Department.
-          </Text>
-        </Flexbox>
-        <Form
-          onSubmit={() => {}}
-          render={({ handleSubmit, pristine, invalid }) => (
-            <Flexbox alignItems="flex-start" flex={1} responsiveLayout>
-              <Flexbox
-                flex={1}
-                column
-                width="100%"
-                marginLeft={spacingValues.xxs}
-                marginRight={spacingValues.xxs}
-              >
-                {/* Flight info */}
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                  marginTop={5}
-                >
-                  <Text size="l" bold>
-                    FLIGHT INFORMATION
-                  </Text>
-                </Flexbox>
-                <Flexbox>
-                  <Text>
-                    It is recommended that you provide us with your flight
-                    details for better support. (In case you apply for express
-                    visa service or extra service at Vietnam airport, this
-                    information is required)
-                  </Text>
-                </Flexbox>
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <Label display="flex" alignItems="center" cursor="pointer">
-                    <Input
-                      type="checkbox"
-                      onChange={this.toggleHasFlightInfo}
-                      value={hasFlightInfo}
-                      marginRight={spacingValues.s}
-                    />
-                    <Text>I have booked</Text>
-                  </Label>
-                </Flexbox>
+      <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
+        <Text>
+          Please review your application details below before starting visa
+          processing with Vietnam Immigration Department.
+        </Text>
 
-                <Div
-                  display={hasFlightInfo ? 'flex' : 'none'}
-                  flexDirection="column"
-                  width="100%"
-                >
-                  <Text bold>FLIGHT NUMBER</Text>
-                  <Input
-                    backgroundColor="white"
-                    padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                    borderRadius={borderRadius}
-                    border={`1px solid ${colors.lightGrey}`}
-                    width="100%"
-                    value={flightNumber}
-                    onChange={this.updateFlightNumber}
-                    marginTop={2}
-                  />
-                </Div>
-
-                {/* Terms checkbox */}
-                <Label
-                  paddingTop={25}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updateIsTermsAgreed}
-                    value={isTermsAgreed}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold textAlign="center">
-                    I have read and agreed with the Terms of Use
-                  </Text>
-                </Label>
-
-                <Div width="100%" marginTop={10}>
-                  {/* Paypal */}
-                  {isPaypalLoaded && (
-                    <PayPalButton
-                      commit={commit}
-                      env={env}
-                      client={client}
-                      style={style}
-                      onClick={this.onPaypalClick}
-                      validate={actions => this.validatePaypal(actions)}
-                      payment={(data, actions) => this.payment(data, actions)}
-                      onAuthorize={(data, actions) =>
-                        this.onAuthorize(data, actions)
-                      }
-                      onCanccel={(data, actions) =>
-                        this.onCancel(data, actions)
-                      }
-                      onError={error => this.onError(error)}
-                    />
-                  )}
-                </Div>
-
-                {/* Applicants information */}
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                  marginTop={5}
-                >
-                  <Text size="l" bold>
-                    APPLICANT(S) INFORMATION
-                  </Text>
-                </Flexbox>
-
-                {this.renderApplicants()}
-              </Flexbox>
-
-              {/* Review form */}
-              <Flexbox
-                flex={1}
-                column
-                width="100%"
-                marginHorizontal={spacingValues.xxs}
-                marginVertical={spacingValues.xxs}
-              >
-                <ApplyFormReviewForm />
-
-                <Flexbox
-                  width="100%"
-                  justifyContent="space-around"
-                  marginTop={5}
-                  marginBottom={5}
-                >
-                  <Button solid onClick={goBack}>
-                    <i className="fa fa-arrow-left" />
-                    &nbsp;&nbsp;BACK
-                  </Button>
-                </Flexbox>
-
-                {shouldShowSuccessMessage && (
-                  <Text color="visaBlue" textAlign="center">
-                    Thank you for choosing us, we will contact you shortly!
-                  </Text>
-                )}
-
-                {shouldShowErrorMessage && (
-                  <Text color="visaRed" textAlign="center">
-                    Please fill in the Contact information inputs & accept Terms
-                    of Use & pay
-                  </Text>
-                )}
-              </Flexbox>
-            </Flexbox>
-          )}
-        />
-      </Div>
+        <FormHeading text="Contact Information" hasPaddingTop />
+      </Form>
     );
   }
 }

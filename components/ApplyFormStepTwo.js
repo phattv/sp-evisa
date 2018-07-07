@@ -16,8 +16,8 @@ import {
   countryOptionsSemantic,
   genderOptions,
 } from '../constants/dropDownOptions';
-import Divider from './Divider';
 import FormErrorMessage from './FormErrorMessage';
+import FormHeading from './FormHeading';
 
 const emptyApplicant = {
   name: '',
@@ -204,10 +204,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
-        <Flexbox paddingBottom={3} column>
-          <Text fontSize="m">Flight Info</Text>
-          <Divider />
-        </Flexbox>
+        <FormHeading text="Flight Info" />
         <Form.Field>
           <label>Airport</label>
           <Dropdown
@@ -255,11 +252,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
         {applicants.map((applicant, index) => (
           <Flexbox column paddingBottom={6} key={index}>
-            <Flexbox paddingBottom={3} column>
-              <Text fontSize="m">Applicant {index + 1}</Text>
-              <Divider />
-            </Flexbox>
-
+            <FormHeading text={`Applicant ${index + 1}`} />
             <Form.Field required>
               <label>Full name</label>
               <Input
