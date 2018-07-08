@@ -37,16 +37,7 @@ const spacingUnits = {
 
 const borderRadius = 6;
 
-// TODO: remove s m l, use semantic text instead,
 const spacingValues = {
-  xxs: 4,
-  xs: 8,
-  s: 12,
-  m: 16,
-  l: 20,
-  xl: 24,
-  xxl: 28,
-  xxxl: 32,
   blockPaddingTop: 20,
 };
 
@@ -81,9 +72,12 @@ const pageNames = {
   home: '/',
   apply: '/apply',
   fees: '/fees',
-  how: '/how',
+  faq: '/faq',
   services: '/services',
   contact: '/contact',
+  reviews: '/reviews',
+  thankYou: '/thank-you',
+  paymentFailed: '/payment-failed',
 };
 
 /**

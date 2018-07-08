@@ -5,12 +5,13 @@ import Media from 'react-media';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 // Custom
-import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
+import { Anchor, Flexbox, Image, Text } from '../components/ui';
 import {
   colors,
   screenSizes,
   contentMaxWidth,
   pageNames,
+  borderRadius,
 } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import PhoneAndEmail from './PhoneAndEmail';
@@ -25,21 +26,25 @@ const menus = [
     url: pageNames.home,
   },
   {
-    text: 'How to Apply',
-    url: pageNames.how,
-  },
-  {
     text: 'Fees',
     url: pageNames.fees,
+  },
+  {
+    text: 'FAQ',
+    url: pageNames.faq,
   },
   {
     text: 'Services',
     url: pageNames.services,
   },
   {
-    text: 'Contact Us',
+    text: 'Contact',
     url: pageNames.contact,
   },
+  // {
+  //   text: 'Reviews',
+  //   url: pageNames.reviews,
+  // },
 ];
 
 const mobileAnchorStyles = {
@@ -64,6 +69,8 @@ class Header extends React.PureComponent<Props, State> {
     shouldShowMobileMenus: false,
   };
 
+  navigateToApply = () => Router.push(pageNames.apply);
+
   toggleMobileMenus = () => {
     this.setState({
       shouldShowMobileMenus: !this.state.shouldShowMobileMenus,
@@ -81,19 +88,28 @@ class Header extends React.PureComponent<Props, State> {
       <Flexbox
         width="100%"
         maxWidth={contentMaxWidth}
-        aligniItems="baseline"
+        aligniItems="center"
         justifyContent="flex-end"
         paddingVertical={2}
         paddingHorizontal={3}
       >
         {menus.map((menu, index) => (
           <Anchor key={index} href={menu.url} color="white" activeColor="green">
-            <Flexbox paddingHorizontal={4} paddingVertical={2}>
+            <Flexbox paddingHorizontal={6} paddingVertical={2}>
               {menu.text}
             </Flexbox>
           </Anchor>
         ))}
-        <Button onClick={() => Router.push(pageNames.apply)}>Apply</Button>
+        <Anchor href={pageNames.apply} color="white" activeColor="green">
+          <Flexbox
+            paddingHorizontal={6}
+            paddingVertical={2}
+            backgroundColor="darkRed"
+            borderRadius={borderRadius}
+          >
+            <Text color="white">Apply</Text>
+          </Flexbox>
+        </Anchor>
       </Flexbox>
     </Flexbox>
   );

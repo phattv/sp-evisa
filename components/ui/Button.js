@@ -1,6 +1,11 @@
 // @flow
 import styled from 'styled-components';
-import { colors, screenSizes, spacingUnits } from '../../constants/ui';
+import {
+  colors,
+  screenSizes,
+  spacingUnits,
+  borderRadius,
+} from '../../constants/ui';
 import { generateCommonProps } from './generateCommonProps';
 
 /**
@@ -13,10 +18,9 @@ const Button = styled.button`
   text-align: center;
   font-weight: bold;
   padding: 10px 25px;
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 
   ${props => `
+border-radius: ${props.borderRadius > -1 ? props.borderRadius : borderRadius}px;
 color: ${colors[props.color || 'white']};
 background-color: ${colors[props.backgroundColor || 'red']};
         
