@@ -12,10 +12,7 @@ import { updateStepThree } from '../redux/actions';
 import { Flexbox, Text, Button } from './ui';
 import { displayDateFormat, postgresDateFormat } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
-import {
-  countryOptions,
-  countryOptionsSemantic,
-} from '../constants/dropDownOptions';
+import { countryOptionsSemantic } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
 import FormHeading from './FormHeading';
 import FormErrorMessage from './FormErrorMessage';
@@ -323,7 +320,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     }
 
     return (
-      <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
+      <Form style={{ width: '100%' }}>
         <Flexbox>
           <Text noDoubleLineHeight>
             Please review your application details below before starting visa
@@ -411,7 +408,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     const { stepTwo: { applicants } } = this.props;
 
     return applicants.map((applicant, index) => {
-      const countryObject = countryOptions.find(
+      const countryObject = countryOptionsSemantic.find(
         option => option.value === applicant.countryId,
       );
       const parsedBirthday = dayjs(applicant.birthday).isValid()
@@ -425,7 +422,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         <Flexbox key={index} column width="100%" paddingBottom={6}>
           <Text semibold>{applicant.name}</Text>
           <Flexbox justifyContent="space-between">
-            <Text>{countryObject.label}</Text>
+            <Text>{countryObject.text}</Text>
             <Text>/</Text>
             <Text>DOB: {parsedBirthday}</Text>
             <Text>/</Text>
