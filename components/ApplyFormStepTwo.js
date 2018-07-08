@@ -10,6 +10,7 @@ import _get from 'lodash/get';
 import { Button, Flexbox, Text } from './ui';
 import { resetStepTwo, updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
+import { displayDateFormat, postgresDateFormat } from '../constants/ui';
 import {
   airportOptions,
   countryOptionsSemantic,
@@ -25,6 +26,10 @@ const emptyApplicant = {
   gender: '',
   passport: '',
   passportExpiry: '',
+};
+const defaultDateInputProps = {
+  dateFormat: postgresDateFormat,
+  closable: true,
 };
 
 type Props = {
@@ -201,6 +206,13 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       shouldShowErrorMessage,
     } = this.state;
 
+    const parsedArrivalDate = dayjs(arrivalDate).isValid()
+      ? dayjs(arrivalDate).format(displayDateFormat)
+      : '';
+    const parsedDepartureDate = dayjs(departureDate).isValid()
+      ? dayjs(departureDate).format(displayDateFormat)
+      : '';
+
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
         <FormHeading text="Flight Info" />
@@ -218,18 +230,20 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         <Form.Field>
           <label>Arrival Date</label>
           <DateInput
+            {...defaultDateInputProps}
             name="arrivalDate"
             placeholder="Select..."
-            value={arrivalDate}
+            value={parsedArrivalDate}
             onChange={this.updateFlightDate}
           />
         </Form.Field>
         <Form.Field>
           <label>Departure Date</label>
           <DateInput
+            {...defaultDateInputProps}
             name="departureDate"
             placeholder="Select..."
-            value={departureDate}
+            value={parsedDepartureDate}
             onChange={this.updateFlightDate}
           />
         </Form.Field>
@@ -249,88 +263,99 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
           </Text>
         </Flexbox>
 
-        {applicants.map((applicant, index) => (
-          <Flexbox column paddingBottom={6} key={index}>
-            <FormHeading text={`Applicant ${index + 1}`} />
-            <Form.Field required>
-              <label>Full name</label>
-              <Input
-                name="name"
-                placeholder="Enter..."
-                value={applicant.name}
-                onChange={event => this.updateTextInput(event, index)}
-              />
-            </Form.Field>
-            <Form.Field required>
-              <label>Nationality</label>
-              <Dropdown
-                value={applicant.countryId}
-                placeholder="Select..."
-                search
-                selection
-                options={countryOptionsSemantic}
-                onChange={(event, option) =>
-                  this.updateCountry(event, option, index)
-                }
-              />
-            </Form.Field>
-            <Flexbox>
-              <Flexbox flex={1}>
-                <Form.Field required>
-                  <label>Date of Birth</label>
-                  <DateInput
-                    name="birthday"
-                    placeholder="Select..."
-                    value={applicant.birthday}
-                    onChange={(event, option) =>
-                      this.updateDatePicker(event, option, index)
-                    }
-                  />
-                </Form.Field>
-              </Flexbox>
-              <Flexbox flex={1}>
-                <Form.Field required>
-                  <label>Gender</label>
-                  <Dropdown
-                    value={applicant.gender}
-                    placeholder="Select..."
-                    search
-                    selection
-                    options={genderOptions}
-                    onChange={(event, option) =>
-                      this.updateGender(event, option, index)
-                    }
-                  />
-                </Form.Field>
-              </Flexbox>
-            </Flexbox>
+        {applicants.map((applicant, index) => {
+          const parsedBirthday = dayjs(applicant.birthday).isValid()
+            ? dayjs(applicant.birthday).format(displayDateFormat)
+            : '';
+          const parsedPassportExpiry = dayjs(applicant.passportExpiry).isValid()
+            ? dayjs(applicant.passportExpiry).format(displayDateFormat)
+            : '';
 
-            <Flexbox>
+          return (
+            <Flexbox column paddingBottom={6} key={index}>
+              <FormHeading text={`Applicant ${index + 1}`} />
               <Form.Field required>
-                <label>Passport No.</label>
+                <label>Full name</label>
                 <Input
-                  name="passport"
+                  name="name"
                   placeholder="Enter..."
-                  value={applicant.passport}
+                  value={applicant.name}
                   onChange={event => this.updateTextInput(event, index)}
                 />
               </Form.Field>
-              <Flexbox flex={1}>
+              <Form.Field required>
+                <label>Nationality</label>
+                <Dropdown
+                  value={applicant.countryId}
+                  placeholder="Select..."
+                  search
+                  selection
+                  options={countryOptionsSemantic}
+                  onChange={(event, option) =>
+                    this.updateCountry(event, option, index)
+                  }
+                />
+              </Form.Field>
+              <Flexbox>
+                <Flexbox flex={1}>
+                  <Form.Field required>
+                    <label>Date of Birth</label>
+                    <DateInput
+                      {...defaultDateInputProps}
+                      name="birthday"
+                      placeholder="Select..."
+                      value={parsedBirthday}
+                      onChange={(event, option) =>
+                        this.updateDatePicker(event, option, index)
+                      }
+                    />
+                  </Form.Field>
+                </Flexbox>
+                <Flexbox flex={1}>
+                  <Form.Field required>
+                    <label>Gender</label>
+                    <Dropdown
+                      value={applicant.gender}
+                      placeholder="Select..."
+                      search
+                      selection
+                      options={genderOptions}
+                      onChange={(event, option) =>
+                        this.updateGender(event, option, index)
+                      }
+                    />
+                  </Form.Field>
+                </Flexbox>
+              </Flexbox>
+
+              <Flexbox>
                 <Form.Field required>
-                  <label>Expiry Date</label>
-                  <DateInput
-                    name="passportExpiry"
-                    placeholder="Select..."
-                    value={applicant.passportExpiry}
-                    onChange={(event, option) =>
-                      this.updateDatePicker(event, option, index)
-                    }
+                  <label>Passport No.</label>
+                  <Input
+                    name="passport"
+                    placeholder="Enter..."
+                    value={applicant.passport}
+                    onChange={event => this.updateTextInput(event, index)}
                   />
                 </Form.Field>
+                <Flexbox flex={1}>
+                  <Form.Field required>
+                    <label>Expiry Date</label>
+                    <DateInput
+                      {...defaultDateInputProps}
+                      name="passportExpiry"
+                      placeholder="Select..."
+                      value={parsedPassportExpiry}
+                      onChange={(event, option) =>
+                        this.updateDatePicker(event, option, index)
+                      }
+                    />
+                  </Form.Field>
+                </Flexbox>
               </Flexbox>
             </Flexbox>
-          </Flexbox>
-        ))}
+          );
+        })}
 
         <Text color="green" clickable onClick={this.addApplicant}>
           Add Applicant
