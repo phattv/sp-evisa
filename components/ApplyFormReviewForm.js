@@ -20,15 +20,12 @@ import {
   carPickUpOptions,
 } from '../constants/dropDownOptions';
 import { fees } from '../constants/fees';
-import { updateGuest, updatePrice } from '../redux/actions';
-import { guestInitialState } from '../redux/reducers/guest';
+import { updatePrice } from '../redux/actions';
 
 type Props = {
   stepOne: Object,
   stepTwo: Object,
   fees: Array<Object>,
-  account: Object,
-  updateGuest: Object => void,
   updatePrice: number => void,
   price: number,
 };
@@ -43,8 +40,6 @@ type State = {
   carPickupObject: Object,
   privateVisaLetter: boolean,
   shouldShowExtraServices: boolean,
-
-  guest: Object,
 };
 class ApplyFormReviewForm extends React.Component<Props, State> {
   state = {
@@ -58,24 +53,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     carPickupObject: {},
     privateVisaLetter: false,
     shouldShowExtraServices: false,
-
-    guest: {
-      name: '',
-      email: '',
-      phone: '',
-    },
-  };
-
-  updateGuestTextField = (event: Object) => {
-    this.setState(
-      {
-        guest: {
-          ...this.state.guest,
-          [event.target.name]: event.target.value,
-        },
-      },
-      () => this.props.updateGuest(this.state.guest),
-    );
   };
 
   calculateTotalFee = (nextProps: Object) => {
@@ -134,7 +111,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     const purpose = _get(props, 'stepOne.purpose', '');
     const fees = _get(props, 'fees', []).find(fees => fees.type === purpose);
     const processingTime = _get(props, 'stepOne.processingTime', '');
-    const guest = _get(props, 'guest', guestInitialState);
 
     // Processing time
     const processingTimeObject = processingTimeOptions.find(
@@ -164,7 +140,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
     this.setState(
       {
-        guest,
         costPerPerson,
         processingTimeObject,
         shouldShowProcessingFees,
@@ -471,8 +446,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
 const mapStateToProps = store => {
   return {
-    account: store[reducerNames.account],
-    guest: store[reducerNames.guest],
     stepOne: store[reducerNames.form].stepOne,
     stepTwo: store[reducerNames.form].stepTwo,
     fees: store[reducerNames.fees].fees,
@@ -480,7 +453,6 @@ const mapStateToProps = store => {
   };
 };
 const mapDispatchToProps = {
-  updateGuest,
   updatePrice,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(
