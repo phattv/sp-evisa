@@ -2,7 +2,7 @@
 // vendor
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, Dropdown, Checkbox } from 'semantic-ui-react';
+import { Form, Input, Checkbox } from 'semantic-ui-react';
 import ReactDOM from 'react-dom';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
@@ -12,7 +12,7 @@ import { updateStepThree } from '../redux/actions';
 import { Flexbox, Text, Button } from './ui';
 import { displayDateFormat, postgresDateFormat } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
-import { countryOptionsSemantic } from '../constants/dropDownOptions';
+import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
 import FormHeading from './FormHeading';
 import FormErrorMessage from './FormErrorMessage';
@@ -408,7 +408,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     const { stepTwo: { applicants } } = this.props;
 
     return applicants.map((applicant, index) => {
-      const countryObject = countryOptionsSemantic.find(
+      const countryObject = countryOptions.find(
         option => option.value === applicant.countryId,
       );
       const parsedBirthday = dayjs(applicant.birthday).isValid()

@@ -17,7 +17,7 @@ import { getFeesByCountryId } from '../utils/apiClient';
 import {
   airportFastTrackOptions,
   carPickUpOptions,
-  countryOptionsSemantic,
+  countryOptions,
   processingTimeOptions,
   purposeOptions,
   typeOptions,
@@ -241,7 +241,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             fluid
             search
             selection
-            options={countryOptionsSemantic}
+            options={countryOptions}
             onChange={this.updateCountryId}
           />
         </Form.Field>

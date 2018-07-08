@@ -23,7 +23,7 @@ import {
 } from '../constants/ui';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
-import { countryOptionsSemantic } from '../constants/dropDownOptions';
+import { countryOptions } from '../constants/dropDownOptions';
 
 const fieldsToBind = [
   'one_month_single',
@@ -140,7 +140,7 @@ class Fees extends React.Component<Props, State> {
                   fluid
                   search
                   selection
-                  options={countryOptionsSemantic}
+                  options={countryOptions}
                   onChange={this.updateCountryId}
                 />
               </Flexbox>

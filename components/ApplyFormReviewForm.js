@@ -15,7 +15,7 @@ import {
   airportOptions,
   purposeOptions,
   processingTimeOptions,
-  countryOptionsSemantic,
+  countryOptions,
   airportFastTrackOptions,
   carPickUpOptions,
 } from '../constants/dropDownOptions';
@@ -281,7 +281,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     for (let index = 0; index < parsedQuantity; index++) {
       applicants.push(index);
     }
-    const countryObject = countryOptionsSemantic.find(
+    const countryObject = countryOptions.find(
       option => option.value === countryId,
     );
     const countryString = _get(countryObject, 'text', '');

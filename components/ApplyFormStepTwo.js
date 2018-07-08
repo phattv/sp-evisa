@@ -13,7 +13,7 @@ import { reducerNames } from '../constants/reducerNames';
 import { displayDateFormat, postgresDateFormat } from '../constants/ui';
 import {
   airportOptions,
-  countryOptionsSemantic,
+  countryOptions,
   genderOptions,
 } from '../constants/dropDownOptions';
 import FormErrorMessage from './FormErrorMessage';
@@ -290,7 +290,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   placeholder="Select..."
                   search
                   selection
-                  options={countryOptionsSemantic}
+                  options={countryOptions}
                   onChange={(event, option) =>
                     this.updateCountry(event, option, index)
                   }

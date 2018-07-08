@@ -1,6 +1,5 @@
 // @flow
 import countryOptions from '../static/countries.json';
-import countryOptionsSemantic from '../static/countries.semantic.json';
 import { fees } from '../constants/fees';
 
 const genderOptions = [
@@ -89,7 +88,6 @@ export {
   processingTimeOptions,
   airportOptions,
   countryOptions,
-  countryOptionsSemantic,
   airportFastTrackOptions,
   carPickUpOptions,
 };
