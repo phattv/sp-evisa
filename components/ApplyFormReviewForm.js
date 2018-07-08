@@ -4,10 +4,11 @@ import React, { Fragment } from 'react';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 // custom
 import { Image, Flexbox, Text } from './ui';
 import Divider from './Divider';
-import { boxShadow, iconSizes } from '../constants/ui';
+import { boxShadow, displayDateFormat, iconSizes } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
 import {
   typeOptions,
@@ -179,12 +180,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   // TODO: check UI when data is empty
   // TODO: flight number
   render() {
-    const {
-      stepTwo: { airport, arrivalDate, departureDate },
-      account,
-    } = this.props;
-    const { guest: { name, email, phone } } = this.state;
-    const isLoggedIn = account && Object.keys(account).length > 0;
+    const { stepTwo: { airport, arrivalDate, departureDate } } = this.props;
+
+    const parsedArrivalDate = dayjs(arrivalDate).isValid()
+      ? dayjs(arrivalDate).format(displayDateFormat)
+      : '';
+    const parsedDepartureDate = dayjs(departureDate).isValid()
+      ? dayjs(departureDate).format(displayDateFormat)
+      : '';
 
     return (
       <Flexbox
@@ -208,7 +211,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
 
         {arrivalDate &&
           departureDate &&
-          this.renderFlightDates({ arrivalDate, departureDate })}
+          this.renderFlightDates({ parsedArrivalDate, parsedDepartureDate })}
 
         {this.renderTotalFee()}
       </Flexbox>
@@ -235,14 +238,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     }
   };
 
-  renderFlightDates = ({ arrivalDate, departureDate }) => (
+  renderFlightDates = ({ parsedArrivalDate, parsedDepartureDate }) => (
     <Flexbox justifyContent="space-between" paddingTop={4} width="100%">
       <Flexbox column alignItems="center" flex={1}>
         <Text fontSize="s" noDoubleLineHeight>
           Arrival Date
         </Text>
         <Text color="2c3f60" textAlign="center">
-          {arrivalDate}
+          {parsedArrivalDate}
         </Text>
       </Flexbox>
       <Flexbox border borderRight={1} />
@@ -251,7 +254,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           Departure Date
         </Text>
         <Text color="2c3f60" textAlign="center">
-          {departureDate}
+          {parsedDepartureDate}
         </Text>
       </Flexbox>
     </Flexbox>

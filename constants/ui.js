@@ -91,9 +91,9 @@ const pageNames = {
  * - `dayjs('2018-12-31').format('DD/MM/YYYY')` // console: "31/12/2018"
  * - `dayjs('31-12-2018').format('DD/MM/YYYY')` // console: "NaN/NaN/NaN"
  */
-const dateFormat = 'DD/MM/YYYY';
+const displayDateFormat = 'DD/MM/YYYY';
 const postgresDateFormat = 'YYYY/MM/DD';
-const dateTimeFormat = 'DD/MM/YYYY HH:mm:ss A';
+const displayDateTimeFormat = 'DD/MM/YYYY HH:mm:ss A';
 
 export {
   screenSizes,
@@ -102,9 +102,9 @@ export {
   colors,
   fontSizes,
   spacingValues,
-  dateFormat,
+  displayDateFormat,
   postgresDateFormat,
-  dateTimeFormat,
+  displayDateTimeFormat,
   headerHeight,
   contentMaxWidth,
   tableWidth,
