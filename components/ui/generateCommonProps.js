@@ -294,24 +294,8 @@ ${
         };`
       : ''
   }
-${props.borderRadius ? `border-radius: ${borderRadius}px;` : ''}
-${
-    props.borderTopRightRadius
-      ? `border-top-right-radius: ${borderRadius}px;`
-      : ''
-  }
-${
-    props.borderBottomRightRadius
-      ? `border-bottom-right-radius: ${borderRadius}px;`
-      : ''
-  }
-${props.borderTopLeftRadius ? `border-top-left-radius: ${borderRadius}px;` : ''}
-${
-    props.borderBottomLeftRadius
-      ? `border-bottom-left-radius: ${borderRadius}px;`
-      : ''
-  }
-    
+${props.borderRadius ? `border-radius: ${props.borderRadius}px;` : ''}
+
 ${props.overflow ? `overflow: ${props.overflow};` : ''}
 ${props.position ? `position: ${props.position};` : ''}
 ${
