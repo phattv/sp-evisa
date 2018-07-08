@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { Form, Input, Dropdown, Checkbox } from 'semantic-ui-react';
 import ReactDOM from 'react-dom';
 import _get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
+import _isEmpty from 'lodash/isEmpty';
 import dayjs from 'dayjs';
 // custom
 import { updateStepThree } from '../redux/actions';
 import { Flexbox, Text, Button } from './ui';
-import { postgresDateFormat } from '../constants/ui';
+import { displayDateFormat, postgresDateFormat } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
 import {
   countryOptions,
@@ -25,13 +25,11 @@ let paypalActions;
 
 type Props = {
   stepOne: Object,
-  applicants: Array<Object>,
+  stepTwo: Object,
   stepThree: Object,
   price: number,
   updateStepThree: Object => void,
   goBack: () => void,
-  account: Object,
-  guest: Object,
   // updatePaymentStatus: boolean => void,
 };
 type State = {
@@ -41,7 +39,6 @@ type State = {
   isTermsAgreed: boolean,
 
   shouldShowErrorMessage: boolean,
-  shouldShowSuccessMessage: boolean,
 
   // paypal
   isPaypalLoaded: boolean,
@@ -58,7 +55,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     phone: '',
 
     shouldShowErrorMessage: false,
-    shouldShowSuccessMessage: false,
     isTermsAgreed: false,
 
     // paypal
@@ -83,7 +79,9 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       {
         isTermsAgreed: !this.state.isTermsAgreed,
       },
-      () => this.togglePaypalButton(paypalActions),
+      () => {
+        this.togglePaypalButton(paypalActions);
+      },
     );
   };
 
@@ -97,60 +95,62 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   updateStepThreeToStore = () => {
-    const contact = {
+    const stepThree = {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
+      isTermsAgreed: this.state.isTermsAgreed,
     };
 
-    this.props.updateStepThree(contact);
+    this.props.updateStepThree(stepThree);
   };
 
   shouldDisablePaypalButton = () => {
-    const { isTermsAgreed } = this.state;
-    const { account, guest } = this.props;
-    const contact = isEmpty(account) ? guest : account;
-
-    const isContactEmpty =
-      isEmpty(contact) ||
-      isEmpty(contact.name) ||
-      isEmpty(contact.email) ||
-      isEmpty(contact.phone);
-    return !isTermsAgreed || isContactEmpty;
+    const { name, email, phone, isTermsAgreed } = this.state;
+    return (
+      _isEmpty(name) ||
+      _isEmpty(email) ||
+      _isEmpty(phone) ||
+      isTermsAgreed !== true
+    );
   };
 
-  finishForm = () => {
-    debugger;
-    const { stepOne, stepTwo, stepThree, price, account, guest } = this.props;
+  saveOrderAndNavigateToThankYou = () => {
+    const { stepThree: { name, email, phone } } = this.props;
+    const { stepOne, stepTwo, price } = this.props;
+    const contact = {
+      name,
+      email,
+      phone,
+    };
 
-    let contact;
-    let applicants;
+    const parsedArrivalDate = dayjs(_get(stepTwo, 'arrivalDate', ''));
+    let arrivalDate = parsedArrivalDate.isValid()
+      ? dayjs(stepTwo.arrivalDate).format(postgresDateFormat)
+      : '';
+    const parsedDepartureDate = dayjs(_get(stepTwo, 'departureDate', ''));
+    let departureDate = parsedDepartureDate.isValid()
+      ? dayjs(stepTwo.departureDate).format(postgresDateFormat)
+      : '';
+
+    let contactString = '';
+    let applicantsString = '';
     try {
-      contact = JSON.stringify(isEmpty(account) ? guest : account);
-      applicants = JSON.stringify(stepTwo);
+      contactString = JSON.stringify(contact);
+      applicantsString = JSON.stringify(_get(stepTwo, 'applicants', []));
     } catch (exception) {
-      contact = '';
-      applicants = '';
+      // TODO: rollbar
+      console.error(exception);
     }
-
-    const arrivalDate = _get(stepOne, 'arrivalDate', '')
-      ? dayjs(stepOne.arrivalDate).format(postgresDateFormat)
-      : '';
-    const departureDate = _get(stepOne, 'departureDate', '')
-      ? dayjs(stepOne.departureDate).format(postgresDateFormat)
-      : '';
 
     // prepare params
     const params = {
+      quantity: _get(stepTwo, 'quantity', 0),
       price,
-      country_id: _get(stepOne, 'country', ''),
-      quantity: _get(stepOne, 'quantity', ''),
+      country_id: _get(stepOne, 'countryId', ''),
       type: _get(stepOne, 'type', ''),
       purpose: _get(stepOne, 'purpose', ''),
       processing_time: _get(stepOne, 'processingTime', ''),
-      airport: _get(stepOne, 'airport', ''),
-      arrival_date: arrivalDate,
-      departure_date: departureDate,
       airport_fast_track: _get(stepOne, 'extraServices.fastTrack', ''),
       car_pick_up: _get(stepOne, 'extraServices.carPickup', ''),
       private_visa_letter: _get(
@@ -158,21 +158,22 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         'extraServices.privateVisaLetter',
         false,
       ),
-      contact,
-      applicants,
-      flight_number: _get(stepThree, 'flightNumber', ''),
-      status: 'paid',
+
+      applicants: applicantsString,
+      airport: _get(stepTwo, 'airport', ''),
+      arrival_date: arrivalDate,
+      departure_date: departureDate,
+      flight_number: _get(stepTwo, 'flightNumber', ''),
+
+      contact: contactString,
     };
 
-    order(params, () => {
-      this.setState({
-        shouldShowSuccessMessage: true,
-      });
-      console.log('xxx', 'form is finished');
+    console.log('xxx', params);
 
-      setTimeout(() => {
-        window.location = '/';
-      }, 1000);
+    order(params, () => {
+      // setTimeout(() => {
+      //   window.location = '/thank-you';
+      // }, 1000);
     });
   };
 
@@ -249,26 +250,37 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     console.log('Payment ID = ', data.paymentID);
     console.log('PayerID = ', data.payerID);
 
-    return actions.payment.execute().then(function(payment) {
-      window.alert('Payment Succeeded!');
-      // componentInstance.props.updatePaymentStatus(true);
-      componentInstance.finishForm();
-      // The payment is complete!
-      // You can now show a confirmation message to the customer
-    });
+    return actions.payment
+      .execute()
+      .then(function(payment) {
+        // componentInstance.props.updatePaymentStatus(true);
+        componentInstance.saveOrderAndNavigateToThankYou();
+      })
+      .catch(error => {
+        console.error('xxx paypal error', JSON.stringify(error));
+      });
   };
 
   onCancel = (data, actions) => {
     // this.props.updatePaymentStatus(false);
+    alert('payment cancelled');
     console.log('The payment was cancelled!');
     console.log('Payment ID = ', data.paymentID);
   };
 
   onError = error => {
     // this.props.updatePaymentStatus(false);
+    alert('payment failed');
     console.error('paypal error', error);
   };
   //</editor-fold>
+
+  // Life cycle functions
+  componentWillReceiveProps(nextProps) {
+    if (this.props.stepThree !== nextProps.stepThree) {
+      this.syncPropsToState(nextProps);
+    }
+  }
 
   componentDidMount() {
     componentInstance = this;
@@ -276,7 +288,17 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.setState({
       isPaypalLoaded: true,
     });
+    this.syncPropsToState(this.props);
   }
+
+  syncPropsToState = (nextProps: Props) => {
+    this.setState({
+      name: _get(nextProps, 'stepThree.name', ''),
+      email: _get(nextProps, 'stepThree.email', ''),
+      phone: _get(nextProps, 'stepThree.phone', ''),
+      isTermsAgreed: _get(nextProps, 'stepThree.isTermsAgreed', false),
+    });
+  };
 
   render() {
     const {
@@ -284,7 +306,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       email,
       phone,
 
-      shouldShowSuccessMessage,
       shouldShowErrorMessage,
       isTermsAgreed,
 
@@ -294,6 +315,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       client,
       style,
     } = this.state;
+    console.log('xxx', shouldShowErrorMessage);
 
     let PayPalButton = React.Fragment;
     if (isPaypalLoaded) {
@@ -361,12 +383,20 @@ class ApplyFormStepThree extends React.Component<Props, State> {
           />
         )}
 
+        {shouldShowErrorMessage && (
+          <FormErrorMessage
+            message={
+              !isTermsAgreed
+                ? 'Please click on accept Terms of Use checkbox'
+                : ''
+            }
+          />
+        )}
+
         <FormHeading text="Applicants Details" hasPaddingTop />
         {this.renderApplicants()}
 
         <Flexbox paddingTop={6} column>
-          {shouldShowErrorMessage && <FormErrorMessage />}
-
           <Flexbox justifyContent="space-between" width="100%">
             <Button onClick={this.goBack} backgroundColor="mediumBlue">
               Back
@@ -378,12 +408,18 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   }
 
   renderApplicants = () => {
-    const { applicants } = this.props;
+    const { stepTwo: { applicants } } = this.props;
 
     return applicants.map((applicant, index) => {
       const countryObject = countryOptions.find(
         option => option.value === applicant.countryId,
       );
+      const parsedBirthday = dayjs(applicant.birthday).isValid()
+        ? dayjs(applicant.birthday).format(displayDateFormat)
+        : '';
+      const parsedPassportExpiry = dayjs(applicant.passportExpiry).isValid()
+        ? dayjs(applicant.passportExpiry).format(displayDateFormat)
+        : '';
 
       return (
         <Flexbox key={index} column width="100%" paddingBottom={6}>
@@ -391,14 +427,14 @@ class ApplyFormStepThree extends React.Component<Props, State> {
           <Flexbox justifyContent="space-between">
             <Text>{countryObject.label}</Text>
             <Text>/</Text>
-            <Text>DOB: {applicant.birthday}</Text>
+            <Text>DOB: {parsedBirthday}</Text>
             <Text>/</Text>
-            <Text>{applicant.gender}</Text>
+            <Text textTransform="capitalize">{applicant.gender}</Text>
           </Flexbox>
           <Flexbox justifyContent="space-between">
             <Text>Passport: {applicant.passport}</Text>
             <Text>/</Text>
-            <Text>Exp. on {applicant.passportExpiry}</Text>
+            <Text>Exp. on {parsedPassportExpiry}</Text>
           </Flexbox>
         </Flexbox>
       );
@@ -409,12 +445,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 const mapStateToProps = store => {
   return {
     stepOne: store[reducerNames.form].stepOne,
-    applicants: _get(store, `${reducerNames.form}.stepTwo.applicants`, []),
+    stepTwo: _get(store, `${reducerNames.form}.stepTwo`, {}),
     stepThree: store[reducerNames.form].stepThree,
     fees: store[reducerNames.fees].fees,
     price: store[reducerNames.form].price,
-    account: store[reducerNames.account],
-    guest: store[reducerNames.guest],
   };
 };
 const mapDispatchToProps = {
