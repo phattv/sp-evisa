@@ -16,8 +16,7 @@ class PaymentMethodImages extends React.Component<Props, State> {
       <ContentMaxWidth>
         <Flexbox column alignItems="center" paddingTop={16}>
           <Text paddingBottom={6} textAlign="center">
-            In a progressive effort to provide excelent services to all in-need
-            customers
+            We accept many different online payment gateways.
           </Text>
           <Image
             src="../static/icons/payment-methods.svg"

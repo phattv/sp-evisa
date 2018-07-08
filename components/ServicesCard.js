@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { Flexbox, Image } from './ui';
 import ContentMaxWidth from './ContentMaxWidth';
 import Heading from './Heading';
-import { pageNames } from '../constants/ui';
+import { pageNames, spacingValues } from '../constants/ui';
 
 const services = [
   {
@@ -34,7 +34,12 @@ class ServicesCard extends React.Component<Props, State> {
   render() {
     return (
       <ContentMaxWidth>
-        <Flexbox column width="100%" alignItems="center">
+        <Flexbox
+          column
+          width="100%"
+          alignItems="center"
+          paddingTop={spacingValues.blockPaddingTop}
+        >
           <Heading text="Other services" />
           <Flexbox
             width="100%"
