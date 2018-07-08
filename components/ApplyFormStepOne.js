@@ -65,7 +65,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       });
 
     // save to store
-    this.props.updateStepOne(this.state);
+    this.updateStepOneToStore();
 
     // onSubmit callback
     if (shouldShowErrorMessage === false) {
@@ -112,9 +112,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   updateType = (event: Object, selectedOption: Object) =>
     this.setState(
       {
-        type: selectedOption
-          ? selectedOption ? selectedOption.value : ''
-          : '',
+        type: selectedOption ? selectedOption.value : '',
       },
       () => this.updateStepOneToStore(),
     );
@@ -173,7 +171,13 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateStepOneToStore = () => {
-    this.props.updateStepOne(this.state);
+    this.props.updateStepOne({
+      countryId: this.state.countryId,
+      purpose: this.state.purpose,
+      type: this.state.type,
+      processingTime: this.state.processingTime,
+      extraServices: this.state.extraServices,
+    });
   };
 
   componentDidMount() {
@@ -190,8 +194,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     if (isForced || this.props.stepOne !== nextProps.stepOne) {
       this.setState({
         countryId: _get(nextProps, 'stepOne.countryId', ''),
-        type: _get(nextProps, 'stepOne.type', typeOptions[0].value),
         purpose: _get(nextProps, 'stepOne.purpose', purposeOptions[0].value),
+        type: _get(nextProps, 'stepOne.type', typeOptions[0].value),
         processingTime: _get(
           nextProps,
           'stepOne.processingTime',
