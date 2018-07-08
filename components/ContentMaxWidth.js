@@ -13,15 +13,17 @@ import { contentMaxWidth } from '../constants/ui';
  */
 type Props = {
   backgroundImage?: string,
+  backgroundColor?: string,
   children: Node,
 };
 type State = {};
 class ContentMaxWidth extends React.Component<Props, State> {
   render() {
-    const { backgroundImage, children } = this.props;
-    return backgroundImage ? (
+    const { backgroundImage, backgroundColor, children } = this.props;
+    return backgroundImage || backgroundColor ? (
       <Flexbox
         width="100%"
+        backgroundColor={backgroundColor}
         style={{
           backgroundImage,
           backgroundSize: 'cover',
