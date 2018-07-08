@@ -12,7 +12,6 @@ import ContentMaxWidth from '../components/ContentMaxWidth';
 import Card from '../components/Card';
 import Divider from '../components/Divider';
 import Heading from '../components/Heading';
-import FeesCard from '../components/FeesCard';
 import ServicesCard from '../components/ServicesCard';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 import {
@@ -220,7 +219,7 @@ class Home extends React.Component<Props, State> {
       <Fragment>
         <ContentMaxWidth backgroundImage="url('../static/images/bg-banner.jpg')">
           <Flexbox paddingVertical={10} responsiveLayout alignItems="center">
-            <Flexbox flex={1} column {...paddingAll}>
+            <Flexbox flex={1} column {...paddingAll} maxWidth={125}>
               <Heading
                 color="white"
                 text="Easiest way to get your Vietnam Visa."
@@ -240,6 +239,7 @@ class Home extends React.Component<Props, State> {
               backgroundColor="bgGrey2"
               borderRadius={borderRadius}
               overflow="hidden"
+              maxWidth={100}
             >
               <Form
                 onSubmit={this.navigateToApply}
@@ -333,8 +333,8 @@ class Home extends React.Component<Props, State> {
                 <Flexbox flex={1} column marginHorizontal={5}>
                   <Flexbox>
                     <Image
-                      src="../static/icons/development.svg"
-                      alt="development"
+                      src="../static/icons/step-1.svg"
+                      alt="customer service"
                       width={iconSizes.default}
                     />
                   </Flexbox>
@@ -349,8 +349,8 @@ class Home extends React.Component<Props, State> {
                 <Flexbox flex={1} column marginHorizontal={5}>
                   <Flexbox>
                     <Image
-                      src="../static/icons/medal.svg"
-                      alt="medal"
+                      src="../static/icons/step-2.svg"
+                      alt="confidentiality"
                       width={iconSizes.default}
                     />
                   </Flexbox>
@@ -366,8 +366,8 @@ class Home extends React.Component<Props, State> {
                 <Flexbox flex={1} column marginHorizontal={5}>
                   <Flexbox>
                     <Image
-                      src="../static/icons/stopwatch.svg"
-                      alt="stopwatch"
+                      src="../static/icons/step-3.svg"
+                      alt="reliability"
                       width={iconSizes.default}
                     />
                   </Flexbox>
@@ -385,88 +385,74 @@ class Home extends React.Component<Props, State> {
         </ContentMaxWidth>
 
         <ContentMaxWidth>
-          <Flexbox column alignItems="center">
-            <Flexbox paddingTop={4}>
-              <Image
-                src="../static/icons/shield-ico.svg"
-                alt="shield"
-                width={iconSizes.small}
-              />
-              <Text paddingLeft={2}>Money-back guarantee</Text>
-            </Flexbox>
-            <Text>
-              All service fee will be reimbursed if your application is rejected
-              or we don't deliver your applications on time.
-            </Text>
+          <Flexbox
+            column
+            alignItems="center"
+            maxWidth={160}
+            paddingBottom={spacingValues.blockPaddingTop}
+          >
+            <Heading text="Money-back guarantee" color="green" />
+            <Heading
+              text="All service fee will be reimbursed if your application is rejected."
+              secondary
+            />
           </Flexbox>
         </ContentMaxWidth>
 
-        <ContentMaxWidth>
+        <ContentMaxWidth backgroundColor="darkBlue">
           <Flexbox
             paddingVertical={spacingValues.blockPaddingTop}
             column
             width="100%"
           >
             <Flexbox paddingBottom={3} column>
-              <Heading text="How to apply?" />
-              <Heading text="Fast, Cheap and Simple" secondary />
+              <Heading text="How to apply?" color="white" />
+              <Heading text="Fast, Cheap and Simple" color="white" secondary />
             </Flexbox>
-            <Flexbox responsiveLayout>
-              <Card flex={1}>
-                <Flexbox>
-                  <Image
-                    src="../static/icons/step-1.svg"
-                    alt="step-1"
-                    width={iconSizes.default}
-                  />
+            <Flexbox responsiveLayout paddingTop={10}>
+              <Flexbox flex={1}>
+                <Image src="../static/images/s-1.png" alt="step 1" />
+              </Flexbox>
+              {/*<Flexbox column>*/}
+              {/*<StepNumber number="1" />*/}
+              {/*<StepNumber number="2" />*/}
+              {/*<StepNumber number="3" />*/}
+              {/*</Flexbox>*/}
+              <Flexbox flex={1} column>
+                <Flexbox column paddingTop={15}>
+                  <Flexbox alignItems="center">
+                    <Text color="green" fontSize="m">
+                      5 minutes to finish your application
+                    </Text>
+                  </Flexbox>
+                  <Text color="white">
+                    Fill in our secured online application. You are required to
+                    enter the precise information which appears on your
+                    passport.
+                  </Text>
                 </Flexbox>
-                <Text fontSize="m" semibold>
-                  5 minutes to finish application
-                </Text>
-                <Divider />
-                <Text paddingTop={6}>
-                  Fill in our secured online application. You are required to
-                  enter the precise information which appears on your passport.
-                </Text>
-              </Card>
-              <Card flex={1}>
-                <Flexbox>
-                  <Image
-                    src="../static/icons/step-2.svg"
-                    alt="step-2"
-                    width={iconSizes.default}
-                  />
+                <Flexbox column paddingTop={15}>
+                  <Text color="green" fontSize="m">
+                    Secured online payment
+                  </Text>
+                  <Text color="white">
+                    You can make payment via OnePay/PayPal with your
+                    Credit/Debit Card. Find out more about our fee here.
+                  </Text>
                 </Flexbox>
-                <Text fontSize="m" semibold>
-                  Secured online payment
-                </Text>
-                <Divider />
-                <Text paddingTop={6}>
-                  You can make payment via PayPal or your Credit/Debit Card.
-                </Text>
-              </Card>
-              <Card flex={1}>
-                <Flexbox>
-                  <Image
-                    src="../static/icons/step-3.svg"
-                    alt="step-3"
-                    width={iconSizes.default}
-                  />
+                <Flexbox column paddingTop={15}>
+                  <Text color="green" fontSize="m">
+                    Approval Result within 24 hours
+                  </Text>
+                  <Text color="white">
+                    Check your email for your approval letter. Please follow the
+                    instructions to prepare all your supporting docuemnts.
+                  </Text>
                 </Flexbox>
-                <Text fontSize="m" semibold>
-                  Approval result within 24 hours
-                </Text>
-                <Divider />
-                <Text paddingTop={6}>
-                  Check your email for your approval letter. Please follow the
-                  instructions to prepare all your supporting documents.
-                </Text>
-              </Card>
+              </Flexbox>
             </Flexbox>
           </Flexbox>
         </ContentMaxWidth>
-
-        <FeesCard />
 
         <ServicesCard />
 
@@ -477,6 +463,24 @@ class Home extends React.Component<Props, State> {
     );
   }
 }
+
+const StepNumber = ({ number, active }) => (
+  <Flexbox alignItems="center">
+    <Flexbox
+      alignItems="center"
+      justifyContent="center"
+      width={10}
+      height={10}
+      borderRadius={25}
+      backgroundColor={active ? 'green' : 'bgGrey'}
+    >
+      <Text color={active ? 'white' : 'mediumBlue'} bold fontSize="l">
+        {number}
+      </Text>
+    </Flexbox>
+  </Flexbox>
+);
+
 const mapStateToProps = store => {
   return {
     countryId: _get(store, 'fees.countryId', null),
