@@ -10,7 +10,7 @@ import Router from 'next/router';
 import { Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import FeesCard from '../components/FeesCard';
+import Card from '../components/Card';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 
 import { logPageView } from '../utils/analytics';
@@ -111,7 +111,53 @@ class Fees extends React.Component<Props, State> {
 
     return (
       <Fragment>
-        <FeesCard />
+        <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
+          <Flexbox column paddingHorizontal={16} paddingVertical={16}>
+            <Heading color="white" text="Fees you have to pay" />
+            <Flexbox width="100%" alignItems="center">
+              <Flexbox flex={1}>
+                <Card>
+                  <Text>
+                    <Text semibold color="green">
+                      Service fee
+                    </Text>{' '}
+                    is paid online to evisa-vn.com which is the service fee for
+                    the process of getting the visa approval letter. You use the
+                    letter to get Vietnam visa stamp at the airports.
+                  </Text>
+                </Card>
+              </Flexbox>
+              <Flexbox>
+                <Flexbox
+                  alignItems="center"
+                  justifyContent="center"
+                  width={10}
+                  height={10}
+                  borderRadius={25}
+                  backgroundColor="green"
+                >
+                  <Text fontSize="xl" bold color="white">
+                    +
+                  </Text>
+                </Flexbox>
+              </Flexbox>
+              <Flexbox flex={1}>
+                <Card>
+                  <Text>
+                    <Text semibold color="green">
+                      Stamping fee
+                    </Text>{' '}
+                    is paid in cash (USD) at the landing visa counter at the
+                    arrival airport. It costs{' '}
+                    <Text semibold>25 USD for a single entry visa</Text> and{' '}
+                    <Text semibold>50 USD for a multiple visa</Text>.
+                  </Text>
+                </Card>
+              </Flexbox>
+            </Flexbox>
+          </Flexbox>
+        </ContentMaxWidth>
+
         <ContentMaxWidth>
           <Flexbox column maxWidth={tableWidth * 2 + 4}>
             <Flexbox
