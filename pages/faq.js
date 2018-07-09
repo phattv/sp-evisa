@@ -146,7 +146,9 @@ class FAQ extends React.Component<Props, State> {
                 </Text>
                 <i
                   className={`fa fa-chevron-${faq.showAnswer ? 'up' : 'down'}`}
-                  color={colors.green}
+                  style={{
+                    color: colors.green,
+                  }}
                 />
               </Flexbox>
               {faq.showAnswer && (
