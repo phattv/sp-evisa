@@ -7,7 +7,6 @@ import { Form } from 'semantic-ui-react';
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import FAQ from '../components/FAQ';
 import { iconSizes } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { feedback } from '../utils/apiClient';
@@ -211,8 +210,6 @@ class Contact extends React.Component<Props, State> {
                 </Flexbox>
               </Flexbox>
             </Flexbox>
-
-            <FAQ />
           </Flexbox>
         </ContentMaxWidth>
       </Fragment>

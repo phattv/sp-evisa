@@ -4,7 +4,9 @@ import React, { Fragment } from 'react';
 // custom
 import { Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
-import { iconSizes, spacingValues } from '../constants/ui';
+import { colors, iconSizes, spacingValues } from '../constants/ui';
+import { logPageView } from '../utils/analytics';
+import Heading from '../components/Heading';
 
 const faqMaxWidth = 800 / 5;
 const faqsConstants = [
@@ -73,47 +75,89 @@ class FAQ extends React.Component<Props, State> {
     });
   };
 
+  componentDidMount() {
+    logPageView();
+  }
+
   render() {
     const { faqs } = this.state;
 
     return (
-      <Flexbox
-        paddingVertical={spacingValues.blockPaddingTop}
-        column
-        alignItems="center"
-      >
-        <Flexbox paddingBottom={5} alignItems="center">
-          <Image
-            src="../static/icons/team.svg"
-            alt="team"
-            width={iconSizes.default}
-          />
-          <Flexbox paddingLeft={3}>
-            <Text fontSize="l">Frequently Asked Questions</Text>
-          </Flexbox>
-        </Flexbox>
-        {faqs.map((faq, index) => (
-          <Flexbox
-            clickable
-            backgroundColor="white"
-            key={index}
-            width={faqMaxWidth}
-            paddingHorizontal={3}
-            paddingVertical={3}
-            marginVertical={2}
-            column
-            onClick={() => this.toggleShowAnswer(index)}
-          >
-            <Flexbox justifyContent="space-between">
-              <Text color={faq.showAnswer ? 'green' : 'mediumBlue'}>
-                {faq.question}
-              </Text>
-              <Text>{faq.showAnswer ? 'up' : 'down'}</Text>
+      <ContentMaxWidth>
+        <Flexbox
+          paddingVertical={spacingValues.blockPaddingTop}
+          column
+          alignItems="center"
+          width="100%"
+          maxWidth={faqMaxWidth}
+        >
+          <Heading text="Why visa on arrival?" />
+          <Text textAlign="left" fontSize="s" width="100%" p>
+            A valid visa is required for most foreign travelers to Vietnam.
+            There are two options:
+          </Text>
+          <Text textAlign="justify" fontSize="s" p>
+            <Text fontSize="s" color="green">
+              Via a Vietnam Embassy:
+            </Text>{' '}
+            This is the traditional method that requires some trips to the
+            nearest embassy. This method can be time-consuming or not an option
+            for some people if there is no embassy in your area.
+          </Text>
+          <Text fontSize="s" textAlign="justify">
+            <Text fontSize="s" color="green">
+              Online application:
+            </Text>{' '}
+            This method will let you do everything online for the visa approval
+            letter, and you will get your visa stamped onto your passport at the
+            arrival airport in Vietnam.
+          </Text>
+
+          <Flexbox paddingBottom={5} alignItems="center" paddingTop={15}>
+            <Image
+              src="../static/icons/team.svg"
+              alt="team"
+              width={iconSizes.default}
+            />
+            <Flexbox paddingLeft={3}>
+              <Text fontSize="l">Frequently Asked Questions</Text>
             </Flexbox>
-            {faq.showAnswer && <Text paddingTop={2}>{faq.answer}</Text>}
           </Flexbox>
-        ))}
-      </Flexbox>
+
+          {faqs.map((faq, index) => (
+            <Flexbox
+              width="100%"
+              clickable
+              backgroundColor="white"
+              key={index}
+              paddingHorizontal={3}
+              paddingVertical={3}
+              marginVertical={2}
+              column
+              onClick={() => this.toggleShowAnswer(index)}
+            >
+              <Flexbox justifyContent="space-between" alignItems="center">
+                <Text
+                  color={faq.showAnswer ? 'green' : 'mediumBlue'}
+                  textNotSelectable
+                  paddingRight={4}
+                >
+                  {faq.question}
+                </Text>
+                <i
+                  className={`fa fa-chevron-${faq.showAnswer ? 'up' : 'down'}`}
+                  color={colors.green}
+                />
+              </Flexbox>
+              {faq.showAnswer && (
+                <Text fontSize="s" paddingTop={2}>
+                  {faq.answer}
+                </Text>
+              )}
+            </Flexbox>
+          ))}
+        </Flexbox>
+      </ContentMaxWidth>
     );
   }
 }
