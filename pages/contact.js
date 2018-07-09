@@ -7,7 +7,7 @@ import { Form } from 'semantic-ui-react';
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import { iconSizes } from '../constants/ui';
+import { iconSizes, pageNames } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { feedback } from '../utils/apiClient';
 
@@ -75,31 +75,17 @@ class Contact extends React.Component<Props, State> {
     return (
       <Fragment>
         <ContentMaxWidth>
-          <Flexbox paddingTop={16} column>
+          <Flexbox paddingTop={16} column alignItems="center">
             <Heading text="Get in touch" />
-            <Flexbox paddingTop={14} responsiveLayout>
-              <Flexbox
-                column
-                flex={1}
-                paddingHorizontal={2}
-                paddingVertical={2}
-              >
-                <Flexbox paddingBottom={6}>
-                  <Image
-                    src="../static/icons/message.svg"
-                    alt="message"
-                    width={iconSizes.default}
-                  />
-                </Flexbox>
-                <Text>
-                  We are committed to provide the best and most rewarding
-                  experience to all travelers to Vietnam. Therefore, whether you
-                  plan to use our service or just need help with your visa in
-                  Vietnam, feel free to send us an enquiry, or check out our
-                  intensive FAQs section.
-                </Text>
-              </Flexbox>
+            <Text textAlign="center" maxWidth={150}>
+              We are committed to provide the best and most rewarding experience
+              to all travelers to Vietnam. Therefore, whether you plan to use
+              our service or just need help with your visa in Vietnam, feel free
+              to drop us instant messages, send us an enquiry, or check out our
+              intensive <Anchor href={pageNames.faq}>FAQs</Anchor>.
+            </Text>
 
+            <Flexbox paddingVertical={14} responsiveLayout>
               <Flexbox
                 column
                 flex={1}
@@ -113,36 +99,46 @@ class Contact extends React.Component<Props, State> {
                     width={iconSizes.default}
                   />
                 </Flexbox>
-                <Flexbox paddingBottom={4}>
-                  <i
-                    className="fa fa-fw fa-2x fa-map-marker"
-                    aria-hidden="true"
+                <Flexbox paddingBottom={4} alignItems="baseline">
+                  <Image
+                    src="../static/icons/location.svg"
+                    alt="location"
+                    width={iconSizes.small}
                   />
-                  <Text paddingLeft={2}>{companyInfo.address}</Text>
+                  <Text paddingLeft={4}>{companyInfo.address}</Text>
                 </Flexbox>
                 <Flexbox paddingBottom={4}>
-                  <i className="fa fa-fw fa-2x fa-phone" aria-hidden="true" />
-                  <Anchor href={`tel:${companyInfo.phone}`}>
-                    {companyInfo.phoneString}
-                  </Anchor>
+                  <Image
+                    src="../static/icons/call.svg"
+                    alt="call"
+                    width={iconSizes.small}
+                  />
+                  <Flexbox paddingLeft={4}>
+                    <Anchor href={`tel:${companyInfo.phone}`}>
+                      {companyInfo.phoneString}
+                    </Anchor>
+                  </Flexbox>
                 </Flexbox>
                 <Flexbox paddingBottom={4}>
-                  <i
-                    className="fa fa-fw fa-2x fa-envelope"
-                    aria-hidden="true"
+                  <Image
+                    src="../static/icons/email.svg"
+                    alt="email"
+                    width={iconSizes.small}
                   />
-                  <Text paddingLeft={2}>
+                  <Text paddingLeft={4}>
                     <Anchor href={`mailto:${companyInfo.email}`}>
                       {companyInfo.email}
                     </Anchor>
                   </Text>
                 </Flexbox>
-                <Flexbox paddingBottom={4}>
-                  <i className="fa fa-fw fa-2x fa-clock-o" aria-hidden="true" />
-                  <Flexbox column>
-                    <Text paddingLeft={2} p semibold>
-                      Working Hours
-                    </Text>
+                <Flexbox paddingBottom={4} alignItems="baseline">
+                  <Image
+                    src="../static/icons/time.svg"
+                    alt="time"
+                    width={iconSizes.small}
+                  />
+                  <Flexbox column paddingLeft={4}>
+                    <Text semibold>Working Hours</Text>
                     <Text>
                       Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
                       <br />

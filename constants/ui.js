@@ -48,6 +48,7 @@ const iconSizes = {
 };
 
 const headerHeight = 140 / spacingUnits.desktop;
+// TODO: simplify maxWidth for all pages: text, form, table
 const contentMaxWidth = 1440 / spacingUnits.desktop;
 const tableWidth = 380 / spacingUnits.desktop;
 const textMaxWidth = 580 / spacingUnits.desktop;
