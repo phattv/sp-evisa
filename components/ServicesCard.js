@@ -62,6 +62,7 @@ class ServicesCard extends React.Component<Props, State> {
                 <Image
                   src={`../static/images/${service.image}`}
                   alt={service.image}
+                  width="100%"
                 />
                 <Flexbox
                   backgroundColor="white"

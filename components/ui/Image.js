@@ -8,7 +8,6 @@ import generateCommonProps from './generateCommonProps';
  * TODO: https://github.com/cyrilwanner/next-optimized-images
  */
 const Image = styled.img`
-  width: ${props => (props.fixedWidth ? props.width : props.width || '100%')};
   height: ${props => props.height || 'auto'};
   display: block;
 
