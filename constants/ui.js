@@ -79,6 +79,8 @@ const pageNames = {
   reviews: '/reviews',
   thankYou: '/thank-you',
   paymentFailed: '/payment-failed',
+  terms: '/terms',
+  privacy: '/privacy',
 };
 
 /**

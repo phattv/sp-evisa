@@ -5,14 +5,20 @@ import { logPageView } from '../utils/analytics';
 import { Step } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 // custom
-import { Flexbox, Text } from '../components/ui';
+import { Anchor, Button, Flexbox, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
+import Card from '../components/Card';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
-import { spacingValues, formMaxWidth } from '../constants/ui';
+import {
+  textMaxWidth,
+  spacingValues,
+  formMaxWidth,
+  pageNames,
+} from '../constants/ui';
 
 const formPaddingHorizontal = 3;
 
@@ -22,6 +28,7 @@ const formPaddingHorizontal = 3;
 type Props = {};
 type State = {
   steps: Array<Object>,
+  isAgreeClicked: boolean,
 };
 class Apply extends React.Component<Props, State> {
   static defaultProps: Props = {};
@@ -50,6 +57,7 @@ class Apply extends React.Component<Props, State> {
         onClick: () => this.showStepThree(),
       },
     ],
+    isAgreeClicked: false,
   };
 
   showStepOne = () => {
@@ -94,63 +102,85 @@ class Apply extends React.Component<Props, State> {
     });
   };
 
+  hideAgreeStatement = () => {
+    this.setState({
+      isAgreeClicked: true,
+    });
+  };
+
   componentDidMount() {
     logPageView();
   }
 
   render() {
-    const { steps } = this.state;
+    const { steps, isAgreeClicked } = this.state;
 
     return (
       <Fragment>
-        <ContentMaxWidth>
-          <Flexbox
-            paddingVertical={spacingValues.blockPaddingTop}
-            column
-            alignItems="center"
-            maxWidth={formMaxWidth - formPaddingHorizontal * 4}
-          >
-            <Flexbox column width="100%">
-              <Heading secondary text="Get your Visa in 3 steps" />
-
-              <Step.Group size="large" ordered items={steps} />
-            </Flexbox>
-
+        {isAgreeClicked ? (
+          <ContentMaxWidth>
             <Flexbox
-              justifyContent="space-between"
-              paddingTop={6}
-              responsiveLayout
+              paddingVertical={spacingValues.blockPaddingTop}
+              column
+              alignItems="center"
+              maxWidth={formMaxWidth - formPaddingHorizontal * 4}
             >
-              <Flexbox
-                maxWidth="50%"
-                flex={1}
-                paddingVertical={5}
-                paddingHorizontal={formPaddingHorizontal}
-              >
-                {steps[0].active && (
-                  <ApplyFormStepOne onSubmit={this.showStepTwo} />
-                )}
-                {steps[1].active && (
-                  <ApplyFormStepTwo
-                    goBack={this.showStepOne}
-                    onSubmit={this.showStepThree}
-                  />
-                )}
-                {steps[2].active && (
-                  <ApplyFormStepThree goBack={this.showStepTwo} />
-                )}
+              <Flexbox column width="100%">
+                <Heading secondary text="Get your Visa in 3 steps" />
+
+                <Step.Group size="large" ordered items={steps} />
               </Flexbox>
+
               <Flexbox
-                maxWidth="50%"
-                flex={1}
-                paddingVertical={5}
-                paddingHorizontal={formPaddingHorizontal}
+                justifyContent="space-between"
+                paddingTop={6}
+                responsiveLayout
               >
-                <ApplyFormReviewForm />
+                <Flexbox
+                  maxWidth="50%"
+                  flex={1}
+                  paddingVertical={5}
+                  paddingHorizontal={formPaddingHorizontal}
+                >
+                  {steps[0].active && (
+                    <ApplyFormStepOne onSubmit={this.showStepTwo} />
+                  )}
+                  {steps[1].active && (
+                    <ApplyFormStepTwo
+                      goBack={this.showStepOne}
+                      onSubmit={this.showStepThree}
+                    />
+                  )}
+                  {steps[2].active && (
+                    <ApplyFormStepThree goBack={this.showStepTwo} />
+                  )}
+                </Flexbox>
+                <Flexbox
+                  maxWidth="50%"
+                  flex={1}
+                  paddingVertical={5}
+                  paddingHorizontal={formPaddingHorizontal}
+                >
+                  <ApplyFormReviewForm />
+                </Flexbox>
               </Flexbox>
             </Flexbox>
+          </ContentMaxWidth>
+        ) : (
+          <Flexbox maxWidth={formMaxWidth} alignItem="center">
+            <Card maxWidth={textMaxWidth}>
+              <Text color="green" fontSize="l" p textAlign="center">
+                This application will take not more than 15 minutes.
+              </Text>
+              <Text p textAlign="center">
+                All information provided to evisa.vn will be kept confidential.
+                By using our service, you agree to our{' '}
+                <Anchor href={pageNames.terms}>Terms of Use</Anchor>.
+              </Text>
+              <Button onClick={this.hideAgreeStatement}>I Agree</Button>
+            </Card>
           </Flexbox>
-        </ContentMaxWidth>
+        )}
       </Fragment>
     );
   }
