@@ -18,6 +18,7 @@ import {
 } from '../constants/dropDownOptions';
 import FormErrorMessage from './FormErrorMessage';
 import FormHeading from './FormHeading';
+import Divider from './Divider';
 
 const emptyApplicant = {
   name: '',
@@ -96,9 +97,21 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   };
 
   addApplicant = () => {
-    this.setState({
-      applicants: this.state.applicants.concat(emptyApplicant),
-    });
+    this.setState(
+      {
+        applicants: this.state.applicants.concat(emptyApplicant),
+      },
+      () => this.updateStepTwoToStore(),
+    );
+  };
+
+  removeApplicant = (index: number) => {
+    this.setState(
+      {
+        applicants: this.state.applicants.splice(index, 1),
+      },
+      () => this.updateStepTwoToStore(),
+    );
   };
 
   // Flight info
@@ -143,13 +156,13 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
   updateCountry = (event: Object, selectedOption: Object, index: number) => {
     let { applicants } = this.state;
-    applicants[index].countryId = selectedOption ? selectedOption.value : 0;
+    applicants[index]['countryId'] = selectedOption ? selectedOption.value : 0;
     this.updateApplicantsToStateAndStore(applicants);
   };
 
   updateGender = (event: Object, selectedOption: Object, index: number) => {
     let { applicants } = this.state;
-    applicants[index].gender = selectedOption ? selectedOption.value : '';
+    applicants[index]['gender'] = selectedOption ? selectedOption.value : '';
     this.updateApplicantsToStateAndStore(applicants);
   };
 
@@ -273,7 +286,25 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
           return (
             <Flexbox column paddingBottom={6} key={index}>
-              <FormHeading text={`Applicant ${index + 1}`} />
+              <Flexbox
+                paddingTop={6}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text fontSize="m">Applicant {index + 1}</Text>
+                {index > 0 && (
+                  <Text
+                    color="red"
+                    clickable
+                    onClick={() => this.removeApplicant(index)}
+                  >
+                    Remove
+                  </Text>
+                )}
+              </Flexbox>
+              <Divider />
+              <Flexbox paddingTop={3} />
+
               <Form.Field required>
                 <label>Full name</label>
                 <Input
@@ -358,7 +389,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         })}
 
         <Text color="green" clickable onClick={this.addApplicant}>
-          Add Applicant
+          + Add Applicant
         </Text>
 
         <Flexbox paddingTop={6} column>

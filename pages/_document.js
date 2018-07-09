@@ -65,6 +65,7 @@ export default class MyDocument extends Document {
           {/* TODO: need font-awesome? */}
           <link href="../static/styles/font-awesome.min.css" rel="stylesheet" />
           <link href="../static/styles/semantic.min.css" rel="stylesheet" />
+          <link href="../static/styles/calendar.css" rel="stylesheet" />
           <link
             href="https://fonts.googleapis.com/css?family=Rubik:400,500,700"
             rel="stylesheet"
