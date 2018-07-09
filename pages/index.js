@@ -7,7 +7,7 @@ import { Form, Dropdown } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import { connect } from 'react-redux';
 // custom
-import { Button, Flexbox, Image, Text } from '../components/ui';
+import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Card from '../components/Card';
 import Divider from '../components/Divider';
@@ -52,6 +52,7 @@ type State = {
   processingTime: string,
   extraServices: Object,
   totalFee: number,
+  activeStepImage: string,
 };
 class Home extends React.Component<Props, State> {
   state = {
@@ -65,6 +66,7 @@ class Home extends React.Component<Props, State> {
       privateVisaLetter: false,
     },
     totalFee: 0,
+    activeStepImage: 's-1',
   };
 
   navigateToApply = () => {
@@ -205,8 +207,21 @@ class Home extends React.Component<Props, State> {
     );
   };
 
+  setActiveStepImage = activeStepImage => {
+    this.setState({
+      activeStepImage,
+    });
+  };
+
   render() {
-    const { countryId, type, processingTime, purpose, totalFee } = this.state;
+    const {
+      countryId,
+      type,
+      processingTime,
+      purpose,
+      totalFee,
+      activeStepImage,
+    } = this.state;
 
     let typeOptionsByPurpose = [];
     if (purpose === purposeOptions[0].value) {
@@ -409,45 +424,78 @@ class Home extends React.Component<Props, State> {
               <Heading text="How to apply?" color="white" />
               <Heading text="Fast, Cheap and Simple" color="white" secondary />
             </Flexbox>
-            <Flexbox responsiveLayout paddingTop={10}>
-              <Flexbox flex={1}>
-                <Image src="../static/images/s-1.png" alt="step 1" />
+            <Flexbox responsiveLayout paddingTop={10} width="100%">
+              <Flexbox flex={1} alignItems="center" justifyContent="center">
+                <Flexbox maxWidth={100} maxHeight={100}>
+                  <Image
+                    src={`../static/images/${activeStepImage}.png`}
+                    alt="step image"
+                    maxWidth="100%"
+                  />
+                </Flexbox>
               </Flexbox>
-              {/*<Flexbox column>*/}
-              {/*<StepNumber number="1" />*/}
-              {/*<StepNumber number="2" />*/}
-              {/*<StepNumber number="3" />*/}
-              {/*</Flexbox>*/}
               <Flexbox flex={1} column>
-                <Flexbox column paddingTop={15}>
-                  <Flexbox alignItems="center">
-                    <Text color="green" fontSize="m">
-                      5 minutes to finish your application
+                <Flexbox alignItems="center" paddingVertical={5}>
+                  <StepNumber number="1" />
+                  <Flexbox column paddingLeft={5}>
+                    <Flexbox alignItems="center">
+                      <Text
+                        color="green"
+                        fontSize="m"
+                        clickable
+                        hoverColor="red"
+                        onClick={() => this.setActiveStepImage('s-1')}
+                      >
+                        5 minutes to finish your application
+                      </Text>
+                    </Flexbox>
+                    <Text color="white">
+                      Fill in our secured online application. You are required
+                      to enter the precise information which appears on your
+                      passport.
                     </Text>
                   </Flexbox>
-                  <Text color="white">
-                    Fill in our secured online application. You are required to
-                    enter the precise information which appears on your
-                    passport.
-                  </Text>
                 </Flexbox>
-                <Flexbox column paddingTop={15}>
-                  <Text color="green" fontSize="m">
-                    Secured online payment
-                  </Text>
-                  <Text color="white">
-                    You can make payment via OnePay/PayPal with your
-                    Credit/Debit Card. Find out more about our fee here.
-                  </Text>
+                <Flexbox alignItems="center" paddingVertical={5}>
+                  <StepNumber number="2" />
+                  <Flexbox column paddingLeft={5}>
+                    <Flexbox alignItems="center">
+                      <Text
+                        color="green"
+                        fontSize="m"
+                        clickable
+                        hoverColor="red"
+                        onClick={() => this.setActiveStepImage('s-2')}
+                      >
+                        Secured online payment
+                      </Text>
+                    </Flexbox>
+                    <Text color="white">
+                      You can make payment via OnePay/PayPal with your
+                      Credit/Debit Card. Find out more about our fee{' '}
+                      <Anchor href={pageNames.fees}>here</Anchor>.
+                    </Text>
+                  </Flexbox>
                 </Flexbox>
-                <Flexbox column paddingTop={15}>
-                  <Text color="green" fontSize="m">
-                    Approval Result within 24 hours
-                  </Text>
-                  <Text color="white">
-                    Check your email for your approval letter. Please follow the
-                    instructions to prepare all your supporting docuemnts.
-                  </Text>
+                <Flexbox alignItems="center" paddingVertical={5}>
+                  <StepNumber number="3" />
+                  <Flexbox column paddingLeft={5}>
+                    <Flexbox alignItems="center">
+                      <Text
+                        color="green"
+                        fontSize="m"
+                        clickable
+                        hoverColor="red"
+                        onClick={() => this.setActiveStepImage('s-3')}
+                      >
+                        Approval Result within 24 hours
+                      </Text>
+                    </Flexbox>
+                    <Text color="white">
+                      Check your email for your approval letter. Please follow
+                      the instructions to prepare all your supporting documents.
+                    </Text>
+                  </Flexbox>
                 </Flexbox>
               </Flexbox>
             </Flexbox>
@@ -464,6 +512,8 @@ class Home extends React.Component<Props, State> {
   }
 }
 
+// backgroundColor={active ? 'green' : 'bgGrey'}
+// color={active ? 'white' : 'mediumBlue'}
 const StepNumber = ({ number, active }) => (
   <Flexbox alignItems="center">
     <Flexbox
@@ -472,9 +522,9 @@ const StepNumber = ({ number, active }) => (
       width={10}
       height={10}
       borderRadius={25}
-      backgroundColor={active ? 'green' : 'bgGrey'}
+      backgroundColor="green"
     >
-      <Text color={active ? 'white' : 'mediumBlue'} bold fontSize="l">
+      <Text color="white" bold fontSize="l">
         {number}
       </Text>
     </Flexbox>

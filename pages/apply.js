@@ -135,9 +135,9 @@ class Apply extends React.Component<Props, State> {
                 justifyContent="space-between"
                 paddingTop={6}
                 responsiveLayout
+                width="100%"
               >
                 <Flexbox
-                  maxWidth="50%"
                   flex={1}
                   paddingVertical={5}
                   paddingHorizontal={formPaddingHorizontal}
@@ -156,7 +156,6 @@ class Apply extends React.Component<Props, State> {
                   )}
                 </Flexbox>
                 <Flexbox
-                  maxWidth="50%"
                   flex={1}
                   paddingVertical={5}
                   paddingHorizontal={formPaddingHorizontal}
