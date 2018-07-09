@@ -2,9 +2,9 @@
 // vendor
 import React from 'react';
 // custom
-import { Flexbox, Text } from '../components/ui';
+import { Anchor, Flexbox, Text } from '../components/ui';
 import { companyInfo } from '../constants/companyInfo';
-import { contentMaxWidth, spacingValues } from '../constants/ui';
+import { contentMaxWidth, spacingValues, pageNames } from '../constants/ui';
 import PhoneAndEmail from './PhoneAndEmail';
 
 const currentYear = new Date().getFullYear();
@@ -34,8 +34,11 @@ class Footer extends React.Component<Props> {
           <Text paddingTop={2} textAlign="center">
             {companyInfo.address}
           </Text>
-          <Flexbox paddingTop={10} justifyContent="center">
-            Facebook / Terms of Use / Privacy Policy
+          <Flexbox paddingTop={10} justifyContent="space-around" width="100%">
+            {/*Facebook / */}
+            <Anchor href={pageNames.terms}>Terms of Use</Anchor>
+            <Text>/</Text>
+            <Anchor href={pageNames.privacy}>Privacy Policy</Anchor>
           </Flexbox>
           <Text paddingTop={2} textAlign="center" fontSize="xs">
             Disclaimers: evisa-vn.com is a non-government site (managed by a

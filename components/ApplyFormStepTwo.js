@@ -259,7 +259,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         <Flexbox paddingBottom={4}>
           <Text fontStyle="italic" fontSize="s" noDoubleLineHeight>
             Note: If you have different flight information for different
-            applicants, please submit another application
+            applicants, please submit another application.
           </Text>
         </Flexbox>
 
