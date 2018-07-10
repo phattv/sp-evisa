@@ -1,4 +1,16 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.1] - 2018-07-09
+### Changed
+- Update packages
+- Re-design whole application UI & content
+- Add comments for components
+### Fixed
+- Undefined css strings from generateCommonProps
+- Simplify custom components
+### Removed
+- /about, /feedback, /how, /login, /news, /partners & /register pages
+- Total clean up of the project
+
 ## [2.5.4] - 2018-06-26
 ### Added
 - Enable rollbar & crisp only on production
