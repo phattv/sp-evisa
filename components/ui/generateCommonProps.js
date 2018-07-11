@@ -319,7 +319,14 @@ ${
       : ''
   }
 
-${props.clickable ? `cursor: pointer;` : ''}
+${
+    props.clickable
+      ? `cursor: pointer;
+&:hover {
+  background-color: ${colors[props.hoverBackgroundColor || 'bgGrey2']}
+}`
+      : ''
+  }
 ${props.textNotSelectable ? `user-select: none;` : ''}`;
 
   return styleString.replace(/\n/g, '');
