@@ -144,15 +144,16 @@ class FAQ extends React.Component<Props, State> {
                 >
                   {faq.question}
                 </Text>
-                <i
-                  className={`fa fa-chevron-${faq.showAnswer ? 'up' : 'down'}`}
-                  style={{
-                    color: colors.green,
-                  }}
+                <Image
+                  src={`../static/icons/arrow-${
+                    faq.showAnswer ? 'up' : 'down'
+                  }.svg`}
+                  alt="arrow"
+                  width={iconSizes.default}
                 />
               </Flexbox>
               {faq.showAnswer && (
-                <Text fontSize="s" paddingTop={2}>
+                <Text fontSize="s" paddingTop={2} whiteSpace="pre-line">
                   {faq.answer}
                 </Text>
               )}
