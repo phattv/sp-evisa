@@ -114,9 +114,11 @@ class Contact extends React.Component<Props, State> {
                     width={iconSizes.small}
                   />
                   <Flexbox paddingLeft={4}>
-                    <Anchor href={`tel:${companyInfo.phone}`}>
-                      {companyInfo.phoneString}
-                    </Anchor>
+                    <a href={`tel:${companyInfo.phone}`}>
+                      <Text color="green" clickable>
+                        {companyInfo.phoneString}
+                      </Text>
+                    </a>
                   </Flexbox>
                 </Flexbox>
                 <Flexbox paddingBottom={4}>
@@ -126,9 +128,11 @@ class Contact extends React.Component<Props, State> {
                     width={iconSizes.small}
                   />
                   <Text paddingLeft={4}>
-                    <Anchor href={`mailto:${companyInfo.email}`}>
-                      {companyInfo.email}
-                    </Anchor>
+                    <a href={`mailto:${companyInfo.email}`}>
+                      <Text color="green" clickable>
+                        {companyInfo.email}
+                      </Text>
+                    </a>
                   </Text>
                 </Flexbox>
                 <Flexbox paddingBottom={4} alignItems="baseline">

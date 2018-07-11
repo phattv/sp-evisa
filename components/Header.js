@@ -133,7 +133,7 @@ class Header extends React.PureComponent<Props, State> {
       left={0}
       width={'100%'}
     >
-      <Anchor
+      <a
         href={`tel:${companyInfo.phone}`}
         style={{
           ...mobileAnchorStyles,
@@ -150,9 +150,9 @@ class Header extends React.PureComponent<Props, State> {
             {companyInfo.phoneString}
           </Text>
         </Flexbox>
-      </Anchor>
+      </a>
 
-      <Anchor
+      <a
         href={`mailto:${companyInfo.email}`}
         style={{
           ...mobileAnchorStyles,
@@ -169,7 +169,7 @@ class Header extends React.PureComponent<Props, State> {
             {companyInfo.email}
           </Text>
         </Flexbox>
-      </Anchor>
+      </a>
 
       {menus.map((menu, index) => (
         <Anchor

@@ -15,11 +15,12 @@ class PhoneAndEmail extends React.Component<Props, State> {
   render() {
     return (
       <Flexbox alignItems={'center'}>
-        <Anchor href={`tel:${companyInfo.phone}`} changeBackground>
+        <a href={`tel:${companyInfo.phone}`}>
           <Flexbox
             alignItems={'center'}
             paddingHorizontal={1}
             paddingVertical={1}
+            clickable
           >
             <Image
               src={'../static/icons/phone-ico.svg'}
@@ -30,13 +31,14 @@ class PhoneAndEmail extends React.Component<Props, State> {
               {companyInfo.phoneString}
             </Text>
           </Flexbox>
-        </Anchor>
+        </a>
         <Flexbox borderRight height={7} marginHorizontal={3} />
-        <Anchor href={`mailto:${companyInfo.email}`} changeBackground>
+        <a href={`mailto:${companyInfo.email}`}>
           <Flexbox
             alignItems={'center'}
             paddingHorizontal={1}
             paddingVertical={1}
+            clickable
           >
             <Image
               src={'../static/icons/email-ico.svg'}
@@ -47,7 +49,7 @@ class PhoneAndEmail extends React.Component<Props, State> {
               {companyInfo.email}
             </Text>
           </Flexbox>
-        </Anchor>
+        </a>
       </Flexbox>
     );
   }
