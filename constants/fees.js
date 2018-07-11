@@ -11,6 +11,8 @@ const fees = {
   processingTimeNormal: 0,
   processingTimeUrgent: 20,
   processingTimeEmergency: 180,
+  stampingFeeSingleEntry: 25,
+  stampingFeeMultipleEntries: 50,
 };
 
 export { fees };

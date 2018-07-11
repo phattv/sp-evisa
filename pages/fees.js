@@ -24,6 +24,7 @@ import {
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
 import { countryOptions } from '../constants/dropDownOptions';
+import { fees } from '../constants/fees';
 
 const fieldsToBind = [
   'one_month_single',
@@ -149,8 +150,13 @@ class Fees extends React.Component<Props, State> {
                     </Text>{' '}
                     is paid in cash (USD) at the landing visa counter at the
                     arrival airport. It costs{' '}
-                    <Text semibold>25 USD for a single entry visa</Text> and{' '}
-                    <Text semibold>50 USD for a multiple visa</Text>.
+                    <Text semibold>
+                      {fees.stampingFeeSingleEntry} USD for a single entry visa
+                    </Text>{' '}
+                    and{' '}
+                    <Text semibold>
+                      {fees.stampingFeeMultipleEntries} USD for a multiple visa
+                    </Text>.
                   </Text>
                 </Card>
               </Flexbox>
