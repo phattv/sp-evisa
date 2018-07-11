@@ -22,9 +22,10 @@ export default class MyDocument extends Document {
           <title>evisa-vn - Trusted & Instant Vietnam Visa Service</title>
           {this.props.styleTags}
 
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
           <meta name="application-name" content="evisa-vn.com" />
-          <meta name="theme-color" content="#0061B1" />
+          <meta name="theme-color" content="#2C3F60" />
           <meta
             name="description"
             content="Trusted and instant Vietnam visa services best price guarantee. 24/7 customer support"
