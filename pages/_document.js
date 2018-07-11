@@ -63,8 +63,6 @@ export default class MyDocument extends Document {
 
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/nprogress.css" rel="stylesheet" />
-          {/* TODO: need font-awesome? */}
-          <link href="../static/styles/font-awesome.min.css" rel="stylesheet" />
           <link href="../static/styles/semantic.min.css" rel="stylesheet" />
           <link href="../static/styles/calendar.css" rel="stylesheet" />
           <link
