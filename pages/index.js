@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react';
 import { logPageView } from '../utils/analytics';
 import Router from 'next/router';
-import { Form, Dropdown } from 'semantic-ui-react';
+import { Dropdown, Form } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import { connect } from 'react-redux';
 // custom
@@ -15,11 +15,11 @@ import Heading from '../components/Heading';
 import ServicesCard from '../components/ServicesCard';
 import PaymentMethodImages from '../components/PaymentMethodImages';
 import {
+  borderRadius,
   iconSizes,
   paddingAll,
   pageNames,
   spacingValues,
-  borderRadius,
 } from '../constants/ui';
 import {
   airportFastTrackOptions,
@@ -36,6 +36,12 @@ import {
 import { getFeesByCountryId } from '../utils/apiClient';
 import { fees } from '../constants/fees';
 import { reducerNames } from '../constants/reducerNames';
+
+const activeStepImages = {
+  stepOne: 's-1',
+  stepTwo: 's-2',
+  stepThree: 's-3',
+};
 
 type Props = {
   countryId: number,
@@ -66,7 +72,7 @@ class Home extends React.Component<Props, State> {
       privateVisaLetter: false,
     },
     totalFee: 0,
-    activeStepImage: 's-1',
+    activeStepImage: activeStepImages.stepOne,
   };
 
   navigateToApply = () => {
@@ -436,15 +442,21 @@ class Home extends React.Component<Props, State> {
               </Flexbox>
               <Flexbox flex={1} column>
                 <Flexbox alignItems="center" paddingVertical={5}>
-                  <StepNumber number="1" />
+                  <StepNumber
+                    number="1"
+                    active={activeStepImage === activeStepImages.stepOne}
+                  />
                   <Flexbox column paddingLeft={5}>
                     <Flexbox alignItems="center">
                       <Text
                         color="green"
                         fontSize="m"
                         clickable
+                        hoverBackgroundColor="darkBlue"
                         hoverColor="red"
-                        onClick={() => this.setActiveStepImage('s-1')}
+                        onClick={() =>
+                          this.setActiveStepImage(activeStepImages.stepOne)
+                        }
                       >
                         5 minutes to finish your application
                       </Text>
@@ -457,15 +469,21 @@ class Home extends React.Component<Props, State> {
                   </Flexbox>
                 </Flexbox>
                 <Flexbox alignItems="center" paddingVertical={5}>
-                  <StepNumber number="2" />
+                  <StepNumber
+                    number="2"
+                    active={activeStepImage === activeStepImages.stepTwo}
+                  />
                   <Flexbox column paddingLeft={5}>
                     <Flexbox alignItems="center">
                       <Text
                         color="green"
                         fontSize="m"
                         clickable
+                        hoverBackgroundColor="darkBlue"
                         hoverColor="red"
-                        onClick={() => this.setActiveStepImage('s-2')}
+                        onClick={() =>
+                          this.setActiveStepImage(activeStepImages.stepTwo)
+                        }
                       >
                         Secured online payment
                       </Text>
@@ -478,15 +496,21 @@ class Home extends React.Component<Props, State> {
                   </Flexbox>
                 </Flexbox>
                 <Flexbox alignItems="center" paddingVertical={5}>
-                  <StepNumber number="3" />
+                  <StepNumber
+                    number="3"
+                    active={activeStepImage === activeStepImages.stepThree}
+                  />
                   <Flexbox column paddingLeft={5}>
                     <Flexbox alignItems="center">
                       <Text
                         color="green"
                         fontSize="m"
                         clickable
+                        hoverBackgroundColor="darkBlue"
                         hoverColor="red"
-                        onClick={() => this.setActiveStepImage('s-3')}
+                        onClick={() =>
+                          this.setActiveStepImage(activeStepImages.stepThree)
+                        }
                       >
                         Approval Result within 24 hours
                       </Text>
@@ -512,8 +536,6 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-// backgroundColor={active ? 'green' : 'bgGrey'}
-// color={active ? 'white' : 'mediumBlue'}
 const StepNumber = ({ number, active }) => (
   <Flexbox alignItems="center">
     <Flexbox
@@ -522,9 +544,9 @@ const StepNumber = ({ number, active }) => (
       width={10}
       height={10}
       borderRadius={25}
-      backgroundColor="green"
+      backgroundColor={active ? 'green' : 'bgGrey'}
     >
-      <Text color="white" bold fontSize="l">
+      <Text color={active ? 'white' : 'mediumBlue'} bold fontSize="l">
         {number}
       </Text>
     </Flexbox>
