@@ -38,6 +38,7 @@
     "semantic-ui-calendar-react": "^0.6.0",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.81.3",
+    "sitemap": "^1.13.0",
     "styled-components": "^2.2.3"
   },
   "devDependencies": {
