@@ -256,7 +256,7 @@ class Fees extends React.Component<Props, State> {
             backgroundColor={index % 2 === 0 ? 'bgGrey2' : 'white'}
           >
             <Text>{field.replace(/_/g, ' ')}</Text>
-            <Text>{`${fees[field]} USD` || 'N/A'}</Text>
+            <Text>{fees[field] > 0 ? `${fees[field]} USD` : 'N/A'}</Text>
           </Flexbox>
         ))}
       </Flexbox>
