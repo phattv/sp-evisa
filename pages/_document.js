@@ -51,30 +51,30 @@ export default class MyDocument extends Document {
           />
 
           <link
-            ref="icon"
+            rel="icon"
             sizes="16x16"
             type="image/png"
             href="../static/favicon/favicon_16x16.png"
           />
           <link
-            ref="icon"
+            rel="icon"
             sizes="32x32"
             type="image/png"
             href="../static/favicon/favicon_32x32.png"
           />
           <link
-            ref="icon"
+            rel="icon"
             sizes="64x64"
             type="image/png"
             href="../static/favicon/favicon_64x64.png"
           />
           <link
-            ref="icon"
+            rel="icon"
             sizes="128x128"
             type="image/png"
             href="../static/favicon/favicon_128x128.png"
           />
-          <link ref="shortcut icon" href="../static/favicon/favicon.ico" />
+          <link rel="shortcut icon" href="../static/favicon/favicon.ico" />
 
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/nprogress.css" rel="stylesheet" />
