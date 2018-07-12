@@ -1,425 +1,1668 @@
 [
-  { "value": 1, "iso": "AF", "text": "Afghanistan", "phonecode": 93 },
-  { "value": 2, "iso": "AL", "text": "Albania", "phonecode": 355 },
-  { "value": 3, "iso": "DZ", "text": "Algeria", "phonecode": 213 },
-  { "value": 4, "iso": "AS", "text": "American Samoa", "phonecode": 1684 },
-  { "value": 5, "iso": "AD", "text": "Andorra", "phonecode": 376 },
-  { "value": 6, "iso": "AO", "text": "Angola", "phonecode": 244 },
-  { "value": 7, "iso": "AI", "text": "Anguilla", "phonecode": 1264 },
-  { "value": 8, "iso": "AQ", "text": "Antarctica", "phonecode": 0 },
+  {
+    "value": 1,
+    "iso": "AF",
+    "flag": "af",
+    "text": "Afghanistan",
+    "phonecode": 93
+  },
+  {
+    "value": 2,
+    "iso": "AL",
+    "text": "Albania",
+    "phonecode": 355,
+    "flag": "al"
+  },
+  {
+    "value": 3,
+    "iso": "DZ",
+    "text": "Algeria",
+    "phonecode": 213,
+    "flag": "dz"
+  },
+  {
+    "value": 4,
+    "iso": "AS",
+    "text": "American Samoa",
+    "phonecode": 1684,
+    "flag": "as"
+  },
+  {
+    "value": 5,
+    "iso": "AD",
+    "text": "Andorra",
+    "phonecode": 376,
+    "flag": "ad"
+  },
+  {
+    "value": 6,
+    "iso": "AO",
+    "text": "Angola",
+    "phonecode": 244,
+    "flag": "ao"
+  },
+  {
+    "value": 7,
+    "iso": "AI",
+    "text": "Anguilla",
+    "phonecode": 1264,
+    "flag": "ai"
+  },
+  {
+    "value": 8,
+    "iso": "AQ",
+    "text": "Antarctica",
+    "phonecode": 0,
+    "flag": "aq"
+  },
   {
     "value": 9,
     "iso": "AG",
     "text": "Antigua and Barbuda",
-    "phonecode": 1268
+    "phonecode": 1268,
+    "flag": "ag"
   },
-  { "value": 10, "iso": "AR", "text": "Argentina", "phonecode": 54 },
-  { "value": 11, "iso": "AM", "text": "Armenia", "phonecode": 374 },
-  { "value": 12, "iso": "AW", "text": "Aruba", "phonecode": 297 },
-  { "value": 13, "iso": "AU", "text": "Australia", "phonecode": 61 },
-  { "value": 14, "iso": "AT", "text": "Austria", "phonecode": 43 },
-  { "value": 15, "iso": "AZ", "text": "Azerbaijan", "phonecode": 994 },
-  { "value": 16, "iso": "BS", "text": "Bahamas", "phonecode": 1242 },
-  { "value": 17, "iso": "BH", "text": "Bahrain", "phonecode": 973 },
-  { "value": 18, "iso": "BD", "text": "Bangladesh", "phonecode": 880 },
-  { "value": 19, "iso": "BB", "text": "Barbados", "phonecode": 1246 },
-  { "value": 20, "iso": "BY", "text": "Belarus", "phonecode": 375 },
-  { "value": 21, "iso": "BE", "text": "Belgium", "phonecode": 32 },
-  { "value": 22, "iso": "BZ", "text": "Belize", "phonecode": 501 },
-  { "value": 23, "iso": "BJ", "text": "Benin", "phonecode": 229 },
-  { "value": 24, "iso": "BM", "text": "Bermuda", "phonecode": 1441 },
-  { "value": 25, "iso": "BT", "text": "Bhutan", "phonecode": 975 },
-  { "value": 26, "iso": "BO", "text": "Bolivia", "phonecode": 591 },
+  {
+    "value": 10,
+    "iso": "AR",
+    "text": "Argentina",
+    "phonecode": 54,
+    "flag": "ar"
+  },
+  {
+    "value": 11,
+    "iso": "AM",
+    "text": "Armenia",
+    "phonecode": 374,
+    "flag": "am"
+  },
+  {
+    "value": 12,
+    "iso": "AW",
+    "text": "Aruba",
+    "phonecode": 297,
+    "flag": "aw"
+  },
+  {
+    "value": 13,
+    "iso": "AU",
+    "text": "Australia",
+    "phonecode": 61,
+    "flag": "au"
+  },
+  {
+    "value": 14,
+    "iso": "AT",
+    "text": "Austria",
+    "phonecode": 43,
+    "flag": "at"
+  },
+  {
+    "value": 15,
+    "iso": "AZ",
+    "text": "Azerbaijan",
+    "phonecode": 994,
+    "flag": "az"
+  },
+  {
+    "value": 16,
+    "iso": "BS",
+    "text": "Bahamas",
+    "phonecode": 1242,
+    "flag": "bs"
+  },
+  {
+    "value": 17,
+    "iso": "BH",
+    "text": "Bahrain",
+    "phonecode": 973,
+    "flag": "bh"
+  },
+  {
+    "value": 18,
+    "iso": "BD",
+    "text": "Bangladesh",
+    "phonecode": 880,
+    "flag": "bd"
+  },
+  {
+    "value": 19,
+    "iso": "BB",
+    "text": "Barbados",
+    "phonecode": 1246,
+    "flag": "bb"
+  },
+  {
+    "value": 20,
+    "iso": "BY",
+    "text": "Belarus",
+    "phonecode": 375,
+    "flag": "by"
+  },
+  {
+    "value": 21,
+    "iso": "BE",
+    "text": "Belgium",
+    "phonecode": 32,
+    "flag": "be"
+  },
+  {
+    "value": 22,
+    "iso": "BZ",
+    "text": "Belize",
+    "phonecode": 501,
+    "flag": "bz"
+  },
+  {
+    "value": 23,
+    "iso": "BJ",
+    "text": "Benin",
+    "phonecode": 229,
+    "flag": "bj"
+  },
+  {
+    "value": 24,
+    "iso": "BM",
+    "text": "Bermuda",
+    "phonecode": 1441,
+    "flag": "bm"
+  },
+  {
+    "value": 25,
+    "iso": "BT",
+    "text": "Bhutan",
+    "phonecode": 975,
+    "flag": "bt"
+  },
+  {
+    "value": 26,
+    "iso": "BO",
+    "text": "Bolivia",
+    "phonecode": 591,
+    "flag": "bo"
+  },
   {
     "value": 27,
     "iso": "BA",
     "text": "Bosnia and Herzegovina",
-    "phonecode": 387
+    "phonecode": 387,
+    "flag": "ba"
   },
-  { "value": 28, "iso": "BW", "text": "Botswana", "phonecode": 267 },
-  { "value": 29, "iso": "BV", "text": "Bouvet Island", "phonecode": 0 },
-  { "value": 30, "iso": "BR", "text": "Brazil", "phonecode": 55 },
+  {
+    "value": 28,
+    "iso": "BW",
+    "text": "Botswana",
+    "phonecode": 267,
+    "flag": "bw"
+  },
+  {
+    "value": 29,
+    "iso": "BV",
+    "text": "Bouvet Island",
+    "phonecode": 0,
+    "flag": "bv"
+  },
+  {
+    "value": 30,
+    "iso": "BR",
+    "text": "Brazil",
+    "phonecode": 55,
+    "flag": "br"
+  },
   {
     "value": 31,
     "iso": "IO",
     "text": "British Indian Ocean Territory",
-    "phonecode": 246
+    "phonecode": 246,
+    "flag": "io"
   },
-  { "value": 32, "iso": "BN", "text": "Brunei Darussalam", "phonecode": 673 },
-  { "value": 33, "iso": "BG", "text": "Bulgaria", "phonecode": 359 },
-  { "value": 34, "iso": "BF", "text": "Burkina Faso", "phonecode": 226 },
-  { "value": 35, "iso": "BI", "text": "Burundi", "phonecode": 257 },
-  { "value": 36, "iso": "KH", "text": "Cambodia", "phonecode": 855 },
-  { "value": 37, "iso": "CM", "text": "Cameroon", "phonecode": 237 },
-  { "value": 38, "iso": "CA", "text": "Canada", "phonecode": 1 },
-  { "value": 39, "iso": "CV", "text": "Cape Verde", "phonecode": 238 },
-  { "value": 40, "iso": "KY", "text": "Cayman Islands", "phonecode": 1345 },
+  {
+    "value": 32,
+    "iso": "BN",
+    "text": "Brunei Darussalam",
+    "phonecode": 673,
+    "flag": "bn"
+  },
+  {
+    "value": 33,
+    "iso": "BG",
+    "text": "Bulgaria",
+    "phonecode": 359,
+    "flag": "bg"
+  },
+  {
+    "value": 34,
+    "iso": "BF",
+    "text": "Burkina Faso",
+    "phonecode": 226,
+    "flag": "bf"
+  },
+  {
+    "value": 35,
+    "iso": "BI",
+    "text": "Burundi",
+    "phonecode": 257,
+    "flag": "bi"
+  },
+  {
+    "value": 36,
+    "iso": "KH",
+    "text": "Cambodia",
+    "phonecode": 855,
+    "flag": "kh"
+  },
+  {
+    "value": 37,
+    "iso": "CM",
+    "text": "Cameroon",
+    "phonecode": 237,
+    "flag": "cm"
+  },
+  {
+    "value": 38,
+    "iso": "CA",
+    "text": "Canada",
+    "phonecode": 1,
+    "flag": "ca"
+  },
+  {
+    "value": 39,
+    "iso": "CV",
+    "text": "Cape Verde",
+    "phonecode": 238,
+    "flag": "cv"
+  },
+  {
+    "value": 40,
+    "iso": "KY",
+    "text": "Cayman Islands",
+    "phonecode": 1345,
+    "flag": "ky"
+  },
   {
     "value": 41,
     "iso": "CF",
     "text": "Central African Republic",
-    "phonecode": 236
+    "phonecode": 236,
+    "flag": "cf"
   },
-  { "value": 42, "iso": "TD", "text": "Chad", "phonecode": 235 },
-  { "value": 43, "iso": "CL", "text": "Chile", "phonecode": 56 },
-  { "value": 44, "iso": "CN", "text": "China", "phonecode": 86 },
-  { "value": 45, "iso": "CX", "text": "Christmas Island", "phonecode": 61 },
+  {
+    "value": 42,
+    "iso": "TD",
+    "text": "Chad",
+    "phonecode": 235,
+    "flag": "td"
+  },
+  {
+    "value": 43,
+    "iso": "CL",
+    "text": "Chile",
+    "phonecode": 56,
+    "flag": "cl"
+  },
+  {
+    "value": 44,
+    "iso": "CN",
+    "text": "China",
+    "phonecode": 86,
+    "flag": "cn"
+  },
+  {
+    "value": 45,
+    "iso": "CX",
+    "text": "Christmas Island",
+    "phonecode": 61,
+    "flag": "cx"
+  },
   {
     "value": 46,
     "iso": "CC",
     "text": "Cocos (Keeling) Islands",
-    "phonecode": 672
+    "phonecode": 672,
+    "flag": "cc"
   },
-  { "value": 47, "iso": "CO", "text": "Colombia", "phonecode": 57 },
-  { "value": 48, "iso": "KM", "text": "Comoros", "phonecode": 269 },
-  { "value": 49, "iso": "CG", "text": "Congo", "phonecode": 242 },
+  {
+    "value": 47,
+    "iso": "CO",
+    "text": "Colombia",
+    "phonecode": 57,
+    "flag": "co"
+  },
+  {
+    "value": 48,
+    "iso": "KM",
+    "text": "Comoros",
+    "phonecode": 269,
+    "flag": "km"
+  },
+  {
+    "value": 49,
+    "iso": "CG",
+    "text": "Congo",
+    "phonecode": 242,
+    "flag": "cg"
+  },
   {
     "value": 50,
     "iso": "CD",
     "text": "Congo, the Democratic Republic of the",
-    "phonecode": 242
+    "phonecode": 242,
+    "flag": "cd"
   },
-  { "value": 51, "iso": "CK", "text": "Cook Islands", "phonecode": 682 },
-  { "value": 52, "iso": "CR", "text": "Costa Rica", "phonecode": 506 },
-  { "value": 53, "iso": "CI", "text": "Cote D'Ivoire", "phonecode": 225 },
-  { "value": 54, "iso": "HR", "text": "Croatia", "phonecode": 385 },
-  { "value": 55, "iso": "CU", "text": "Cuba", "phonecode": 53 },
-  { "value": 56, "iso": "CY", "text": "Cyprus", "phonecode": 357 },
-  { "value": 57, "iso": "CZ", "text": "Czech Republic", "phonecode": 420 },
-  { "value": 58, "iso": "DK", "text": "Denmark", "phonecode": 45 },
-  { "value": 59, "iso": "DJ", "text": "Djibouti", "phonecode": 253 },
-  { "value": 60, "iso": "DM", "text": "Dominica", "phonecode": 1767 },
+  {
+    "value": 51,
+    "iso": "CK",
+    "text": "Cook Islands",
+    "phonecode": 682,
+    "flag": "ck"
+  },
+  {
+    "value": 52,
+    "iso": "CR",
+    "text": "Costa Rica",
+    "phonecode": 506,
+    "flag": "cr"
+  },
+  {
+    "value": 53,
+    "iso": "CI",
+    "text": "Cote D'Ivoire",
+    "phonecode": 225,
+    "flag": "ci"
+  },
+  {
+    "value": 54,
+    "iso": "HR",
+    "text": "Croatia",
+    "phonecode": 385,
+    "flag": "hr"
+  },
+  {
+    "value": 55,
+    "iso": "CU",
+    "text": "Cuba",
+    "phonecode": 53,
+    "flag": "cu"
+  },
+  {
+    "value": 56,
+    "iso": "CY",
+    "text": "Cyprus",
+    "phonecode": 357,
+    "flag": "cy"
+  },
+  {
+    "value": 57,
+    "iso": "CZ",
+    "text": "Czech Republic",
+    "phonecode": 420,
+    "flag": "cz"
+  },
+  {
+    "value": 58,
+    "iso": "DK",
+    "text": "Denmark",
+    "phonecode": 45,
+    "flag": "dk"
+  },
+  {
+    "value": 59,
+    "iso": "DJ",
+    "text": "Djibouti",
+    "phonecode": 253,
+    "flag": "dj"
+  },
+  {
+    "value": 60,
+    "iso": "DM",
+    "text": "Dominica",
+    "phonecode": 1767,
+    "flag": "dm"
+  },
   {
     "value": 61,
     "iso": "DO",
     "text": "Dominican Republic",
-    "phonecode": 1809
+    "phonecode": 1809,
+    "flag": "do"
   },
-  { "value": 62, "iso": "EC", "text": "Ecuador", "phonecode": 593 },
-  { "value": 63, "iso": "EG", "text": "Egypt", "phonecode": 20 },
-  { "value": 64, "iso": "SV", "text": "El Salvador", "phonecode": 503 },
-  { "value": 65, "iso": "GQ", "text": "Equatorial Guinea", "phonecode": 240 },
-  { "value": 66, "iso": "ER", "text": "Eritrea", "phonecode": 291 },
-  { "value": 67, "iso": "EE", "text": "Estonia", "phonecode": 372 },
-  { "value": 68, "iso": "ET", "text": "Ethiopia", "phonecode": 251 },
+  {
+    "value": 62,
+    "iso": "EC",
+    "text": "Ecuador",
+    "phonecode": 593,
+    "flag": "ec"
+  },
+  {
+    "value": 63,
+    "iso": "EG",
+    "text": "Egypt",
+    "phonecode": 20,
+    "flag": "eg"
+  },
+  {
+    "value": 64,
+    "iso": "SV",
+    "text": "El Salvador",
+    "phonecode": 503,
+    "flag": "sv"
+  },
+  {
+    "value": 65,
+    "iso": "GQ",
+    "text": "Equatorial Guinea",
+    "phonecode": 240,
+    "flag": "gq"
+  },
+  {
+    "value": 66,
+    "iso": "ER",
+    "text": "Eritrea",
+    "phonecode": 291,
+    "flag": "er"
+  },
+  {
+    "value": 67,
+    "iso": "EE",
+    "text": "Estonia",
+    "phonecode": 372,
+    "flag": "ee"
+  },
+  {
+    "value": 68,
+    "iso": "ET",
+    "text": "Ethiopia",
+    "phonecode": 251,
+    "flag": "et"
+  },
   {
     "value": 69,
     "iso": "FK",
     "text": "Falkland Islands (Malvinas)",
-    "phonecode": 500
+    "phonecode": 500,
+    "flag": "fk"
   },
-  { "value": 70, "iso": "FO", "text": "Faroe Islands", "phonecode": 298 },
-  { "value": 71, "iso": "FJ", "text": "Fiji", "phonecode": 679 },
-  { "value": 72, "iso": "FI", "text": "Finland", "phonecode": 358 },
-  { "value": 73, "iso": "FR", "text": "France", "phonecode": 33 },
-  { "value": 74, "iso": "GF", "text": "French Guiana", "phonecode": 594 },
-  { "value": 75, "iso": "PF", "text": "French Polynesia", "phonecode": 689 },
+  {
+    "value": 70,
+    "iso": "FO",
+    "text": "Faroe Islands",
+    "phonecode": 298,
+    "flag": "fo"
+  },
+  {
+    "value": 71,
+    "iso": "FJ",
+    "text": "Fiji",
+    "phonecode": 679,
+    "flag": "fj"
+  },
+  {
+    "value": 72,
+    "iso": "FI",
+    "text": "Finland",
+    "phonecode": 358,
+    "flag": "fi"
+  },
+  {
+    "value": 73,
+    "iso": "FR",
+    "text": "France",
+    "phonecode": 33,
+    "flag": "fr"
+  },
+  {
+    "value": 74,
+    "iso": "GF",
+    "text": "French Guiana",
+    "phonecode": 594,
+    "flag": "gf"
+  },
+  {
+    "value": 75,
+    "iso": "PF",
+    "text": "French Polynesia",
+    "phonecode": 689,
+    "flag": "pf"
+  },
   {
     "value": 76,
     "iso": "TF",
     "text": "French Southern Territories",
-    "phonecode": 0
+    "phonecode": 0,
+    "flag": "tf"
   },
-  { "value": 77, "iso": "GA", "text": "Gabon", "phonecode": 241 },
-  { "value": 78, "iso": "GM", "text": "Gambia", "phonecode": 220 },
-  { "value": 79, "iso": "GE", "text": "Georgia", "phonecode": 995 },
-  { "value": 80, "iso": "DE", "text": "Germany", "phonecode": 49 },
-  { "value": 81, "iso": "GH", "text": "Ghana", "phonecode": 233 },
-  { "value": 82, "iso": "GI", "text": "Gibraltar", "phonecode": 350 },
-  { "value": 83, "iso": "GR", "text": "Greece", "phonecode": 30 },
-  { "value": 84, "iso": "GL", "text": "Greenland", "phonecode": 299 },
-  { "value": 85, "iso": "GD", "text": "Grenada", "phonecode": 1473 },
-  { "value": 86, "iso": "GP", "text": "Guadeloupe", "phonecode": 590 },
-  { "value": 87, "iso": "GU", "text": "Guam", "phonecode": 1671 },
-  { "value": 88, "iso": "GT", "text": "Guatemala", "phonecode": 502 },
-  { "value": 89, "iso": "GN", "text": "Guinea", "phonecode": 224 },
-  { "value": 90, "iso": "GW", "text": "Guinea-Bissau", "phonecode": 245 },
-  { "value": 91, "iso": "GY", "text": "Guyana", "phonecode": 592 },
-  { "value": 92, "iso": "HT", "text": "Haiti", "phonecode": 509 },
+  {
+    "value": 77,
+    "iso": "GA",
+    "text": "Gabon",
+    "phonecode": 241,
+    "flag": "ga"
+  },
+  {
+    "value": 78,
+    "iso": "GM",
+    "text": "Gambia",
+    "phonecode": 220,
+    "flag": "gm"
+  },
+  {
+    "value": 79,
+    "iso": "GE",
+    "text": "Georgia",
+    "phonecode": 995,
+    "flag": "ge"
+  },
+  {
+    "value": 80,
+    "iso": "DE",
+    "text": "Germany",
+    "phonecode": 49,
+    "flag": "de"
+  },
+  {
+    "value": 81,
+    "iso": "GH",
+    "text": "Ghana",
+    "phonecode": 233,
+    "flag": "gh"
+  },
+  {
+    "value": 82,
+    "iso": "GI",
+    "text": "Gibraltar",
+    "phonecode": 350,
+    "flag": "gi"
+  },
+  {
+    "value": 83,
+    "iso": "GR",
+    "text": "Greece",
+    "phonecode": 30,
+    "flag": "gr"
+  },
+  {
+    "value": 84,
+    "iso": "GL",
+    "text": "Greenland",
+    "phonecode": 299,
+    "flag": "gl"
+  },
+  {
+    "value": 85,
+    "iso": "GD",
+    "text": "Grenada",
+    "phonecode": 1473,
+    "flag": "gd"
+  },
+  {
+    "value": 86,
+    "iso": "GP",
+    "text": "Guadeloupe",
+    "phonecode": 590,
+    "flag": "gp"
+  },
+  {
+    "value": 87,
+    "iso": "GU",
+    "text": "Guam",
+    "phonecode": 1671,
+    "flag": "gu"
+  },
+  {
+    "value": 88,
+    "iso": "GT",
+    "text": "Guatemala",
+    "phonecode": 502,
+    "flag": "gt"
+  },
+  {
+    "value": 89,
+    "iso": "GN",
+    "text": "Guinea",
+    "phonecode": 224,
+    "flag": "gn"
+  },
+  {
+    "value": 90,
+    "iso": "GW",
+    "text": "Guinea-Bissau",
+    "phonecode": 245,
+    "flag": "gw"
+  },
+  {
+    "value": 91,
+    "iso": "GY",
+    "text": "Guyana",
+    "phonecode": 592,
+    "flag": "gy"
+  },
+  {
+    "value": 92,
+    "iso": "HT",
+    "text": "Haiti",
+    "phonecode": 509,
+    "flag": "ht"
+  },
   {
     "value": 93,
     "iso": "HM",
     "text": "Heard Island and Mcdonald Islands",
-    "phonecode": 0
+    "phonecode": 0,
+    "flag": "hm"
   },
   {
     "value": 94,
     "iso": "VA",
     "text": "Holy See (Vatican City State)",
-    "phonecode": 39
+    "phonecode": 39,
+    "flag": "va"
   },
-  { "value": 95, "iso": "HN", "text": "Honduras", "phonecode": 504 },
-  { "value": 96, "iso": "HK", "text": "Hong Kong", "phonecode": 852 },
-  { "value": 97, "iso": "HU", "text": "Hungary", "phonecode": 36 },
-  { "value": 98, "iso": "IS", "text": "Iceland", "phonecode": 354 },
-  { "value": 99, "iso": "IN", "text": "India", "phonecode": 91 },
-  { "value": 100, "iso": "value", "text": "Indonesia", "phonecode": 62 },
+  {
+    "value": 95,
+    "iso": "HN",
+    "text": "Honduras",
+    "phonecode": 504,
+    "flag": "hn"
+  },
+  {
+    "value": 96,
+    "iso": "HK",
+    "text": "Hong Kong",
+    "phonecode": 852,
+    "flag": "hk"
+  },
+  {
+    "value": 97,
+    "iso": "HU",
+    "text": "Hungary",
+    "phonecode": 36,
+    "flag": "hu"
+  },
+  {
+    "value": 98,
+    "iso": "IS",
+    "text": "Iceland",
+    "phonecode": 354,
+    "flag": "is"
+  },
+  {
+    "value": 99,
+    "iso": "IN",
+    "text": "India",
+    "phonecode": 91,
+    "flag": "in"
+  },
+  {
+    "value": 100,
+    "iso": "value",
+    "text": "Indonesia",
+    "phonecode": 62,
+    "flag": "value"
+  },
   {
     "value": 101,
     "iso": "IR",
     "text": "Iran, Islamic Republic of",
-    "phonecode": 98
+    "phonecode": 98,
+    "flag": "ir"
   },
-  { "value": 102, "iso": "IQ", "text": "Iraq", "phonecode": 964 },
-  { "value": 103, "iso": "IE", "text": "Ireland", "phonecode": 353 },
-  { "value": 104, "iso": "IL", "text": "Israel", "phonecode": 972 },
-  { "value": 105, "iso": "IT", "text": "Italy", "phonecode": 39 },
-  { "value": 106, "iso": "JM", "text": "Jamaica", "phonecode": 1876 },
-  { "value": 107, "iso": "JP", "text": "Japan", "phonecode": 81 },
-  { "value": 108, "iso": "JO", "text": "Jordan", "phonecode": 962 },
-  { "value": 109, "iso": "KZ", "text": "Kazakhstan", "phonecode": 7 },
-  { "value": 110, "iso": "KE", "text": "Kenya", "phonecode": 254 },
-  { "value": 111, "iso": "KI", "text": "Kiribati", "phonecode": 686 },
+  {
+    "value": 102,
+    "iso": "IQ",
+    "text": "Iraq",
+    "phonecode": 964,
+    "flag": "iq"
+  },
+  {
+    "value": 103,
+    "iso": "IE",
+    "text": "Ireland",
+    "phonecode": 353,
+    "flag": "ie"
+  },
+  {
+    "value": 104,
+    "iso": "IL",
+    "text": "Israel",
+    "phonecode": 972,
+    "flag": "il"
+  },
+  {
+    "value": 105,
+    "iso": "IT",
+    "text": "Italy",
+    "phonecode": 39,
+    "flag": "it"
+  },
+  {
+    "value": 106,
+    "iso": "JM",
+    "text": "Jamaica",
+    "phonecode": 1876,
+    "flag": "jm"
+  },
+  {
+    "value": 107,
+    "iso": "JP",
+    "text": "Japan",
+    "phonecode": 81,
+    "flag": "jp"
+  },
+  {
+    "value": 108,
+    "iso": "JO",
+    "text": "Jordan",
+    "phonecode": 962,
+    "flag": "jo"
+  },
+  {
+    "value": 109,
+    "iso": "KZ",
+    "text": "Kazakhstan",
+    "phonecode": 7,
+    "flag": "kz"
+  },
+  {
+    "value": 110,
+    "iso": "KE",
+    "text": "Kenya",
+    "phonecode": 254,
+    "flag": "ke"
+  },
+  {
+    "value": 111,
+    "iso": "KI",
+    "text": "Kiribati",
+    "phonecode": 686,
+    "flag": "ki"
+  },
   {
     "value": 112,
     "iso": "KP",
     "text": "Korea, Democratic People's Republic of",
-    "phonecode": 850
+    "phonecode": 850,
+    "flag": "kp"
   },
-  { "value": 113, "iso": "KR", "text": "Korea, Republic of", "phonecode": 82 },
-  { "value": 114, "iso": "KW", "text": "Kuwait", "phonecode": 965 },
-  { "value": 115, "iso": "KG", "text": "Kyrgyzstan", "phonecode": 996 },
+  {
+    "value": 113,
+    "iso": "KR",
+    "text": "Korea, Republic of",
+    "phonecode": 82,
+    "flag": "kr"
+  },
+  {
+    "value": 114,
+    "iso": "KW",
+    "text": "Kuwait",
+    "phonecode": 965,
+    "flag": "kw"
+  },
+  {
+    "value": 115,
+    "iso": "KG",
+    "text": "Kyrgyzstan",
+    "phonecode": 996,
+    "flag": "kg"
+  },
   {
     "value": 116,
     "iso": "LA",
     "text": "Lao People's Democratic Republic",
-    "phonecode": 856
+    "phonecode": 856,
+    "flag": "la"
   },
-  { "value": 117, "iso": "LV", "text": "Latvia", "phonecode": 371 },
-  { "value": 118, "iso": "LB", "text": "Lebanon", "phonecode": 961 },
-  { "value": 119, "iso": "LS", "text": "Lesotho", "phonecode": 266 },
-  { "value": 120, "iso": "LR", "text": "Liberia", "phonecode": 231 },
+  {
+    "value": 117,
+    "iso": "LV",
+    "text": "Latvia",
+    "phonecode": 371,
+    "flag": "lv"
+  },
+  {
+    "value": 118,
+    "iso": "LB",
+    "text": "Lebanon",
+    "phonecode": 961,
+    "flag": "lb"
+  },
+  {
+    "value": 119,
+    "iso": "LS",
+    "text": "Lesotho",
+    "phonecode": 266,
+    "flag": "ls"
+  },
+  {
+    "value": 120,
+    "iso": "LR",
+    "text": "Liberia",
+    "phonecode": 231,
+    "flag": "lr"
+  },
   {
     "value": 121,
     "iso": "LY",
     "text": "Libyan Arab Jamahiriya",
-    "phonecode": 218
+    "phonecode": 218,
+    "flag": "ly"
   },
-  { "value": 122, "iso": "LI", "text": "Liechtenstein", "phonecode": 423 },
-  { "value": 123, "iso": "LT", "text": "Lithuania", "phonecode": 370 },
-  { "value": 124, "iso": "LU", "text": "Luxembourg", "phonecode": 352 },
-  { "value": 125, "iso": "MO", "text": "Macao", "phonecode": 853 },
+  {
+    "value": 122,
+    "iso": "LI",
+    "text": "Liechtenstein",
+    "phonecode": 423,
+    "flag": "li"
+  },
+  {
+    "value": 123,
+    "iso": "LT",
+    "text": "Lithuania",
+    "phonecode": 370,
+    "flag": "lt"
+  },
+  {
+    "value": 124,
+    "iso": "LU",
+    "text": "Luxembourg",
+    "phonecode": 352,
+    "flag": "lu"
+  },
+  {
+    "value": 125,
+    "iso": "MO",
+    "text": "Macao",
+    "phonecode": 853,
+    "flag": "mo"
+  },
   {
     "value": 126,
     "iso": "MK",
     "text": "Macedonia, the Former Yugoslav Republic of",
-    "phonecode": 389
+    "phonecode": 389,
+    "flag": "mk"
   },
-  { "value": 127, "iso": "MG", "text": "Madagascar", "phonecode": 261 },
-  { "value": 128, "iso": "MW", "text": "Malawi", "phonecode": 265 },
-  { "value": 129, "iso": "MY", "text": "Malaysia", "phonecode": 60 },
-  { "value": 130, "iso": "MV", "text": "Maldives", "phonecode": 960 },
-  { "value": 131, "iso": "ML", "text": "Mali", "phonecode": 223 },
-  { "value": 132, "iso": "MT", "text": "Malta", "phonecode": 356 },
-  { "value": 133, "iso": "MH", "text": "Marshall Islands", "phonecode": 692 },
-  { "value": 134, "iso": "MQ", "text": "Martinique", "phonecode": 596 },
-  { "value": 135, "iso": "MR", "text": "Mauritania", "phonecode": 222 },
-  { "value": 136, "iso": "MU", "text": "Mauritius", "phonecode": 230 },
-  { "value": 137, "iso": "YT", "text": "Mayotte", "phonecode": 269 },
-  { "value": 138, "iso": "MX", "text": "Mexico", "phonecode": 52 },
+  {
+    "value": 127,
+    "iso": "MG",
+    "text": "Madagascar",
+    "phonecode": 261,
+    "flag": "mg"
+  },
+  {
+    "value": 128,
+    "iso": "MW",
+    "text": "Malawi",
+    "phonecode": 265,
+    "flag": "mw"
+  },
+  {
+    "value": 129,
+    "iso": "MY",
+    "text": "Malaysia",
+    "phonecode": 60,
+    "flag": "my"
+  },
+  {
+    "value": 130,
+    "iso": "MV",
+    "text": "Maldives",
+    "phonecode": 960,
+    "flag": "mv"
+  },
+  {
+    "value": 131,
+    "iso": "ML",
+    "text": "Mali",
+    "phonecode": 223,
+    "flag": "ml"
+  },
+  {
+    "value": 132,
+    "iso": "MT",
+    "text": "Malta",
+    "phonecode": 356,
+    "flag": "mt"
+  },
+  {
+    "value": 133,
+    "iso": "MH",
+    "text": "Marshall Islands",
+    "phonecode": 692,
+    "flag": "mh"
+  },
+  {
+    "value": 134,
+    "iso": "MQ",
+    "text": "Martinique",
+    "phonecode": 596,
+    "flag": "mq"
+  },
+  {
+    "value": 135,
+    "iso": "MR",
+    "text": "Mauritania",
+    "phonecode": 222,
+    "flag": "mr"
+  },
+  {
+    "value": 136,
+    "iso": "MU",
+    "text": "Mauritius",
+    "phonecode": 230,
+    "flag": "mu"
+  },
+  {
+    "value": 137,
+    "iso": "YT",
+    "text": "Mayotte",
+    "phonecode": 269,
+    "flag": "yt"
+  },
+  {
+    "value": 138,
+    "iso": "MX",
+    "text": "Mexico",
+    "phonecode": 52,
+    "flag": "mx"
+  },
   {
     "value": 139,
     "iso": "FM",
     "text": "Micronesia, Federated States of",
-    "phonecode": 691
+    "phonecode": 691,
+    "flag": "fm"
   },
   {
     "value": 140,
     "iso": "MD",
     "text": "Moldova, Republic of",
-    "phonecode": 373
+    "phonecode": 373,
+    "flag": "md"
   },
-  { "value": 141, "iso": "MC", "text": "Monaco", "phonecode": 377 },
-  { "value": 142, "iso": "MN", "text": "Mongolia", "phonecode": 976 },
-  { "value": 143, "iso": "MS", "text": "Montserrat", "phonecode": 1664 },
-  { "value": 144, "iso": "MA", "text": "Morocco", "phonecode": 212 },
-  { "value": 145, "iso": "MZ", "text": "Mozambique", "phonecode": 258 },
-  { "value": 146, "iso": "MM", "text": "Myanmar", "phonecode": 95 },
-  { "value": 147, "iso": "NA", "text": "Namibia", "phonecode": 264 },
-  { "value": 148, "iso": "NR", "text": "Nauru", "phonecode": 674 },
-  { "value": 149, "iso": "NP", "text": "Nepal", "phonecode": 977 },
-  { "value": 150, "iso": "NL", "text": "Netherlands", "phonecode": 31 },
+  {
+    "value": 141,
+    "iso": "MC",
+    "text": "Monaco",
+    "phonecode": 377,
+    "flag": "mc"
+  },
+  {
+    "value": 142,
+    "iso": "MN",
+    "text": "Mongolia",
+    "phonecode": 976,
+    "flag": "mn"
+  },
+  {
+    "value": 143,
+    "iso": "MS",
+    "text": "Montserrat",
+    "phonecode": 1664,
+    "flag": "ms"
+  },
+  {
+    "value": 144,
+    "iso": "MA",
+    "text": "Morocco",
+    "phonecode": 212,
+    "flag": "ma"
+  },
+  {
+    "value": 145,
+    "iso": "MZ",
+    "text": "Mozambique",
+    "phonecode": 258,
+    "flag": "mz"
+  },
+  {
+    "value": 146,
+    "iso": "MM",
+    "text": "Myanmar",
+    "phonecode": 95,
+    "flag": "mm"
+  },
+  {
+    "value": 147,
+    "iso": "NA",
+    "text": "Namibia",
+    "phonecode": 264,
+    "flag": "na"
+  },
+  {
+    "value": 148,
+    "iso": "NR",
+    "text": "Nauru",
+    "phonecode": 674,
+    "flag": "nr"
+  },
+  {
+    "value": 149,
+    "iso": "NP",
+    "text": "Nepal",
+    "phonecode": 977,
+    "flag": "np"
+  },
+  {
+    "value": 150,
+    "iso": "NL",
+    "text": "Netherlands",
+    "phonecode": 31,
+    "flag": "nl"
+  },
   {
     "value": 151,
     "iso": "AN",
     "text": "Netherlands Antilles",
-    "phonecode": 599
+    "phonecode": 599,
+    "flag": "an"
   },
-  { "value": 152, "iso": "NC", "text": "New Caledonia", "phonecode": 687 },
-  { "value": 153, "iso": "NZ", "text": "New Zealand", "phonecode": 64 },
-  { "value": 154, "iso": "NI", "text": "Nicaragua", "phonecode": 505 },
-  { "value": 155, "iso": "NE", "text": "Niger", "phonecode": 227 },
-  { "value": 156, "iso": "NG", "text": "Nigeria", "phonecode": 234 },
-  { "value": 158, "iso": "NF", "text": "Norfolk Island", "phonecode": 672 },
+  {
+    "value": 152,
+    "iso": "NC",
+    "text": "New Caledonia",
+    "phonecode": 687,
+    "flag": "nc"
+  },
+  {
+    "value": 153,
+    "iso": "NZ",
+    "text": "New Zealand",
+    "phonecode": 64,
+    "flag": "nz"
+  },
+  {
+    "value": 154,
+    "iso": "NI",
+    "text": "Nicaragua",
+    "phonecode": 505,
+    "flag": "ni"
+  },
+  {
+    "value": 155,
+    "iso": "NE",
+    "text": "Niger",
+    "phonecode": 227,
+    "flag": "ne"
+  },
+  {
+    "value": 156,
+    "iso": "NG",
+    "text": "Nigeria",
+    "phonecode": 234,
+    "flag": "ng"
+  },
+  {
+    "value": 158,
+    "iso": "NF",
+    "text": "Norfolk Island",
+    "phonecode": 672,
+    "flag": "nf"
+  },
   {
     "value": 159,
     "iso": "MP",
     "text": "Northern Mariana Islands",
-    "phonecode": 1670
+    "phonecode": 1670,
+    "flag": "mp"
   },
-  { "value": 160, "iso": "NO", "text": "Norway", "phonecode": 47 },
-  { "value": 161, "iso": "OM", "text": "Oman", "phonecode": 968 },
-  { "value": 162, "iso": "PK", "text": "Pakistan", "phonecode": 92 },
-  { "value": 163, "iso": "PW", "text": "Palau", "phonecode": 680 },
+  {
+    "value": 160,
+    "iso": "NO",
+    "text": "Norway",
+    "phonecode": 47,
+    "flag": "no"
+  },
+  {
+    "value": 161,
+    "iso": "OM",
+    "text": "Oman",
+    "phonecode": 968,
+    "flag": "om"
+  },
+  {
+    "value": 162,
+    "iso": "PK",
+    "text": "Pakistan",
+    "phonecode": 92,
+    "flag": "pk"
+  },
+  {
+    "value": 163,
+    "iso": "PW",
+    "text": "Palau",
+    "phonecode": 680,
+    "flag": "pw"
+  },
   {
     "value": 164,
     "iso": "PS",
     "text": "Palestinian Territory, Occupied",
-    "phonecode": 970
+    "phonecode": 970,
+    "flag": "ps"
   },
-  { "value": 165, "iso": "PA", "text": "Panama", "phonecode": 507 },
-  { "value": 166, "iso": "PG", "text": "Papua New Guinea", "phonecode": 675 },
-  { "value": 167, "iso": "PY", "text": "Paraguay", "phonecode": 595 },
-  { "value": 168, "iso": "PE", "text": "Peru", "phonecode": 51 },
-  { "value": 169, "iso": "PH", "text": "Philippines", "phonecode": 63 },
-  { "value": 170, "iso": "PN", "text": "Pitcairn", "phonecode": 0 },
-  { "value": 171, "iso": "PL", "text": "Poland", "phonecode": 48 },
-  { "value": 172, "iso": "PT", "text": "Portugal", "phonecode": 351 },
-  { "value": 173, "iso": "PR", "text": "Puerto Rico", "phonecode": 1787 },
-  { "value": 174, "iso": "QA", "text": "Qatar", "phonecode": 974 },
-  { "value": 175, "iso": "RE", "text": "Reunion", "phonecode": 262 },
-  { "value": 176, "iso": "RO", "text": "Romania", "phonecode": 40 },
-  { "value": 177, "iso": "RU", "text": "Russian Federation", "phonecode": 70 },
-  { "value": 178, "iso": "RW", "text": "Rwanda", "phonecode": 250 },
-  { "value": 179, "iso": "SH", "text": "Saint Helena", "phonecode": 290 },
+  {
+    "value": 165,
+    "iso": "PA",
+    "text": "Panama",
+    "phonecode": 507,
+    "flag": "pa"
+  },
+  {
+    "value": 166,
+    "iso": "PG",
+    "text": "Papua New Guinea",
+    "phonecode": 675,
+    "flag": "pg"
+  },
+  {
+    "value": 167,
+    "iso": "PY",
+    "text": "Paraguay",
+    "phonecode": 595,
+    "flag": "py"
+  },
+  {
+    "value": 168,
+    "iso": "PE",
+    "text": "Peru",
+    "phonecode": 51,
+    "flag": "pe"
+  },
+  {
+    "value": 169,
+    "iso": "PH",
+    "text": "Philippines",
+    "phonecode": 63,
+    "flag": "ph"
+  },
+  {
+    "value": 170,
+    "iso": "PN",
+    "text": "Pitcairn",
+    "phonecode": 0,
+    "flag": "pn"
+  },
+  {
+    "value": 171,
+    "iso": "PL",
+    "text": "Poland",
+    "phonecode": 48,
+    "flag": "pl"
+  },
+  {
+    "value": 172,
+    "iso": "PT",
+    "text": "Portugal",
+    "phonecode": 351,
+    "flag": "pt"
+  },
+  {
+    "value": 173,
+    "iso": "PR",
+    "text": "Puerto Rico",
+    "phonecode": 1787,
+    "flag": "pr"
+  },
+  {
+    "value": 174,
+    "iso": "QA",
+    "text": "Qatar",
+    "phonecode": 974,
+    "flag": "qa"
+  },
+  {
+    "value": 175,
+    "iso": "RE",
+    "text": "Reunion",
+    "phonecode": 262,
+    "flag": "re"
+  },
+  {
+    "value": 176,
+    "iso": "RO",
+    "text": "Romania",
+    "phonecode": 40,
+    "flag": "ro"
+  },
+  {
+    "value": 177,
+    "iso": "RU",
+    "text": "Russian Federation",
+    "phonecode": 70,
+    "flag": "ru"
+  },
+  {
+    "value": 178,
+    "iso": "RW",
+    "text": "Rwanda",
+    "phonecode": 250,
+    "flag": "rw"
+  },
+  {
+    "value": 179,
+    "iso": "SH",
+    "text": "Saint Helena",
+    "phonecode": 290,
+    "flag": "sh"
+  },
   {
     "value": 180,
     "iso": "KN",
     "text": "Saint Kitts and Nevis",
-    "phonecode": 1869
+    "phonecode": 1869,
+    "flag": "kn"
   },
-  { "value": 181, "iso": "LC", "text": "Saint Lucia", "phonecode": 1758 },
+  {
+    "value": 181,
+    "iso": "LC",
+    "text": "Saint Lucia",
+    "phonecode": 1758,
+    "flag": "lc"
+  },
   {
     "value": 182,
     "iso": "PM",
     "text": "Saint Pierre and Miquelon",
-    "phonecode": 508
+    "phonecode": 508,
+    "flag": "pm"
   },
   {
     "value": 183,
     "iso": "VC",
     "text": "Saint Vincent and the Grenadines",
-    "phonecode": 1784
+    "phonecode": 1784,
+    "flag": "vc"
   },
-  { "value": 184, "iso": "WS", "text": "Samoa", "phonecode": 684 },
-  { "value": 185, "iso": "SM", "text": "San Marino", "phonecode": 378 },
+  {
+    "value": 184,
+    "iso": "WS",
+    "text": "Samoa",
+    "phonecode": 684,
+    "flag": "ws"
+  },
+  {
+    "value": 185,
+    "iso": "SM",
+    "text": "San Marino",
+    "phonecode": 378,
+    "flag": "sm"
+  },
   {
     "value": 186,
     "iso": "ST",
     "text": "Sao Tome and Principe",
-    "phonecode": 239
+    "phonecode": 239,
+    "flag": "st"
   },
-  { "value": 187, "iso": "SA", "text": "Saudi Arabia", "phonecode": 966 },
-  { "value": 188, "iso": "SN", "text": "Senegal", "phonecode": 221 },
+  {
+    "value": 187,
+    "iso": "SA",
+    "text": "Saudi Arabia",
+    "phonecode": 966,
+    "flag": "sa"
+  },
+  {
+    "value": 188,
+    "iso": "SN",
+    "text": "Senegal",
+    "phonecode": 221,
+    "flag": "sn"
+  },
   {
     "value": 189,
     "iso": "CS",
     "text": "Serbia and Montenegro",
-    "phonecode": 381
+    "phonecode": 381,
+    "flag": "cs"
   },
-  { "value": 190, "iso": "SC", "text": "Seychelles", "phonecode": 248 },
-  { "value": 191, "iso": "SL", "text": "Sierra Leone", "phonecode": 232 },
-  { "value": 192, "iso": "SG", "text": "Singapore", "phonecode": 65 },
-  { "value": 193, "iso": "SK", "text": "Slovakia", "phonecode": 421 },
-  { "value": 194, "iso": "SI", "text": "Slovenia", "phonecode": 386 },
-  { "value": 195, "iso": "SB", "text": "Solomon Islands", "phonecode": 677 },
-  { "value": 196, "iso": "SO", "text": "Somalia", "phonecode": 252 },
-  { "value": 197, "iso": "ZA", "text": "South Africa", "phonecode": 27 },
+  {
+    "value": 190,
+    "iso": "SC",
+    "text": "Seychelles",
+    "phonecode": 248,
+    "flag": "sc"
+  },
+  {
+    "value": 191,
+    "iso": "SL",
+    "text": "Sierra Leone",
+    "phonecode": 232,
+    "flag": "sl"
+  },
+  {
+    "value": 192,
+    "iso": "SG",
+    "text": "Singapore",
+    "phonecode": 65,
+    "flag": "sg"
+  },
+  {
+    "value": 193,
+    "iso": "SK",
+    "text": "Slovakia",
+    "phonecode": 421,
+    "flag": "sk"
+  },
+  {
+    "value": 194,
+    "iso": "SI",
+    "text": "Slovenia",
+    "phonecode": 386,
+    "flag": "si"
+  },
+  {
+    "value": 195,
+    "iso": "SB",
+    "text": "Solomon Islands",
+    "phonecode": 677,
+    "flag": "sb"
+  },
+  {
+    "value": 196,
+    "iso": "SO",
+    "text": "Somalia",
+    "phonecode": 252,
+    "flag": "so"
+  },
+  {
+    "value": 197,
+    "iso": "ZA",
+    "text": "South Africa",
+    "phonecode": 27,
+    "flag": "za"
+  },
   {
     "value": 198,
     "iso": "GS",
     "text": "South Georgia and the South Sandwich Islands",
-    "phonecode": 0
+    "phonecode": 0,
+    "flag": "gs"
   },
-  { "value": 199, "iso": "ES", "text": "Spain", "phonecode": 34 },
-  { "value": 200, "iso": "LK", "text": "Sri Lanka", "phonecode": 94 },
-  { "value": 201, "iso": "SD", "text": "Sudan", "phonecode": 249 },
-  { "value": 202, "iso": "SR", "text": "Surilabel", "phonecode": 597 },
+  {
+    "value": 199,
+    "iso": "ES",
+    "text": "Spain",
+    "phonecode": 34,
+    "flag": "es"
+  },
+  {
+    "value": 200,
+    "iso": "LK",
+    "text": "Sri Lanka",
+    "phonecode": 94,
+    "flag": "lk"
+  },
+  {
+    "value": 201,
+    "iso": "SD",
+    "text": "Sudan",
+    "phonecode": 249,
+    "flag": "sd"
+  },
+  {
+    "value": 202,
+    "iso": "SR",
+    "text": "Surilabel",
+    "phonecode": 597,
+    "flag": "sr"
+  },
   {
     "value": 203,
     "iso": "SJ",
     "text": "Svalbard and Jan Mayen",
-    "phonecode": 47
+    "phonecode": 47,
+    "flag": "sj"
   },
-  { "value": 204, "iso": "SZ", "text": "Swaziland", "phonecode": 268 },
-  { "value": 205, "iso": "SE", "text": "Sweden", "phonecode": 46 },
-  { "value": 206, "iso": "CH", "text": "Switzerland", "phonecode": 41 },
+  {
+    "value": 204,
+    "iso": "SZ",
+    "text": "Swaziland",
+    "phonecode": 268,
+    "flag": "sz"
+  },
+  {
+    "value": 205,
+    "iso": "SE",
+    "text": "Sweden",
+    "phonecode": 46,
+    "flag": "se"
+  },
+  {
+    "value": 206,
+    "iso": "CH",
+    "text": "Switzerland",
+    "phonecode": 41,
+    "flag": "ch"
+  },
   {
     "value": 207,
     "iso": "SY",
     "text": "Syrian Arab Republic",
-    "phonecode": 963
+    "phonecode": 963,
+    "flag": "sy"
   },
   {
     "value": 208,
     "iso": "TW",
     "text": "Taiwan, Province of China",
-    "phonecode": 886
+    "phonecode": 886,
+    "flag": "tw"
   },
-  { "value": 209, "iso": "TJ", "text": "Tajikistan", "phonecode": 992 },
+  {
+    "value": 209,
+    "iso": "TJ",
+    "text": "Tajikistan",
+    "phonecode": 992,
+    "flag": "tj"
+  },
   {
     "value": 210,
     "iso": "TZ",
     "text": "Tanzania, United Republic of",
-    "phonecode": 255
+    "phonecode": 255,
+    "flag": "tz"
   },
-  { "value": 211, "iso": "TH", "text": "Thailand", "phonecode": 66 },
-  { "value": 212, "iso": "TL", "text": "Timor-Leste", "phonecode": 670 },
-  { "value": 213, "iso": "TG", "text": "Togo", "phonecode": 228 },
-  { "value": 214, "iso": "TK", "text": "Tokelau", "phonecode": 690 },
-  { "value": 215, "iso": "TO", "text": "Tonga", "phonecode": 676 },
+  {
+    "value": 211,
+    "iso": "TH",
+    "text": "Thailand",
+    "phonecode": 66,
+    "flag": "th"
+  },
+  {
+    "value": 212,
+    "iso": "TL",
+    "text": "Timor-Leste",
+    "phonecode": 670,
+    "flag": "tl"
+  },
+  {
+    "value": 213,
+    "iso": "TG",
+    "text": "Togo",
+    "phonecode": 228,
+    "flag": "tg"
+  },
+  {
+    "value": 214,
+    "iso": "TK",
+    "text": "Tokelau",
+    "phonecode": 690,
+    "flag": "tk"
+  },
+  {
+    "value": 215,
+    "iso": "TO",
+    "text": "Tonga",
+    "phonecode": 676,
+    "flag": "to"
+  },
   {
     "value": 216,
     "iso": "TT",
     "text": "Trinvaluead and Tobago",
-    "phonecode": 1868
+    "phonecode": 1868,
+    "flag": "tt"
   },
-  { "value": 217, "iso": "TN", "text": "Tunisia", "phonecode": 216 },
-  { "value": 218, "iso": "TR", "text": "Turkey", "phonecode": 90 },
-  { "value": 219, "iso": "TM", "text": "Turkmenistan", "phonecode": 7370 },
+  {
+    "value": 217,
+    "iso": "TN",
+    "text": "Tunisia",
+    "phonecode": 216,
+    "flag": "tn"
+  },
+  {
+    "value": 218,
+    "iso": "TR",
+    "text": "Turkey",
+    "phonecode": 90,
+    "flag": "tr"
+  },
+  {
+    "value": 219,
+    "iso": "TM",
+    "text": "Turkmenistan",
+    "phonecode": 7370,
+    "flag": "tm"
+  },
   {
     "value": 220,
     "iso": "TC",
     "text": "Turks and Caicos Islands",
-    "phonecode": 1649
+    "phonecode": 1649,
+    "flag": "tc"
   },
-  { "value": 221, "iso": "TV", "text": "Tuvalu", "phonecode": 688 },
-  { "value": 222, "iso": "UG", "text": "Uganda", "phonecode": 256 },
-  { "value": 223, "iso": "UA", "text": "Ukraine", "phonecode": 380 },
+  {
+    "value": 221,
+    "iso": "TV",
+    "text": "Tuvalu",
+    "phonecode": 688,
+    "flag": "tv"
+  },
+  {
+    "value": 222,
+    "iso": "UG",
+    "text": "Uganda",
+    "phonecode": 256,
+    "flag": "ug"
+  },
+  {
+    "value": 223,
+    "iso": "UA",
+    "text": "Ukraine",
+    "phonecode": 380,
+    "flag": "ua"
+  },
   {
     "value": 224,
     "iso": "AE",
     "text": "United Arab Emirates",
-    "phonecode": 971
+    "phonecode": 971,
+    "flag": "ae"
   },
-  { "value": 225, "iso": "GB", "text": "United Kingdom", "phonecode": 44 },
-  { "value": 226, "iso": "US", "text": "United States", "phonecode": 1 },
+  {
+    "value": 225,
+    "iso": "GB",
+    "text": "United Kingdom",
+    "phonecode": 44,
+    "flag": "gb"
+  },
+  {
+    "value": 226,
+    "iso": "US",
+    "text": "United States",
+    "phonecode": 1,
+    "flag": "us"
+  },
   {
     "value": 227,
     "iso": "UM",
     "text": "United States Minor Outlying Islands",
-    "phonecode": 1
+    "phonecode": 1,
+    "flag": "um"
   },
-  { "value": 228, "iso": "UY", "text": "Uruguay", "phonecode": 598 },
-  { "value": 229, "iso": "UZ", "text": "Uzbekistan", "phonecode": 998 },
-  { "value": 230, "iso": "VU", "text": "Vanuatu", "phonecode": 678 },
-  { "value": 231, "iso": "VE", "text": "Venezuela", "phonecode": 58 },
-  { "value": 232, "iso": "VN", "text": "Viet Nam", "phonecode": 84 },
+  {
+    "value": 228,
+    "iso": "UY",
+    "text": "Uruguay",
+    "phonecode": 598,
+    "flag": "uy"
+  },
+  {
+    "value": 229,
+    "iso": "UZ",
+    "text": "Uzbekistan",
+    "phonecode": 998,
+    "flag": "uz"
+  },
+  {
+    "value": 230,
+    "iso": "VU",
+    "text": "Vanuatu",
+    "phonecode": 678,
+    "flag": "vu"
+  },
+  {
+    "value": 231,
+    "iso": "VE",
+    "text": "Venezuela",
+    "phonecode": 58,
+    "flag": "ve"
+  },
+  {
+    "value": 232,
+    "iso": "VN",
+    "text": "Viet Nam",
+    "phonecode": 84,
+    "flag": "vn"
+  },
   {
     "value": 233,
     "iso": "VG",
     "text": "Virgin Islands, British",
-    "phonecode": 1284
+    "phonecode": 1284,
+    "flag": "vg"
   },
   {
     "value": 234,
     "iso": "VI",
     "text": "Virgin Islands, U.s.",
-    "phonecode": 1340
+    "phonecode": 1340,
+    "flag": "vi"
   },
-  { "value": 235, "iso": "WF", "text": "Wallis and Futuna", "phonecode": 681 },
-  { "value": 236, "iso": "EH", "text": "Western Sahara", "phonecode": 212 },
-  { "value": 237, "iso": "YE", "text": "Yemen", "phonecode": 967 },
-  { "value": 238, "iso": "ZM", "text": "Zambia", "phonecode": 260 },
-  { "value": 239, "iso": "ZW", "text": "Zimbabwe", "phonecode": 263 }
+  {
+    "value": 235,
+    "iso": "WF",
+    "text": "Wallis and Futuna",
+    "phonecode": 681,
+    "flag": "wf"
+  },
+  {
+    "value": 236,
+    "iso": "EH",
+    "text": "Western Sahara",
+    "phonecode": 212,
+    "flag": "eh"
+  },
+  {
+    "value": 237,
+    "iso": "YE",
+    "text": "Yemen",
+    "phonecode": 967,
+    "flag": "ye"
+  },
+  {
+    "value": 238,
+    "iso": "ZM",
+    "text": "Zambia",
+    "phonecode": 260,
+    "flag": "zm"
+  },
+  {
+    "value": 239,
+    "iso": "ZW",
+    "text": "Zimbabwe",
+    "phonecode": 263,
+    "flag": "zw"
+  }
 ]
