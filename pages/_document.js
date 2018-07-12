@@ -2,6 +2,21 @@
 // vendor
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+// styles
+import 'semantic-ui-css/components/dropdown.min.css'; // for Dropdown
+import 'semantic-ui-css/components/transition.min.css'; // for Dropdown
+import 'semantic-ui-css/components/flag.min.css'; // for Dropdown
+import 'semantic-ui-css/components/form.min.css';
+import 'semantic-ui-css/components/checkbox.min.css';
+import 'semantic-ui-css/components/input.min.css';
+import 'semantic-ui-css/components/step.min.css';
+import 'semantic-ui-css/themes/default/assets/fonts/icons.eot';
+import 'semantic-ui-css/themes/default/assets/fonts/icons.woff';
+import 'semantic-ui-css/themes/default/assets/fonts/icons.woff2';
+import 'semantic-ui-css/components/icon.min.css'; // for DateInput
+import 'semantic-ui-css/components/table.min.css'; // for DateInput
+import 'semantic-ui-css/components/popup.min.css'; // for DateInput
+import 'semantic-ui-calendar-react/dist/css/calendar.min.css'; // for DateInput
 // custom
 
 export default class MyDocument extends Document {
@@ -63,12 +78,12 @@ export default class MyDocument extends Document {
 
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/nprogress.css" rel="stylesheet" />
-          <link href="../static/styles/semantic.min.css" rel="stylesheet" />
-          <link href="../static/styles/calendar.css" rel="stylesheet" />
           <link
             href="https://fonts.googleapis.com/css?family=Rubik:400,500,700"
             rel="stylesheet"
           />
+          {/* bundle all css imports on top */}
+          <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
         <body>
           <Main />
