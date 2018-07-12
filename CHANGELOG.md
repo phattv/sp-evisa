@@ -1,4 +1,19 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.2] - 2018-07-13
+### Added
+- Viewport for mobile view
+- Fee constants
+- sitemap.xml, robots.txt & favicon.ico
+### Changed
+- package.json package versions
+- Update countries.json with flag
+### Fixed
+- Undefined css strings from generateCommonProps
+- next/link with prefetch for mailto: & tel: href
+### Removed
+- Unused package.json packages
+- Some static css files
+
 ## [3.0.0-beta.1] - 2018-07-09
 ### Changed
 - Update packages
