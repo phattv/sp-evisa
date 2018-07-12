@@ -49,13 +49,6 @@
     "flag": "ai"
   },
   {
-    "value": 8,
-    "iso": "AQ",
-    "text": "Antarctica",
-    "phonecode": 0,
-    "flag": "aq"
-  },
-  {
     "value": 9,
     "iso": "AG",
     "text": "Antigua and Barbuda",
