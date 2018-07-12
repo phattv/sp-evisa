@@ -694,10 +694,10 @@
   },
   {
     "value": 100,
-    "iso": "value",
+    "iso": "ID",
     "text": "Indonesia",
     "phonecode": 62,
-    "flag": "value"
+    "flag": "id"
   },
   {
     "value": 101,
