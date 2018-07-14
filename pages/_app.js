@@ -47,14 +47,6 @@ class MyApp extends App {
       <Container>
         <Provider store={store}>
           <Layout>
-            <style jsx global>{`
-              body {
-                font-family: 'Rubik', -apple-system, system-ui,
-                  BlinkMacSystemFont, 'SegoeUI', 'Roboto', 'Helvetica Neue',
-                  'Arial', 'sans-serif';
-                font-size: 18px;
-              }
-            `}</style>
             <Component {...pageProps} />
           </Layout>
         </Provider>
