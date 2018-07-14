@@ -31,6 +31,7 @@ app.get('/sitemap.xml', (req, res) =>
       cacheTime: 600000,
       urls: [
         { url: '/', changefreq: 'weekly', priority: 1.0 },
+        // { url: '/reviews', changefreq: 'daily', priority: 1.0 },
         { url: '/apply', changefreq: 'weekly', priority: 0.9 },
         { url: '/fees', changefreq: 'weekly', priority: 0.8 },
         { url: '/services', changefreq: 'weekly', priority: 0.7 },

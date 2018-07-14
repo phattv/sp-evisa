@@ -3,6 +3,8 @@
 import axios from 'axios';
 // custom
 
+// TODO: Rollbar
+
 const getFeesByCountryId = (params: Object, callback: Function) => {
   return axios
     .get(`${getApiServer()}/fees-by-country/${params.countryId}`)
