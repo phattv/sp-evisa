@@ -440,7 +440,6 @@ class Home extends React.Component<Props, State> {
                   <Image
                     src={`../static/images/${activeStepImage}.png`}
                     alt="step image"
-                    maxWidth="100%"
                   />
                 </Flexbox>
               </Flexbox>

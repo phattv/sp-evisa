@@ -10,6 +10,7 @@ import generateCommonProps from './generateCommonProps';
 const Image = styled.img`
   height: ${props => props.height || 'auto'};
   display: block;
+  max-width: 100%;
 
   @media only screen and (min-width: ${screenSizes.desktop}px) {
     ${props => generateCommonProps(props, spacingUnits.desktop)};
