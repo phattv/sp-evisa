@@ -1,0 +1,11 @@
+body {
+    font-family: 'Rubik', -apple-system, system-ui,
+    BlinkMacSystemFont, 'SegoeUI', 'Roboto', 'Helvetica Neue',
+    'Arial', 'sans-serif';
+    font-size: 18px;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
