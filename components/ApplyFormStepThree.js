@@ -7,10 +7,15 @@ import ReactDOM from 'react-dom';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import dayjs from 'dayjs';
+import Router from 'next/router';
 // custom
 import { updateStepThree } from '../redux/actions';
 import { Flexbox, Text, Button } from './ui';
-import { displayDateFormat, postgresDateFormat } from '../constants/ui';
+import {
+  displayDateFormat,
+  pageNames,
+  postgresDateFormat,
+} from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
 import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
@@ -165,17 +170,15 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       contact: contactString,
     };
 
-    console.log('xxx', params);
-
     order(params, () => {
-      // setTimeout(() => {
-      //   window.location = '/thank-you';
-      // }, 1000);
+      setTimeout(() => {
+        Router.push(pageNames.thankYou);
+      }, 1000);
     });
   };
 
-  onSubmit = () => {
-    console.log('xxx', 'onSubmit');
+  navigateToPaymentFailed = () => {
+    Router.push(pageNames.paymentFailed);
   };
 
   goBack = () => {
@@ -254,6 +257,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         componentInstance.saveOrderAndNavigateToThankYou();
       })
       .catch(error => {
+        componentInstance.navigateToPaymentFailed();
         console.error('xxx paypal error', JSON.stringify(error));
       });
   };
