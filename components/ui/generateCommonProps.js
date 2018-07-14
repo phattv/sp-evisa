@@ -60,11 +60,11 @@ const setResponsiveFontSize = (
       break;
     }
     case spacingUnits.tablet: {
-      actualFontSize = fontSizes[fontSize || 'default'] - 1;
+      actualFontSize = fontSizes[fontSize || 'default'] - 2;
       break;
     }
     case spacingUnits.mobile: {
-      actualFontSize = fontSizes[fontSize || 'default'] - 2;
+      actualFontSize = fontSizes[fontSize || 'default'] - 4;
       break;
     }
     default: {
