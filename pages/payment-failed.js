@@ -53,7 +53,7 @@ class PaymentFailed extends React.Component<Props, State> {
             </Text>
             <Text>
               Please try again,{' '}
-              <Text color="green" onClick={openChatBox}>
+              <Text color="green" onClick={openChatBox} clickable>
                 give us a chat message
               </Text>{' '}
               or email us at{' '}
