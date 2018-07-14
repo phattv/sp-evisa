@@ -5,23 +5,14 @@ import React from 'react';
 import { Anchor, Flexbox, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-
 import { spacingValues, pageNames } from '../constants/ui';
-import { logPageView } from '../utils/analytics';
 import { companyInfo } from '../constants/companyInfo';
+import { logPageView } from '../utils/analytics';
 
 type Props = {};
 type State = {};
 
 const terms = [
-  {
-    term: 'Acceptance of Terms.',
-    description: `By using or visiting this Site, by sending or delivering your application(s) and other document(s) to ${
-      companyInfo.name
-    }, you are expressly agreeing to be bound by these Terms & Conditions as well as the Privacy Statement and to follow these Terms and any applicable laws and regulations. If you do not agree with the terms stated in this agreement or are dissatisfied with the site, please direct your complaints to Contact us. Your failure to follow these Terms & Conditions may result in legal action, suspension or termination of your access to this Site, without notice. ${
-      companyInfo.name
-    } reserves the right to change the Terms & Conditions, at any time, without notice. Please continue to review this agreement whenever accessing or using this site.`,
-  },
   {
     term: 'Processing time',
     description:
@@ -67,9 +58,9 @@ const terms = [
   {
     term: 'Assignment',
     description:
-      `You expressly agree that we may utilize the services of agents and third party contractors in the provisions of the services and the terms and conditions herein contained apply equally to the benefit of such persons or entities. The benefit of this agreement may be assigned by us, but not our obligations to you - to do that, you agree that we may give notice to you in writing, and your failure to respond will be deemed acceptance.\n` +
-      `Changing the terms & conditions on renewal.\n` +
-      `We may change the terms and conditions of this Agreement at any time.`,
+      `You expressly agree that we may utilize the services of agents and third party contractors in the provisions of the services and the Terms of Use herein contained apply equally to the benefit of such persons or entities. The benefit of this agreement may be assigned by us, but not our obligations to you - to do that, you agree that we may give notice to you in writing, and your failure to respond will be deemed acceptance.\n` +
+      `Changing the Terms of Use on renewal.\n` +
+      `We may change the Terms of Use of this Agreement at any time.`,
   },
   {
     term: 'Disclaimer',
@@ -106,8 +97,23 @@ class Terms extends React.Component<Props, State> {
           <Heading text="Terms of Use" />
           <Text p textAlign="center">
             In these Terms of Use{' '}
-            <Text semibold>"we", "our", "us", "Site"</Text> refers to{' '}
+            <Text semibold>"we", "our", "us", "site"</Text> refers to{' '}
             <Anchor href={pageNames.home}>{companyInfo.name}</Anchor>.
+            <br />
+            By using or visiting this site, by sending or delivering your
+            application(s) and other document(s) to evisa-vn.com, you are
+            expressly agreeing to be bound by these{' '}
+            <Anchor href={pageNames.terms}>Terms of Use</Anchor> as well as the{' '}
+            <Anchor href={pageNames.privacy}>Privacy Policy</Anchor> and to
+            follow these Terms and any applicable laws and regulations. If you
+            do not agree with the terms stated in this agreement or are
+            dissatisfied with the site, please direct your complaints to{' '}
+            <Anchor href={pageNames.contact}>Contact</Anchor>. Your failure to
+            follow these Terms of Use may result in legal action, suspension or
+            termination of your access to this site without notice. evisa-vn.com
+            reserves the right to change the Terms of Use, at any time, without
+            noticing. Please continue to review this agreement whenever
+            accessing or using this site.
           </Text>
           <Flexbox alignItems="flex-start" column paddingTop={10}>
             {terms.map((term, index) => (
