@@ -68,6 +68,7 @@ const boxShadow = '8px 8px 40px 0 rgba(91, 108, 148, 0.2)';
  * TODO: domain name is https://evisa-vn.com, how the page urls should be?
  * should page names have "visa-" prefix for SEO purposes?
  * like "visa-fees", "how-to-apply", "other-services", "contact-us"..
+ * TODO: share with server.js to generate sitemap.xml
  */
 const pageNames = {
   home: '/',

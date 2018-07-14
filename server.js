@@ -23,6 +23,7 @@ app.get('/robots.txt', (req, res) =>
   }),
 );
 
+// TODO: import { pageNames } from constants/ui
 app.get('/sitemap.xml', (req, res) =>
   sitemap
     .createSitemap({
@@ -33,6 +34,8 @@ app.get('/sitemap.xml', (req, res) =>
         { url: '/apply', changefreq: 'weekly', priority: 0.9 },
         { url: '/fees', changefreq: 'weekly', priority: 0.8 },
         { url: '/services', changefreq: 'weekly', priority: 0.7 },
+        { url: '/thank-you', changefreq: 'monthly', priority: 0.6 },
+        { url: '/payment-failed', changefreq: 'monthly', priority: 0.5 },
         { url: '/contact', changefreq: 'monthly', priority: 0.5 },
         { url: '/faq', changefreq: 'monthly', priority: 0.5 },
         { url: '/privacy', changefreq: 'monthly', priority: 0.5 },
