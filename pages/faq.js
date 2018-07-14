@@ -4,9 +4,9 @@ import React, { Fragment } from 'react';
 // custom
 import { Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
-import { colors, iconSizes, spacingValues } from '../constants/ui';
-import { logPageView } from '../utils/analytics';
 import Heading from '../components/Heading';
+import { iconSizes, spacingValues } from '../constants/ui';
+import { logPageView } from '../utils/analytics';
 
 const faqMaxWidth = 800 / 5;
 const faqsConstants = [

@@ -12,7 +12,6 @@ import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import Card from '../components/Card';
 import PaymentMethodImages from '../components/PaymentMethodImages';
-
 import { logPageView } from '../utils/analytics';
 import { reducerNames } from '../constants/reducerNames';
 import {

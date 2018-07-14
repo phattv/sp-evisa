@@ -13,12 +13,7 @@ import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
-import {
-  textMaxWidth,
-  spacingValues,
-  formMaxWidth,
-  pageNames,
-} from '../constants/ui';
+import { formMaxWidth, pageNames, spacingValues } from '../constants/ui';
 
 const formPaddingHorizontal = 3;
 
@@ -128,7 +123,7 @@ class Apply extends React.Component<Props, State> {
               <Flexbox column width="100%">
                 <Heading secondary text="Get your Visa in 3 steps" />
 
-                <Step.Group size="large" ordered items={steps} />
+                <Step.Group ordered items={steps} />
               </Flexbox>
 
               <Flexbox

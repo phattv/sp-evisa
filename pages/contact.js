@@ -100,19 +100,23 @@ class Contact extends React.Component<Props, State> {
                   />
                 </Flexbox>
                 <Flexbox paddingBottom={4} alignItems="baseline">
-                  <Image
-                    src="../static/icons/location.svg"
-                    alt="location"
-                    width={iconSizes.small}
-                  />
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/location.svg"
+                      alt="location"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
                   <Text paddingLeft={4}>{companyInfo.address}</Text>
                 </Flexbox>
                 <Flexbox paddingBottom={4}>
-                  <Image
-                    src="../static/icons/call.svg"
-                    alt="call"
-                    width={iconSizes.small}
-                  />
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/call.svg"
+                      alt="call"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
                   <Flexbox paddingLeft={4}>
                     <a href={`tel:${companyInfo.phone}`}>
                       <Text color="green" clickable>
@@ -122,11 +126,13 @@ class Contact extends React.Component<Props, State> {
                   </Flexbox>
                 </Flexbox>
                 <Flexbox paddingBottom={4}>
-                  <Image
-                    src="../static/icons/email.svg"
-                    alt="email"
-                    width={iconSizes.small}
-                  />
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/email.svg"
+                      alt="email"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
                   <Text paddingLeft={4}>
                     <a href={`mailto:${companyInfo.email}`}>
                       <Text color="green" clickable>
@@ -136,11 +142,13 @@ class Contact extends React.Component<Props, State> {
                   </Text>
                 </Flexbox>
                 <Flexbox paddingBottom={4} alignItems="baseline">
-                  <Image
-                    src="../static/icons/time.svg"
-                    alt="time"
-                    width={iconSizes.small}
-                  />
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/time.svg"
+                      alt="time"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
                   <Flexbox column paddingLeft={4}>
                     <Text semibold>Working Hours</Text>
                     <Text>

@@ -5,7 +5,7 @@ import React from 'react';
 import { Anchor, Flexbox, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import { spacingValues, pageNames } from '../constants/ui';
+import { pageNames, spacingValues } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { logPageView } from '../utils/analytics';
 
