@@ -20,7 +20,9 @@ const terms = [
       `WEEKENDs & HOLIDAY PROCESS INCLUDE ( 24/7 support): The fee may be extra charged for weekend and holiday process ( Only Tourist visa available on these days, some nationalities are not able to process, email us to check if possible). \n'` +
       `The visa letter will be sent to you via email immediately in case of emergency, contact us by email if you are not getting the visa letter from us via email.\n'` +
       `In special cases, additional documents or confirmations may be required and processing time may be longer than usual. In such cases, we will inform you by email.\n'` +
-      `The Vietnam Immigration Department may delay and/or deny the visa processing without any explanation. VietnamEvisa.vn holds no responsibility for any delays, cancellations, financial and other losses due to denial or delay in processing. No service fees, embassy fees, courier fees, shipping charges or any portion thereof will be refunded due to delays or denial of service.\n`,
+      `The Vietnam Immigration Department may delay and/or deny the visa processing without any explanation. ${
+        companyInfo.name
+      } holds no responsibility for any delays, cancellations, financial and other losses due to denial or delay in processing. No service fees, embassy fees, courier fees, shipping charges or any portion thereof will be refunded due to delays or denial of service.\n`,
   },
   {
     term: 'Fees & payments',

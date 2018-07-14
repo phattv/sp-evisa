@@ -428,7 +428,11 @@ class Home extends React.Component<Props, State> {
           >
             <Flexbox paddingBottom={3} column>
               <Heading text="How to apply?" color="white" />
-              <Heading text="Fast, Cheap and Simple" color="white" secondary />
+              <Heading
+                text="3 Steps to get your Visa"
+                color="white"
+                secondary
+              />
             </Flexbox>
             <Flexbox responsiveLayout paddingTop={10} width="100%">
               <Flexbox flex={1} alignItems="center" justifyContent="center">
@@ -490,7 +494,7 @@ class Home extends React.Component<Props, State> {
                     </Flexbox>
                     <Text color="white">
                       You can make payment via OnePay/PayPal with your
-                      Credit/Debit Card. Find out more about our fee{' '}
+                      Credit/Debit Card. Find out more about our fees{' '}
                       <Anchor href={pageNames.fees}>here</Anchor>.
                     </Text>
                   </Flexbox>

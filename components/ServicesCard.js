@@ -66,8 +66,8 @@ class ServicesCard extends React.Component<Props, State> {
                 />
                 <Flexbox
                   backgroundColor="white"
-                  paddingHorizontal={3}
                   paddingVertical={3}
+                  justifyContent="center"
                 >
                   {service.text}
                 </Flexbox>

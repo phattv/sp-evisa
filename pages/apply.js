@@ -167,12 +167,15 @@ class Apply extends React.Component<Props, State> {
           </ContentMaxWidth>
         ) : (
           <Flexbox maxWidth={formMaxWidth} alignItem="center">
-            <Card maxWidth={textMaxWidth}>
+            <Card>
               <Text color="green" fontSize="l" p textAlign="center">
-                This application will take not more than 15 minutes.
+                All information provided to evisa-vn.com
+                <br />
+                will be kept confidential.
               </Text>
               <Text p textAlign="center">
-                All information provided to evisa.vn will be kept confidential.
+                This application will take approximately 5 minutes.
+                <br />
                 By using our service, you agree to our{' '}
                 <Anchor href={pageNames.terms}>Terms of Use</Anchor>.
               </Text>
