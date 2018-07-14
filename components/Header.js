@@ -22,7 +22,7 @@ Router.onRouteChangeError = () => NProgress.done();
 
 const menus = [
   {
-    text: 'About',
+    text: 'Home',
     url: pageNames.home,
   },
   {
