@@ -240,7 +240,7 @@ class Home extends React.Component<Props, State> {
       <Fragment>
         <ContentMaxWidth backgroundImage="url('../static/images/bg-banner.jpg')">
           <Flexbox paddingVertical={10} responsiveLayout alignItems="center">
-            <Flexbox flex={1} column {...paddingAll} maxWidth={125}>
+            <Flexbox column {...paddingAll} maxWidth={150}>
               <Heading
                 color="white"
                 text="Easiest way to get your Vietnam Visa."
@@ -255,11 +255,11 @@ class Home extends React.Component<Props, State> {
               </Text>
             </Flexbox>
             <Flexbox
-              flex={1}
               column
               backgroundColor="bgGrey2"
               borderRadius={borderRadius}
               overflow="hidden"
+              width="100%"
               maxWidth={100}
             >
               <Form

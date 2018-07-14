@@ -102,7 +102,7 @@ class Services extends React.Component<Props, State> {
                 <Heading secondary text="Airport Fast Track" />
               </Flexbox>
             </Flexbox>
-            <Flexbox>
+            <Flexbox responsiveLayout>
               {airportFastTrackTables.map((airportFastTrack, index) => (
                 <Flexbox
                   key={index}

@@ -115,7 +115,7 @@ class Fees extends React.Component<Props, State> {
         <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
           <Flexbox column paddingHorizontal={16} paddingVertical={16}>
             <Heading color="white" text="Fees you have to pay" />
-            <Flexbox width="100%" alignItems="center">
+            <Flexbox width="100%" alignItems="center" responsiveLayout>
               <Flexbox flex={1}>
                 <Card>
                   <Text>

@@ -30,26 +30,24 @@ class ContentMaxWidth extends React.Component<Props, State> {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <Flexbox
-          width="100%"
-          justifyContent="center"
-          maxWidth={contentMaxWidth}
-          style={{ margin: 'auto' }}
-        >
-          {children}
-        </Flexbox>
+        <ContentWrapper children={children} />
       </Flexbox>
     ) : (
-      <Flexbox
-        width="100%"
-        justifyContent="center"
-        maxWidth={contentMaxWidth}
-        style={{ margin: 'auto' }}
-      >
-        {children}
-      </Flexbox>
+      <ContentWrapper children={children} />
     );
   }
 }
+
+const ContentWrapper = ({ children }) => (
+  <Flexbox
+    width="100%"
+    justifyContent="center"
+    maxWidth={contentMaxWidth}
+    paddingHorizontal={3}
+    style={{ margin: 'auto' }}
+  >
+    {children}
+  </Flexbox>
+);
 
 export default ContentMaxWidth;
