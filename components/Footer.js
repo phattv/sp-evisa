@@ -35,7 +35,10 @@ class Footer extends React.Component<Props> {
             {companyInfo.address}
           </Text>
           <Flexbox paddingTop={10} justifyContent="space-around" width="100%">
-            {/*Facebook / */}
+            <Anchor href={companyInfo.facebook} target="_blank">
+              Facebook
+            </Anchor>
+            <Text>/</Text>
             <Anchor href={pageNames.terms}>Terms of Use</Anchor>
             <Text>/</Text>
             <Anchor href={pageNames.privacy}>Privacy Policy</Anchor>
