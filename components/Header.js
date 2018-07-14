@@ -69,7 +69,12 @@ class Header extends React.PureComponent<Props, State> {
     shouldShowMobileMenus: false,
   };
 
-  navigateToApply = () => Router.push(pageNames.apply);
+  navigate = (url: string) => {
+    this.setState({
+      shouldShowMobileMenus: false,
+    });
+    Router.push(url);
+  };
 
   toggleMobileMenus = () => {
     this.setState({
@@ -172,19 +177,21 @@ class Header extends React.PureComponent<Props, State> {
       </a>
 
       {menus.map((menu, index) => (
-        <Anchor
+        <Text
+          clickable
           key={index}
-          href={menu.url}
+          onClick={() => this.navigate(menu.url)}
           color="mediumBlue"
           activeColor="green"
           style={mobileAnchorStyles}
         >
           {menu.text}
-        </Anchor>
+        </Text>
       ))}
 
-      <Anchor
-        href={pageNames.apply}
+      <Text
+        clickable
+        onClick={() => this.navigate(pageNames.apply)}
         color={'white'}
         activeColor={'green'}
         style={{
@@ -194,7 +201,7 @@ class Header extends React.PureComponent<Props, State> {
         }}
       >
         APPLY
-      </Anchor>
+      </Text>
     </Flexbox>
   );
 
