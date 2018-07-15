@@ -1,4 +1,14 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.3] - 2018-07-16
+### Added
+- /reviews
+- /faq questions and answers
+- Override some semantic-ui-css styles 
+### Changed
+- <meta> tags
+### Fixed
+- StepTwo: Fix syncPropsToState set countryId from stepOne only when countryId is not set
+
 ## [3.0.0-beta.2.2] - 2018-07-14
 ### Added
 - /thank-you & /payment-failed
