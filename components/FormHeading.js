@@ -23,7 +23,7 @@ class FormHeading extends React.Component<Props, State> {
       : null;
 
     return (
-      <Flexbox paddingBottom={3} column {...paddingTop}>
+      <Flexbox paddingBottom={6} column {...paddingTop}>
         <Text fontSize="m">{text}</Text>
         <Divider />
       </Flexbox>

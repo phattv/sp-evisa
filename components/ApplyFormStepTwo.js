@@ -303,7 +303,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                 )}
               </Flexbox>
               <Divider />
-              <Flexbox paddingTop={3} />
+              <Flexbox paddingTop={6} />
 
               <Form.Field required>
                 <label>Full name</label>

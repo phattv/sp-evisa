@@ -9,3 +9,9 @@ body {
 a {
     text-decoration: none;
 }
+
+/* Override semantic-ui-css */
+.ui.form .field > label {
+    margin-bottom: 6px !important;
+    line-height: 20px !important;
+}

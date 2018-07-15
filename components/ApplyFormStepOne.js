@@ -5,8 +5,9 @@ import { Checkbox, Dropdown, Form } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import { connect } from 'react-redux';
 // custom
-import { Button, Flexbox, Text } from './ui';
+import { Anchor, Button, Flexbox, Text } from './ui';
 import FormHeading from './FormHeading';
+import Divider from './Divider';
 import FormErrorMessage from './FormErrorMessage';
 import {
   updateFees,
@@ -14,6 +15,7 @@ import {
   updateStepOne,
 } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
+import { pageNames } from '../constants/ui';
 import {
   airportFastTrackOptions,
   carPickUpOptions,
@@ -287,7 +289,13 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         </Form.Field>
 
         {/* TODO: collapse by default on mobile */}
-        <FormHeading text="Other Services (Optional)" hasPaddingTop />
+        <Flexbox paddingBottom={6} column paddingTop={6}>
+          <Flexbox justifyContent="space-between" alignItems="center">
+            <Text fontSize="m">Other Services (Optional)</Text>
+            <Anchor href={pageNames.services}>See all</Anchor>
+          </Flexbox>
+          <Divider />
+        </Flexbox>
         <Form.Field>
           <label>Airport Fast Track</label>
           <Dropdown
