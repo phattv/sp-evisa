@@ -79,6 +79,7 @@ class Services extends React.Component<Props, State> {
               />
             </Flexbox>
             <Heading secondary text="Services Upon Arrival" />
+            {/* TODO: change this sentence */}
             <Text textAlign="center" width={textMaxWidth}>
               We offer an all-in-one arrival package which covers all your needs
               for your trip in Vietnam.
@@ -102,7 +103,7 @@ class Services extends React.Component<Props, State> {
                 <Heading secondary text="Airport Fast Track" />
               </Flexbox>
             </Flexbox>
-            <Flexbox responsiveLayout>
+            <Flexbox responsiveLayout id="airport-fast-track">
               {airportFastTrackTables.map((airportFastTrack, index) => (
                 <Flexbox
                   key={index}
@@ -174,7 +175,7 @@ class Services extends React.Component<Props, State> {
                 Vietnam for the first time and/or your arrival is at night.
               </Text>
             </Flexbox>
-            <Flexbox>
+            <Flexbox id="pick-up">
               <Flexbox
                 responsiveLayout
                 justifyContent="center"
@@ -232,7 +233,10 @@ class Services extends React.Component<Props, State> {
           </Flexbox>
         </ContentMaxWidth>
 
-        <ContentMaxWidth backgroundImage="url('../static/images/bg-letter.jpg')">
+        <ContentMaxWidth
+          backgroundImage="url('../static/images/bg-letter.jpg')"
+          id="private-letter"
+        >
           <Flexbox
             column
             alignItems="center"

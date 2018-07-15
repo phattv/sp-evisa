@@ -12,14 +12,17 @@ const services = [
   {
     image: 'fast-track.jpg',
     text: 'Airport fast track',
+    anchor: 'airport-fast-track',
   },
   {
     image: 'pick-up.jpg',
     text: 'Pick up at airport',
+    anchor: 'pick-up',
   },
   {
     image: 'private-letter.jpg',
     text: 'Private letter',
+    anchor: 'private-letter',
   },
 ];
 
@@ -29,7 +32,9 @@ const services = [
 type Props = {};
 type State = {};
 class ServicesCard extends React.Component<Props, State> {
-  navigateToServices = () => Router.push(pageNames.services);
+  // TODO: navigate to appropriate anchor
+  navigateToServices = (anchor: string) =>
+    Router.push(`${pageNames.services}#${anchor}`);
 
   render() {
     return (
@@ -54,7 +59,7 @@ class ServicesCard extends React.Component<Props, State> {
                 flex={1}
                 clickable
                 column
-                onClick={this.navigateToServices}
+                onClick={() => this.navigateToServices(service.anchor)}
                 maxWidth={60}
                 marginHorizontal={2}
                 marginVertical={2}
