@@ -6,6 +6,7 @@ import { DateInput } from 'semantic-ui-calendar-react';
 import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
 // custom
 import { Button, Flexbox, Text } from './ui';
 import { resetStepTwo, updateStepTwo } from '../redux/actions';
@@ -68,24 +69,30 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   };
 
   onSubmit = () => {
-    const { stepTwo } = this.props;
-    const indexes = Object.keys(stepTwo);
-    if (indexes.length > 0) {
-      let isFillInValues = [];
-      indexes.forEach(index => {
-        isFillInValues.push(stepTwo[index].isFilledIn);
-      });
+    const { applicants } = this.state;
+    let shouldShowErrorMessage = false;
 
-      // show error
-      if (isFillInValues.includes(false)) {
-        this.setState({
-          shouldShowErrorMessage: true,
-        });
-      } else {
-        // continue to step 3
-        const { onSubmit } = this.props;
-        onSubmit && onSubmit();
+    applicants.forEach(applicant => {
+      if (
+        _isEmpty(applicant.name) ||
+        applicant.countryId <= 0 ||
+        _isEmpty(applicant.birthday) ||
+        _isEmpty(applicant.gender) ||
+        _isEmpty(applicant.passport) ||
+        _isEmpty(applicant.passportExpiry)
+      ) {
+        shouldShowErrorMessage = true;
       }
+    });
+
+    this.setState({
+      shouldShowErrorMessage,
+    });
+
+    if (!shouldShowErrorMessage) {
+      // continue to step 3
+      const { onSubmit } = this.props;
+      onSubmit && onSubmit();
     }
   };
 
