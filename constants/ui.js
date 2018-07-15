@@ -11,6 +11,7 @@ const colors = {
   bgGrey2: '#F2F7FF',
   bgRed: '#FFD1D7',
   white: '#FFFFFF',
+  transparent: 'transparent',
 };
 
 const fontSizes = {

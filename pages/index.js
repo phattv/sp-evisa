@@ -448,6 +448,9 @@ class Home extends React.Component<Props, State> {
                   <StepNumber
                     number="1"
                     active={activeStepImage === activeStepImages.stepOne}
+                    onClick={() =>
+                      this.setActiveStepImage(activeStepImages.stepOne)
+                    }
                   />
                   <Flexbox column paddingLeft={5}>
                     <Flexbox alignItems="center">
@@ -455,7 +458,7 @@ class Home extends React.Component<Props, State> {
                         color="green"
                         fontSize="m"
                         clickable
-                        hoverBackgroundColor="darkBlue"
+                        hoverBackgroundColor="transparent"
                         hoverColor="red"
                         onClick={() =>
                           this.setActiveStepImage(activeStepImages.stepOne)
@@ -475,6 +478,9 @@ class Home extends React.Component<Props, State> {
                   <StepNumber
                     number="2"
                     active={activeStepImage === activeStepImages.stepTwo}
+                    onClick={() =>
+                      this.setActiveStepImage(activeStepImages.stepTwo)
+                    }
                   />
                   <Flexbox column paddingLeft={5}>
                     <Flexbox alignItems="center">
@@ -482,7 +488,7 @@ class Home extends React.Component<Props, State> {
                         color="green"
                         fontSize="m"
                         clickable
-                        hoverBackgroundColor="darkBlue"
+                        hoverBackgroundColor="transparent"
                         hoverColor="red"
                         onClick={() =>
                           this.setActiveStepImage(activeStepImages.stepTwo)
@@ -502,6 +508,9 @@ class Home extends React.Component<Props, State> {
                   <StepNumber
                     number="3"
                     active={activeStepImage === activeStepImages.stepThree}
+                    onClick={() =>
+                      this.setActiveStepImage(activeStepImages.stepThree)
+                    }
                   />
                   <Flexbox column paddingLeft={5}>
                     <Flexbox alignItems="center">
@@ -509,7 +518,7 @@ class Home extends React.Component<Props, State> {
                         color="green"
                         fontSize="m"
                         clickable
-                        hoverBackgroundColor="darkBlue"
+                        hoverBackgroundColor="transparent"
                         hoverColor="red"
                         onClick={() =>
                           this.setActiveStepImage(activeStepImages.stepThree)
@@ -539,8 +548,14 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-const StepNumber = ({ number, active }) => (
-  <Flexbox alignItems="center">
+const StepNumber = ({ number, active, onClick }) => (
+  <Flexbox
+    alignSelf="stretch"
+    alignItems="center"
+    onClick={onClick}
+    clickable
+    hoverBackgroundColor="transparent"
+  >
     <Flexbox
       alignItems="center"
       justifyContent="center"
