@@ -342,7 +342,12 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                 }}
               >
                 <Flexbox flex={1} marginRight={2}>
-                  <Form.Field required>
+                  <Form.Field
+                    required
+                    style={{
+                      width: '100%',
+                    }}
+                  >
                     <label>Gender</label>
                     <Dropdown
                       value={applicant.gender}

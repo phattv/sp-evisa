@@ -20,3 +20,7 @@ a {
 .ui.form .field .ui.input input {
     width: 100% !important;
 }
+
+.ui.selection.dropdown {
+    min-width: 10em !important;
+}
