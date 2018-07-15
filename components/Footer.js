@@ -26,7 +26,7 @@ class Footer extends React.Component<Props> {
           alignItems="center"
           column
         >
-          <Text>Copyright © {currentYear} evisa-vn</Text>
+          <Text>Copyright © {currentYear} evisa-vn. All rights reserved.</Text>
           <Text paddingTop={4} semibold>
             CONTACT US
           </Text>

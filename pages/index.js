@@ -243,7 +243,7 @@ class Home extends React.Component<Props, State> {
             <Flexbox column {...paddingAll} maxWidth={150}>
               <Heading
                 color="white"
-                text="Easiest way to get your Vietnam Visa."
+                text="Easiest way to get Vietnam Visa."
                 textAlign="left"
               />
               <Text color="white" paddingBottom={7}>
@@ -360,7 +360,7 @@ class Home extends React.Component<Props, State> {
                     />
                   </Flexbox>
                   <Text fontSize="m" semibold>
-                    24/7 customer service
+                    24/7 Customer Service
                   </Text>
                   <Divider small />
                   <Text paddingTop={6}>

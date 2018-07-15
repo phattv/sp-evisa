@@ -35,20 +35,20 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           {/* TODO: dynamic title */}
-          <title>evisa-vn - Trusted & Instant Vietnam Visa Service</title>
+          <title>evisa-vn - Easiest way to get your Vietnam Visa.</title>
           {this.props.styleTags}
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
-          <meta name="application-name" content="evisa-vn.com" />
+          <meta name="application-name" content="evisa-vn" />
           <meta name="theme-color" content="#2C3F60" />
           <meta
             name="description"
-            content="Trusted and instant Vietnam visa services best price guarantee. 24/7 customer support"
+            content="Easiest way to get Vietnam Visa, 24/7 Customer Service - Confidentiality - Reliability"
           />
           <meta
             name="keywords"
-            content="vietnam, visa, best, price, guarantee, trusted, fast, services, service, urgent, 30, minutes, mins, convenient, fees, fee"
+            content="vietnam, visa, evisa, easy, easiest, best, price, budget, guarantee, trusted, fast, services, service, urgent, 5, minutes, mins, fees, fee, confidentiality, reliability"
           />
 
           <link

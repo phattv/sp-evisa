@@ -184,7 +184,6 @@ class Fees extends React.Component<Props, State> {
               </Flexbox>
 
               <Flexbox paddingTop={6} width={tableWidth}>
-                {/* TODO: country flag */}
                 <Dropdown
                   value={countryId}
                   placeholder="Select Country"
