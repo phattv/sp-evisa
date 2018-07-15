@@ -204,7 +204,11 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     const { countryId } = this.props;
     let applicants = _get(nextProps, 'stepTwo.applicants', []);
     if (countryId) {
-      applicants.forEach(applicant => (applicant.countryId = countryId));
+      applicants.forEach(applicant => {
+        if (applicant.countryId <= 0) {
+          applicant.countryId = countryId;
+        }
+      });
     }
 
     this.setState({
