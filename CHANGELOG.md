@@ -1,4 +1,17 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.2.2] - 2018-07-14
+### Added
+- /thank-you & /payment-failed
+- Facebook page url
+### Changed
+- Update /terms & /privacy
+- fontSizes: -2 on tablet, -4 on mobile
+### Fixed
+- Responsive layout for mobile
+- Header: click on a menu to hide menus
+### Removed
+- <style jsx global>
+
 ## [3.0.0-beta.2] - 2018-07-13
 ### Added
 - Viewport for mobile view
