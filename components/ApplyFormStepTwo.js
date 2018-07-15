@@ -314,6 +314,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   onChange={event => this.updateTextInput(event, index)}
                 />
               </Form.Field>
+
               <Form.Field required>
                 <label>Nationality</label>
                 <Dropdown
@@ -327,22 +328,13 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   }
                 />
               </Form.Field>
-              <Flexbox>
-                <Flexbox flex={1}>
-                  <Form.Field required>
-                    <label>Date of Birth</label>
-                    <DateInput
-                      {...defaultDateInputProps}
-                      name="birthday"
-                      placeholder="Select..."
-                      value={parsedBirthday}
-                      onChange={(event, option) =>
-                        this.updateDatePicker(event, option, index)
-                      }
-                    />
-                  </Form.Field>
-                </Flexbox>
-                <Flexbox flex={1}>
+
+              <Flexbox
+                style={{
+                  marginBottom: '1em',
+                }}
+              >
+                <Flexbox flex={1} marginRight={2}>
                   <Form.Field required>
                     <label>Gender</label>
                     <Dropdown
@@ -357,19 +349,35 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                     />
                   </Form.Field>
                 </Flexbox>
+                <Flexbox flex={1} marginLeft={2}>
+                  <Form.Field required>
+                    <label>Date of Birth</label>
+                    <DateInput
+                      {...defaultDateInputProps}
+                      name="birthday"
+                      placeholder="Select..."
+                      value={parsedBirthday}
+                      onChange={(event, option) =>
+                        this.updateDatePicker(event, option, index)
+                      }
+                    />
+                  </Form.Field>
+                </Flexbox>
               </Flexbox>
 
               <Flexbox>
-                <Form.Field required>
-                  <label>Passport No.</label>
-                  <Input
-                    name="passport"
-                    placeholder="Enter..."
-                    value={applicant.passport}
-                    onChange={event => this.updateTextInput(event, index)}
-                  />
-                </Form.Field>
-                <Flexbox flex={1}>
+                <Flexbox flex={1} marginRight={2}>
+                  <Form.Field required>
+                    <label>Passport No.</label>
+                    <Input
+                      name="passport"
+                      placeholder="Enter..."
+                      value={applicant.passport}
+                      onChange={event => this.updateTextInput(event, index)}
+                    />
+                  </Form.Field>
+                </Flexbox>
+                <Flexbox flex={1} marginLeft={2}>
                   <Form.Field required>
                     <label>Expiry Date</label>
                     <DateInput

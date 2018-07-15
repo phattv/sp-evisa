@@ -115,20 +115,17 @@ class Apply extends React.Component<Props, State> {
         {isAgreeClicked ? (
           <ContentMaxWidth>
             <Flexbox
-              paddingVertical={spacingValues.blockPaddingTop}
+              paddingTop={10}
+              paddingBottom={spacingValues.blockPaddingTop}
               column
               alignItems="center"
               maxWidth={formMaxWidth - formPaddingHorizontal * 4}
             >
-              <Flexbox column width="100%">
-                <Heading secondary text="Get your Visa in 3 steps" />
-
-                <Step.Group ordered items={steps} />
-              </Flexbox>
+              <Heading secondary text="Get your Visa in 3 steps" />
+              <Step.Group ordered items={steps} fluid />
 
               <Flexbox
                 justifyContent="space-between"
-                paddingTop={6}
                 responsiveLayout
                 width="100%"
               >
