@@ -76,7 +76,7 @@ class Contact extends React.Component<Props, State> {
       <Fragment>
         <ContentMaxWidth>
           <Flexbox paddingTop={16} column alignItems="center">
-            <Heading text="Get in touch" />
+            <Heading text="Get In Touch" />
             <Text textAlign="center" maxWidth={150}>
               We are committed to provide the best and most rewarding experience
               to all travelers to Vietnam. Therefore, whether you plan to use

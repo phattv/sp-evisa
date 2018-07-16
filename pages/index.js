@@ -247,8 +247,8 @@ class Home extends React.Component<Props, State> {
                 textAlign="left"
               />
               <Text color="white" paddingBottom={7}>
-                Visa application can be intimidate to everyone and bothersome to
-                even the most seasoned travelers. If you are traveling to
+                Visa application can be intimidating to everyone and bothersome
+                to even the most seasoned travelers. If you are traveling to
                 Vietnam, let evisa-vn take care of all the hassles. Get your
                 visa in just 3 simple steps with evisa-vn, so you would have
                 more time planning your trips.
@@ -364,7 +364,7 @@ class Home extends React.Component<Props, State> {
                   </Text>
                   <Divider small />
                   <Text paddingTop={6}>
-                    We reply to all enquiries within 5 minutes.
+                    We reply to all enquiries and messages within 5 minutes.
                   </Text>
                 </Flexbox>
                 <Flexbox flex={1} column marginHorizontal={5}>
@@ -388,12 +388,12 @@ class Home extends React.Component<Props, State> {
                   <Flexbox>
                     <Image
                       src="../static/icons/step-3.svg"
-                      alt="reliability"
+                      alt="speed"
                       width={iconSizes.default}
                     />
                   </Flexbox>
                   <Text fontSize="m" semibold>
-                    Reliability
+                    Speed
                   </Text>
                   <Divider small />
                   <Text paddingTop={6}>
@@ -412,9 +412,9 @@ class Home extends React.Component<Props, State> {
             maxWidth={160}
             paddingBottom={spacingValues.blockPaddingTop}
           >
-            <Heading text="Money-back guarantee" color="green" />
+            <Heading text="Money-back Guarantee" color="green" />
             <Heading
-              text="All service fee will be reimbursed if your application is rejected."
+              text="All service fee will be reimbursed in case your application is rejected."
               secondary
             />
           </Flexbox>
@@ -427,12 +427,7 @@ class Home extends React.Component<Props, State> {
             width="100%"
           >
             <Flexbox paddingBottom={3} column>
-              <Heading text="How to apply?" color="white" />
-              <Heading
-                text="3 Steps to get your Visa"
-                color="white"
-                secondary
-              />
+              <Heading text="How to Apply?" color="white" />
             </Flexbox>
             <Flexbox responsiveLayout paddingTop={10} width="100%">
               <Flexbox flex={1} alignItems="center" justifyContent="center">

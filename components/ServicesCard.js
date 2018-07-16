@@ -45,7 +45,7 @@ class ServicesCard extends React.Component<Props, State> {
           alignItems="center"
           paddingTop={spacingValues.blockPaddingTop}
         >
-          <Heading text="Other services" />
+          <Heading text="Other Services" />
           <Flexbox
             width="100%"
             justifyContent="center"

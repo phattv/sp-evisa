@@ -113,7 +113,7 @@ class Fees extends React.Component<Props, State> {
       <Fragment>
         <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
           <Flexbox column paddingHorizontal={16} paddingVertical={16}>
-            <Heading color="white" text="Fees you have to pay" />
+            <Heading color="white" text="Fees" />
             <Flexbox width="100%" alignItems="center" responsiveLayout>
               <Flexbox flex={1}>
                 <Card>
@@ -178,7 +178,7 @@ class Fees extends React.Component<Props, State> {
               />
               <Flexbox paddingTop={3}>
                 <Heading
-                  text="Select your country to see the Service Fees in details"
+                  text="Select your country to see Service Fees in details"
                   secondary
                 />
               </Flexbox>
