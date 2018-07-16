@@ -85,6 +85,13 @@ const pageNames = {
   privacy: '/privacy',
 };
 
+const htmlIds = {
+  airportFastTrack: 'airport-fast-track',
+  pickUp: 'pick-up',
+  privateLetter: 'private-letter',
+  formErrorMessage: 'form-error-message',
+};
+
 /**
  * NOTES using dayjs library:
  * - `dayjs('2018-12-31').format('DD/MM/YYYY')` // console: "31/12/2018"
@@ -113,5 +120,6 @@ export {
   paddingAllLarge,
   boxShadow,
   pageNames,
+  htmlIds,
   iconSizes,
 };

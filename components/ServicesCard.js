@@ -6,23 +6,23 @@ import Router from 'next/router';
 import { Flexbox, Image } from './ui';
 import ContentMaxWidth from './ContentMaxWidth';
 import Heading from './Heading';
-import { pageNames, spacingValues } from '../constants/ui';
+import { pageNames, htmlIds, spacingValues } from '../constants/ui';
 
 const services = [
   {
     image: 'fast-track.jpg',
     text: 'Airport fast track',
-    anchor: 'airport-fast-track',
+    anchor: htmlIds.airportFastTrack,
   },
   {
     image: 'pick-up.jpg',
     text: 'Pick up at airport',
-    anchor: 'pick-up',
+    anchor: htmlIds.pickUp,
   },
   {
     image: 'private-letter.jpg',
     text: 'Private letter',
-    anchor: 'private-letter',
+    anchor: htmlIds.privateLetter,
   },
 ];
 

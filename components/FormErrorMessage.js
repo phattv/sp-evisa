@@ -3,6 +3,7 @@
 import React from 'react';
 // custom
 import { Flexbox, Text } from './ui';
+import { htmlIds } from '../constants/ui';
 
 /**
  * FormErrorMessage show error message for apply form
@@ -23,6 +24,7 @@ class FormErrorMessage extends React.Component<Props, State> {
 
     return (
       <Flexbox
+        id={htmlIds.formErrorMessage}
         width="100%"
         backgroundColor="bgRed"
         paddingVertical={2}

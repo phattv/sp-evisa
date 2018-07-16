@@ -10,6 +10,7 @@ import Heading from '../components/Heading';
 import {
   iconSizes,
   pageNames,
+  htmlIds,
   spacingValues,
   tableWidth,
   textMaxWidth,
@@ -103,7 +104,7 @@ class Services extends React.Component<Props, State> {
                 <Heading secondary text="Airport Fast Track" />
               </Flexbox>
             </Flexbox>
-            <Flexbox responsiveLayout id="airport-fast-track">
+            <Flexbox responsiveLayout id={htmlIds.airportFastTrack}>
               {airportFastTrackTables.map((airportFastTrack, index) => (
                 <Flexbox
                   key={index}
@@ -175,7 +176,7 @@ class Services extends React.Component<Props, State> {
                 Vietnam for the first time and/or your arrival is at night.
               </Text>
             </Flexbox>
-            <Flexbox id="pick-up">
+            <Flexbox id={htmlIds.pickUp}>
               <Flexbox
                 responsiveLayout
                 justifyContent="center"
@@ -235,7 +236,7 @@ class Services extends React.Component<Props, State> {
 
         <ContentMaxWidth
           backgroundImage="url('../static/images/bg-letter.jpg')"
-          id="private-letter"
+          id={htmlIds.privateLetter}
         >
           <Flexbox
             column
