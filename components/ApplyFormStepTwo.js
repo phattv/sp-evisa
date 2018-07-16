@@ -9,7 +9,7 @@ import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 // custom
 import { Button, Flexbox, Text } from './ui';
-import { resetStepTwo, updateStepTwo } from '../redux/actions';
+import { updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
 import { displayDateFormat, postgresDateFormat } from '../constants/ui';
 import {
@@ -40,7 +40,6 @@ type Props = {
   stepOne: Object,
   stepTwo: Object,
   updateStepTwo: Object => void,
-  resetStepTwo: () => void,
   goBack: () => void,
 };
 type Applicant = {
@@ -71,7 +70,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
   onSubmit = () => {
     const { applicants, flightNumber } = this.state;
-    const isFlightNumberRequired = this.getFlightNumberRequired();
+    const isFlightNumberRequired = this.getFlightNumberRequirement();
     let shouldShowErrorMessage = false;
 
     if (isFlightNumberRequired && _isEmpty(flightNumber)) {
@@ -102,10 +101,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     }
   };
 
-  // TODO: remove resetStepTwo
   goBack = () => {
-    const { resetStepTwo, goBack } = this.props;
-    // resetStepTwo();
+    const { goBack } = this.props;
     goBack();
   };
 
@@ -195,7 +192,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     });
   };
 
-  getFlightNumberRequired = () => {
+  getFlightNumberRequirement = () => {
     return _get(this, 'props.stepOne.extraServices.fastTrack', '') !== '';
   };
 
@@ -281,7 +278,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             onChange={this.updateFlightDate}
           />
         </Form.Field>
-        <Form.Field required={this.getFlightNumberRequired()}>
+        <Form.Field required={this.getFlightNumberRequirement()}>
           <label>Flight Number</label>
           <Input
             name="flightNumber"
@@ -450,6 +447,5 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = {
   updateStepTwo,
-  resetStepTwo,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyFormStepTwo);
