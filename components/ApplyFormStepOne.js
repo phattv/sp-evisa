@@ -231,6 +231,11 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       typeOptionsByPurpose = typeOptions;
     }
 
+    let fastTrackOptions =
+      processingTime === 'emergency'
+        ? airportFastTrackOptions.slice(1)
+        : airportFastTrackOptions;
+
     return (
       <Form
         onSubmit={this.onSubmit}
@@ -304,7 +309,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             fluid
             search
             selection
-            options={airportFastTrackOptions}
+            options={fastTrackOptions}
             onChange={this.updateAirportFastTrack}
           />
         </Form.Field>
