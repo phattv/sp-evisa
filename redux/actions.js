@@ -49,12 +49,6 @@ const updatePrice = (params: Object) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
-const updatePaymentStatus = (params: Object) => (dispatch: Dispatch) => {
-  return dispatch({
-    type: actionTypes.UPDATE_PAYMENT_STATUS,
-    payload: params,
-  });
-};
 const updateFees = (params: Array<Object>) => (dispatch: Dispatch) => {
   return dispatch({
     type: actionTypes.UPDATE_FEES,
@@ -97,7 +91,6 @@ export {
   updateStepTwo,
   updateStepThree,
   updatePrice,
-  updatePaymentStatus,
   updateFees,
   updateFeesSelectedCountry,
   updateAccount,

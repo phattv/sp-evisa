@@ -32,7 +32,6 @@ type Props = {
   price: number,
   updateStepThree: Object => void,
   goBack: () => void,
-  // updatePaymentStatus: boolean => void,
 };
 type State = {
   name: string,
@@ -231,7 +230,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   payment = (data, actions) => {
-    // this.props.updatePaymentStatus(false);
     const { price } = this.props;
 
     return actions.payment.create({
@@ -253,7 +251,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     return actions.payment
       .execute()
       .then(function(payment) {
-        // componentInstance.props.updatePaymentStatus(true);
         componentInstance.saveOrderAndNavigateToThankYou();
       })
       .catch(error => {
@@ -263,14 +260,12 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   onCancel = (data, actions) => {
-    // this.props.updatePaymentStatus(false);
     alert('payment cancelled');
     console.log('The payment was cancelled!');
     console.log('Payment ID = ', data.paymentID);
   };
 
   onError = error => {
-    // this.props.updatePaymentStatus(false);
     alert('payment failed');
     console.error('paypal error', error);
   };
@@ -454,6 +449,5 @@ const mapStateToProps = store => {
 };
 const mapDispatchToProps = {
   updateStepThree,
-  // updatePaymentStatus,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyFormStepThree);
