@@ -37,6 +37,7 @@ const defaultDateInputProps = {
 type Props = {
   onSubmit: () => void,
   countryId: number,
+  stepOne: Object,
   stepTwo: Object,
   updateStepTwo: Object => void,
   resetStepTwo: () => void,
@@ -69,21 +70,26 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   };
 
   onSubmit = () => {
-    const { applicants } = this.state;
+    const { applicants, flightNumber } = this.state;
+    const isFlightNumberRequired = this.getFlightNumberRequired();
     let shouldShowErrorMessage = false;
 
-    applicants.forEach(applicant => {
-      if (
-        _isEmpty(applicant.name) ||
-        applicant.countryId <= 0 ||
-        _isEmpty(applicant.birthday) ||
-        _isEmpty(applicant.gender) ||
-        _isEmpty(applicant.passport) ||
-        _isEmpty(applicant.passportExpiry)
-      ) {
-        shouldShowErrorMessage = true;
-      }
-    });
+    if (isFlightNumberRequired && _isEmpty(flightNumber)) {
+      shouldShowErrorMessage = true;
+    } else {
+      applicants.forEach(applicant => {
+        if (
+          _isEmpty(applicant.name) ||
+          applicant.countryId <= 0 ||
+          _isEmpty(applicant.birthday) ||
+          _isEmpty(applicant.gender) ||
+          _isEmpty(applicant.passport) ||
+          _isEmpty(applicant.passportExpiry)
+        ) {
+          shouldShowErrorMessage = true;
+        }
+      });
+    }
 
     this.setState({
       shouldShowErrorMessage,
@@ -189,6 +195,10 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     });
   };
 
+  getFlightNumberRequired = () => {
+    return _get(this, 'props.stepOne.extraServices.fastTrack', '') !== '';
+  };
+
   // Life cycle functions
   componentWillReceiveProps(nextProps) {
     if (this.props.stepTwo !== nextProps.stepTwo) {
@@ -271,7 +281,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             onChange={this.updateFlightDate}
           />
         </Form.Field>
-        <Form.Field>
+        <Form.Field required={this.getFlightNumberRequired()}>
           <label>Flight Number</label>
           <Input
             name="flightNumber"
@@ -434,6 +444,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 const mapStateToProps = store => {
   return {
     countryId: _get(store, `${reducerNames.form}.stepOne.countryId`, 0),
+    stepOne: _get(store, 'form.stepOne', {}),
     stepTwo: _get(store, `${reducerNames.form}.stepTwo`, {}),
   };
 };
