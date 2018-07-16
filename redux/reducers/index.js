@@ -35,6 +35,7 @@ const reducers = {
 };
 const combinedReducer = combineReducers(reducers);
 
+// TODO: on application fail, logout to reset everything, may need redux-observable
 const rootReducer = (state: Store = initialState, action: Object) => {
   if (action.type === actionTypes.LOGOUT) {
     return initialState;

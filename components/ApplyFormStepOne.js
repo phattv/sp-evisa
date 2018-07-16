@@ -24,6 +24,7 @@ import {
   purposeOptions,
   typeOptions,
 } from '../constants/dropDownOptions';
+import { scrollToFirstErrorMessage } from '../utils/form';
 
 type Props = {
   countryId: number,
@@ -59,12 +60,11 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     const { countryId, purpose, type, processingTime } = this.state;
 
     // required fields
-    const shouldShowErrorMessage = !countryId || !purpose;
-    !type ||
-      !processingTime ||
-      this.setState({
-        shouldShowErrorMessage,
-      });
+    const shouldShowErrorMessage =
+      !countryId || !purpose || !type || !processingTime;
+    this.setState({
+      shouldShowErrorMessage,
+    });
 
     // save to store
     this.updateStepOneToStore();
@@ -73,6 +73,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     if (shouldShowErrorMessage === false) {
       const { onSubmit } = this.props;
       onSubmit && onSubmit();
+    } else {
+      scrollToFirstErrorMessage();
     }
   };
 
@@ -247,6 +249,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         <Form.Field required>
           <label>Country</label>
           <Dropdown
+            error={shouldShowErrorMessage && !countryId}
             value={countryId}
             placeholder="Select..."
             fluid
@@ -259,6 +262,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         <Form.Field required>
           <label>Purpose of Visa</label>
           <Dropdown
+            error={shouldShowErrorMessage && !purpose}
             value={purpose}
             placeholder="Select..."
             fluid
@@ -271,6 +275,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         <Form.Field required>
           <label>Type of Visa</label>
           <Dropdown
+            error={shouldShowErrorMessage && !type}
             value={type}
             placeholder="Select..."
             fluid
@@ -283,6 +288,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         <Form.Field required>
           <label>Processing Time</label>
           <Dropdown
+            error={shouldShowErrorMessage && !processingTime}
             value={processingTime}
             placeholder="Select..."
             fluid
