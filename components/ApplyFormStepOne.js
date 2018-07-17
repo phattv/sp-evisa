@@ -56,12 +56,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     shouldShowErrorMessage: false,
   };
 
-  onSubmit = (event: Object) => {
+  validateForm = () => {
     const { countryId, purpose, type, processingTime } = this.state;
 
     // required fields
-    const shouldShowErrorMessage =
-      !countryId || !purpose || !type || !processingTime;
+    return !countryId || !purpose || !type || !processingTime;
+  };
+
+  onSubmit = (event: Object) => {
+    const shouldShowErrorMessage = this.validateForm();
     this.setState({
       shouldShowErrorMessage,
     });

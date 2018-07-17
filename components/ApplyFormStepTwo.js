@@ -69,7 +69,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     shouldShowErrorMessage: false,
   };
 
-  onSubmit = () => {
+  validateForm = () => {
     const { applicants, flightNumber } = this.state;
     const isFlightNumberRequired = this.getFlightNumberRequirement();
     let shouldShowErrorMessage = false;
@@ -91,6 +91,11 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       });
     }
 
+    return shouldShowErrorMessage;
+  };
+
+  onSubmit = () => {
+    const shouldShowErrorMessage = this.validateForm();
     this.setState({
       shouldShowErrorMessage,
     });
@@ -190,7 +195,11 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
 
   updateStepTwoToStore = () => {
     this.props.updateStepTwo({
-      ...this.state,
+      applicants: this.state.applicants,
+      airport: this.state.airport,
+      arrivalDate: this.state.arrivalDate,
+      departureDate: this.state.departureDate,
+      flightNumber: this.state.flightNumber,
       quantity: this.state.applicants.length,
     });
   };

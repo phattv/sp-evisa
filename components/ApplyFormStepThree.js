@@ -107,7 +107,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.props.updateStepThree(stepThree);
   };
 
-  shouldDisablePaypalButton = () => {
+  validateForm = () => {
     const { name, email, phone, isTermsAgreed } = this.state;
     return (
       _isEmpty(name) ||
@@ -188,7 +188,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   //<editor-fold desc="Paypal configs">
   togglePaypalButton = (actions, callback) => {
-    const shouldDisablePaypalButton = this.shouldDisablePaypalButton();
+    const shouldDisablePaypalButton = this.validateForm();
 
     if (actions) {
       if (shouldDisablePaypalButton) {
@@ -217,7 +217,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   onPaypalClick = () => {
     this.togglePaypalButton(paypalActions, () => {
-      const shouldShowErrorMessage = this.shouldDisablePaypalButton();
+      const shouldShowErrorMessage = this.validateForm();
 
       if (shouldShowErrorMessage) {
         scrollToFirstErrorMessage();
