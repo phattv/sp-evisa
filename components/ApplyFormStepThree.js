@@ -21,6 +21,7 @@ import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
 import FormHeading from './FormHeading';
 import FormErrorMessage from './FormErrorMessage';
+import { scrollToFirstErrorMessage } from '../utils/form';
 
 let componentInstance;
 let paypalActions;
@@ -218,6 +219,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.togglePaypalButton(paypalActions, () => {
       const shouldShowErrorMessage = this.shouldDisablePaypalButton();
 
+      if (shouldShowErrorMessage) {
+        scrollToFirstErrorMessage();
+      }
+
       this.setState({
         shouldShowErrorMessage,
       });
@@ -331,6 +336,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         <Form.Field required>
           <label>Name</label>
           <Input
+            error={shouldShowErrorMessage && !name}
             name="name"
             placeholder="Enter..."
             value={name}
@@ -340,6 +346,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         <Form.Field required>
           <label>Email</label>
           <Input
+            error={shouldShowErrorMessage && !email}
             name="email"
             type="email"
             placeholder="Enter..."
@@ -350,6 +357,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
         <Form.Field required>
           <label>Phone</label>
           <Input
+            error={shouldShowErrorMessage && !phone}
             name="phone"
             placeholder="Enter..."
             value={phone}
