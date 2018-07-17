@@ -38,6 +38,12 @@ class PaymentFailed extends React.Component<Props, State> {
           alignItems="center"
           width="100%"
         >
+          <Text paddingLeft={2} fontSize="xl" color="red" textAlign="center">
+            Payment Failed!
+          </Text>
+          <Text fontSize="l" textAlign="center" noDoubleLineHeight>
+            Sorry, your application and payment could not be processed
+          </Text>
           <Flexbox
             marginTop={5}
             paddingHorizontal={5}
@@ -48,9 +54,6 @@ class PaymentFailed extends React.Component<Props, State> {
               boxShadow,
             }}
           >
-            <Text fontSize="l" color="red">
-              Sorry, your payment failed.
-            </Text>
             <Text>
               Please try again,{' '}
               <Text color="green" onClick={openChatBox} clickable>
