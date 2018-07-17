@@ -1,4 +1,9 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4.1] - 2018-07-17
+### Updated
+- /thank-you: update text with green tick icon
+- /payment-failed: update text
+
 ## [3.0.0-beta.4] - 2018-07-17
 ### Added
 - /apply: steps navigation: validate before switching steps
