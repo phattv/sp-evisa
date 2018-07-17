@@ -1,7 +1,15 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4] - 2018-07-17
+### Added
+- /apply: steps navigation: validate before switching steps
+- /apply: show the first error message if any
+### Changed
+- /apply: process logic for fastTrack service & processingTime of "emergency"
+### Removed
+- Unused actions: resetStepTwo, updatePaymentStatus
+
 ## [3.0.0-beta.3] - 2018-07-16
 ### Added
-- /reviews
 - /faq questions and answers
 - Override some semantic-ui-css styles 
 ### Changed
