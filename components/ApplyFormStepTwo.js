@@ -42,6 +42,7 @@ type Props = {
   stepTwo: Object,
   updateStepTwo: Object => void,
   goBack: () => void,
+  onRef: any => void,
 };
 type Applicant = {
   name: string,
@@ -69,12 +70,15 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     shouldShowErrorMessage: false,
   };
 
-  validateForm = () => {
+  getFormInvalidity = () => {
     const { applicants, flightNumber } = this.state;
     const isFlightNumberRequired = this.getFlightNumberRequirement();
     let shouldShowErrorMessage = false;
 
-    if (isFlightNumberRequired && _isEmpty(flightNumber)) {
+    if (
+      (isFlightNumberRequired && _isEmpty(flightNumber)) ||
+      _isEmpty(applicants)
+    ) {
       shouldShowErrorMessage = true;
     } else {
       applicants.forEach(applicant => {
@@ -95,7 +99,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   };
 
   onSubmit = () => {
-    const shouldShowErrorMessage = this.validateForm();
+    const shouldShowErrorMessage = this.getFormInvalidity();
     this.setState({
       shouldShowErrorMessage,
     });
@@ -216,6 +220,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    this.props.onRef(this);
     this.syncPropsToState(this.props);
   }
 

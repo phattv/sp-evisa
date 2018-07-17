@@ -13,6 +13,7 @@ import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
 import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
+import FormErrorMessage from '../components/FormErrorMessage';
 import { formMaxWidth, pageNames, spacingValues } from '../constants/ui';
 
 const formPaddingHorizontal = 3;
@@ -24,6 +25,7 @@ type Props = {};
 type State = {
   steps: Array<Object>,
   isAgreeClicked: boolean,
+  shouldShowErrorMessage: boolean,
 };
 class Apply extends React.Component<Props, State> {
   static defaultProps: Props = {};
@@ -53,6 +55,7 @@ class Apply extends React.Component<Props, State> {
       },
     ],
     isAgreeClicked: false,
+    shouldShowErrorMessage: false,
   };
 
   showStepOne = () => {
@@ -70,31 +73,42 @@ class Apply extends React.Component<Props, State> {
   };
 
   showStepTwo = () => {
-    let { steps } = this.state;
-    steps[0].active = false;
-    steps[0].completed = true;
-    steps[1].active = true;
-    steps[1].completed = false;
-    steps[2].active = false;
-    steps[2].completed = false;
-
-    this.setState({
-      steps,
-    });
+    const shouldShowErrorMessage = this.stepOne.getFormInvalidity();
+    this.setState({ shouldShowErrorMessage });
+    if (!shouldShowErrorMessage) {
+      let { steps } = this.state;
+      steps[0].active = false;
+      steps[0].completed = true;
+      steps[1].active = true;
+      steps[1].completed = false;
+      steps[2].active = false;
+      steps[2].completed = false;
+      this.setState({
+        steps,
+      });
+    }
   };
 
   showStepThree = () => {
-    let { steps } = this.state;
-    steps[0].active = false;
-    steps[0].completed = true;
-    steps[1].active = false;
-    steps[1].completed = true;
-    steps[2].active = true;
-    steps[2].completed = false;
+    if (this.stepTwo) {
+      const shouldShowErrorMessage = this.stepTwo.getFormInvalidity();
+      this.setState({ shouldShowErrorMessage });
+      if (!shouldShowErrorMessage) {
+        let { steps } = this.state;
+        steps[0].active = false;
+        steps[0].completed = true;
+        steps[1].active = false;
+        steps[1].completed = true;
+        steps[2].active = true;
+        steps[2].completed = false;
 
-    this.setState({
-      steps,
-    });
+        this.setState({
+          steps,
+        });
+      }
+    } else {
+      this.setState({ shouldShowErrorMessage: true });
+    }
   };
 
   hideAgreeStatement = () => {
@@ -108,7 +122,7 @@ class Apply extends React.Component<Props, State> {
   }
 
   render() {
-    const { steps, isAgreeClicked } = this.state;
+    const { steps, isAgreeClicked, shouldShowErrorMessage } = this.state;
 
     return (
       <Fragment>
@@ -124,6 +138,12 @@ class Apply extends React.Component<Props, State> {
               <Heading secondary text="Get your Visa in 3 steps" />
               <Step.Group ordered items={steps} fluid />
 
+              <Flexbox paddingTop={6} width="100%">
+                {shouldShowErrorMessage && (
+                  <FormErrorMessage message="Please finish this step before moving on the next one" />
+                )}
+              </Flexbox>
+
               <Flexbox
                 justifyContent="space-between"
                 responsiveLayout
@@ -135,12 +155,16 @@ class Apply extends React.Component<Props, State> {
                   paddingHorizontal={formPaddingHorizontal}
                 >
                   {steps[0].active && (
-                    <ApplyFormStepOne onSubmit={this.showStepTwo} />
+                    <ApplyFormStepOne
+                      onSubmit={this.showStepTwo}
+                      onRef={ref => (this.stepOne = ref)}
+                    />
                   )}
                   {steps[1].active && (
                     <ApplyFormStepTwo
                       goBack={this.showStepOne}
                       onSubmit={this.showStepThree}
+                      onRef={ref => (this.stepTwo = ref)}
                     />
                   )}
                   {steps[2].active && (

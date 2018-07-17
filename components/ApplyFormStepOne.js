@@ -33,6 +33,7 @@ type Props = {
   updateStepOne: Object => void,
   updateFees: (Array<Object>) => void,
   updateFeesSelectedCountry: number => void,
+  onRef: any => void,
 };
 type State = {
   countryId: number | string,
@@ -56,7 +57,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     shouldShowErrorMessage: false,
   };
 
-  validateForm = () => {
+  getFormInvalidity = () => {
     const { countryId, purpose, type, processingTime } = this.state;
 
     // required fields
@@ -64,7 +65,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   onSubmit = (event: Object) => {
-    const shouldShowErrorMessage = this.validateForm();
+    const shouldShowErrorMessage = this.getFormInvalidity();
     this.setState({
       shouldShowErrorMessage,
     });
@@ -188,6 +189,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   componentDidMount() {
+    this.props.onRef(this);
     this.syncPropsToState(this.props, true);
   }
 
