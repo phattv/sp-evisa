@@ -20,6 +20,7 @@ import {
 import FormErrorMessage from './FormErrorMessage';
 import FormHeading from './FormHeading';
 import Divider from './Divider';
+import { scrollToFirstErrorMessage } from '../utils/form';
 
 const emptyApplicant = {
   name: '',
@@ -98,6 +99,8 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       // continue to step 3
       const { onSubmit } = this.props;
       onSubmit && onSubmit();
+    } else {
+      scrollToFirstErrorMessage();
     }
   };
 
@@ -243,6 +246,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     const parsedDepartureDate = dayjs(departureDate).isValid()
       ? dayjs(departureDate).format(displayDateFormat)
       : '';
+    const isFlightNumberRequired = this.getFlightNumberRequirement();
 
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
@@ -278,9 +282,12 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             onChange={this.updateFlightDate}
           />
         </Form.Field>
-        <Form.Field required={this.getFlightNumberRequirement()}>
+        <Form.Field required={isFlightNumberRequired}>
           <label>Flight Number</label>
           <Input
+            error={
+              shouldShowErrorMessage && isFlightNumberRequired && !flightNumber
+            }
             name="flightNumber"
             placeholder="Enter..."
             value={flightNumber}
@@ -326,6 +333,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
               <Form.Field required>
                 <label>Full name</label>
                 <Input
+                  error={shouldShowErrorMessage && !applicant.name}
                   name="name"
                   placeholder="Enter..."
                   value={applicant.name}
@@ -336,6 +344,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
               <Form.Field required>
                 <label>Nationality</label>
                 <Dropdown
+                  error={shouldShowErrorMessage && !applicant.countryId}
                   value={applicant.countryId}
                   placeholder="Select..."
                   search
@@ -361,6 +370,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   >
                     <label>Gender</label>
                     <Dropdown
+                      error={shouldShowErrorMessage && !applicant.gender}
                       value={applicant.gender}
                       placeholder="Select..."
                       search
@@ -376,6 +386,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   <Form.Field required>
                     <label>Date of Birth</label>
                     <DateInput
+                      error={shouldShowErrorMessage && !parsedBirthday}
                       {...defaultDateInputProps}
                       name="birthday"
                       placeholder="Select..."
@@ -393,6 +404,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   <Form.Field required>
                     <label>Passport No.</label>
                     <Input
+                      error={shouldShowErrorMessage && !applicant.passport}
                       name="passport"
                       placeholder="Enter..."
                       value={applicant.passport}
@@ -404,6 +416,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                   <Form.Field required>
                     <label>Expiry Date</label>
                     <DateInput
+                      error={shouldShowErrorMessage && !parsedPassportExpiry}
                       {...defaultDateInputProps}
                       name="passportExpiry"
                       placeholder="Select..."
