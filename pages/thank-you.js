@@ -5,9 +5,10 @@ import Router from 'next/router';
 // custom
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
-import { Button, Flexbox, Text } from '../components/ui';
+import { Button, Flexbox, Image, Text } from '../components/ui';
 import {
   boxShadow,
+  iconSizes,
   pageNames,
   spacingValues,
   textMaxWidth,
@@ -37,7 +38,23 @@ class ThankYou extends React.Component<Props, State> {
           alignItems="center"
           width="100%"
         >
-          <Heading secondary text="Thank you, all done!" />
+          <Flexbox alignItems="center">
+            <Image
+              src="../static/icons/tick-icon.svg"
+              width={iconSizes.small}
+            />
+            <Text
+              paddingLeft={2}
+              fontSize="xl"
+              color="green"
+              textAlign="center"
+            >
+              Payment Successful!
+            </Text>
+          </Flexbox>
+          <Text fontSize="l" textAlign="center" noDoubleLineHeight>
+            Thank you, we have received your application and payment
+          </Text>
           <Flexbox
             marginTop={5}
             paddingHorizontal={5}
@@ -48,9 +65,6 @@ class ThankYou extends React.Component<Props, State> {
               boxShadow,
             }}
           >
-            <Text fontSize="l" color="green">
-              Your payment is successful.
-            </Text>
             <Text>Here's what will happen next:</Text>
             <Text>
               1. Please check your inbox for our email and follow the
