@@ -281,7 +281,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
           <DateInput
             {...defaultDateInputProps}
             name="arrivalDate"
-            placeholder="Select..."
+            placeholder="DD/MM/YYYY"
             value={parsedArrivalDate}
             onChange={this.updateFlightDate}
           />
@@ -291,7 +291,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
           <DateInput
             {...defaultDateInputProps}
             name="departureDate"
-            placeholder="Select..."
+            placeholder="DD/MM/YYYY"
             value={parsedDepartureDate}
             onChange={this.updateFlightDate}
           />
@@ -403,7 +403,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                       error={shouldShowErrorMessage && !parsedBirthday}
                       {...defaultDateInputProps}
                       name="birthday"
-                      placeholder="Select..."
+                      placeholder="DD/MM/YYYY"
                       value={parsedBirthday}
                       onChange={(event, option) =>
                         this.updateDatePicker(event, option, index)
@@ -433,7 +433,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                       error={shouldShowErrorMessage && !parsedPassportExpiry}
                       {...defaultDateInputProps}
                       name="passportExpiry"
-                      placeholder="Select..."
+                      placeholder="DD/MM/YYYY"
                       value={parsedPassportExpiry}
                       onChange={(event, option) =>
                         this.updateDatePicker(event, option, index)
