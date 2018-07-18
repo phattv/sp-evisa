@@ -429,7 +429,7 @@ class Home extends React.Component<Props, State> {
             <Flexbox paddingBottom={3} column>
               <Heading text="How to Apply?" color="white" />
             </Flexbox>
-            <Flexbox responsiveLayout paddingTop={10} width="100%">
+            <Flexbox responsiveLayout paddingVertical={10} width="100%">
               <Flexbox flex={1} alignItems="center" justifyContent="center">
                 <Flexbox maxWidth={100} maxHeight={100}>
                   <Image
@@ -493,9 +493,8 @@ class Home extends React.Component<Props, State> {
                       </Text>
                     </Flexbox>
                     <Text color="white">
-                      You can make payment via OnePay/PayPal with your
-                      Credit/Debit Card. Find out more about our fees{' '}
-                      <Anchor href={pageNames.fees}>here</Anchor>.
+                      You can securely make payment through PayPal. We accept
+                      Visa, MasterCard, American Express and Discover cards
                     </Text>
                   </Flexbox>
                 </Flexbox>
@@ -529,6 +528,12 @@ class Home extends React.Component<Props, State> {
                   </Flexbox>
                 </Flexbox>
               </Flexbox>
+            </Flexbox>
+
+            <Flexbox justifyContent="center" width="100%">
+              <Button width="50%" onClick={this.navigateToApply}>
+                Apply Now!
+              </Button>
             </Flexbox>
           </Flexbox>
         </ContentMaxWidth>
