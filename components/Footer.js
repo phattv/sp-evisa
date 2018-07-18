@@ -17,7 +17,12 @@ type Props = {};
 class Footer extends React.Component<Props> {
   render() {
     return (
-      <Flexbox width="100%" justifyContent="center" backgroundColor="bgGrey2">
+      <Flexbox
+        width="100%"
+        justifyContent="center"
+        backgroundColor="bgGrey2"
+        paddingHorizontal={3}
+      >
         <Flexbox
           width="100%"
           maxWidth={contentMaxWidth / 2}
@@ -34,7 +39,12 @@ class Footer extends React.Component<Props> {
           <Text paddingTop={2} textAlign="center">
             {companyInfo.address}
           </Text>
-          <Flexbox paddingTop={10} justifyContent="space-around" width="100%">
+          <Flexbox
+            paddingTop={10}
+            paddingBottom={2}
+            justifyContent="space-around"
+            width="100%"
+          >
             <a href={companyInfo.facebook} target="_blank">
               <Text color="green" clickable>
                 Facebook
@@ -45,13 +55,19 @@ class Footer extends React.Component<Props> {
             <Text>/</Text>
             <Anchor href={pageNames.privacy}>Privacy Policy</Anchor>
           </Flexbox>
-          <Text paddingTop={2} textAlign="center" fontSize="xs">
+          <span
+            style={{
+              textAlign: 'center',
+              fontSize: 12,
+              lineHeight: '16px',
+            }}
+          >
             Disclaimers: evisa-vn.com is a non-government site (managed by a
             private agency) providing visa approval letter service for travelers
             to Vietnam for a fee and whilst every effort is made to ensure the
             information is correct and up to date, there may be changes which we
             are not aware of.
-          </Text>
+          </span>
         </Flexbox>
       </Flexbox>
     );

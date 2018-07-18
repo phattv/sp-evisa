@@ -84,18 +84,6 @@ class Contact extends React.Component<Props, State> {
               to drop us instant messages, send us an enquiry, or check out our
               intensive <Anchor href={pageNames.faq}>FAQs</Anchor>.
             </Text>
-            <Text
-              paddingTop={2}
-              textAlign="center"
-              fontSize="xs"
-              maxWidth={150}
-            >
-              Disclaimers: evisa-vn.com is a non-government site (managed by a
-              private agency) providing visa approval letter service for
-              travelers to Vietnam for a fee and whilst every effort is made to
-              ensure the information is correct and up to date, there may be
-              changes which we are not aware of.
-            </Text>
 
             <Flexbox paddingVertical={14} responsiveLayout>
               <Flexbox
