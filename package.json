@@ -29,6 +29,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-ga": "^2.4.1",
+    "react-id-swiper": "^1.6.6",
     "react-media": "^1.6.1",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
