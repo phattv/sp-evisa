@@ -38,12 +38,6 @@ import { getFeesByCountryId } from '../utils/apiClient';
 import { fees } from '../constants/fees';
 import { reducerNames } from '../constants/reducerNames';
 
-const activeStepImages = {
-  stepOne: 's-1',
-  stepTwo: 's-2',
-  stepThree: 's-3',
-};
-
 const reasons = [
   {
     icon: 'lady.svg',
@@ -63,24 +57,23 @@ const reasons = [
   },
 ];
 
-const params = {
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
+const steps = [
+  {
+    text: '5 minutes to finish your application',
+    description:
+      'Fill in our secured online application. You are required to enter the precise information which appears on your passport.',
   },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
+  {
+    text: 'Secured online payment',
+    description:
+      'You can securely make payment through PayPal. We accept Visa, MasterCard, American Express and Discover cards',
   },
-  autoplay: {
-    delay: 2500,
-    disableOnInteraction: false,
+  {
+    text: 'Approval Result within 24 hours',
+    description:
+      'Check your email for your approval letter. Please follow the instructions to prepare all your supporting documents.',
   },
-  spaceBetween: 30,
-  loop: true,
-  grabCursor: true,
-};
+];
 
 type Props = {
   countryId: number,
@@ -97,9 +90,11 @@ type State = {
   processingTime: string,
   extraServices: Object,
   totalFee: number,
-  activeStepImage: string,
+  activeStepIndex: number,
 };
 class Home extends React.Component<Props, State> {
+  swiper = null;
+
   state = {
     countryId: '',
     purpose: purposeOptions[0].value,
@@ -111,7 +106,7 @@ class Home extends React.Component<Props, State> {
       privateVisaLetter: false,
     },
     totalFee: 0,
-    activeStepImage: activeStepImages.stepOne,
+    activeStepIndex: 1,
   };
 
   navigateToApply = () => {
@@ -252,12 +247,6 @@ class Home extends React.Component<Props, State> {
     );
   };
 
-  setActiveStepImage = activeStepImage => {
-    this.setState({
-      activeStepImage,
-    });
-  };
-
   render() {
     const {
       countryId,
@@ -265,8 +254,39 @@ class Home extends React.Component<Props, State> {
       processingTime,
       purpose,
       totalFee,
-      activeStepImage,
+      activeStepIndex,
     } = this.state;
+    const swiperParams = {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      spaceBetween: 30,
+      loop: true,
+      grabCursor: true,
+      on: {
+        slideChange: () => {
+          if (this.swiper) {
+            let { activeIndex } = this.swiper;
+            if (activeIndex > steps.length) {
+              activeIndex = activeIndex - steps.length;
+            }
+            this.setState({
+              activeStepIndex: activeIndex,
+            });
+          }
+        },
+      },
+    };
 
     let typeOptionsByPurpose = [];
     if (purpose === purposeOptions[0].value) {
@@ -439,102 +459,58 @@ class Home extends React.Component<Props, State> {
             <Flexbox responsiveLayout paddingVertical={10} width="100%">
               <Flexbox flex={1} alignItems="center" justifyContent="center">
                 <Flexbox maxWidth={100} maxHeight={100}>
-                  <Swiper {...params}>
-                    <Image src={`../static/images/s-1.png`} alt="step image" />
-                    <Image src={`../static/images/s-2.png`} alt="step image" />
-                    <Image src={`../static/images/s-3.png`} alt="step image" />
+                  <Swiper
+                    {...swiperParams}
+                    ref={node => {
+                      if (node) {
+                        this.swiper = node.swiper;
+                      }
+                    }}
+                  >
+                    <Image src={`../static/images/s-1.png`} alt="step 1" />
+                    <Image src={`../static/images/s-2.png`} alt="step 2" />
+                    <Image src={`../static/images/s-3.png`} alt="step 3" />
                   </Swiper>
                 </Flexbox>
               </Flexbox>
               <Flexbox flex={1} column>
-                <Flexbox alignItems="center" paddingVertical={5}>
-                  <StepNumber
-                    number="1"
-                    active={activeStepImage === activeStepImages.stepOne}
-                    onClick={() =>
-                      this.setActiveStepImage(activeStepImages.stepOne)
-                    }
-                  />
-                  <Flexbox column paddingLeft={5}>
-                    <Flexbox alignItems="center">
-                      <Text
-                        color="green"
-                        fontSize="m"
-                        clickable
+                {steps.map((step, index) => {
+                  const active = activeStepIndex === index + 1;
+                  return (
+                    <Flexbox alignItems="center" paddingVertical={5}>
+                      <Flexbox
+                        alignSelf="stretch"
+                        alignItems="center"
                         hoverBackgroundColor="transparent"
-                        hoverColor="red"
-                        onClick={() =>
-                          this.setActiveStepImage(activeStepImages.stepOne)
-                        }
                       >
-                        5 minutes to finish your application
-                      </Text>
+                        <Flexbox
+                          alignItems="center"
+                          justifyContent="center"
+                          width={10}
+                          height={10}
+                          borderRadius={25}
+                          backgroundColor={active ? 'green' : 'bgGrey'}
+                        >
+                          <Text
+                            color={active ? 'white' : 'mediumBlue'}
+                            bold
+                            fontSize="l"
+                          >
+                            {index + 1}
+                          </Text>
+                        </Flexbox>
+                      </Flexbox>
+                      <Flexbox column paddingLeft={5}>
+                        <Flexbox alignItems="center">
+                          <Text color="green" fontSize="m">
+                            {step.text}
+                          </Text>
+                        </Flexbox>
+                        <Text color="white">{step.description}</Text>
+                      </Flexbox>
                     </Flexbox>
-                    <Text color="white">
-                      Fill in our secured online application. You are required
-                      to enter the precise information which appears on your
-                      passport.
-                    </Text>
-                  </Flexbox>
-                </Flexbox>
-                <Flexbox alignItems="center" paddingVertical={5}>
-                  <StepNumber
-                    number="2"
-                    active={activeStepImage === activeStepImages.stepTwo}
-                    onClick={() =>
-                      this.setActiveStepImage(activeStepImages.stepTwo)
-                    }
-                  />
-                  <Flexbox column paddingLeft={5}>
-                    <Flexbox alignItems="center">
-                      <Text
-                        color="green"
-                        fontSize="m"
-                        clickable
-                        hoverBackgroundColor="transparent"
-                        hoverColor="red"
-                        onClick={() =>
-                          this.setActiveStepImage(activeStepImages.stepTwo)
-                        }
-                      >
-                        Secured online payment
-                      </Text>
-                    </Flexbox>
-                    <Text color="white">
-                      You can securely make payment through PayPal. We accept
-                      Visa, MasterCard, American Express and Discover cards
-                    </Text>
-                  </Flexbox>
-                </Flexbox>
-                <Flexbox alignItems="center" paddingVertical={5}>
-                  <StepNumber
-                    number="3"
-                    active={activeStepImage === activeStepImages.stepThree}
-                    onClick={() =>
-                      this.setActiveStepImage(activeStepImages.stepThree)
-                    }
-                  />
-                  <Flexbox column paddingLeft={5}>
-                    <Flexbox alignItems="center">
-                      <Text
-                        color="green"
-                        fontSize="m"
-                        clickable
-                        hoverBackgroundColor="transparent"
-                        hoverColor="red"
-                        onClick={() =>
-                          this.setActiveStepImage(activeStepImages.stepThree)
-                        }
-                      >
-                        Approval Result within 24 hours
-                      </Text>
-                    </Flexbox>
-                    <Text color="white">
-                      Check your email for your approval letter. Please follow
-                      the instructions to prepare all your supporting documents.
-                    </Text>
-                  </Flexbox>
-                </Flexbox>
+                  );
+                })}
               </Flexbox>
             </Flexbox>
 
@@ -555,29 +531,6 @@ class Home extends React.Component<Props, State> {
     );
   }
 }
-
-const StepNumber = ({ number, active, onClick }) => (
-  <Flexbox
-    alignSelf="stretch"
-    alignItems="center"
-    onClick={onClick}
-    clickable
-    hoverBackgroundColor="transparent"
-  >
-    <Flexbox
-      alignItems="center"
-      justifyContent="center"
-      width={10}
-      height={10}
-      borderRadius={25}
-      backgroundColor={active ? 'green' : 'bgGrey'}
-    >
-      <Text color={active ? 'white' : 'mediumBlue'} bold fontSize="l">
-        {number}
-      </Text>
-    </Flexbox>
-  </Flexbox>
-);
 
 const mapStateToProps = store => {
   return {
