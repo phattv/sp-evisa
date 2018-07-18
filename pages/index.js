@@ -43,6 +43,25 @@ const activeStepImages = {
   stepThree: 's-3',
 };
 
+const reasons = [
+  {
+    icon: 'lady.svg',
+    text: '24/7 Customer Service',
+    description: 'We reply to all enquiries and messages within 5 minutes.',
+  },
+  {
+    icon: 'development.svg',
+    text: 'Confidentiality',
+    description:
+      'All information provided to us will be kept confidential and secured.',
+  },
+  {
+    icon: 'stopwatch.svg',
+    text: 'Speed',
+    description: 'All applications will be processed in 1 working day or less.',
+  },
+];
+
 type Props = {
   countryId: number,
   stepOne: Object,
@@ -261,6 +280,7 @@ class Home extends React.Component<Props, State> {
               overflow="hidden"
               width="100%"
               maxWidth={100}
+              boxShadow
             >
               <Form
                 onSubmit={this.navigateToApply}
@@ -349,74 +369,26 @@ class Home extends React.Component<Props, State> {
             width="100%"
           >
             <Heading text="Why evisa-vn?" />
-            <Card>
-              <Flexbox responsiveLayout>
-                <Flexbox
-                  flex={1}
-                  column
-                  marginHorizontal={5}
-                  marginVertical={5}
-                >
-                  <Flexbox>
-                    <Image
-                      src="../static/icons/step-1.svg"
-                      alt="customer service"
-                      width={iconSizes.default}
-                    />
+            <Flexbox responsiveLayout>
+              {reasons.map((reason, index) => (
+                <Card flex={1}>
+                  <Flexbox key={index} flex={1} column>
+                    <Flexbox>
+                      <Image
+                        src={`../static/icons/${reason.icon}`}
+                        alt={reason.text}
+                        width={iconSizes.default}
+                      />
+                    </Flexbox>
+                    <Text fontSize="m" semibold>
+                      {reason.text}
+                    </Text>
+                    <Divider small />
+                    <Text paddingTop={6}>{reason.description}</Text>
                   </Flexbox>
-                  <Text fontSize="m" semibold>
-                    24/7 Customer Service
-                  </Text>
-                  <Divider small />
-                  <Text paddingTop={6}>
-                    We reply to all enquiries and messages within 5 minutes.
-                  </Text>
-                </Flexbox>
-                <Flexbox
-                  flex={1}
-                  column
-                  marginHorizontal={5}
-                  marginVertical={5}
-                >
-                  <Flexbox>
-                    <Image
-                      src="../static/icons/step-2.svg"
-                      alt="confidentiality"
-                      width={iconSizes.default}
-                    />
-                  </Flexbox>
-                  <Text fontSize="m" semibold>
-                    Confidentiality
-                  </Text>
-                  <Divider small />
-                  <Text paddingTop={6}>
-                    All information provided to us will be kept confidential and
-                    secured.
-                  </Text>
-                </Flexbox>
-                <Flexbox
-                  flex={1}
-                  column
-                  marginHorizontal={5}
-                  marginVertical={5}
-                >
-                  <Flexbox>
-                    <Image
-                      src="../static/icons/step-3.svg"
-                      alt="speed"
-                      width={iconSizes.default}
-                    />
-                  </Flexbox>
-                  <Text fontSize="m" semibold>
-                    Speed
-                  </Text>
-                  <Divider small />
-                  <Text paddingTop={6}>
-                    All applications will be processed in 1 working day or less.
-                  </Text>
-                </Flexbox>
-              </Flexbox>
-            </Card>
+                </Card>
+              ))}
+            </Flexbox>
           </Flexbox>
         </ContentMaxWidth>
 
