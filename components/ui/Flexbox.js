@@ -1,7 +1,7 @@
 // @flow
 import styled from 'styled-components';
 import { generateCommonProps } from './generateCommonProps';
-import { screenSizes, spacingUnits } from '../../constants/ui';
+import { boxShadow, screenSizes, spacingUnits } from '../../constants/ui';
 
 /**
  * Set responsive flex-direction:
@@ -33,6 +33,7 @@ const Flexbox = styled.div`
   ${props => props.alignItems && `align-items: ${props.alignItems}`};
   ${props => props.flex && `flex: ${props.flex}`};
   ${props => props.alignSelf && `align-self: ${props.alignSelf}`};
+  ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
 
   @media only screen and (min-width: ${screenSizes.desktop}px) {
     ${props => generateCommonProps(props, spacingUnits.desktop)};

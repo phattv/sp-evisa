@@ -7,7 +7,6 @@ import ContentMaxWidth from '../components/ContentMaxWidth';
 import Heading from '../components/Heading';
 import { Button, Flexbox, Image, Text } from '../components/ui';
 import {
-  boxShadow,
   iconSizes,
   pageNames,
   spacingValues,
@@ -61,9 +60,7 @@ class ThankYou extends React.Component<Props, State> {
             paddingVertical={5}
             backgroundColor="bgGrey2"
             column
-            style={{
-              boxShadow,
-            }}
+            boxShadow
           >
             <Text>Here's what will happen next:</Text>
             <Text>

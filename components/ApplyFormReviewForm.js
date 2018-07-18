@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 // custom
 import { Image, Flexbox, Text } from './ui';
 import Divider from './Divider';
-import { boxShadow, displayDateFormat, iconSizes } from '../constants/ui';
+import { displayDateFormat, iconSizes } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
 import {
   typeOptions,
@@ -173,9 +173,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         alignItems="center"
         paddingVertical={6}
         paddingHorizontal={6}
-        style={{
-          boxShadow,
-        }}
+        boxShadow
       >
         <Text fontSize="m" semibold color="darkBlue">
           Review Your Order

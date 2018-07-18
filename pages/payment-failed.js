@@ -5,12 +5,7 @@ import Router from 'next/router';
 // custom
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import { Button, Flexbox, Text } from '../components/ui';
-import {
-  boxShadow,
-  pageNames,
-  spacingValues,
-  textMaxWidth,
-} from '../constants/ui';
+import { pageNames, spacingValues, textMaxWidth } from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
 import { logPageView } from '../utils/analytics';
 import { openChatBox } from '../utils/crisp';
@@ -50,9 +45,7 @@ class PaymentFailed extends React.Component<Props, State> {
             paddingVertical={5}
             backgroundColor="bgGrey2"
             column
-            style={{
-              boxShadow,
-            }}
+            boxShadow
           >
             <Text>
               Please try again,{' '}
