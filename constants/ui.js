@@ -15,13 +15,21 @@ const colors = {
 };
 
 const fontSizes = {
-  xs: 14,
   s: 16,
   default: 18,
   m: 22,
   l: 32,
   xl: 40,
   xxl: 48,
+};
+
+const fontSizesSmall = {
+  s: 14,
+  default: 16,
+  m: 18,
+  l: 22,
+  xl: 32,
+  xxl: 40,
 };
 
 const screenSizes = {
@@ -107,6 +115,7 @@ export {
   borderRadius,
   colors,
   fontSizes,
+  fontSizesSmall,
   spacingValues,
   displayDateFormat,
   postgresDateFormat,

@@ -351,7 +351,12 @@ class Home extends React.Component<Props, State> {
             <Heading text="Why evisa-vn?" />
             <Card>
               <Flexbox responsiveLayout>
-                <Flexbox flex={1} column marginHorizontal={5}>
+                <Flexbox
+                  flex={1}
+                  column
+                  marginHorizontal={5}
+                  marginVertical={5}
+                >
                   <Flexbox>
                     <Image
                       src="../static/icons/step-1.svg"
@@ -367,7 +372,12 @@ class Home extends React.Component<Props, State> {
                     We reply to all enquiries and messages within 5 minutes.
                   </Text>
                 </Flexbox>
-                <Flexbox flex={1} column marginHorizontal={5}>
+                <Flexbox
+                  flex={1}
+                  column
+                  marginHorizontal={5}
+                  marginVertical={5}
+                >
                   <Flexbox>
                     <Image
                       src="../static/icons/step-2.svg"
@@ -384,7 +394,12 @@ class Home extends React.Component<Props, State> {
                     secured.
                   </Text>
                 </Flexbox>
-                <Flexbox flex={1} column marginHorizontal={5}>
+                <Flexbox
+                  flex={1}
+                  column
+                  marginHorizontal={5}
+                  marginVertical={5}
+                >
                   <Flexbox>
                     <Image
                       src="../static/icons/step-3.svg"

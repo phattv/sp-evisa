@@ -3,6 +3,7 @@ import {
   borderRadius,
   colors,
   fontSizes,
+  fontSizesSmall,
   spacingUnits,
 } from '../../constants/ui';
 
@@ -59,12 +60,9 @@ const setResponsiveFontSize = (
       actualFontSize = fontSizes[fontSize || 'default'];
       break;
     }
-    case spacingUnits.tablet: {
-      actualFontSize = fontSizes[fontSize || 'default'] - 2;
-      break;
-    }
+    case spacingUnits.tablet:
     case spacingUnits.mobile: {
-      actualFontSize = fontSizes[fontSize || 'default'] - 4;
+      actualFontSize = fontSizesSmall[fontSize || 'default'];
       break;
     }
     default: {
@@ -294,7 +292,11 @@ ${
         };`
       : ''
   }
-${props.borderRadius ? `border-radius: ${props.borderRadius}px;` : ''}
+${
+    props.borderRadius
+      ? `border-radius: ${props.borderRadius || borderRadius}px;`
+      : ''
+  }
 
 ${props.overflow ? `overflow: ${props.overflow};` : ''}
 ${props.position ? `position: ${props.position};` : ''}
