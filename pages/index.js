@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { Dropdown, Form } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import { connect } from 'react-redux';
+import Swiper from 'react-id-swiper';
 // custom
 import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
@@ -61,6 +62,25 @@ const reasons = [
     description: 'All applications will be processed in 1 working day or less.',
   },
 ];
+
+const params = {
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  spaceBetween: 30,
+  loop: true,
+  grabCursor: true,
+};
 
 type Props = {
   countryId: number,
@@ -371,7 +391,7 @@ class Home extends React.Component<Props, State> {
             <Heading text="Why evisa-vn?" />
             <Flexbox responsiveLayout>
               {reasons.map((reason, index) => (
-                <Card flex={1}>
+                <Card key={index} flex={1}>
                   <Flexbox key={index} flex={1} column>
                     <Flexbox>
                       <Image
@@ -419,10 +439,11 @@ class Home extends React.Component<Props, State> {
             <Flexbox responsiveLayout paddingVertical={10} width="100%">
               <Flexbox flex={1} alignItems="center" justifyContent="center">
                 <Flexbox maxWidth={100} maxHeight={100}>
-                  <Image
-                    src={`../static/images/${activeStepImage}.png`}
-                    alt="step image"
-                  />
+                  <Swiper {...params}>
+                    <Image src={`../static/images/s-1.png`} alt="step image" />
+                    <Image src={`../static/images/s-2.png`} alt="step image" />
+                    <Image src={`../static/images/s-3.png`} alt="step image" />
+                  </Swiper>
                 </Flexbox>
               </Flexbox>
               <Flexbox flex={1} column>

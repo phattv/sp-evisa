@@ -18,6 +18,7 @@ import { ServerStyleSheet } from 'styled-components';
 // import 'semantic-ui-css/components/table.min.css'; // for DateInput
 // import 'semantic-ui-css/components/popup.min.css'; // for DateInput
 // import 'semantic-ui-calendar-react/dist/css/calendar.min.css'; // for DateInput
+// import 'react-id-swiper/src/styles/css/swiper.css'
 // custom
 
 export default class MyDocument extends Document {
@@ -79,6 +80,7 @@ export default class MyDocument extends Document {
 
           <link href="../static/styles/sanitize.css" rel="stylesheet" />
           <link href="../static/styles/nprogress.css" rel="stylesheet" />
+          <link href="../static/styles/swiper.css" rel="stylesheet" />
 
           {/* TODO: bundle all css imports on top work only on "next dev", doesn't work on "next export" */}
           {/*<link rel="stylesheet" href="/_next/static/style.css" />*/}
