@@ -12,7 +12,8 @@
     "start": "next start",
     "export": "next build && next export -o dist",
     "precommit": "lint-staged",
-    "analyze": "cross-env ANALYZE=1 next build"
+    "analyze": "cross-env ANALYZE=1 next build",
+    "lint": "git add . && yarn precommit"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",

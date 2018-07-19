@@ -8,7 +8,7 @@ import _get from 'lodash/get';
 import { connect } from 'react-redux';
 import Swiper from 'react-id-swiper';
 // custom
-import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
+import { Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
 import Card from '../components/Card';
 import Divider from '../components/Divider';
@@ -477,7 +477,11 @@ class Home extends React.Component<Props, State> {
                 {steps.map((step, index) => {
                   const active = activeStepIndex === index + 1;
                   return (
-                    <Flexbox alignItems="center" paddingVertical={5}>
+                    <Flexbox
+                      key={index}
+                      alignItems="center"
+                      paddingVertical={5}
+                    >
                       <Flexbox
                         alignSelf="stretch"
                         alignItems="center"
