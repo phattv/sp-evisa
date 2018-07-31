@@ -1,11 +1,11 @@
 // @flow
 // vendor
 import React from 'react';
-import { Checkbox, Dropdown, Form } from 'semantic-ui-react';
+import { Checkbox, Dropdown, Form, Popup } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import { connect } from 'react-redux';
 // custom
-import { Anchor, Button, Flexbox, Text } from './ui';
+import { Anchor, Button, Flexbox, Image, Text } from './ui';
 import FormHeading from './FormHeading';
 import Divider from './Divider';
 import FormErrorMessage from './FormErrorMessage';
@@ -15,7 +15,7 @@ import {
   updateStepOne,
 } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
-import { pageNames } from '../constants/ui';
+import { iconSizes, pageNames } from '../constants/ui';
 import {
   airportFastTrackOptions,
   carPickUpOptions,
@@ -244,15 +244,27 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         : airportFastTrackOptions;
 
     return (
-      <Form
-        onSubmit={this.onSubmit}
-        style={{
-          width: '100%',
-        }}
-      >
+      <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
         <FormHeading text="Visa Requirements" />
         <Form.Field required>
-          <label>Country</label>
+          <Flexbox
+            width="100%"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <label>Country of Issue</label>
+            <Popup
+              trigger={
+                <Image
+                  src="../static/icons/info-ico.svg"
+                  alt="info"
+                  width={18}
+                  fixedWidth
+                />
+              }
+              content="Country of Immigration Department or Embassy Office where you get your passport from"
+            />
+          </Flexbox>
           <Dropdown
             error={shouldShowErrorMessage && !countryId}
             value={countryId}
