@@ -1603,13 +1603,6 @@
     "flag": "ve"
   },
   {
-    "value": 232,
-    "iso": "VN",
-    "text": "Viet Nam",
-    "phonecode": 84,
-    "flag": "vn"
-  },
-  {
     "value": 233,
     "iso": "VG",
     "text": "Virgin Islands, British",
