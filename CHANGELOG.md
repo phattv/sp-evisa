@@ -1,4 +1,14 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4.2] - 2018-08-01
+### Added
+- /apply with id URL query param
+- /apply: add info icon for tooltip
+### Updated
+- /apply: use input type="date" for date input
+### Removed
+- yarn remove semantic-ui-calendar-react
+- remove Viet Nam from country list
+
 ## [3.0.0-beta.4.1] - 2018-07-17
 ### Updated
 - /thank-you: update text with green tick icon
