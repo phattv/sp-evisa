@@ -325,7 +325,24 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           <Divider />
         </Flexbox>
         <Form.Field>
-          <label>Airport Fast Track</label>
+          <Flexbox
+            width="100%"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <label>Airport Fast Track</label>
+            <Popup
+              trigger={
+                <Image
+                  src="../static/icons/info-ico.svg"
+                  alt="info"
+                  width={18}
+                  fixedWidth
+                />
+              }
+              content="Our staff will greet you at the Visa Landing Counter and assist you to get visa stamp and sticker without queuing"
+            />
+          </Flexbox>
           <Dropdown
             value={extraServices.fastTrack}
             placeholder="Select..."
@@ -337,7 +354,24 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           />
         </Form.Field>
         <Form.Field>
-          <label>Car Pick Up</label>
+          <Flexbox
+            width="100%"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <label>Car Pick Up</label>
+            <Popup
+              trigger={
+                <Image
+                  src="../static/icons/info-ico.svg"
+                  alt="info"
+                  width={18}
+                  fixedWidth
+                />
+              }
+              content="You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time"
+            />
+          </Flexbox>
           <Dropdown
             value={extraServices.carPickup}
             placeholder="Select..."
@@ -349,11 +383,28 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           />
         </Form.Field>
         <Form.Field>
-          <Checkbox
-            checked={extraServices.privateVisaLetter}
-            onChange={this.togglePrivateVisaLetter}
-            label="Private Visa Letter"
-          />
+          <Flexbox
+            width="100%"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Checkbox
+              checked={extraServices.privateVisaLetter}
+              onChange={this.togglePrivateVisaLetter}
+              label="Private Visa Letter"
+            />
+            <Popup
+              trigger={
+                <Image
+                  src="../static/icons/info-ico.svg"
+                  alt="info"
+                  width={18}
+                  fixedWidth
+                />
+              }
+              content="Confidentiality is crucial. Because of Vietnam Immigration Office policy, all names for people getting visas on the same day will be on the same letter. We offer a private letter service so your name and the names of all members in your group will in a a private letter"
+            />
+          </Flexbox>
         </Form.Field>
 
         <Flexbox paddingTop={6} column>
