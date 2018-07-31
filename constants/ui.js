@@ -106,6 +106,7 @@ const htmlIds = {
  * - `dayjs('31-12-2018').format('DD/MM/YYYY')` // console: "NaN/NaN/NaN"
  */
 const displayDateFormat = 'DD/MM/YYYY';
+const dateInputDateFormat = 'YYYY-MM-DD';
 const postgresDateFormat = 'YYYY/MM/DD';
 const displayDateTimeFormat = 'DD/MM/YYYY HH:mm:ss A';
 
@@ -118,6 +119,7 @@ export {
   fontSizesSmall,
   spacingValues,
   displayDateFormat,
+  dateInputDateFormat,
   postgresDateFormat,
   displayDateTimeFormat,
   headerHeight,

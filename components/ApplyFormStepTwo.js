@@ -11,7 +11,7 @@ import _isEmpty from 'lodash/isEmpty';
 import { Button, Flexbox, Text } from './ui';
 import { updateStepTwo } from '../redux/actions';
 import { reducerNames } from '../constants/reducerNames';
-import { displayDateFormat, postgresDateFormat } from '../constants/ui';
+import { dateInputDateFormat } from '../constants/ui';
 import {
   airportOptions,
   countryOptions,
@@ -31,8 +31,9 @@ const emptyApplicant = {
   passportExpiry: '',
 };
 const defaultDateInputProps = {
-  dateFormat: postgresDateFormat,
-  closable: true,
+  type: 'date',
+  pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}',
+  placeholder: dateInputDateFormat,
 };
 
 type Props = {
@@ -146,10 +147,10 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     );
   };
 
-  updateFlightDate = (event: Object, selectedDate: Object) => {
+  updateFlightDate = (event: Object) => {
     this.setState(
       {
-        [selectedDate.name]: selectedDate ? selectedDate.value : '',
+        [event.target.name]: event.target.value || '',
       },
       () => this.updateStepTwoToStore(),
     );
@@ -168,11 +169,9 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     this.updateApplicantsToStateAndStore(applicants);
   };
 
-  updateDatePicker = (event: Object, selectedDate: Object, index) => {
+  updateApplicantDate = (event: Object, index: number) => {
     let { applicants } = this.state;
-    applicants[index][selectedDate.name] = selectedDate
-      ? selectedDate.value
-      : '';
+    applicants[index][event.target.name] = event.target.value || '';
     this.updateApplicantsToStateAndStore(applicants);
   };
 
@@ -254,12 +253,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       shouldShowErrorMessage,
     } = this.state;
 
-    const parsedArrivalDate = dayjs(arrivalDate).isValid()
-      ? dayjs(arrivalDate).format(displayDateFormat)
-      : '';
-    const parsedDepartureDate = dayjs(departureDate).isValid()
-      ? dayjs(departureDate).format(displayDateFormat)
-      : '';
+    const today = dayjs(new Date()).format(dateInputDateFormat);
     const isFlightNumberRequired = this.getFlightNumberRequirement();
 
     return (
@@ -278,21 +272,21 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         </Form.Field>
         <Form.Field>
           <label>Arrival Date</label>
-          <DateInput
+          <input
             {...defaultDateInputProps}
             name="arrivalDate"
-            placeholder="DD/MM/YYYY"
-            value={parsedArrivalDate}
+            value={arrivalDate}
+            min={today}
             onChange={this.updateFlightDate}
           />
         </Form.Field>
         <Form.Field>
           <label>Departure Date</label>
-          <DateInput
+          <input
             {...defaultDateInputProps}
             name="departureDate"
-            placeholder="DD/MM/YYYY"
-            value={parsedDepartureDate}
+            value={departureDate}
+            min={arrivalDate}
             onChange={this.updateFlightDate}
           />
         </Form.Field>
@@ -316,13 +310,6 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         </Flexbox>
 
         {applicants.map((applicant, index) => {
-          const parsedBirthday = dayjs(applicant.birthday).isValid()
-            ? dayjs(applicant.birthday).format(displayDateFormat)
-            : '';
-          const parsedPassportExpiry = dayjs(applicant.passportExpiry).isValid()
-            ? dayjs(applicant.passportExpiry).format(displayDateFormat)
-            : '';
-
           return (
             <Flexbox column paddingBottom={6} key={index}>
               <Flexbox
@@ -370,18 +357,9 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                 />
               </Form.Field>
 
-              <Flexbox
-                style={{
-                  marginBottom: '1em',
-                }}
-              >
+              <Flexbox style={{ marginBottom: '1em' }}>
                 <Flexbox flex={1} marginRight={2}>
-                  <Form.Field
-                    required
-                    style={{
-                      width: '100%',
-                    }}
-                  >
+                  <Form.Field required style={{ width: '100%' }}>
                     <label>Gender</label>
                     <Dropdown
                       error={shouldShowErrorMessage && !applicant.gender}
@@ -399,15 +377,12 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                 <Flexbox flex={1} marginLeft={2}>
                   <Form.Field required>
                     <label>Date of Birth</label>
-                    <DateInput
-                      error={shouldShowErrorMessage && !parsedBirthday}
+                    <input
                       {...defaultDateInputProps}
                       name="birthday"
-                      placeholder="DD/MM/YYYY"
-                      value={parsedBirthday}
-                      onChange={(event, option) =>
-                        this.updateDatePicker(event, option, index)
-                      }
+                      value={applicant.birthday}
+                      max={today}
+                      onChange={event => this.updateApplicantDate(event, index)}
                     />
                   </Form.Field>
                 </Flexbox>
@@ -429,15 +404,12 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                 <Flexbox flex={1} marginLeft={2}>
                   <Form.Field required>
                     <label>Expiry Date</label>
-                    <DateInput
-                      error={shouldShowErrorMessage && !parsedPassportExpiry}
+                    <input
                       {...defaultDateInputProps}
                       name="passportExpiry"
-                      placeholder="DD/MM/YYYY"
-                      value={parsedPassportExpiry}
-                      onChange={(event, option) =>
-                        this.updateDatePicker(event, option, index)
-                      }
+                      value={applicant.passportExpiry}
+                      min={today}
+                      onChange={event => this.updateApplicantDate(event, index)}
                     />
                   </Form.Field>
                 </Flexbox>
