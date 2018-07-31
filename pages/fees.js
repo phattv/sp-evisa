@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import { Dropdown } from 'semantic-ui-react';
-import Router from 'next/router';
+import Router, { withRouter } from 'next/router';
 // custom
 import { Button, Flexbox, Image, Text } from '../components/ui';
 import ContentMaxWidth from '../components/ContentMaxWidth';
@@ -57,7 +57,25 @@ class Fees extends React.Component<Props, State> {
 
   componentDidMount() {
     logPageView();
-    this.syncPropsToState(this.props, true);
+
+    const { countryId } = this.props;
+    const countryIdParam = parseInt(_get(this, 'props.router.query.id', 0), 10);
+
+    /**
+     * Read "id" URL params from URL:
+     * - if > 0 then update countryId prop and save to store
+     * - if = 0 means there's no params:
+     *   + if countryId prop exists, set to URL param
+     */
+    if (countryIdParam > 0 && countryIdParam !== countryId) {
+      this.props.updateFeesSelectedCountry(countryIdParam);
+      getFeesByCountryId({ countryId: countryIdParam }, this.updateFees);
+    } else {
+      if (countryId > 0) {
+        this.updateUrlQueryParams(countryId);
+      }
+      this.syncPropsToState(this.props, true);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,6 +105,8 @@ class Fees extends React.Component<Props, State> {
   };
 
   updateCountryId = (event: Object, country: Object) => {
+    this.updateUrlQueryParams(country.value);
+
     this.setState(
       {
         countryId: country.value,
@@ -102,6 +122,11 @@ class Fees extends React.Component<Props, State> {
 
   updateFees = data => {
     this.props.updateFees(data);
+  };
+
+  updateUrlQueryParams = countryId => {
+    const href = pageNames.fees + '?id=' + countryId;
+    Router.push(href, href, { shallow: true });
   };
 
   navigateToApply = () => Router.push(pageNames.apply);
@@ -272,4 +297,4 @@ const mapDispatchToProps = {
   updateFees,
   updateFeesSelectedCountry,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Fees);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Fees));
