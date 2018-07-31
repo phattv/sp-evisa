@@ -2,7 +2,6 @@
 // vendor
 import React from 'react';
 import { Form, Dropdown, Input } from 'semantic-ui-react';
-import { DateInput } from 'semantic-ui-calendar-react';
 import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 import _get from 'lodash/get';

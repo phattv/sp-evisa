@@ -14,10 +14,6 @@ import { ServerStyleSheet } from 'styled-components';
 // import 'semantic-ui-css/themes/default/assets/fonts/icons.eot';
 // import 'semantic-ui-css/themes/default/assets/fonts/icons.woff';
 // import 'semantic-ui-css/themes/default/assets/fonts/icons.woff2';
-// import 'semantic-ui-css/components/icon.min.css'; // for DateInput
-// import 'semantic-ui-css/components/table.min.css'; // for DateInput
-// import 'semantic-ui-css/components/popup.min.css'; // for DateInput
-// import 'semantic-ui-calendar-react/dist/css/calendar.min.css'; // for DateInput
 // import 'react-id-swiper/src/styles/css/swiper.css'
 // custom
 
