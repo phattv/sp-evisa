@@ -36,9 +36,9 @@ class Footer extends React.Component<Props> {
             CONTACT US
           </Text>
           <PhoneAndEmail />
-          <Text paddingTop={2} textAlign="center">
-            {companyInfo.address}
-          </Text>
+          {/*<Text paddingTop={2} textAlign="center">*/}
+          {/*{companyInfo.address}*/}
+          {/*</Text>*/}
           <Flexbox
             paddingTop={10}
             paddingBottom={2}

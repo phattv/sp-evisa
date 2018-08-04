@@ -99,16 +99,16 @@ class Contact extends React.Component<Props, State> {
                     width={iconSizes.default}
                   />
                 </Flexbox>
-                <Flexbox paddingBottom={4} alignItems="baseline">
-                  <Flexbox width={10}>
-                    <Image
-                      src="../static/icons/location.svg"
-                      alt="location"
-                      width={iconSizes.small}
-                    />
-                  </Flexbox>
-                  <Text paddingLeft={4}>{companyInfo.address}</Text>
-                </Flexbox>
+                {/*<Flexbox paddingBottom={4} alignItems="baseline">*/}
+                {/*<Flexbox width={10}>*/}
+                {/*<Image*/}
+                {/*src="../static/icons/location.svg"*/}
+                {/*alt="location"*/}
+                {/*width={iconSizes.small}*/}
+                {/*/>*/}
+                {/*</Flexbox>*/}
+                {/*<Text paddingLeft={4}>{companyInfo.address}</Text>*/}
+                {/*</Flexbox>*/}
                 <Flexbox paddingBottom={4}>
                   <Flexbox width={10}>
                     <Image
@@ -152,7 +152,7 @@ class Contact extends React.Component<Props, State> {
                   <Flexbox column paddingLeft={4}>
                     <Text semibold>Working Hours</Text>
                     <Text>
-                      Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
+                      address Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
                       <br />
                       Sat: 8:30 AM – 12:00 PM (GMT+7)
                     </Text>
