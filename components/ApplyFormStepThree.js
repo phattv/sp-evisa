@@ -171,6 +171,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       flight_number: _get(stepTwo, 'flightNumber', ''),
 
       contact: contactString,
+      status: 'paid',
     };
 
     order(params, () => {
