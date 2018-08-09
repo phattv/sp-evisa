@@ -8,6 +8,7 @@ import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import dayjs from 'dayjs';
 import Router from 'next/router';
+import humps from 'humps';
 // custom
 import { updateStepThree } from '../redux/actions';
 import { Flexbox, Text, Button } from './ui';
@@ -138,8 +139,10 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     let contactString = '';
     let applicantsString = '';
     try {
-      contactString = JSON.stringify(contact);
-      applicantsString = JSON.stringify(_get(stepTwo, 'applicants', []));
+      contactString = JSON.stringify(humps.decamelizeKeys(contact));
+      applicantsString = JSON.stringify(
+        humps.decamelizeKeys(_get(stepTwo, 'applicants', [])),
+      );
     } catch (exception) {
       // TODO: rollbar
       console.error(exception);
