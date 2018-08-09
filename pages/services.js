@@ -259,7 +259,7 @@ class Services extends React.Component<Props, State> {
                 Office policy, all names for people getting visas on the same
                 day will be on the same letter. We offer a private letter
                 service so your name and the names of all members in your group
-                will in a a private letter. The fee for each private letter is{' '}
+                will in a private letter. The fee for each private letter is{' '}
                 <Text semibold>{`${fees.privateVisaLetter} USD`}</Text> per
                 letter (one letter can be for one person or for a group).
               </Text>

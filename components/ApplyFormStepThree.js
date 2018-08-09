@@ -316,7 +316,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       client,
       style,
     } = this.state;
-    console.log('xxx', shouldShowErrorMessage);
 
     let PayPalButton = React.Fragment;
     if (isPaypalLoaded) {

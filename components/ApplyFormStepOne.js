@@ -402,7 +402,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
                   fixedWidth
                 />
               }
-              content="Confidentiality is crucial. Because of Vietnam Immigration Office policy, all names for people getting visas on the same day will be on the same letter. We offer a private letter service so your name and the names of all members in your group will in a a private letter"
+              content="Because of Vietnam Immigration Office policy, all names for people getting visas on the same day will be on the same letter. We offer a private letter service so your name and the names of all members in your group will in a private letter"
             />
           </Flexbox>
         </Form.Field>

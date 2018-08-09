@@ -34,6 +34,11 @@ const defaultDateInputProps = {
   pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}',
   placeholder: dateInputDateFormat,
 };
+const errorInputStyles = {
+  backgroundColor: '#fff6f6',
+  borderColor: '#e0b4b4',
+  color: '#9f3a38',
+};
 
 type Props = {
   onSubmit: () => void,
@@ -344,7 +349,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
               <Form.Field required>
                 <label>Nationality</label>
                 <Dropdown
-                  error={shouldShowErrorMessage && !applicant.countryId}
+                  error={shouldShowErrorMessage && applicant.countryId <= 0}
                   value={applicant.countryId}
                   placeholder="Select..."
                   search
@@ -381,6 +386,11 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                       name="birthday"
                       value={applicant.birthday}
                       max={today}
+                      style={
+                        shouldShowErrorMessage && !applicant.birthday
+                          ? errorInputStyles
+                          : {}
+                      }
                       onChange={event => this.updateApplicantDate(event, index)}
                     />
                   </Form.Field>
@@ -408,6 +418,11 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                       name="passportExpiry"
                       value={applicant.passportExpiry}
                       min={today}
+                      style={
+                        shouldShowErrorMessage && !applicant.passportExpiry
+                          ? errorInputStyles
+                          : {}
+                      }
                       onChange={event => this.updateApplicantDate(event, index)}
                     />
                   </Form.Field>
