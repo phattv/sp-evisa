@@ -268,17 +268,14 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           costPerPerson,
           type,
         })}
-
         {shouldShowProcessingFees &&
           this.renderProcessingFees({ quantity, processingTimeObject })}
-
         {shouldShowExtraServices &&
           this.renderExtraServices({
             fastTrackObject,
             carPickupObject,
             privateVisaLetter,
           })}
-
         <Flexbox
           backgroundColor="darkBlue"
           paddingHorizontal={3}
@@ -286,9 +283,16 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           marginTop={4}
           justifyContent="space-between"
         >
-          <Text color="white">Total Fee</Text>
+          <Text color="white">Total Fee*</Text>
           <Text bold color="white">
             ${totalFee}
+          </Text>
+        </Flexbox>
+
+        <Flexbox paddingTop={2}>
+          <Text textAlign="center" fontSize="s" noDoubleLineHeight>
+            *This cost doesn't include stamping fee, you have to pay in cash at
+            the airport
           </Text>
         </Flexbox>
       </Flexbox>
