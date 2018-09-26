@@ -152,7 +152,7 @@ class Contact extends React.Component<Props, State> {
                   <Flexbox column paddingLeft={4}>
                     <Text semibold>Working Hours</Text>
                     <Text>
-                      address Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
+                      Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
                       <br />
                       Sat: 8:30 AM – 12:00 PM (GMT+7)
                     </Text>
