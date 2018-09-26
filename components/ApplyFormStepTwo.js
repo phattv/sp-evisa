@@ -34,6 +34,7 @@ const defaultDateInputProps = {
   pattern: '[0-9]{4}-[0-9]{2}-[0-9]{2}',
   placeholder: dateInputDateFormat,
 };
+// TODO: toggle class "ui error" for scrollToFirstErrorMessage
 const errorInputStyles = {
   backgroundColor: '#fff6f6',
   borderColor: '#e0b4b4',
@@ -64,6 +65,7 @@ type State = {
   departureDate: string,
   flightNumber: string,
   shouldShowErrorMessage: boolean,
+  hasPassportsExpiringSoon: boolean,
 };
 class ApplyFormStepTwo extends React.Component<Props, State> {
   state = {
@@ -73,12 +75,17 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     departureDate: '',
     flightNumber: '',
     shouldShowErrorMessage: false,
+    hasPassportsExpiringSoon: false,
   };
 
   getFormInvalidity = () => {
+    const sixMonthsFromToday = dayjs(new Date()).add(6, 'months');
     const { applicants, flightNumber } = this.state;
     const isFlightNumberRequired = this.getFlightNumberRequirement();
     let shouldShowErrorMessage = false;
+
+    // Resets this.state.hasPassportsExpiringSoon
+    this.setState({ hasPassportsExpiringSoon: false });
 
     if (
       (isFlightNumberRequired && _isEmpty(flightNumber)) ||
@@ -87,13 +94,22 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       shouldShowErrorMessage = true;
     } else {
       applicants.forEach(applicant => {
+        const isPassportExpiredSoon = dayjs(applicant.passportExpiry).isBefore(
+          sixMonthsFromToday
+        );
+        applicant.isPassportExpiredSoon = isPassportExpiredSoon;
+        if (isPassportExpiredSoon) {
+          this.setState({ hasPassportsExpiringSoon: true });
+        }
+
         if (
           _isEmpty(applicant.name) ||
           applicant.countryId <= 0 ||
           _isEmpty(applicant.birthday) ||
           _isEmpty(applicant.gender) ||
           _isEmpty(applicant.passport) ||
-          _isEmpty(applicant.passportExpiry)
+          _isEmpty(applicant.passportExpiry) ||
+          isPassportExpiredSoon
         ) {
           shouldShowErrorMessage = true;
         }
@@ -128,7 +144,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         applicants: this.state.applicants.concat(emptyApplicant),
       },
-      () => this.updateStepTwoToStore(),
+      () => this.updateStepTwoToStore()
     );
   };
 
@@ -137,7 +153,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         applicants: this.state.applicants.splice(index, 1),
       },
-      () => this.updateStepTwoToStore(),
+      () => this.updateStepTwoToStore()
     );
   };
 
@@ -147,7 +163,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         airport: selectedOption ? selectedOption.value : '',
       },
-      () => this.updateStepTwoToStore(),
+      () => this.updateStepTwoToStore()
     );
   };
 
@@ -156,7 +172,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         [event.target.name]: event.target.value || '',
       },
-      () => this.updateStepTwoToStore(),
+      () => this.updateStepTwoToStore()
     );
   };
 
@@ -196,7 +212,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         applicants,
       },
-      () => this.updateStepTwoToStore(),
+      () => this.updateStepTwoToStore()
     );
   };
 
@@ -255,6 +271,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       departureDate,
       flightNumber,
       shouldShowErrorMessage,
+      hasPassportsExpiringSoon,
     } = this.state;
 
     const today = dayjs(new Date()).format(dateInputDateFormat);
@@ -419,7 +436,9 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
                       value={applicant.passportExpiry}
                       min={today}
                       style={
-                        shouldShowErrorMessage && !applicant.passportExpiry
+                        shouldShowErrorMessage &&
+                        (!applicant.passportExpiry ||
+                          applicant.isPassportExpiredSoon)
                           ? errorInputStyles
                           : {}
                       }
@@ -437,7 +456,15 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
         </Text>
 
         <Flexbox paddingTop={6} column>
-          {shouldShowErrorMessage && <FormErrorMessage />}
+          {shouldShowErrorMessage && (
+            <FormErrorMessage
+              message={
+                hasPassportsExpiringSoon
+                  ? 'Passports should have at least six months of validity!'
+                  : 'Please fill in the required inputs!'
+              }
+            />
+          )}
 
           <Flexbox justifyContent="space-between" width="100%">
             <Button onClick={this.goBack} backgroundColor="mediumBlue">
