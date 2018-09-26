@@ -11,7 +11,7 @@ module.exports = withCss({
           analyzerMode: 'server',
           analyzerPort: isServer ? 8888 : 8889,
           openAnalyzer: true,
-        }),
+        })
       );
     }
 
