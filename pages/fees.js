@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
+import _find from 'lodash/find';
 import { Dropdown } from 'semantic-ui-react';
 import Router, { withRouter } from 'next/router';
 // custom
@@ -22,17 +23,8 @@ import {
 } from '../constants/ui';
 import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
-import { countryOptions } from '../constants/dropDownOptions';
+import { countryOptions, typeOptions } from '../constants/dropDownOptions';
 import { fees } from '../constants/fees';
-
-const fieldsToBind = [
-  'one_month_single',
-  'one_month_multiple',
-  'three_month_single',
-  'three_month_multiple',
-  'six_month_multiple',
-  'one_year_multiple',
-];
 
 /**
  * Fees show all the fees a person must pay to apply visa
@@ -269,19 +261,23 @@ class Fees extends React.Component<Props, State> {
           </Text>
           <Text color="lightBlue">(Price per pax)</Text>
         </Flexbox>
-        {fieldsToBind.map((field, index) => (
-          <Flexbox
-            paddingVertical={1}
-            paddingHorizontal={5}
-            key={index}
-            justifyContent="space-between"
-            width="100%"
-            backgroundColor={index % 2 === 0 ? 'bgGrey2' : 'white'}
-          >
-            <Text>{field.replace(/_/g, ' ')}</Text>
-            <Text>{fees[field] > 0 ? `${fees[field]} USD` : 'N/A'}</Text>
-          </Flexbox>
-        ))}
+        {typeOptions.map((type, index) => {
+          return (
+            <Flexbox
+              paddingVertical={1}
+              paddingHorizontal={5}
+              key={index}
+              justifyContent="space-between"
+              width="100%"
+              backgroundColor={index % 2 === 0 ? 'bgGrey2' : 'white'}
+            >
+              <Text>{type.text}</Text>
+              <Text>
+                {fees[type.value] > 0 ? `${fees[type.value]} USD` : 'N/A'}
+              </Text>
+            </Flexbox>
+          );
+        })}
       </Flexbox>
     );
   };
