@@ -1,4 +1,11 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4.4] - 2018-09-27
+### Added
+### Updated
+- Validate “Passports should have at least six months of validity!”
+### Removed
+- /fees & /contact typos
+
 ## [3.0.0-beta.4.3] - 2018-08-10
 ### Added
 - /apply invalid input styles for date pickers
