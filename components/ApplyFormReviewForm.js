@@ -153,9 +153,10 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
 
   // TODO: check UI when data is empty
-  // TODO: flight number
   render() {
-    const { stepTwo: { airport, arrivalDate, departureDate } } = this.props;
+    const {
+      stepTwo: { airport, flightNumber, arrivalDate, departureDate },
+    } = this.props;
 
     const parsedArrivalDate = dayjs(arrivalDate).isValid()
       ? dayjs(arrivalDate).format(displayDateFormat)
@@ -185,6 +186,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
         {arrivalDate &&
           departureDate &&
           this.renderFlightDates({ parsedArrivalDate, parsedDepartureDate })}
+
+        {flightNumber && this.renderFlightNumber({ flightNumber })}
 
         {this.renderTotalFee()}
       </Flexbox>
@@ -232,6 +235,19 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       </Flexbox>
     </Flexbox>
   );
+
+  renderFlightNumber = ({ flightNumber }) => {
+    return (
+      <Flexbox column alignItems="center" paddingTop={4}>
+        <Text fontSize="s" noDoubleLineHeight>
+          Flight Number
+        </Text>
+        <Text color="2c3f60" textAlign="center">
+          {flightNumber}
+        </Text>
+      </Flexbox>
+    );
+  };
 
   renderTotalFee = () => {
     const {

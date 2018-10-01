@@ -95,7 +95,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     } else {
       applicants.forEach(applicant => {
         const isPassportExpiredSoon = dayjs(applicant.passportExpiry).isBefore(
-          sixMonthsFromToday
+          sixMonthsFromToday,
         );
         applicant.isPassportExpiredSoon = isPassportExpiredSoon;
         if (isPassportExpiredSoon) {
@@ -144,7 +144,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         applicants: this.state.applicants.concat(emptyApplicant),
       },
-      () => this.updateStepTwoToStore()
+      () => this.updateStepTwoToStore(),
     );
   };
 
@@ -153,7 +153,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         applicants: this.state.applicants.splice(index, 1),
       },
-      () => this.updateStepTwoToStore()
+      () => this.updateStepTwoToStore(),
     );
   };
 
@@ -163,7 +163,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         airport: selectedOption ? selectedOption.value : '',
       },
-      () => this.updateStepTwoToStore()
+      () => this.updateStepTwoToStore(),
     );
   };
 
@@ -172,14 +172,17 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         [event.target.name]: event.target.value || '',
       },
-      () => this.updateStepTwoToStore()
+      () => this.updateStepTwoToStore(),
     );
   };
 
   updateFlightNumber = (event: Object) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => this.updateStepTwoToStore(),
+    );
   };
 
   // Applicant info
@@ -212,7 +215,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
       {
         applicants,
       },
-      () => this.updateStepTwoToStore()
+      () => this.updateStepTwoToStore(),
     );
   };
 
