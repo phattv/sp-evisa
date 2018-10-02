@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
+import _find from 'lodash/find';
 // custom
 import { Button, Flexbox, Text } from './ui';
 import { updateStepTwo } from '../redux/actions';
@@ -15,6 +16,7 @@ import {
   airportOptions,
   countryOptions,
   genderOptions,
+  typeOptions,
 } from '../constants/dropDownOptions';
 import FormErrorMessage from './FormErrorMessage';
 import FormHeading from './FormHeading';
@@ -280,6 +282,17 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
     const today = dayjs(new Date()).format(dateInputDateFormat);
     const isFlightNumberRequired = this.getFlightNumberRequirement();
 
+    // Calculate max departure date
+    let maxDepartureDate;
+    const visaTypeOption = _find(typeOptions, {
+      value: _get(this, 'props.stepOne.type', ''),
+    });
+    if (visaTypeOption) {
+      maxDepartureDate = dayjs(today)
+        .add(visaTypeOption.lengthinmonth, 'months')
+        .format(dateInputDateFormat);
+    }
+
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
         <FormHeading text="Flight Info" />
@@ -311,6 +324,7 @@ class ApplyFormStepTwo extends React.Component<Props, State> {
             name="departureDate"
             value={departureDate}
             min={arrivalDate}
+            max={maxDepartureDate}
             onChange={this.updateFlightDate}
           />
         </Form.Field>

@@ -7,12 +7,36 @@ const genderOptions = [
   { value: 'female', text: 'Female' },
 ];
 const typeOptions = [
-  { value: 'one_month_single', text: '1 month - single entry' },
-  { value: 'one_month_multiple', text: '1 month - multiple entries' },
-  { value: 'three_month_single', text: '3 months - single entry' },
-  { value: 'three_month_multiple', text: '3 months - multiple entries' },
-  { value: 'six_month_multiple', text: '6 months - multiple entries' },
-  { value: 'one_year_multiple', text: '1 year - multiple entries' },
+  {
+    value: 'one_month_single',
+    text: '1 month - single entry',
+    lengthinmonth: 1,
+  },
+  {
+    value: 'one_month_multiple',
+    text: '1 month - multiple entries',
+    lengthinmonth: 1,
+  },
+  {
+    value: 'three_month_single',
+    text: '3 months - single entry',
+    lengthinmonth: 3,
+  },
+  {
+    value: 'three_month_multiple',
+    text: '3 months - multiple entries',
+    lengthinmonth: 3,
+  },
+  {
+    value: 'six_month_multiple',
+    text: '6 months - multiple entries',
+    lengthinmonth: 6,
+  },
+  {
+    value: 'one_year_multiple',
+    text: '1 year - multiple entries',
+    lengthinmonth: 12,
+  },
 ];
 const purposeOptions = [
   { value: 'tourist', text: 'Tourist' },
