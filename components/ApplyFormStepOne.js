@@ -3,6 +3,7 @@
 import React from 'react';
 import { Checkbox, Dropdown, Form, Popup } from 'semantic-ui-react';
 import _get from 'lodash/get';
+import _find from 'lodash/find';
 import { connect } from 'react-redux';
 // custom
 import { Anchor, Button, Flexbox, Image, Text } from './ui';
@@ -25,6 +26,8 @@ import {
   typeOptions,
 } from '../constants/dropDownOptions';
 import { scrollToFirstErrorMessage } from '../utils/form';
+
+const usCountryId = _get(_find(countryOptions, { iso: 'US' }), 'value', 226);
 
 type Props = {
   countryId: number,
@@ -84,6 +87,20 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
   updateCountryId = (event: Object, selectedOption: Object) => {
     if (selectedOption) {
+      // Reset type option if invalid
+      const { type } = this.state;
+      if (
+        type === typeOptions[typeOptions.length - 1].value ||
+        type === typeOptions[typeOptions.length - 2].value
+      ) {
+        this.setState(
+          {
+            type: typeOptions[0].value,
+          },
+          () => this.updateStepOneToStore(),
+        );
+      }
+
       this.setState(
         {
           countryId: selectedOption.value,
@@ -232,7 +249,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     } = this.state;
 
     let typeOptionsByPurpose = [];
-    if (purpose === purposeOptions[0].value) {
+    // There are 6 months & 1 year visa for United States applicants
+    if (purpose === purposeOptions[0].value && countryId !== usCountryId) {
       typeOptionsByPurpose = typeOptions.slice(0, 4);
     } else {
       typeOptionsByPurpose = typeOptions;
