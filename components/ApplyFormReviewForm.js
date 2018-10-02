@@ -56,34 +56,45 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   };
 
   calculateTotalFee = (nextProps: Object) => {
+    const {
+      costPerPerson,
+      processingTimeObject,
+      fastTrackObject,
+      carPickupObject,
+      privateVisaLetter,
+
+      shouldShowProcessingFees,
+      shouldShowExtraServices,
+    } = this.state;
+
+    // parse quantity
     const quantity = _get(
       nextProps,
       'stepTwo.quantity',
       _get(this, 'props.stepTwo.quantity'),
     );
     const parsedQuantity = Number.parseInt(quantity, 10);
-    const {
-      processingTimeObject,
-      shouldShowProcessingFees,
-      shouldShowExtraServices,
-      fastTrackObject,
-      carPickupObject,
-      privateVisaLetter,
-    } = this.state;
+
+    // processing fees
     const processingFees = shouldShowProcessingFees
-      ? parsedQuantity * _get(processingTimeObject, 'price', 0)
+      ? _get(processingTimeObject, 'price', 0)
       : 0;
-    const extraFees = shouldShowExtraServices
+
+    // extra services fees
+    let extraServiceFees = shouldShowExtraServices
       ? _get(fastTrackObject, 'price', 0) + _get(carPickupObject, 'price', 0)
       : 0;
-    const privateVisaLetterCost =
-      privateVisaLetter === true ? fees.privateVisaLetter : 0;
+    if (privateVisaLetter) {
+      extraServiceFees += fees.privateVisaLetter;
+    }
 
+    /**
+     * Total fee formular:
+     * - per applicant: cost per person + processing fee (multiply by quantity)
+     * - per order: extraServiceFees (once only)
+     */
     const totalFee =
-      parsedQuantity * this.state.costPerPerson +
-      processingFees +
-      extraFees +
-      privateVisaLetterCost;
+      (costPerPerson + processingFees) * parsedQuantity + extraServiceFees;
 
     this.setState(
       {
@@ -100,7 +111,8 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps) {
     if (
       this.props.fees !== nextProps.fees ||
-      this.props.stepOne !== nextProps.stepOne
+      this.props.stepOne !== nextProps.stepOne ||
+      this.props.stepTwo !== nextProps.stepTwo
     ) {
       this.syncStateAndCalculateTotalFee(nextProps);
     }
