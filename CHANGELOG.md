@@ -1,4 +1,12 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4.5] - 2018-10-02
+### Added
+- Review form: add flight number render block
+- Step 1: 6 months & 1 year option for US
+- Step 2: max departure date
+### Fixed
+- calculate total fee trigger (step 2 change) & logic (add comments)
+
 ## [3.0.0-beta.4.4] - 2018-09-27
 ### Added
 ### Updated
