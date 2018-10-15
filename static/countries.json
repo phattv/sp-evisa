@@ -245,13 +245,6 @@
     "flag": "kh"
   },
   {
-    "value": 37,
-    "iso": "CM",
-    "text": "Cameroon",
-    "phonecode": 237,
-    "flag": "cm"
-  },
-  {
     "value": 38,
     "iso": "CA",
     "text": "Canada",
@@ -553,13 +546,6 @@
     "flag": "de"
   },
   {
-    "value": 81,
-    "iso": "GH",
-    "text": "Ghana",
-    "phonecode": 233,
-    "flag": "gh"
-  },
-  {
     "value": 82,
     "iso": "GI",
     "text": "Gibraltar",
@@ -691,13 +677,6 @@
     "text": "Indonesia",
     "phonecode": 62,
     "flag": "id"
-  },
-  {
-    "value": 101,
-    "iso": "IR",
-    "text": "Iran, Islamic Republic of",
-    "phonecode": 98,
-    "flag": "ir"
   },
   {
     "value": 102,
@@ -1071,13 +1050,6 @@
     "flag": "ni"
   },
   {
-    "value": 155,
-    "iso": "NE",
-    "text": "Niger",
-    "phonecode": 227,
-    "flag": "ne"
-  },
-  {
     "value": 156,
     "iso": "NG",
     "text": "Nigeria",
@@ -1293,13 +1265,6 @@
     "text": "Saudi Arabia",
     "phonecode": 966,
     "flag": "sa"
-  },
-  {
-    "value": 188,
-    "iso": "SN",
-    "text": "Senegal",
-    "phonecode": 221,
-    "flag": "sn"
   },
   {
     "value": 189,
