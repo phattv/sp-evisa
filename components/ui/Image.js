@@ -1,22 +1,27 @@
 // @flow
-import styled from "styled-components";
-import { screenSizes, spacingUnits } from "../../constants/ui";
-import generateCommonProps from "../utils/generateCommonProps";
+import styled from 'styled-components';
+import { screenSizes, spacingUnits } from '../../constants/ui';
+import generateCommonProps from './generateCommonProps';
 
+/**
+ * Image component act as a <img> tag.
+ * TODO: https://github.com/cyrilwanner/next-optimized-images
+ */
 const Image = styled.img`
-  width: ${props => (props.fixedWidth ? props.width : props.width || "100%")};
-  height: ${props => props.height || "auto"};
+  height: ${props => props.height || 'auto'};
   display: block;
+  max-width: 100%;
 
   @media only screen and (min-width: ${screenSizes.desktop}px) {
     ${props => generateCommonProps(props, spacingUnits.desktop)};
   }
 
-  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop}px) {
+  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop -
+      1}px) {
     ${props => generateCommonProps(props, spacingUnits.tablet)};
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet}px) {
+  @media only screen and (max-width: ${screenSizes.tablet - 1}px) {
     ${props => generateCommonProps(props, spacingUnits.mobile)};
   }
 `;

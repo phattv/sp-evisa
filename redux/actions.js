@@ -31,12 +31,6 @@ const updateStepOne = (params: Object) => (dispatch: Dispatch) => {
     payload: params,
   });
 };
-const resetStepTwo = () => (dispatch: Dispatch) => {
-  return dispatch({
-    type: actionTypes.RESET_STEP_TWO,
-    payload: {},
-  });
-};
 const updateStepTwo = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
     type: actionTypes.UPDATE_STEP_TWO,
@@ -52,12 +46,6 @@ const updateStepThree = (params: Object) => (dispatch: Dispatch) => {
 const updatePrice = (params: Object) => (dispatch: Dispatch) => {
   return dispatch({
     type: actionTypes.UPDATE_PRICE,
-    payload: params,
-  });
-};
-const updatePaymentStatus = (params: Object) => (dispatch: Dispatch) => {
-  return dispatch({
-    type: actionTypes.UPDATE_PAYMENT_STATUS,
     payload: params,
   });
 };
@@ -100,11 +88,9 @@ const logout = (params: Object) => (dispatch: Dispatch) => {
 export {
   actionTypes,
   updateStepOne,
-  resetStepTwo,
   updateStepTwo,
   updateStepThree,
   updatePrice,
-  updatePaymentStatus,
   updateFees,
   updateFeesSelectedCountry,
   updateAccount,

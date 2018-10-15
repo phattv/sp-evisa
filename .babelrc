@@ -4,6 +4,7 @@
     [
       "styled-components",
       { "ssr": true, "displayName": false, "preprocess": false }
-    ]
+    ],
+    "transform-flow-strip-types"
   ]
 }

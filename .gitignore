@@ -6,3 +6,4 @@ out
 deploy
 dist
 dev.sh
+yarn-error.log

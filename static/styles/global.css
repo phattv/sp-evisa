@@ -1,0 +1,30 @@
+body {
+    font-family: 'Rubik', -apple-system, system-ui,
+    BlinkMacSystemFont, 'SegoeUI', 'Roboto', 'Helvetica Neue',
+    'Arial', 'sans-serif';
+    font-size: 18px;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Override semantic-ui-css */
+.ui.form .field > label {
+    margin-bottom: 6px !important;
+    line-height: 20px !important;
+}
+
+.ui.form .fields .field .ui.input input,
+.ui.form .field .ui.input input {
+    width: 100% !important;
+}
+
+.ui.selection.dropdown {
+    min-width: 10em !important;
+}
+
+.ui.search.dropdown .menu {
+    max-height: 300px !important;
+}

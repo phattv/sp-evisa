@@ -1,61 +1,57 @@
 // @flow
-import styled from "styled-components";
-import { generateCommonProps } from "../utils/generateCommonProps";
-import { screenSizes, spacingUnits } from "../../constants/ui";
+import styled from 'styled-components';
+import { generateCommonProps } from './generateCommonProps';
+import { boxShadow, screenSizes, spacingUnits } from '../../constants/ui';
 
+/**
+ * Set responsive flex-direction:
+ * on mobile screen, if responsiveLayout prop is true,
+ * switch value between 'column' & 'row'
+ * @param props
+ * @param spacingUnit
+ * @returns {string}
+ */
 const setResponsiveFlexDirection = (props, spacingUnit) => {
   if (spacingUnit === spacingUnits.mobile) {
     if (props.responsiveLayout) {
-      return !props.column || props.row ? "column" : "row";
+      return !props.column || props.row ? 'column' : 'row';
     } else {
-      return props.column ? "column" : "row";
+      return props.column ? 'column' : 'row';
     }
   } else {
-    return props.column ? "column" : "row";
+    return props.column ? 'column' : 'row';
   }
 };
 
-const setResponsiveAlignItems = (props, spacingUnit) => {
-  if (spacingUnit === spacingUnits.mobile) {
-    if (props.responsiveAlignItemsCenter) {
-      return "center";
-    } else {
-      return props.alignItems || "center";
-    }
-  } else {
-    return props.alignItems || "center";
-  }
-};
-
-// https://www.w3schools.com/css/css3_flexbox.asp
+/**
+ * Flexbox component acts as a <div> tag with "display: flex" pre-defined.
+ */
 const Flexbox = styled.div`
   display: flex;
-  justify-content: ${props => props.justifyContent || "center"};
+  ${props =>
+    props.justifyContent && `justify-content: ${props.justifyContent}`};
+  ${props => props.alignItems && `align-items: ${props.alignItems}`};
   ${props => props.flex && `flex: ${props.flex}`};
   ${props => props.alignSelf && `align-self: ${props.alignSelf}`};
+  ${props => props.boxShadow && `box-shadow: ${boxShadow}`};
 
   @media only screen and (min-width: ${screenSizes.desktop}px) {
     ${props => generateCommonProps(props, spacingUnits.desktop)};
     flex-direction: ${props =>
       setResponsiveFlexDirection(props, spacingUnits.desktop)};
-    align-items: ${props =>
-      setResponsiveAlignItems(props, spacingUnits.desktop)};
   }
 
-  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop}px) {
+  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop -
+      1}px) {
     ${props => generateCommonProps(props, spacingUnits.tablet)};
     flex-direction: ${props =>
       setResponsiveFlexDirection(props, spacingUnits.tablet)};
-    align-items: ${props =>
-      setResponsiveAlignItems(props, spacingUnits.tablet)};
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet}px) {
+  @media only screen and (max-width: ${screenSizes.tablet - 1}px) {
     ${props => generateCommonProps(props, spacingUnits.mobile)};
     flex-direction: ${props =>
       setResponsiveFlexDirection(props, spacingUnits.mobile)};
-    align-items: ${props =>
-      setResponsiveAlignItems(props, spacingUnits.mobile)};
   }
 `;
 

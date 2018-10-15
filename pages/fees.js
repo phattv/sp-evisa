@@ -1,27 +1,34 @@
 // @flow
 // vendor
-import * as React from 'react';
-import Select from 'react-select';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
-import withRedux from 'next-redux-wrapper';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
+import _find from 'lodash/find';
+import { Dropdown } from 'semantic-ui-react';
+import Router, { withRouter } from 'next/router';
 // custom
-import {
-  BlockHeader,
-  PageHeader,
-  Content,
-  Flexbox,
-  Image,
-  Layout,
-  Text,
-} from '../components';
-import { countryOptions } from '../constants/dropDownOptions';
-import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
-import { configureStore } from '../redux/store';
-import { colors } from '../constants/ui';
-import { getFeesByCountryId } from '../utils/apiClient';
+import { Button, Flexbox, Image, Text } from '../components/ui';
+import ContentMaxWidth from '../components/ContentMaxWidth';
+import Heading from '../components/Heading';
+import Card from '../components/Card';
+import PaymentMethodImages from '../components/PaymentMethodImages';
+import { logPageView } from '../utils/analytics';
 import { reducerNames } from '../constants/reducerNames';
+import {
+  iconSizes,
+  pageNames,
+  spacingValues,
+  tableWidth,
+} from '../constants/ui';
+import { updateFees, updateFeesSelectedCountry } from '../redux/actions';
+import { getFeesByCountryId } from '../utils/apiClient';
+import { countryOptions, typeOptions } from '../constants/dropDownOptions';
+import { fees } from '../constants/fees';
 
+/**
+ * Fees show all the fees a person must pay to apply visa
+ */
 type Props = {
   countryId: number,
   fees: Array<Object>,
@@ -33,7 +40,7 @@ type State = {
   touristFees: Object,
   businessFees: Object,
 };
-class VisaFees extends React.Component<Props, State> {
+class Fees extends React.Component<Props, State> {
   state = {
     countryId: 0,
     touristFees: {},
@@ -41,7 +48,26 @@ class VisaFees extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    this.syncPropsToState(this.props, true);
+    logPageView();
+
+    const { countryId } = this.props;
+    const countryIdParam = parseInt(_get(this, 'props.router.query.id', 0), 10);
+
+    /**
+     * Read "id" URL params from URL:
+     * - if > 0 then update countryId prop and save to store
+     * - if = 0 means there's no params:
+     *   + if countryId prop exists, set to URL param
+     */
+    if (countryIdParam > 0 && countryIdParam !== countryId) {
+      this.props.updateFeesSelectedCountry(countryIdParam);
+      getFeesByCountryId({ countryId: countryIdParam }, this.updateFees);
+    } else {
+      if (countryId > 0) {
+        this.updateUrlQueryParams(countryId);
+      }
+      this.syncPropsToState(this.props, true);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,11 +76,15 @@ class VisaFees extends React.Component<Props, State> {
 
   syncPropsToState = (nextProps: Props, isForced?: boolean) => {
     if (isForced || this.props.fees !== nextProps.fees) {
-      get(nextProps, 'fees', []).forEach(fees => {
+      _get(nextProps, 'fees', []).forEach(fees => {
         if (fees.type === 'tourist') {
-          this.updateTouristFees(fees);
+          this.setState({
+            touristFees: fees,
+          });
         } else if (fees.type === 'business') {
-          this.updateBusinessFees(fees);
+          this.setState({
+            businessFees: fees,
+          });
         }
       });
     }
@@ -66,7 +96,9 @@ class VisaFees extends React.Component<Props, State> {
     }
   };
 
-  updateCountryId = (country: Object) => {
+  updateCountryId = (event: Object, country: Object) => {
+    this.updateUrlQueryParams(country.value);
+
     this.setState(
       {
         countryId: country.value,
@@ -84,228 +116,171 @@ class VisaFees extends React.Component<Props, State> {
     this.props.updateFees(data);
   };
 
-  updateTouristFees = (touristFees: Object) => {
-    this.setState({
-      touristFees,
-    });
+  updateUrlQueryParams = countryId => {
+    const href = pageNames.fees + '?id=' + countryId;
+    Router.push(href, href, { shallow: true });
   };
 
-  updateBusinessFees = (businessFees: Object) => {
-    this.setState({
-      businessFees,
-    });
-  };
+  navigateToApply = () => Router.push(pageNames.apply);
 
   render() {
     const { countryId, touristFees, businessFees } = this.state;
 
     return (
-      <Layout title="Visa Fees">
-        <Image src="/static/images/fees-background.png" />
-        <PageHeader header="VISA FEES" />
-        <Content>
-          <Flexbox width="100%" responsiveLayout column>
-            <Flexbox column>
-              <Text bold paddingBottom={10}>
-                Applying Vietnam Visa on arrival, two types of fee need to be
-                paid by customers
-              </Text>
-              <Flexbox column>
-                <Flexbox flex={1} column alignItems="flex-start" width="100%">
-                  <BlockHeader header="Service fee" smallPadding />
-                  <Flexbox alignItems="flex-start">
-                    <Text p>
-                      Service fee is paid online to evisa-vn.com which is the
-                      service fee for the process of getting the visa approval
-                      letter. You use the letter to get Vietnam visa stamp at
-                      the airports.
-                    </Text>
-                  </Flexbox>
-                </Flexbox>
-                <Flexbox flex={1} column alignItems="flex-start" width="100%">
-                  <BlockHeader header="Stamping fee" smallPadding />
-                  <Flexbox alignItems="flex-start">
-                    <Text p>
-                      Stamping fee is paid in cash (USD) at the landing visa
-                      counter at the arrival airport. This fee is vary depend on
-                      types of visa:
-                    </Text>
-                  </Flexbox>
-                </Flexbox>
-
-                <Flexbox width="100%" column paddingTop={5}>
-                  <Text p size="l">
-                    Please select your coutry to see the price in detail
+      <Fragment>
+        <ContentMaxWidth backgroundImage="url('../static/images/bg-airport.jpg')">
+          <Flexbox column paddingHorizontal={16} paddingVertical={16}>
+            <Heading color="white" text="Fees" />
+            <Flexbox width="100%" alignItems="center" responsiveLayout>
+              <Flexbox flex={1}>
+                <Card>
+                  <Text>
+                    <Text semibold color="green">
+                      Service fee
+                    </Text>{' '}
+                    is paid online to evisa-vn.com which is the service fee for
+                    the process of getting the visa approval letter. You use the
+                    letter to get Vietnam visa stamp at the airports.
                   </Text>
-                  <Flexbox width="100%" maxWidth={100}>
-                    <Select
-                      value={countryId}
-                      placeholder="Select country"
-                      onChange={this.updateCountryId}
-                      options={countryOptions}
-                    />
-                  </Flexbox>
-
-                  <Flexbox responsiveLayout>
-                    {!isEmpty(touristFees) && (
-                      <Flexbox column paddingVertical={5} paddingHorizontal={5}>
-                        <BlockHeader header="TOURIST FEES" smallPadding />
-                        <table>
-                          <thead
-                            style={{
-                              backgroundColor: colors.visaRed,
-                              color: colors.white,
-                              fontWeight: 'bold',
-                            }}
-                          >
-                            <tr>
-                              <th>VISA TYPE</th>
-                              <th>SERVICE FEE</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>1 month single</td>
-                              <td>
-                                {touristFees.one_month_single
-                                  ? `${touristFees.one_month_single} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1 month multiple</td>
-                              <td>
-                                {touristFees.one_month_multiple
-                                  ? `${touristFees.one_month_multiple} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>3 months single</td>
-                              <td>
-                                {touristFees.three_month_single
-                                  ? `${touristFees.three_month_single} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>3 months multiple</td>
-                              <td>
-                                {touristFees.three_month_multiple
-                                  ? `${
-                                      touristFees.three_month_multiple
-                                    } USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>6 months single</td>
-                              <td>
-                                {touristFees.six_month_multiple
-                                  ? `${touristFees.six_month_multiple} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1 year single</td>
-                              <td>
-                                {touristFees.one_year_multiple
-                                  ? `${touristFees.one_year_multiple} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </Flexbox>
-                    )}
-
-                    {!isEmpty(businessFees) && (
-                      <Flexbox column paddingVertical={5} paddingHorizontal={5}>
-                        <BlockHeader header="BUSINESS FEES" smallPadding />
-                        <table>
-                          <thead
-                            style={{
-                              backgroundColor: colors.visaRed,
-                              color: colors.white,
-                              fontWeight: 'bold',
-                            }}
-                          >
-                            <tr>
-                              <th>VISA TYPE</th>
-                              <th>SERVICE FEE</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>1 month single</td>
-                              <td>
-                                {businessFees.one_month_single
-                                  ? `${businessFees.one_month_single} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1 month multiple</td>
-                              <td>
-                                {businessFees.one_month_multiple
-                                  ? `${businessFees.one_month_multiple} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>3 months single</td>
-                              <td>
-                                {businessFees.three_month_single
-                                  ? `${businessFees.three_month_single} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>3 months multiple</td>
-                              <td>
-                                {businessFees.three_month_multiple
-                                  ? `${
-                                      businessFees.three_month_multiple
-                                    } USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>6 months single</td>
-                              <td>
-                                {businessFees.six_month_multiple
-                                  ? `${businessFees.six_month_multiple} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1 year single</td>
-                              <td>
-                                {businessFees.one_year_multiple
-                                  ? `${businessFees.one_year_multiple} USD/pax`
-                                  : 'N/A'}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </Flexbox>
-                    )}
-                  </Flexbox>
-
-                  {!isEmpty(touristFees) &&
-                    !isEmpty(businessFees) && (
-                      <Text fontStyle="italic">
-                        Note: Stamping is excluded from the fee tables above
-                      </Text>
-                    )}
+                </Card>
+              </Flexbox>
+              <Flexbox>
+                <Flexbox
+                  alignItems="center"
+                  justifyContent="center"
+                  width={10}
+                  height={10}
+                  borderRadius={25}
+                  backgroundColor="green"
+                >
+                  <Text fontSize="xl" bold color="white">
+                    +
+                  </Text>
                 </Flexbox>
+              </Flexbox>
+              <Flexbox flex={1}>
+                <Card>
+                  <Text>
+                    <Text semibold color="green">
+                      Stamping fee
+                    </Text>{' '}
+                    is paid in cash (USD) at the landing visa counter at the
+                    arrival airport. It costs{' '}
+                    <Text semibold>
+                      {fees.stampingFeeSingleEntry} USD for a single entry visa
+                    </Text>{' '}
+                    and{' '}
+                    <Text semibold>
+                      {fees.stampingFeeMultipleEntries} USD for a multiple visa
+                    </Text>.
+                  </Text>
+                </Card>
               </Flexbox>
             </Flexbox>
           </Flexbox>
-        </Content>
-      </Layout>
+        </ContentMaxWidth>
+
+        <ContentMaxWidth>
+          <Flexbox column maxWidth={tableWidth * 2 + 4}>
+            <Flexbox
+              column
+              paddingTop={spacingValues.blockPaddingTop}
+              paddingBottom={2}
+              alignItems="center"
+            >
+              <Image
+                width={iconSizes.large}
+                src="../static/icons/world.svg"
+                alt="world icon"
+              />
+              <Flexbox paddingTop={3}>
+                <Heading
+                  text="Select your country to see Service Fees in details"
+                  secondary
+                />
+              </Flexbox>
+
+              <Flexbox paddingTop={6} width={tableWidth}>
+                <Dropdown
+                  value={countryId}
+                  placeholder="Select Country"
+                  fluid
+                  search
+                  selection
+                  options={countryOptions}
+                  onChange={this.updateCountryId}
+                />
+              </Flexbox>
+
+              <Flexbox responsiveLayout paddingTop={6}>
+                {!_isEmpty(touristFees) && this.renderTouristFees()}
+                {!_isEmpty(businessFees) && this.renderBusinessFees()}
+              </Flexbox>
+            </Flexbox>
+
+            <Button onClick={this.navigateToApply}>Apply Now!</Button>
+          </Flexbox>
+        </ContentMaxWidth>
+
+        <PaymentMethodImages />
+
+        <Flexbox paddingBottom={30} />
+      </Fragment>
     );
   }
+
+  renderTouristFees = () => {
+    return this.renderFees(this.state.touristFees, 'Tourist Fees');
+  };
+
+  renderBusinessFees = () => {
+    return this.renderFees(this.state.businessFees, 'Business Fees');
+  };
+
+  renderFees = (fees, title) => {
+    return (
+      <Flexbox
+        column
+        backgroundColor="white"
+        borderTop
+        borderWidth={3}
+        borderColor="green"
+        marginHorizontal={2}
+        marginVertical={4}
+        minWidth={tableWidth}
+        width="100%"
+      >
+        <Flexbox
+          paddingVertical={6}
+          column
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text fontSize="l" color="darkBlue" bold noDoubleLineHeight>
+            {title}
+          </Text>
+          <Text color="lightBlue">(Price per pax)</Text>
+        </Flexbox>
+        {typeOptions.map((type, index) => {
+          return (
+            <Flexbox
+              paddingVertical={1}
+              paddingHorizontal={5}
+              key={index}
+              justifyContent="space-between"
+              width="100%"
+              backgroundColor={index % 2 === 0 ? 'bgGrey2' : 'white'}
+            >
+              <Text>{type.text}</Text>
+              <Text>
+                {fees[type.value] > 0 ? `${fees[type.value]} USD` : 'N/A'}
+              </Text>
+            </Flexbox>
+          );
+        })}
+      </Flexbox>
+    );
+  };
 }
 
 const mapStateToProps = store => {
@@ -318,6 +293,4 @@ const mapDispatchToProps = {
   updateFees,
   updateFeesSelectedCountry,
 };
-export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
-  VisaFees,
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Fees));

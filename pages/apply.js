@@ -1,125 +1,207 @@
 // @flow
 // vendor
-import * as React from 'react';
-import { Div } from 'glamorous';
-import withRedux from 'next-redux-wrapper';
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import React, { Fragment } from 'react';
+import { logPageView } from '../utils/analytics';
+import { Step } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 // custom
-import { Content, Flexbox, Layout, Text } from '../components';
-import { borderRadius, colors, spacingValues } from '../constants/ui';
+import { Anchor, Button, Flexbox, Text } from '../components/ui';
+import ContentMaxWidth from '../components/ContentMaxWidth';
+import Heading from '../components/Heading';
+import Card from '../components/Card';
 import ApplyFormStepOne from '../components/ApplyFormStepOne';
 import ApplyFormStepTwo from '../components/ApplyFormStepTwo';
 import ApplyFormStepThree from '../components/ApplyFormStepThree';
-import { configureStore } from '../redux/store';
+import ApplyFormReviewForm from '../components/ApplyFormReviewForm';
+import FormErrorMessage from '../components/FormErrorMessage';
+import { formMaxWidth, pageNames, spacingValues } from '../constants/ui';
 
+const formPaddingHorizontal = 3;
+
+/**
+ * Apply show the form to apply for visa
+ */
 type Props = {};
 type State = {
-  currentTabIndex: number,
+  steps: Array<Object>,
+  isAgreeClicked: boolean,
+  shouldShowErrorMessage: boolean,
 };
-class ApplyVisaOnline extends React.Component<Props, State> {
+class Apply extends React.Component<Props, State> {
+  static defaultProps: Props = {};
+
   state = {
-    currentTabIndex: 0,
+    steps: [
+      {
+        key: 'options',
+        active: true,
+        completed: false,
+        title: 'Visa Options',
+        onClick: () => this.showStepOne(),
+      },
+      {
+        key: 'billing',
+        active: false,
+        completed: false,
+        title: 'Applicant Details',
+        onClick: () => this.showStepTwo(),
+      },
+      {
+        key: 'confirm',
+        active: false,
+        completed: false,
+        title: 'Review & Finalize',
+        onClick: () => this.showStepThree(),
+      },
+    ],
+    isAgreeClicked: false,
+    shouldShowErrorMessage: false,
   };
 
-  navigateToStep = (index: number) => {
+  showStepOne = () => {
+    let { steps } = this.state;
+    steps[0].active = true;
+    steps[0].completed = false;
+    steps[1].active = false;
+    steps[1].completed = false;
+    steps[2].active = false;
+    steps[2].completed = false;
+
     this.setState({
-      currentTabIndex: index || 0,
+      steps,
     });
   };
 
+  showStepTwo = () => {
+    const shouldShowErrorMessage = this.stepOne.getFormInvalidity();
+    this.setState({ shouldShowErrorMessage });
+    if (!shouldShowErrorMessage) {
+      let { steps } = this.state;
+      steps[0].active = false;
+      steps[0].completed = true;
+      steps[1].active = true;
+      steps[1].completed = false;
+      steps[2].active = false;
+      steps[2].completed = false;
+      this.setState({
+        steps,
+      });
+    }
+  };
+
+  showStepThree = () => {
+    if (this.stepTwo) {
+      const shouldShowErrorMessage = this.stepTwo.getFormInvalidity();
+      this.setState({ shouldShowErrorMessage });
+      if (!shouldShowErrorMessage) {
+        let { steps } = this.state;
+        steps[0].active = false;
+        steps[0].completed = true;
+        steps[1].active = false;
+        steps[1].completed = true;
+        steps[2].active = true;
+        steps[2].completed = false;
+
+        this.setState({
+          steps,
+        });
+      }
+    } else {
+      this.setState({ shouldShowErrorMessage: true });
+    }
+  };
+
+  hideAgreeStatement = () => {
+    this.setState({
+      isAgreeClicked: true,
+    });
+  };
+
+  componentDidMount() {
+    logPageView();
+  }
+
   render() {
-    const { currentTabIndex } = this.state;
+    const { steps, isAgreeClicked, shouldShowErrorMessage } = this.state;
+
     return (
-      <Layout title="Apply">
-        <Content>
-          <Div
-            display="flex"
-            flex={1}
-            border={`3px solid ${colors.visaBlue}`}
-            backgroundColor={colors.lightGrey}
-            borderRadius={borderRadius}
-            padding={spacingValues.xl}
-          >
-            <Flexbox flex={1}>
-              <Tabs
-                onSelect={() => {}}
-                selectedIndex={currentTabIndex}
-                style={{
-                  width: '100%',
-                }}
+      <Fragment>
+        {isAgreeClicked ? (
+          <ContentMaxWidth>
+            <Flexbox
+              paddingTop={10}
+              paddingBottom={spacingValues.blockPaddingTop}
+              column
+              alignItems="center"
+              maxWidth={formMaxWidth - formPaddingHorizontal * 4}
+            >
+              <Heading secondary text="Get your Visa in 3 steps" />
+              <Step.Group ordered items={steps} fluid />
+
+              <Flexbox paddingTop={6} width="100%">
+                {shouldShowErrorMessage && (
+                  <FormErrorMessage message="Please finish this step before moving on the next one" />
+                )}
+              </Flexbox>
+
+              <Flexbox
+                justifyContent="space-between"
+                responsiveLayout
+                width="100%"
               >
-                <TabList
-                  style={{
-                    listStyleType: 'none',
-                  }}
+                <Flexbox
+                  flex={1}
+                  paddingVertical={5}
+                  paddingHorizontal={formPaddingHorizontal}
                 >
-                  <Flexbox justifyContent="flex-end" responsiveLayout>
-                    <Tab disabled>
-                      <CustomTab index={0} currentIndex={currentTabIndex}>
-                        1. Visa Options
-                      </CustomTab>
-                    </Tab>
-                    <Tab disabled>
-                      <CustomTab index={1} currentIndex={currentTabIndex}>
-                        2. Applicant Details
-                      </CustomTab>
-                    </Tab>
-                    <Tab disabled>
-                      <CustomTab index={2} currentIndex={currentTabIndex}>
-                        3. Review & Finalize
-                      </CustomTab>
-                    </Tab>
-                  </Flexbox>
-                </TabList>
-
-                <TabPanel>
-                  <ApplyFormStepOne onSubmit={() => this.navigateToStep(1)} />
-                </TabPanel>
-                <TabPanel>
-                  <ApplyFormStepTwo
-                    onSubmit={() => this.navigateToStep(2)}
-                    goBack={() => this.navigateToStep(0)}
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <ApplyFormStepThree goBack={() => this.navigateToStep(1)} />
-                </TabPanel>
-              </Tabs>
+                  {steps[0].active && (
+                    <ApplyFormStepOne
+                      onSubmit={this.showStepTwo}
+                      onRef={ref => (this.stepOne = ref)}
+                    />
+                  )}
+                  {steps[1].active && (
+                    <ApplyFormStepTwo
+                      goBack={this.showStepOne}
+                      onSubmit={this.showStepThree}
+                      onRef={ref => (this.stepTwo = ref)}
+                    />
+                  )}
+                  {steps[2].active && (
+                    <ApplyFormStepThree goBack={this.showStepTwo} />
+                  )}
+                </Flexbox>
+                <Flexbox
+                  flex={1}
+                  paddingVertical={5}
+                  paddingHorizontal={formPaddingHorizontal}
+                >
+                  <ApplyFormReviewForm />
+                </Flexbox>
+              </Flexbox>
             </Flexbox>
-          </Div>
-        </Content>
-      </Layout>
+          </ContentMaxWidth>
+        ) : (
+          <Flexbox maxWidth={formMaxWidth} alignItem="center">
+            <Card>
+              <Text color="green" fontSize="l" p textAlign="center">
+                All information provided to evisa-vn.com
+                <br />
+                will be kept confidential.
+              </Text>
+              <Text p textAlign="center">
+                This application will take approximately 5 minutes.
+                <br />
+                By using our service, you agree to our{' '}
+                <Anchor href={pageNames.terms}>Terms of Use</Anchor>.
+              </Text>
+              <Button onClick={this.hideAgreeStatement}>I Agree</Button>
+            </Card>
+          </Flexbox>
+        )}
+      </Fragment>
     );
   }
 }
 
-type CustomTabProps = {
-  children: React.Node,
-  index: number,
-  currentIndex: number,
-};
-class CustomTab extends React.Component<CustomTabProps> {
-  render() {
-    const { children, index, currentIndex } = this.props;
-    return (
-      <Div
-        backgroundColor={
-          index === currentIndex ? colors.visaRed : colors.darkGrey
-        }
-        padding={`${spacingValues.xs}px ${spacingValues.l}px`}
-      >
-        <Text size="l" bold color="white">
-          {children}
-        </Text>
-      </Div>
-    );
-  }
-}
-
-const mapStateToProps = store => {
-  return {};
-};
-const mapDispatchToProps = {};
-export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
-  ApplyVisaOnline,
-);
+export default Apply;

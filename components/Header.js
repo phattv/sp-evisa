@@ -3,270 +3,257 @@
 import * as React from 'react';
 import Media from 'react-media';
 import Router from 'next/router';
-import { connect } from 'react-redux';
+import NProgress from 'nprogress';
 // Custom
 import { Anchor, Flexbox, Image, Text } from '../components/ui';
-import { colors, screenSizes } from '../constants/ui';
+import {
+  colors,
+  screenSizes,
+  contentMaxWidth,
+  pageNames,
+  borderRadius,
+} from '../constants/ui';
 import { companyInfo } from '../constants/companyInfo';
-import { reducerNames } from '../constants/reducerNames';
-import { logout } from '../redux/actions';
+import PhoneAndEmail from './PhoneAndEmail';
 
-const headerHeight = 25;
-const blockId = 'header';
-const styleHtml = `<style>#${blockId} a.active {color: ${
-  colors.visaRed
-}}</style>`;
-const logoutUrl = '/logout';
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
-type Props = {
-  account: Object,
-  logout: () => void,
+const menus = [
+  {
+    text: 'Home',
+    url: pageNames.home,
+  },
+  {
+    text: 'Fees',
+    url: pageNames.fees,
+  },
+  {
+    text: 'FAQ',
+    url: pageNames.faq,
+  },
+  {
+    text: 'Services',
+    url: pageNames.services,
+  },
+  {
+    text: 'Contact',
+    url: pageNames.contact,
+  },
+  // {
+  //   text: 'Reviews',
+  //   url: pageNames.reviews,
+  // },
+];
+
+const mobileAnchorStyles = {
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'center',
+  paddingTop: 15,
+  paddingBottom: 15,
+  backgroundColor: 'white',
 };
-type HeaderState = {
-  isMenuShowed?: boolean,
-  menus: Array<Object>,
+
+/**
+ * Header component that acts as the fixed top part in the application layout,
+ * and shows logo, contact information and navigation.
+ */
+type Props = {};
+type State = {
+  shouldShowMobileMenus?: boolean,
 };
-class Header extends React.PureComponent<Props, HeaderState> {
+class Header extends React.PureComponent<Props, State> {
   state = {
-    isMenuShowed: false,
-    menus: [],
+    shouldShowMobileMenus: false,
   };
 
-  updateIsMenuShowed = () => {
+  navigate = (url: string) => {
     this.setState({
-      isMenuShowed: !this.state.isMenuShowed,
+      shouldShowMobileMenus: false,
+    });
+    Router.push(url);
+  };
+
+  toggleMobileMenus = () => {
+    this.setState({
+      shouldShowMobileMenus: !this.state.shouldShowMobileMenus,
     });
   };
 
-  hideMenu = () => {
-    this.setState({
-      isMenuShowed: false,
-    });
-  };
+  renderDesktopHorizontalMenus = () => (
+    <Flexbox
+      flex={1}
+      height={16}
+      backgroundColor="darkBlue"
+      justifyContent={'center'}
+      alignItems={'center'}
+    >
+      <Flexbox
+        width="100%"
+        maxWidth={contentMaxWidth}
+        aligniItems="center"
+        justifyContent="flex-end"
+        paddingVertical={2}
+        paddingHorizontal={3}
+      >
+        {menus.map((menu, index) => (
+          <Anchor key={index} href={menu.url} color="white" activeColor="green">
+            <Flexbox paddingHorizontal={6} paddingVertical={2}>
+              {menu.text}
+            </Flexbox>
+          </Anchor>
+        ))}
+        <Anchor href={pageNames.apply} color="white" activeColor="green">
+          <Flexbox
+            paddingHorizontal={6}
+            paddingVertical={2}
+            backgroundColor="darkRed"
+            borderRadius={borderRadius}
+          >
+            <Text color="white">Apply</Text>
+          </Flexbox>
+        </Anchor>
+      </Flexbox>
+    </Flexbox>
+  );
 
-  navigateToUrl = (url: string) => {
-    this.hideMenu();
-    if (url === logoutUrl) {
-      this.props.logout();
-    } else {
-      Router.push(url).then(() => window.scrollTo(0, 0));
-    }
-  };
+  renderMobileMenuIcon = () => (
+    <Flexbox
+      paddingVertical={2}
+      paddingHorizontal={3}
+      onClick={this.toggleMobileMenus}
+    >
+      <Image src="../static/icons/hamburger-ico.svg" alt={'menu'} width={5} />
+    </Flexbox>
+  );
 
-  componentWillReceiveProps(nextProps: Props) {
-    this.setMenus(nextProps);
-  }
+  renderMobileMenus = () => (
+    <Flexbox
+      column
+      alignItems={'center'}
+      position={'fixed'}
+      top={12}
+      left={0}
+      width={'100%'}
+    >
+      <a
+        href={`tel:${companyInfo.phone}`}
+        style={{
+          ...mobileAnchorStyles,
+          backgroundColor: colors.darkBlue,
+        }}
+      >
+        <Flexbox
+          alignItems={'center'}
+          paddingHorizontal={1}
+          paddingVertical={1}
+        >
+          <Image src="../static/icons/phone-ico.svg" width={5} alt={'phone'} />
+          <Text fonsize={'l'} color={'white'} paddingLeft={2}>
+            {companyInfo.phoneString}
+          </Text>
+        </Flexbox>
+      </a>
 
-  componentDidMount() {
-    this.setMenus(this.props);
-  }
+      <a
+        href={`mailto:${companyInfo.email}`}
+        style={{
+          ...mobileAnchorStyles,
+          backgroundColor: colors.mediumBlue,
+        }}
+      >
+        <Flexbox
+          alignItems={'center'}
+          paddingHorizontal={1}
+          paddingVertical={1}
+        >
+          <Image src="../static/icons/email-ico.svg" width={5} alt={'mail'} />
+          <Text fonsize={'l'} color="white" paddingLeft={2}>
+            {companyInfo.email}
+          </Text>
+        </Flexbox>
+      </a>
 
-  setMenus = (props: Props) => {
-    const { account } = props;
-    const isLoggedIn = account && Object.keys(account).length > 0;
-    this.setState({
-      menus: [
-        {
-          text: 'HOME',
-          url: '/',
-        },
-        {
-          text: isLoggedIn ? 'LOGOUT' : 'LOGIN',
-          url: isLoggedIn ? logoutUrl : '/login',
-        },
-        {
-          text: 'APPLY',
-          url: '/apply',
-        },
-        {
-          text: 'VISA FEES',
-          url: '/fees',
-        },
-        {
-          text: 'HOW TO APPLY VISA',
-          url: '/how',
-        },
-        {
-          text: 'EXTRA SERVICES',
-          url: '/services',
-        },
-        // {
-        //   text: 'INFORMATION',
-        //   url: '/news',
-        // },
-        {
-          text: 'FEEDBACK',
-          url: '/feedback',
-        },
-      ],
-    });
-  };
+      {menus.map((menu, index) => (
+        <Text
+          clickable
+          key={index}
+          onClick={() => this.navigate(menu.url)}
+          color="mediumBlue"
+          activeColor="green"
+          style={mobileAnchorStyles}
+        >
+          {menu.text}
+        </Text>
+      ))}
+
+      <Text
+        clickable
+        onClick={() => this.navigate(pageNames.apply)}
+        color={'white'}
+        activeColor={'green'}
+        style={{
+          ...mobileAnchorStyles,
+          fontWeight: 'bold',
+          backgroundColor: colors.red,
+        }}
+      >
+        APPLY
+      </Text>
+    </Flexbox>
+  );
 
   render() {
-    const { isMenuShowed, menus } = this.state;
+    const { shouldShowMobileMenus } = this.state;
 
     return (
       // Paypal z-index: 100
-      <Flexbox id={blockId} style={{ zIndex: 101 }}>
-        <Text
-          dangerouslySetInnerHTML={{
-            __html: styleHtml,
-          }}
-        />
-        <Flexbox
-          width="100%"
-          border
-          position="fixed"
-          top={0}
-          left={0}
-          backgroundColor="white"
-          height={headerHeight}
-          column
-        >
+      <Flexbox style={{ zIndex: 101 }} column backgroundColor="white">
+        <Flexbox flex={1} height={12} justifyContent={'center'}>
           <Flexbox
-            maxWidth={288}
             width="100%"
-            justifyContent="space-between"
+            maxWidth={contentMaxWidth}
             alignItems="center"
+            justifyContent="space-between"
             paddingVertical={2}
-            paddingHorizontal={6}
+            paddingHorizontal={3}
           >
-            <Flexbox>
-              <Anchor href="/" as="/">
-                <Image
-                  src="/static/images/logo.png"
-                  alt="evisa logo"
-                  maxWidth={30}
-                  clickable
-                />
-              </Anchor>
-            </Flexbox>
-            <Flexbox>
-              <Anchor href={`tel:${companyInfo.phone}`}>
-                <Flexbox
-                  border
-                  borderColor="visaRed"
-                  paddingHorizontal={2}
-                  paddingVertical={1}
-                  borderRadius
-                  column
-                >
-                  <Flexbox>
-                    <i
-                      className="fa fa-fw fa-phone"
-                      style={{
-                        color: colors.visaRed,
-                      }}
-                    />
-                    <Text color="visaRed" bold size="s">
-                      HOTLINE
-                    </Text>
-                  </Flexbox>
-                  <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
-                    <Text color="visaRed" bold size="s">
-                      {companyInfo.phone}
-                    </Text>
-                  </Media>
-                </Flexbox>
-              </Anchor>
-              <Anchor href={`mailto:${companyInfo.email}`}>
-                <Flexbox column>
-                  <Flexbox
-                    border
-                    borderColor="visaBlue"
-                    paddingHorizontal={2}
-                    paddingVertical={1}
-                    borderRadius
-                    marginLeft={2}
-                    column
-                  >
-                    <Flexbox>
-                      <i
-                        className="fa fa-fw fa-envelope"
-                        style={{
-                          color: colors.visaBlue,
-                        }}
-                      />
-                      <Text color="visaBlue" bold size="s">
-                        EMAIL
-                      </Text>
-                    </Flexbox>
-                    <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
-                      <Text color="visaBlue" bold size="s">
-                        {companyInfo.email}
-                      </Text>
-                    </Media>
-                  </Flexbox>
-                </Flexbox>
-              </Anchor>
-              <Media query={`(max-width: ${screenSizes.tablet + 1}px)`}>
-                <Flexbox paddingLeft={4} onClick={this.updateIsMenuShowed}>
-                  <Image src="/static/images/line-hamburger.svg" alt="Menu" />
-                </Flexbox>
-              </Media>
-            </Flexbox>
-          </Flexbox>
-          <Flexbox backgroundColor="visaBlue" width="100%">
-            <Media query={`(min-width: ${screenSizes.tablet + 1}px)`}>
-              <Flexbox>
-                {menus.map((menu, index) => (
-                  <Flexbox
-                    paddingVertical={3}
-                    paddingHorizontal={3}
-                    key={index}
-                  >
-                    <Text
-                      size="m"
-                      color="white"
-                      textAlign="center"
-                      onClick={() => this.navigateToUrl(menu.url)}
-                      clickable
-                    >
-                      {menu.text}
-                    </Text>
-                  </Flexbox>
-                ))}
-              </Flexbox>
+            <Anchor href="/" changeBackground>
+              <Image
+                src="../static/logo/logo-horizontal.svg"
+                alt={'logo-horizontal'}
+                width={32}
+              />
+            </Anchor>
+
+            <Media
+              query={`(min-width: ${screenSizes.tablet + 1}px)`}
+              defaultMatches={true}
+            >
+              <PhoneAndEmail />
+            </Media>
+            <Media
+              query={`(max-width: ${screenSizes.tablet}px)`}
+              defaultMatches={false}
+            >
+              {this.renderMobileMenuIcon()}
             </Media>
           </Flexbox>
-
-          {isMenuShowed ? (
-            <Flexbox
-              column
-              position="fixed"
-              width="100%"
-              top={headerHeight}
-              left={0}
-              backgroundColor="white"
-            >
-              {menus.map((menu, index) => (
-                <Text
-                  key={index}
-                  paddingVertical={3}
-                  paddingHorizontal={3}
-                  clickable
-                  textAlign="center"
-                  width="100%"
-                  borderBottom
-                  bold
-                  color="visaBlue"
-                  onClick={() => this.navigateToUrl(menu.url)}
-                >
-                  {menu.text}
-                </Text>
-              ))}
-            </Flexbox>
-          ) : null}
         </Flexbox>
+
+        {shouldShowMobileMenus && this.renderMobileMenus()}
+
+        <Media
+          query={`(min-width: ${screenSizes.tablet + 1}px)`}
+          defaultMatches={true}
+        >
+          {this.renderDesktopHorizontalMenus()}
+        </Media>
       </Flexbox>
     );
   }
 }
 
-const mapStateToProps = store => {
-  return { account: store[reducerNames.account] };
-};
-const mapDispatchToProps = {
-  logout,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

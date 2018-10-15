@@ -5,7 +5,6 @@ import type { Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import localForage from 'localforage';
 // custom
 import { rootReducer } from './reducers';
 
@@ -28,7 +27,7 @@ const composedEnhancers = composeWithDevTools(
  */
 const configureStore = (initialState: Store) => {
   const store = createStore(rootReducer, initialState, composedEnhancers);
-  persistStore(store, { storage: localForage });
+  persistStore(store);
 
   return store;
 };

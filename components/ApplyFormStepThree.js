@@ -1,27 +1,28 @@
 // @flow
 // vendor
 import * as React from 'react';
-import withRedux from 'next-redux-wrapper';
-import { Form } from 'react-final-form';
-import { Div, Input, Label } from 'glamorous';
+import { connect } from 'react-redux';
+import { Form, Input, Checkbox } from 'semantic-ui-react';
 import ReactDOM from 'react-dom';
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
+import _get from 'lodash/get';
+import _isEmpty from 'lodash/isEmpty';
 import dayjs from 'dayjs';
+import Router from 'next/router';
+import humps from 'humps';
 // custom
-import { configureStore } from '../redux/store';
-import { updatePaymentStatus, updateStepThree } from '../redux/actions';
-import { Button, Flexbox, Text } from '../components';
+import { updateStepThree } from '../redux/actions';
+import { Flexbox, Text, Button } from './ui';
 import {
-  borderRadius,
-  colors,
+  displayDateFormat,
+  pageNames,
   postgresDateFormat,
-  spacingValues,
 } from '../constants/ui';
-import ApplyFormReviewForm from './ApplyFormReviewForm';
 import { reducerNames } from '../constants/reducerNames';
 import { countryOptions } from '../constants/dropDownOptions';
 import { order } from '../utils/apiClient';
+import FormHeading from './FormHeading';
+import FormErrorMessage from './FormErrorMessage';
+import { scrollToFirstErrorMessage } from '../utils/form';
 
 let componentInstance;
 let paypalActions;
@@ -32,17 +33,15 @@ type Props = {
   stepThree: Object,
   price: number,
   updateStepThree: Object => void,
-  goBack: Object => void,
-  account: Object,
-  guest: Object,
-  // updatePaymentStatus: boolean => void,
+  goBack: () => void,
 };
 type State = {
-  hasFlightInfo: boolean,
-  flightNumber: string,
-  shouldShowErrorMessage: boolean,
-  shouldShowSuccessMessage: boolean,
+  name: string,
+  email: string,
+  phone: string,
   isTermsAgreed: boolean,
+
+  shouldShowErrorMessage: boolean,
 
   // paypal
   isPaypalLoaded: boolean,
@@ -54,10 +53,11 @@ type State = {
 
 class ApplyFormStepThree extends React.Component<Props, State> {
   state = {
-    hasFlightInfo: false,
-    flightNumber: '',
+    name: '',
+    email: '',
+    phone: '',
+
     shouldShowErrorMessage: false,
-    shouldShowSuccessMessage: false,
     isTermsAgreed: false,
 
     // paypal
@@ -77,154 +77,122 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     },
   };
 
-  toggleHasFlightInfo = () => {
-    this.setState({
-      hasFlightInfo: !this.state.hasFlightInfo,
-    });
-  };
-
-  updateFlightNumber = (event: Object) => {
-    this.setState(
-      {
-        flightNumber: event.target.value,
-      },
-      () => this.updateStore(),
-    );
-  };
-
-  updateStore = () => {
-    this.props.updateStepThree(this.state);
-  };
-
-  updateIsTermsAgreed = () => {
+  toggleIsTermsAgreed = () => {
     this.setState(
       {
         isTermsAgreed: !this.state.isTermsAgreed,
       },
-      () => this.togglePaypalButton(paypalActions),
+      () => {
+        this.togglePaypalButton(paypalActions);
+      },
     );
   };
 
-  shouldDisablePaypalButton = () => {
-    const { isTermsAgreed } = this.state;
-    const { account, guest } = this.props;
-    const contact = isEmpty(account) ? guest : account;
-
-    const isContactEmpty =
-      isEmpty(contact) ||
-      isEmpty(contact.name) ||
-      isEmpty(contact.email) ||
-      isEmpty(contact.phone);
-    return !isTermsAgreed || isContactEmpty;
+  updateTextField = (event: Object) => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => this.updateStepThreeToStore(),
+    );
   };
 
-  finishForm = () => {
-    const { stepOne, stepTwo, stepThree, price, account, guest } = this.props;
+  updateStepThreeToStore = () => {
+    const stepThree = {
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone,
+      isTermsAgreed: this.state.isTermsAgreed,
+    };
 
-    let contact;
-    let applicants;
+    this.props.updateStepThree(stepThree);
+  };
+
+  getFormInvalidity = () => {
+    const { name, email, phone, isTermsAgreed } = this.state;
+    return (
+      _isEmpty(name) ||
+      _isEmpty(email) ||
+      _isEmpty(phone) ||
+      isTermsAgreed !== true
+    );
+  };
+
+  saveOrderAndNavigateToThankYou = () => {
+    const { stepThree: { name, email, phone } } = this.props;
+    const { stepOne, stepTwo, price } = this.props;
+    const contact = {
+      name,
+      email,
+      phone,
+    };
+
+    const parsedArrivalDate = dayjs(_get(stepTwo, 'arrivalDate', ''));
+    let arrivalDate = parsedArrivalDate.isValid()
+      ? dayjs(stepTwo.arrivalDate).format(postgresDateFormat)
+      : '';
+    const parsedDepartureDate = dayjs(_get(stepTwo, 'departureDate', ''));
+    let departureDate = parsedDepartureDate.isValid()
+      ? dayjs(stepTwo.departureDate).format(postgresDateFormat)
+      : '';
+
+    let contactString = '';
+    let applicantsString = '';
     try {
-      contact = JSON.stringify(isEmpty(account) ? guest : account);
-      applicants = JSON.stringify(stepTwo);
+      contactString = JSON.stringify(humps.decamelizeKeys(contact));
+      applicantsString = JSON.stringify(
+        humps.decamelizeKeys(_get(stepTwo, 'applicants', [])),
+      );
     } catch (exception) {
-      contact = '';
-      applicants = '';
+      // TODO: rollbar
+      console.error(exception);
     }
-
-    const arrivalDate = get(stepOne, 'arrivalDate', '')
-      ? dayjs(stepOne.arrivalDate).format(postgresDateFormat)
-      : '';
-    const departureDate = get(stepOne, 'departureDate', '')
-      ? dayjs(stepOne.departureDate).format(postgresDateFormat)
-      : '';
 
     // prepare params
     const params = {
+      quantity: _get(stepTwo, 'quantity', 0),
       price,
-      country_id: get(stepOne, 'country', ''),
-      quantity: get(stepOne, 'quantity', ''),
-      type: get(stepOne, 'type', ''),
-      purpose: get(stepOne, 'purpose', ''),
-      processing_time: get(stepOne, 'processingTime', ''),
-      airport: get(stepOne, 'airport', ''),
-      arrival_date: arrivalDate,
-      departure_date: departureDate,
-      airport_fast_track: get(stepOne, 'extraServices.fastTrack', ''),
-      car_pick_up: get(stepOne, 'extraServices.carPickup', ''),
-      private_visa_letter: get(
+      country_id: _get(stepOne, 'countryId', ''),
+      type: _get(stepOne, 'type', ''),
+      purpose: _get(stepOne, 'purpose', ''),
+      processing_time: _get(stepOne, 'processingTime', ''),
+      airport_fast_track: _get(stepOne, 'extraServices.fastTrack', ''),
+      car_pick_up: _get(stepOne, 'extraServices.carPickup', ''),
+      private_visa_letter: _get(
         stepOne,
         'extraServices.privateVisaLetter',
         false,
       ),
-      contact,
-      applicants,
-      flight_number: get(stepThree, 'flightNumber', ''),
+
+      applicants: applicantsString,
+      airport: _get(stepTwo, 'airport', ''),
+      arrival_date: arrivalDate,
+      departure_date: departureDate,
+      flight_number: _get(stepTwo, 'flightNumber', ''),
+
+      contact: contactString,
       status: 'paid',
     };
 
     order(params, () => {
-      this.setState({
-        shouldShowSuccessMessage: true,
-      });
-      console.log('xxx', 'form is finished');
-
       setTimeout(() => {
-        window.location = '/'
-      }, 1000)
+        Router.push(pageNames.thankYou);
+      }, 1000);
     });
   };
 
-  renderApplicants = () => {
-    const { stepTwo } = this.props;
+  navigateToPaymentFailed = () => {
+    Router.push(pageNames.paymentFailed);
+  };
 
-    return Object.keys(stepTwo).map(index => {
-      const countryObject = countryOptions.find(
-        option => option.value === stepTwo[index].country_id,
-      );
-
-      return (
-        <Flexbox
-          key={index}
-          column
-          alignItems="flex-start"
-          border
-          borderRadius
-          borderColor="visaBlue"
-          width="100%"
-          paddingVertical={2}
-          paddingHorizontal={2}
-          marginVertical={1}
-          marginHorizontal={1}
-        >
-          <Div>
-            <Text bold>Full name:</Text> <Text>{stepTwo[index].name}</Text>
-          </Div>
-          <Div>
-            <Text bold>Country:</Text> <Text>{countryObject.label}</Text>
-          </Div>
-          <Div>
-            <Text bold>Date of birth:</Text>{' '}
-            <Text>{stepTwo[index].birthday}</Text>
-          </Div>
-          <Div>
-            <Text bold>Passport number:</Text>{' '}
-            <Text>{stepTwo[index].passport}</Text>
-          </Div>
-          <Div>
-            <Text bold>Passport expiry date:</Text>{' '}
-            <Text>{stepTwo[index].passport_expiry}</Text>
-          </Div>
-          <Div>
-            <Text bold>Gender:</Text> <Text>{stepTwo[index].gender}</Text>
-          </Div>
-        </Flexbox>
-      );
-    });
+  goBack = () => {
+    const { goBack } = this.props;
+    goBack && goBack();
   };
 
   //<editor-fold desc="Paypal configs">
   togglePaypalButton = (actions, callback) => {
-    const shouldDisablePaypalButton = this.shouldDisablePaypalButton();
+    const shouldDisablePaypalButton = this.getFormInvalidity();
 
     if (actions) {
       if (shouldDisablePaypalButton) {
@@ -253,7 +221,11 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
   onPaypalClick = () => {
     this.togglePaypalButton(paypalActions, () => {
-      const shouldShowErrorMessage = this.shouldDisablePaypalButton();
+      const shouldShowErrorMessage = this.getFormInvalidity();
+
+      if (shouldShowErrorMessage) {
+        scrollToFirstErrorMessage();
+      }
 
       this.setState({
         shouldShowErrorMessage,
@@ -267,7 +239,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
   };
 
   payment = (data, actions) => {
-    // this.props.updatePaymentStatus(false);
     const { price } = this.props;
 
     return actions.payment.create({
@@ -286,26 +257,35 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     console.log('Payment ID = ', data.paymentID);
     console.log('PayerID = ', data.payerID);
 
-    return actions.payment.execute().then(function(payment) {
-      window.alert('Payment Succeeded!');
-      // componentInstance.props.updatePaymentStatus(true);
-      componentInstance.finishForm();
-      // The payment is complete!
-      // You can now show a confirmation message to the customer
-    });
+    return actions.payment
+      .execute()
+      .then(function(payment) {
+        componentInstance.saveOrderAndNavigateToThankYou();
+      })
+      .catch(error => {
+        componentInstance.navigateToPaymentFailed();
+        console.error('xxx paypal error', JSON.stringify(error));
+      });
   };
 
   onCancel = (data, actions) => {
-    // this.props.updatePaymentStatus(false);
+    alert('payment cancelled');
     console.log('The payment was cancelled!');
     console.log('Payment ID = ', data.paymentID);
   };
 
   onError = error => {
-    // this.props.updatePaymentStatus(false);
+    alert('payment failed');
     console.error('paypal error', error);
   };
   //</editor-fold>
+
+  // Life cycle functions
+  componentWillReceiveProps(nextProps) {
+    if (this.props.stepThree !== nextProps.stepThree) {
+      this.syncPropsToState(nextProps);
+    }
+  }
 
   componentDidMount() {
     componentInstance = this;
@@ -313,13 +293,24 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     this.setState({
       isPaypalLoaded: true,
     });
+    this.syncPropsToState(this.props);
   }
+
+  syncPropsToState = (nextProps: Props) => {
+    this.setState({
+      name: _get(nextProps, 'stepThree.name', ''),
+      email: _get(nextProps, 'stepThree.email', ''),
+      phone: _get(nextProps, 'stepThree.phone', ''),
+      isTermsAgreed: _get(nextProps, 'stepThree.isTermsAgreed', false),
+    });
+  };
 
   render() {
     const {
-      hasFlightInfo,
-      flightNumber,
-      shouldShowSuccessMessage,
+      name,
+      email,
+      phone,
+
       shouldShowErrorMessage,
       isTermsAgreed,
 
@@ -329,7 +320,6 @@ class ApplyFormStepThree extends React.Component<Props, State> {
       client,
       style,
     } = this.state;
-    const { goBack } = this.props;
 
     let PayPalButton = React.Fragment;
     if (isPaypalLoaded) {
@@ -337,195 +327,138 @@ class ApplyFormStepThree extends React.Component<Props, State> {
     }
 
     return (
-      <Div>
-        <Flexbox
-          marginLeft={spacingValues.xxs}
-          marginRight={spacingValues.xxs}
-          paddingBottom={5}
-        >
-          <Text>
+      <Form style={{ width: '100%' }}>
+        <Flexbox>
+          <Text noDoubleLineHeight>
             Please review your application details below before starting visa
             processing with Vietnam Immigration Department.
           </Text>
         </Flexbox>
-        <Form
-          onSubmit={() => {}}
-          render={({ handleSubmit, pristine, invalid }) => (
-            <Flexbox alignItems="flex-start" flex={1} responsiveLayout>
-              <Flexbox
-                flex={1}
-                column
-                width="100%"
-                marginLeft={spacingValues.xxs}
-                marginRight={spacingValues.xxs}
-              >
-                {/* Flight info */}
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                  marginTop={5}
-                >
-                  <Text size="l" bold>
-                    FLIGHT INFORMATION
-                  </Text>
-                </Flexbox>
-                <Flexbox>
-                  <Text>
-                    It is recommended that you provide us with your flight
-                    details for better support. (In case you apply for express
-                    visa service or extra service at Vietnam airport, this
-                    information is required)
-                  </Text>
-                </Flexbox>
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                >
-                  <Label display="flex" alignItems="center" cursor="pointer">
-                    <Input
-                      type="checkbox"
-                      onChange={this.toggleHasFlightInfo}
-                      value={hasFlightInfo}
-                      marginRight={spacingValues.s}
-                    />
-                    <Text>I have booked</Text>
-                  </Label>
-                </Flexbox>
 
-                <Div
-                  display={hasFlightInfo ? 'flex' : 'none'}
-                  flexDirection="column"
-                  width="100%"
-                >
-                  <Text bold>FLIGHT NUMBER</Text>
-                  <Input
-                    backgroundColor="white"
-                    padding={`${spacingValues.xs}px ${spacingValues.s}px`}
-                    borderRadius={borderRadius}
-                    border={`1px solid ${colors.lightGrey}`}
-                    width="100%"
-                    value={flightNumber}
-                    onChange={this.updateFlightNumber}
-                    marginTop={2}
-                  />
-                </Div>
+        <FormHeading text="Contact Information" hasPaddingTop />
+        <Form.Field required>
+          <label>Name</label>
+          <Input
+            error={shouldShowErrorMessage && !name}
+            name="name"
+            placeholder="Enter..."
+            value={name}
+            onChange={this.updateTextField}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Email</label>
+          <Input
+            error={shouldShowErrorMessage && !email}
+            name="email"
+            type="email"
+            placeholder="Enter..."
+            value={email}
+            onChange={this.updateTextField}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Phone</label>
+          <Input
+            error={shouldShowErrorMessage && !phone}
+            name="phone"
+            placeholder="Enter..."
+            value={phone}
+            onChange={this.updateTextField}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <Checkbox
+            checked={isTermsAgreed}
+            onChange={this.toggleIsTermsAgreed}
+            label="I have read and agreed with the Terms of Use"
+          />
+        </Form.Field>
 
-                {/* Terms checkbox */}
-                <Label
-                  paddingTop={25}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  cursor="pointer"
-                >
-                  <Input
-                    type="checkbox"
-                    onChange={this.updateIsTermsAgreed}
-                    value={isTermsAgreed}
-                    marginRight={spacingValues.s}
-                  />
-                  <Text bold textAlign="center">
-                    I have read and agreed with the Terms of Use
-                  </Text>
-                </Label>
+        {isPaypalLoaded && (
+          <PayPalButton
+            commit={commit}
+            env={env}
+            client={client}
+            style={style}
+            onClick={this.onPaypalClick}
+            validate={actions => this.validatePaypal(actions)}
+            payment={(data, actions) => this.payment(data, actions)}
+            onAuthorize={(data, actions) => this.onAuthorize(data, actions)}
+            onCanccel={(data, actions) => this.onCancel(data, actions)}
+            onError={error => this.onError(error)}
+          />
+        )}
 
-                <Div width="100%" marginTop={10}>
-                  {/* Paypal */}
-                  {isPaypalLoaded && (
-                    <PayPalButton
-                      commit={commit}
-                      env={env}
-                      client={client}
-                      style={style}
-                      onClick={this.onPaypalClick}
-                      validate={actions => this.validatePaypal(actions)}
-                      payment={(data, actions) => this.payment(data, actions)}
-                      onAuthorize={(data, actions) =>
-                        this.onAuthorize(data, actions)
-                      }
-                      onCanccel={(data, actions) =>
-                        this.onCancel(data, actions)
-                      }
-                      onError={error => this.onError(error)}
-                    />
-                  )}
-                </Div>
+        {shouldShowErrorMessage && (
+          <FormErrorMessage
+            message={
+              !isTermsAgreed
+                ? 'Please click on accept Terms of Use checkbox'
+                : ''
+            }
+          />
+        )}
 
-                {/* Applicants information */}
-                <Flexbox
-                  alignItems="flex-start"
-                  justifyContent="space-between"
-                  width="100%"
-                  marginTop={5}
-                >
-                  <Text size="l" bold>
-                    APPLICANT(S) INFORMATION
-                  </Text>
-                </Flexbox>
+        <FormHeading text="Applicants Details" hasPaddingTop />
+        {this.renderApplicants()}
 
-                {this.renderApplicants()}
-              </Flexbox>
-
-              {/* Review form */}
-              <Flexbox
-                flex={1}
-                column
-                width="100%"
-                marginHorizontal={spacingValues.xxs}
-                marginVertical={spacingValues.xxs}
-              >
-                <ApplyFormReviewForm />
-
-                <Flexbox
-                  width="100%"
-                  justifyContent="space-around"
-                  marginTop={5}
-                  marginBottom={5}
-                >
-                  <Button solid onClick={goBack}>
-                    <i className="fa fa-arrow-left" />
-                    &nbsp;&nbsp;BACK
-                  </Button>
-                </Flexbox>
-
-                {shouldShowSuccessMessage && (
-                  <Text color="visaBlue" textAlign="center">
-                    Thank you for choosing us, we will contact you shortly!
-                  </Text>
-                )}
-
-                {shouldShowErrorMessage && (
-                  <Text color="visaRed" textAlign="center">
-                    Please fill in the Contact information inputs & accept Terms
-                    of Use & pay
-                  </Text>
-                )}
-              </Flexbox>
-            </Flexbox>
-          )}
-        />
-      </Div>
+        <Flexbox paddingTop={6} column>
+          <Flexbox justifyContent="space-between" width="100%">
+            <Button onClick={this.goBack} backgroundColor="mediumBlue">
+              Back
+            </Button>
+          </Flexbox>
+        </Flexbox>
+      </Form>
     );
   }
+
+  renderApplicants = () => {
+    const { stepTwo: { applicants } } = this.props;
+
+    return applicants.map((applicant, index) => {
+      const countryObject = countryOptions.find(
+        option => option.value === applicant.countryId,
+      );
+      const parsedBirthday = dayjs(applicant.birthday).isValid()
+        ? dayjs(applicant.birthday).format(displayDateFormat)
+        : '';
+      const parsedPassportExpiry = dayjs(applicant.passportExpiry).isValid()
+        ? dayjs(applicant.passportExpiry).format(displayDateFormat)
+        : '';
+
+      return (
+        <Flexbox key={index} column width="100%" paddingBottom={6}>
+          <Text semibold>{applicant.name}</Text>
+          <Flexbox justifyContent="space-between">
+            <Text>{countryObject.text}</Text>
+            <Text>/</Text>
+            <Text>DOB: {parsedBirthday}</Text>
+            <Text>/</Text>
+            <Text textTransform="capitalize">{applicant.gender}</Text>
+          </Flexbox>
+          <Flexbox justifyContent="space-between">
+            <Text>Passport: {applicant.passport}</Text>
+            <Text>/</Text>
+            <Text>Exp. on {parsedPassportExpiry}</Text>
+          </Flexbox>
+        </Flexbox>
+      );
+    });
+  };
 }
 
 const mapStateToProps = store => {
   return {
     stepOne: store[reducerNames.form].stepOne,
-    stepTwo: store[reducerNames.form].stepTwo,
+    stepTwo: _get(store, `${reducerNames.form}.stepTwo`, {}),
     stepThree: store[reducerNames.form].stepThree,
     fees: store[reducerNames.fees].fees,
     price: store[reducerNames.form].price,
-    account: store[reducerNames.account],
-    guest: store[reducerNames.guest],
   };
 };
 const mapDispatchToProps = {
   updateStepThree,
-  // updatePaymentStatus,
 };
-export default withRedux(configureStore, mapStateToProps, mapDispatchToProps)(
-  ApplyFormStepThree,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ApplyFormStepThree);

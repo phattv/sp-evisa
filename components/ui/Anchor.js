@@ -8,15 +8,22 @@ import { colors } from '../../constants/ui';
 
 const StyledLink = styled.a`
   text-decoration: none;
-  color: ${props => colors[props.color || 'visaBlue']};
+  color: ${props => colors[props.color || 'green']};
   &:hover {
-    color: ${props => colors[props.activeColor || 'visaRed']};
+    color: ${props => colors[props.activeColor || 'red']};
+    ${props =>
+      props.changeBackground &&
+      `background-color: ${colors[props.backgroundColor || 'bgGrey2']}`};
   }
   &.active {
-    color: ${props => colors[props.activeColor || 'visaRed']};
+    color: ${props => colors[props.activeColor || 'red']};
   }
 `;
 
+/**
+ * Anchor component acts as <a> tag with customizable styles,
+ * set "prefetch" prop to true for maximum performance on production
+ */
 type Props = {
   href: string,
   children: string | React.Node,

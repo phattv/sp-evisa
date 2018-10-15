@@ -1,8 +1,41 @@
 // @flow
+const colors = {
+  green: '#2BC47D',
+  darkGreen: '#28A86D',
+  red: '#D53A4D',
+  darkRed: '#B83040',
+  darkBlue: '#2C3F60',
+  mediumBlue: '#5B6C94',
+  lightBlue: '#8193A9',
+  bgGrey: '#F8F9FC',
+  bgGrey2: '#F2F7FF',
+  bgRed: '#FFD1D7',
+  white: '#FFFFFF',
+  transparent: 'transparent',
+};
+
+const fontSizes = {
+  s: 16,
+  default: 18,
+  m: 22,
+  l: 32,
+  xl: 40,
+  xxl: 48,
+};
+
+const fontSizesSmall = {
+  s: 14,
+  default: 16,
+  m: 18,
+  l: 22,
+  xl: 32,
+  xxl: 40,
+};
+
 const screenSizes = {
   desktop: 1440,
   tablet: 768,
-  mobile: 425,
+  mobile: 480,
 };
 
 const spacingUnits = {
@@ -11,40 +44,60 @@ const spacingUnits = {
   mobile: 3,
 };
 
-const borderRadius = 8;
-
-const colors = {
-  visaRed: '#CD2122',
-  darkRed: '#9F0F12',
-  visaBlue: '#0061B1',
-  darkBlue: '#003058',
-  lightBlue: '#F0F5F8',
-  darkGrey: '#3E3E3E',
-  grey: '#626262',
-  lightGrey: '#D6D9DF',
-  lighterGrey: '#EFEFEF',
-  white: '#FFFFFF',
-};
-
-const fontSizes = {
-  xs: 12,
-  s: 14,
-  default: 16,
-  m: 18,
-  l: 22,
-  xl: 32,
-  xxl: 42,
-};
+const borderRadius = 6;
 
 const spacingValues = {
-  xxs: 4,
-  xs: 8,
-  s: 12,
-  m: 16,
-  l: 20,
-  xl: 24,
-  xxl: 28,
-  xxxl: 32,
+  blockPaddingTop: 20,
+};
+
+const iconSizes = {
+  small: 30 / spacingUnits.desktop,
+  default: 60 / spacingUnits.desktop,
+  large: 100 / spacingUnits.desktop,
+};
+
+const headerHeight = 140 / spacingUnits.desktop;
+// TODO: simplify maxWidth for all pages: text, form, table
+const contentMaxWidth = 1440 / spacingUnits.desktop;
+const tableWidth = 380 / spacingUnits.desktop;
+const textMaxWidth = 580 / spacingUnits.desktop;
+const formMaxWidth = 950 / spacingUnits.desktop;
+
+const paddingAll = {
+  paddingHorizontal: 5,
+  paddingVertical: 5,
+};
+const paddingAllLarge = {
+  paddingHorizontal: 10,
+  paddingVertical: 10,
+};
+
+const boxShadow = '8px 8px 40px 0 rgba(91, 108, 148, 0.2)';
+/**
+ * TODO: domain name is https://evisa-vn.com, how the page urls should be?
+ * should page names have "visa-" prefix for SEO purposes?
+ * like "visa-fees", "how-to-apply", "other-services", "contact-us"..
+ * TODO: share with server.js to generate sitemap.xml
+ */
+const pageNames = {
+  home: '/',
+  apply: '/apply',
+  fees: '/fees',
+  faq: '/faq',
+  services: '/services',
+  contact: '/contact',
+  reviews: '/reviews',
+  thankYou: '/thank-you',
+  paymentFailed: '/payment-failed',
+  terms: '/terms',
+  privacy: '/privacy',
+};
+
+const htmlIds = {
+  airportFastTrack: 'airport-fast-track',
+  pickUp: 'pick-up',
+  privateLetter: 'private-letter',
+  formErrorMessage: 'form-error-message',
 };
 
 /**
@@ -52,9 +105,10 @@ const spacingValues = {
  * - `dayjs('2018-12-31').format('DD/MM/YYYY')` // console: "31/12/2018"
  * - `dayjs('31-12-2018').format('DD/MM/YYYY')` // console: "NaN/NaN/NaN"
  */
-const dateFormat = 'DD/MM/YYYY';
-const postgresDateFormat = 'YYYY/MM/DD'
-const dateTimeFormat = 'DD/MM/YYYY HH:mm:ss A'
+const displayDateFormat = 'DD/MM/YYYY';
+const dateInputDateFormat = 'YYYY-MM-DD';
+const postgresDateFormat = 'YYYY/MM/DD';
+const displayDateTimeFormat = 'DD/MM/YYYY HH:mm:ss A';
 
 export {
   screenSizes,
@@ -62,8 +116,21 @@ export {
   borderRadius,
   colors,
   fontSizes,
+  fontSizesSmall,
   spacingValues,
-  dateFormat,
+  displayDateFormat,
+  dateInputDateFormat,
   postgresDateFormat,
-  dateTimeFormat
+  displayDateTimeFormat,
+  headerHeight,
+  contentMaxWidth,
+  tableWidth,
+  textMaxWidth,
+  formMaxWidth,
+  paddingAll,
+  paddingAllLarge,
+  boxShadow,
+  pageNames,
+  htmlIds,
+  iconSizes,
 };

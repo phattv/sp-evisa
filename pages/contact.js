@@ -1,108 +1,228 @@
 // @flow
 // vendor
-import React from "react";
-import withRedux from 'next-redux-wrapper'
+import React, { Fragment } from 'react';
+import { logPageView } from '../utils/analytics';
+import { Form } from 'semantic-ui-react';
 // custom
-import {
-  Anchor,
-  BlockHeader,
-  PageHeader,
-  Content,
-  Flexbox,
-  Image,
-  Layout,
-  Text
-} from "../components";
-import { companyInfo } from "../constants/companyInfo";
-import { configureStore } from '../redux/store'
+import { Anchor, Button, Flexbox, Image, Text } from '../components/ui';
+import ContentMaxWidth from '../components/ContentMaxWidth';
+import Heading from '../components/Heading';
+import { iconSizes, pageNames } from '../constants/ui';
+import { companyInfo } from '../constants/companyInfo';
+import { feedback } from '../utils/apiClient';
 
+/**
+ * Contact show company contact information
+ */
 type Props = {};
-type State = {};
-
+type State = {
+  name: string,
+  email: string,
+  subject: string,
+  message: string,
+  responseMessage: string,
+};
 class Contact extends React.Component<Props, State> {
-  constructor(props: Object) {
-    super(props);
+  state = {
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    responseMessage: '',
+  };
+
+  componentDidMount() {
+    logPageView();
   }
 
-  static defaultProps: Props = {};
+  updateTextInput = (event: Object) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  state = {};
+  onSubmit = () => {
+    this.setState({
+      responseMessage: '',
+    });
+
+    const { name, email, subject, message } = this.state;
+    if (!message || !email) {
+      return this.setState({
+        responseMessage: 'Please fill in the required fields',
+      });
+    }
+    feedback(
+      {
+        name,
+        email,
+        subject,
+        message,
+      },
+      this.showMessage,
+    );
+  };
+
+  showMessage = (response: Object) => {
+    this.setState({
+      responseMessage: response.message,
+    });
+  };
 
   render() {
+    const { name, email, subject, message, responseMessage } = this.state;
+
     return (
-      <Layout title="Contact">
-        <Image src="/static/images/contact-us-background.png" />
-        <PageHeader header="CONTACT US" />
-        <Content>
-          <Flexbox width="100%" responsiveLayout>
-            <Flexbox flex={2} column alignItems="flex-start">
-              <BlockHeader header="Get in touch" />
-              <Text p>
-                Whether you are our esteemed customer or just have a question
-                about Vietnam visa on arrival,{" "}
-                <Anchor href="/">evisa-vn.com</Anchor> is committed to providing
-                a rewarding customer experience. Select the most convenient way
-                to reach us, and we look forward to assisting you.
-              </Text>
-              <Text p>
-                Need help? Have a question? Get instant answers 24/7.
-              </Text>
-              <Text p>
-                We are here to serve you. Whether you have questions about
-                Vietnam visa procedure, your answers are just a click away. It’s
-                available 24/7. Please visit our{" "}
-                <Anchor href="/feedback">
-                  Frequently Asked Questions today
-                </Anchor>.
-              </Text>
-              <Flexbox paddingBottom={3}>
-                <i
-                  className="fa fa-fw fa-2x fa-map-marker"
-                  aria-hidden="true"
-                />
-                <Text bold paddingLeft={2}>
-                  {companyInfo.address}
-                </Text>
+      <Fragment>
+        <ContentMaxWidth>
+          <Flexbox paddingTop={16} column alignItems="center">
+            <Heading text="Get In Touch" />
+            <Text textAlign="center" maxWidth={150}>
+              We are committed to provide the best and most rewarding experience
+              to all travelers to Vietnam. Therefore, whether you plan to use
+              our service or just need help with your visa in Vietnam, feel free
+              to drop us instant messages, send us an enquiry, or check out our
+              intensive <Anchor href={pageNames.faq}>FAQs</Anchor>.
+            </Text>
+
+            <Flexbox paddingVertical={14} responsiveLayout>
+              <Flexbox
+                column
+                flex={1}
+                paddingHorizontal={2}
+                paddingVertical={2}
+              >
+                <Flexbox paddingBottom={6}>
+                  <Image
+                    src="../static/icons/store.svg"
+                    alt="store"
+                    width={iconSizes.default}
+                  />
+                </Flexbox>
+                {/*<Flexbox paddingBottom={4} alignItems="baseline">*/}
+                {/*<Flexbox width={10}>*/}
+                {/*<Image*/}
+                {/*src="../static/icons/location.svg"*/}
+                {/*alt="location"*/}
+                {/*width={iconSizes.small}*/}
+                {/*/>*/}
+                {/*</Flexbox>*/}
+                {/*<Text paddingLeft={4}>{companyInfo.address}</Text>*/}
+                {/*</Flexbox>*/}
+                <Flexbox paddingBottom={4}>
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/call.svg"
+                      alt="call"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
+                  <Flexbox paddingLeft={4}>
+                    <a href={`tel:${companyInfo.phone}`}>
+                      <Text color="green" clickable>
+                        {companyInfo.phoneString}
+                      </Text>
+                    </a>
+                  </Flexbox>
+                </Flexbox>
+                <Flexbox paddingBottom={4}>
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/email.svg"
+                      alt="email"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
+                  <Text paddingLeft={4}>
+                    <a href={`mailto:${companyInfo.email}`}>
+                      <Text color="green" clickable>
+                        {companyInfo.email}
+                      </Text>
+                    </a>
+                  </Text>
+                </Flexbox>
+                <Flexbox paddingBottom={4} alignItems="baseline">
+                  <Flexbox width={10}>
+                    <Image
+                      src="../static/icons/time.svg"
+                      alt="time"
+                      width={iconSizes.small}
+                    />
+                  </Flexbox>
+                  <Flexbox column paddingLeft={4}>
+                    <Text semibold>Working Hours</Text>
+                    <Text>
+                      Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
+                      <br />
+                      Sat: 8:30 AM – 12:00 PM (GMT+7)
+                    </Text>
+                  </Flexbox>
+                </Flexbox>
               </Flexbox>
-              <Flexbox paddingBottom={3}>
-                <i className="fa fa-fw fa-2x fa-phone" aria-hidden="true" />
-                <Anchor href={`tel:${companyInfo.phone}`}>
-                  {companyInfo.phoneString}
-                </Anchor>
+
+              <Flexbox
+                column
+                flex={1}
+                paddingHorizontal={2}
+                paddingVertical={2}
+              >
+                <Flexbox paddingBottom={6}>
+                  <Image
+                    src="../static/icons/proposal.svg"
+                    alt="proposal"
+                    width={iconSizes.default}
+                  />
+                </Flexbox>
+                <Flexbox column>
+                  <Form onSubmit={this.onSubmit}>
+                    <Form.Field>
+                      <input
+                        name="name"
+                        value={name}
+                        placeholder="Name"
+                        onChange={this.updateTextInput}
+                      />
+                    </Form.Field>
+                    <Form.Field>
+                      <input
+                        type="email"
+                        name="email"
+                        value={email}
+                        placeholder="Email"
+                        onChange={this.updateTextInput}
+                      />
+                    </Form.Field>
+                    <Form.Field>
+                      <input
+                        name="subject"
+                        value={subject}
+                        placeholder="Subject"
+                        onChange={this.updateTextInput}
+                      />
+                    </Form.Field>
+                    <Form.Field>
+                      <textarea
+                        name="message"
+                        value={message}
+                        placeholder="Message"
+                        onChange={this.updateTextInput}
+                        rows={5}
+                      />
+                    </Form.Field>
+                    <Button type="submit">Send Message</Button>
+                  </Form>
+
+                  {responseMessage && (
+                    <Text paddingTop={4}>{responseMessage}</Text>
+                  )}
+                </Flexbox>
               </Flexbox>
-              <Flexbox paddingBottom={3}>
-                <i className="fa fa-fw fa-2x fa-envelope" aria-hidden="true" />
-                <Text bold paddingLeft={2}>
-                  <Anchor href={`mailto:${companyInfo.email}`}>
-                    {companyInfo.email}
-                  </Anchor>
-                </Text>
-              </Flexbox>
-              <Flexbox paddingBottom={3}>
-                <i className="fa fa-fw fa-2x fa-clock-o" aria-hidden="true" />
-                <Text bold paddingLeft={2}>
-                  Mon-Fri: 8:00 AM – 5:00 PM (GMT+7)
-                  <br />
-                  Sat: 8:30 AM – 12:00 PM (GMT+7)
-                </Text>
-              </Flexbox>
-            </Flexbox>
-            <Flexbox flex={1} column alignItems="flex-start">
-              <BlockHeader header="Maps" />
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.729362099555!2d106.69216831594012!3d10.7553289923358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f0dddd8cfbb%3A0xbc825dce9a152e94!2zNzQgTmd1eeG7hW4gS2hvw6FpLCBwaMaw4budbmcgMiwgUXXhuq1uIDQsIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1522893117988"
-                width="350"
-                height="262.5"
-                frameBorder="0"
-                style={{ border: 0 }}
-                allowFullScreen
-              />
             </Flexbox>
           </Flexbox>
-        </Content>
-      </Layout>
+        </ContentMaxWidth>
+      </Fragment>
     );
   }
 }
 
-export default withRedux(configureStore, null, null)(Contact)
+export default Contact;

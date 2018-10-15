@@ -11,12 +11,25 @@ import { actionTypes } from '../actions';
  */
 const formInitialState = {
   stepOne: {
-    quantity: '1',
+    countryId: 0,
   },
-  stepTwo: {},
-  stepThree: {},
+  stepTwo: {
+    quantity: 1,
+    applicants: [
+      {
+        name: '',
+        countryId: 0,
+        birthday: '',
+        gender: '',
+        passport: '',
+        passportExpiry: '',
+      },
+    ],
+  },
+  stepThree: {
+    contact: {},
+  },
   price: 0,
-  paid: false,
 };
 
 /**
@@ -49,11 +62,6 @@ const form = (state: Store = formInitialState, action: Object) => {
     case actionTypes.UPDATE_PRICE: {
       return Object.assign({}, state, {
         price: action.payload,
-      });
-    }
-    case actionTypes.UPDATE_PAYMENT_STATUS: {
-      return Object.assign({}, state, {
-        paid: action.payload,
       });
     }
     default: {

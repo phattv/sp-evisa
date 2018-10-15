@@ -1,21 +1,33 @@
-// https://github.com/zeit/next.js#custom-configuration
-// Configuration object for "next build" & "next export"
+const withCss = require('@zeit/next-css');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { ANALYZE } = process.env;
 
-module.exports = {
-  exportPathMap: function() {
-    return {
-      "/": { page: "/" },
-      "/about": { page: "/about" },
-      "/apply": { page: "/apply" },
-      "/contact": { page: "/contact" },
-      "/feedback": { page: "/feedback" },
-      "/fees": { page: "/fees" },
-      "/how": { page: "/how" },
-      "/news": { page: "/news" },
-      "/partners": { page: "/partners" },
-      "/privacy": { page: "/privacy" },
-      "/services": { page: "/services" },
-      "/terms": { page: "/terms" },
-    };
-  }
-};
+module.exports = withCss({
+  webpack: function(config, { dev, isServer }) {
+    // Read ANALYZE env variable from package.json script "analyze" and show report
+    if (ANALYZE) {
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'server',
+          analyzerPort: isServer ? 8888 : 8889,
+          openAnalyzer: true,
+        })
+      );
+    }
+
+    config.module.rules.push({
+      test: /\.(png|svg|eot|otf|ttf|woff|woff2)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          publicPath: './',
+          outputPath: 'static/',
+          name: '[name].[ext]',
+        },
+      },
+    });
+
+    return config;
+  },
+});

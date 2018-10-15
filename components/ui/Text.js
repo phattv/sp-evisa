@@ -1,16 +1,14 @@
 // @flow
-import styled from "styled-components";
-import { colors, screenSizes, spacingUnits } from "../../constants/ui";
-import {
-  generateCommonProps,
-  getLineHeightValue
-} from "../utils/generateCommonProps";
+import styled from 'styled-components';
+import { colors, screenSizes, spacingUnits } from '../../constants/ui';
+import { generateCommonProps } from './generateCommonProps';
 
-// https://www.w3schools.com/css/css_text.asp
+/**
+ * Text component acts as a <span> tag with customizable styles.
+ */
 const Text = styled.span`
-  color: ${props => colors[props.color || "darkGrey"]};
-  line-height: ${props =>
-    getLineHeightValue(props.lineHeight || props.size || "default")};
+  color: ${props => colors[props.color || 'mediumBlue']};
+  font-weight: ${props => (props.bold ? 700 : props.semibold ? 500 : 400)};
 
   ${props =>
     props.letterSpacing && `letter-spacing: ${props.letterSpacing}px`}};
@@ -27,11 +25,12 @@ const Text = styled.span`
     ${props => generateCommonProps(props, spacingUnits.desktop)};
   }
 
-  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop}px) {
+  @media only screen and (min-width: ${screenSizes.tablet}px) and (max-width: ${screenSizes.desktop -
+      1}px) {
     ${props => generateCommonProps(props, spacingUnits.tablet)};
   }
 
-  @media only screen and (max-width: ${screenSizes.tablet}px) {
+  @media only screen and (max-width: ${screenSizes.tablet - 1}px) {
     ${props => generateCommonProps(props, spacingUnits.mobile)};
   }
 `;
