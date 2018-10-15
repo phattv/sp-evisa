@@ -248,13 +248,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       shouldShowErrorMessage,
     } = this.state;
 
-    let typeOptionsByPurpose = [];
-    // There are 6 months & 1 year visa for United States applicants
-    if (purpose === purposeOptions[0].value && countryId !== usCountryId) {
-      typeOptionsByPurpose = typeOptions.slice(0, 4);
-    } else {
-      typeOptionsByPurpose = typeOptions;
-    }
+    // Only support 6 months & 1 year visa for United States applicants
+    const typeOptionsByPurpose =
+      countryId === usCountryId ? typeOptions : typeOptions.slice(0, 4);
 
     let fastTrackOptions =
       processingTime === 'emergency'

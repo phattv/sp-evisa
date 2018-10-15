@@ -5,6 +5,7 @@ import { logPageView } from '../utils/analytics';
 import Router from 'next/router';
 import { Dropdown, Form } from 'semantic-ui-react';
 import _get from 'lodash/get';
+import _find from 'lodash/find';
 import { connect } from 'react-redux';
 import Swiper from 'react-id-swiper';
 // custom
@@ -74,6 +75,8 @@ const steps = [
       'Check your email for your approval letter. Please follow the instructions to prepare all your supporting documents.',
   },
 ];
+
+const usCountryId = _get(_find(countryOptions, { iso: 'US' }), 'value', 226);
 
 type Props = {
   countryId: number,
@@ -288,12 +291,9 @@ class Home extends React.Component<Props, State> {
       },
     };
 
-    let typeOptionsByPurpose = [];
-    if (purpose === purposeOptions[0].value) {
-      typeOptionsByPurpose = typeOptions.slice(0, 4);
-    } else {
-      typeOptionsByPurpose = typeOptions;
-    }
+    // Only support 6 months & 1 year visa for United States applicants
+    const typeOptionsByPurpose =
+      countryId === usCountryId ? typeOptions : typeOptions.slice(0, 4);
 
     return (
       <Fragment>
