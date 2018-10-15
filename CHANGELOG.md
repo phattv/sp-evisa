@@ -1,4 +1,9 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4.6] - 2018-10-15
+### Removed
+- remove countries: Cameroon, Ghana, Iran, Lybia, Niger, Nigieria, Senegal
+- remove 6 months & 1 year visa (except USA)
+
 ## [3.0.0-beta.4.5] - 2018-10-02
 ### Added
 - Review form: add flight number render block
