@@ -1,4 +1,10 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.0-beta.4.9] - 2018-10-24
+### Added
+- Rollbar logs for paypal events
+### Updated
+- Update checkout.v4.js with checkout.js.map
+
 ## [3.0.0-beta.4.6] - 2018-10-15
 ### Removed
 - remove countries: Cameroon, Ghana, Iran, Lybia, Niger, Nigieria, Senegal
