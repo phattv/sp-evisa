@@ -62,8 +62,7 @@ class ApplyFormStepThree extends React.Component<Props, State> {
 
     // paypal
     isPaypalLoaded: false,
-    // env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
-    env: 'sandbox',
+    env: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
     client: {
       sandbox:
         'AfrAzUUAV1ZrMzohzMi77Mrt0Nt8NWjX0YIm0kyWe3i2usiNKFyAi6kMtgvVcgITe4PNqh4p5xZyRJOa',
