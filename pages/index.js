@@ -168,7 +168,7 @@ class Home extends React.Component<Props, State> {
         extraServices: {
           ...this.state.extraServices,
           fastTrack:
-            selectedOption.value === 'emergency'
+            selectedOption.value === processingTimeOptions[2].value
               ? airportFastTrackOptions[1].value
               : '',
         },

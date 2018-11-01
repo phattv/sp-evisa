@@ -1,11 +1,11 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Text } from './ui';
-import { displayTimeFormat } from '../constants/ui';
+import { displayShortDateTimeFormat } from '../constants/ui';
 
 export default class CurrentTime extends React.Component {
   state = {
-    time: dayjs(new Date()).format(displayTimeFormat),
+    time: dayjs(new Date()).format(displayShortDateTimeFormat),
   };
 
   componentDidMount() {
@@ -18,7 +18,7 @@ export default class CurrentTime extends React.Component {
 
   tick() {
     this.setState({
-      time: dayjs(new Date()).format(displayTimeFormat),
+      time: dayjs(new Date()).format(displayShortDateTimeFormat),
     });
   }
 
