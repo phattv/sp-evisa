@@ -314,7 +314,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             justifyContent="space-between"
           >
             <LabelRequired label="Processing Time" />
-            <CustomPopup content="Country of Immigration Department or Embassy Office where you get your passport from" />
+            <CustomPopup content="Approval Letter will be sent to your email (step 3) estimated by the chosen Processing Time & Government Working Hours" />
           </Flexbox>
           <Dropdown
             error={shouldShowErrorMessage && !processingTime}
@@ -334,6 +334,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         <Flexbox justifyContent="space-between" alignItems="center">
           <Text fontSize="s">Estimated:</Text>
           <Text fontSize="s">TODO</Text>
+        </Flexbox>
+        <Flexbox justifyContent="flex-end" alignItems="center">
+          <Anchor href={pageNames.contact}>Working Hours</Anchor>
         </Flexbox>
 
         {/* TODO: collapse by default on mobile */}
