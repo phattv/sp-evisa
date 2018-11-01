@@ -1,4 +1,8 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.2] - 2018-11-02
+### Fixed
+- Fixed updateEta: Cannot read property 'format' of undefined
+
 ## [3.0.1] - 2018-11-02
 ### Added
 - Vietnam current time & ETA

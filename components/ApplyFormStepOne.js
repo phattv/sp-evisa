@@ -159,13 +159,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               : '',
         },
       },
-      () => this.updateStepOneToStore(),
+      () => {
+        this.updateStepOneToStore();
+        // Calculate ETA
+        if (selectedOption) {
+          this.updateEta(selectedOption.value);
+        }
+      },
     );
-
-    // Calculate ETA
-    if (selectedOption) {
-      this.updateEta(selectedOption);
-    }
   };
 
   updateEta = processingTime => {
@@ -269,6 +270,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           }
         }
 
+        break;
+      }
+      default: {
+        eta = nextMonday;
         break;
       }
     }
