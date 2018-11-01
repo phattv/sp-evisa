@@ -5,6 +5,7 @@ import { Checkbox, Dropdown, Form, Popup } from 'semantic-ui-react';
 import _get from 'lodash/get';
 import _find from 'lodash/find';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 // custom
 import { Anchor, Button, Flexbox, Image, Text } from './ui';
 import FormHeading from './FormHeading';
@@ -17,7 +18,7 @@ import {
   updateStepOne,
 } from '../redux/actions';
 import { getFeesByCountryId } from '../utils/apiClient';
-import { iconSizes, pageNames } from '../constants/ui';
+import { pageNames, displayShortDateTimeFormat } from '../constants/ui';
 import {
   airportFastTrackOptions,
   carPickUpOptions,
@@ -44,6 +45,7 @@ type State = {
   purpose: string,
   type: string,
   processingTime: string,
+  eta: string,
   extraServices: Object,
   shouldShowErrorMessage: boolean,
 };
@@ -53,6 +55,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     purpose: purposeOptions[0].value,
     type: typeOptions[0].value,
     processingTime: processingTimeOptions[0].value,
+    eta: '2 days',
     extraServices: {
       fastTrack: '',
       carPickup: '',
@@ -151,13 +154,126 @@ class ApplyFormStepOne extends React.Component<Props, State> {
         extraServices: {
           ...this.state.extraServices,
           fastTrack:
-            selectedOption.value === 'emergency'
+            selectedOption.value === processingTimeOptions[2].value
               ? airportFastTrackOptions[1].value
               : '',
         },
       },
       () => this.updateStepOneToStore(),
     );
+
+    // Calculate ETA
+    if (selectedOption) {
+      this.updateEta(selectedOption);
+    }
+  };
+
+  updateEta = processingTime => {
+    /**
+     * Returns a number representing the Dayjs's day of the week:
+     * Monday = 1
+     * Tuesday = 2
+     * Wednesday = 3
+     * Thursday = 4
+     * Friday = 5
+     * Saturday = 6
+     * Sunday = 0
+     */
+    const now = new Date();
+    const dayInWeek = dayjs(now).day();
+    let eta;
+    const nextMonday = dayjs(now)
+      .add(1, 'week')
+      .startOf('week')
+      .add(1, 'day')
+      .set('hour', 12)
+      .set('minute', 0);
+
+    switch (processingTime) {
+      case processingTimeOptions[0].value: {
+        /**
+         * Normal (Guaranteed 1-2 working days)
+         * - thu, fri, sat, sun -> next monday - 12:00
+         * - else: 2 days from today - 12:00
+         */
+        if ([4, 5, 6, 0].includes(dayInWeek)) {
+          eta = nextMonday;
+        } else {
+          eta = dayjs(now)
+            .add(2, 'day')
+            .set('hour', 12)
+            .set('minute', 0);
+        }
+
+        break;
+      }
+      case processingTimeOptions[1].value: {
+        /**
+         * Urgent (Guaranteed 4-8 working hours)
+         * - sat, sun -> next monday - 12:00
+         * - else:
+         *   + before 08:00 -> today - 12:00
+         *   + before 14:00 -> today - 18:00
+         *   + else, tomorrow - 12:00
+         */
+        if ([6, 0].includes(dayInWeek)) {
+          eta = nextMonday;
+        } else {
+          if (dayjs(now).hour() <= 8) {
+            eta = dayjs(now)
+              .set('hour', 12)
+              .set('minute', 0);
+          } else if (dayjs(now).hour() <= 14) {
+            eta = dayjs(now)
+              .set('hour', 18)
+              .set('minute', 0);
+          } else {
+            eta = dayjs(now)
+              .add(1, 'day')
+              .set('hour', 12)
+              .set('minute', 0);
+          }
+        }
+
+        break;
+      }
+      case processingTimeOptions[2].value: {
+        /**
+         * Emergency (Guaranteed 1 working hour)
+         * - sat, sun -> next monday - 12:00
+         * - else:
+         *   + before 10:00 -> today - 12:00
+         *   + before 13:00 -> today - 15:00
+         *   + before 15:00 -> today - 17:00
+         */
+        if ([6, 0].includes(dayInWeek)) {
+          eta = nextMonday;
+        } else {
+          if (dayjs(now).hour() <= 10) {
+            eta = dayjs(now)
+              .set('hour', 12)
+              .set('minute', 0);
+          } else if (dayjs(now).hour() <= 13) {
+            eta = dayjs(now)
+              .set('hour', 15)
+              .set('minute', 0);
+          } else if (dayjs(now).hour() <= 15) {
+            eta = dayjs(now)
+              .set('hour', 17)
+              .set('minute', 0);
+          } else {
+            eta = dayjs(now)
+              .add(1, 'day')
+              .set('hour', 12)
+              .set('minute', 0);
+          }
+        }
+
+        break;
+      }
+    }
+
+    this.setState({ eta: eta.format(displayShortDateTimeFormat) });
   };
 
   updateAirportFastTrack = (event: Object, selectedOption: Object) => {
@@ -219,17 +335,20 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
   syncPropsToState = (nextProps: Props, isForced?: boolean) => {
     if (isForced || this.props.stepOne !== nextProps.stepOne) {
-      this.setState({
-        countryId: _get(nextProps, 'stepOne.countryId', ''),
-        purpose: _get(nextProps, 'stepOne.purpose', purposeOptions[0].value),
-        type: _get(nextProps, 'stepOne.type', typeOptions[0].value),
-        processingTime: _get(
-          nextProps,
-          'stepOne.processingTime',
-          processingTimeOptions[0].value,
-        ),
-        extraServices: _get(nextProps, 'stepOne.extraServices', {}),
-      });
+      this.setState(
+        {
+          countryId: _get(nextProps, 'stepOne.countryId', ''),
+          purpose: _get(nextProps, 'stepOne.purpose', purposeOptions[0].value),
+          type: _get(nextProps, 'stepOne.type', typeOptions[0].value),
+          processingTime: _get(
+            nextProps,
+            'stepOne.processingTime',
+            processingTimeOptions[0].value,
+          ),
+          extraServices: _get(nextProps, 'stepOne.extraServices', {}),
+        },
+        () => this.updateEta(this.state.processingTime),
+      );
     }
 
     if (isForced || this.props.countryId !== nextProps.countryId) {
@@ -239,11 +358,18 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     }
   };
 
+  openChat = () => {
+    if (window && window.$crisp) {
+      $crisp.push(['do', 'chat:open']);
+    }
+  };
+
   render() {
     const {
       countryId,
       type,
       processingTime,
+      eta,
       purpose,
       extraServices,
       shouldShowErrorMessage,
@@ -254,7 +380,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       countryId === usCountryId ? typeOptions : typeOptions.slice(0, 4);
 
     let fastTrackOptions =
-      processingTime === 'emergency'
+      processingTime === processingTimeOptions[2].value
         ? airportFastTrackOptions.slice(1)
         : airportFastTrackOptions;
 
@@ -332,8 +458,15 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           <CurrentTime />
         </Flexbox>
         <Flexbox justifyContent="space-between" alignItems="center">
-          <Text fontSize="s">Estimated:</Text>
-          <Text fontSize="s">TODO</Text>
+          <Text fontSize="s">How long will it take?</Text>
+          <Text fontSize="s" bold>
+            {eta}
+          </Text>
+        </Flexbox>
+        <Flexbox justifyContent="flex-end" alignItems="center">
+          <Text color="green" onClick={this.openChat} clickable>
+            Need Assistance? Chat with us
+          </Text>
         </Flexbox>
         <Flexbox justifyContent="flex-end" alignItems="center">
           <Anchor href={pageNames.contact}>Working Hours</Anchor>
