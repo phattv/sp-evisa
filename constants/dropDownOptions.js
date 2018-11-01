@@ -45,7 +45,7 @@ const purposeOptions = [
 const processingTimeOptions = [
   {
     value: 'normal',
-    text: 'Normal (Guaranteed 1 working day)',
+    text: 'Normal (Guaranteed 1-2 working days)',
     price: fees.processingTimeNormal,
   },
   {

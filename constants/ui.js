@@ -105,10 +105,16 @@ const htmlIds = {
  * - `dayjs('2018-12-31').format('DD/MM/YYYY')` // console: "31/12/2018"
  * - `dayjs('31-12-2018').format('DD/MM/YYYY')` // console: "NaN/NaN/NaN"
  */
-const displayDateFormat = 'DD/MM/YYYY';
 const dateInputDateFormat = 'YYYY-MM-DD';
 const postgresDateFormat = 'YYYY/MM/DD';
-const displayDateTimeFormat = 'DD/MM/YYYY HH:mm:ss A';
+const displayDateFormat = 'DD/MM/YYYY';
+const displayShortDateFormat = 'MMM DD';
+const displayTimeFormat = 'hh:mm A';
+const displayShortTimeFormat = 'hh A';
+const displayDateTimeFormat = `${displayDateFormat} ${displayTimeFormat}`;
+const displayShortDateTimeFormat = `${displayShortDateFormat} - ${
+  displayTimeFormat
+}`;
 
 export {
   screenSizes,
@@ -118,10 +124,14 @@ export {
   fontSizes,
   fontSizesSmall,
   spacingValues,
-  displayDateFormat,
   dateInputDateFormat,
   postgresDateFormat,
+  displayDateFormat,
+  displayShortDateFormat,
+  displayTimeFormat,
+  displayShortTimeFormat,
   displayDateTimeFormat,
+  displayShortDateTimeFormat,
   headerHeight,
   contentMaxWidth,
   tableWidth,
