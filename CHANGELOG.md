@@ -1,4 +1,8 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.0.1] - 2018-11-02
+### Added
+- Vietnam current time & ETA
+
 ## [3.0.0-beta.4.9] - 2018-10-24
 ### Added
 - Rollbar logs for paypal events
