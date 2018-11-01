@@ -109,6 +109,7 @@ const displayDateFormat = 'DD/MM/YYYY';
 const dateInputDateFormat = 'YYYY-MM-DD';
 const postgresDateFormat = 'YYYY/MM/DD';
 const displayDateTimeFormat = 'DD/MM/YYYY HH:mm:ss A';
+const displayTimeFormat = 'HH:mm A';
 
 export {
   screenSizes,
@@ -122,6 +123,7 @@ export {
   dateInputDateFormat,
   postgresDateFormat,
   displayDateTimeFormat,
+  displayTimeFormat,
   headerHeight,
   contentMaxWidth,
   tableWidth,

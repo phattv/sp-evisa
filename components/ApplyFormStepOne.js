@@ -10,6 +10,7 @@ import { Anchor, Button, Flexbox, Image, Text } from './ui';
 import FormHeading from './FormHeading';
 import Divider from './Divider';
 import FormErrorMessage from './FormErrorMessage';
+import CurrentTime from './CurrentTime';
 import {
   updateFees,
   updateFeesSelectedCountry,
@@ -266,18 +267,8 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             alignItems="center"
             justifyContent="space-between"
           >
-            <label>Country of Issue</label>
-            <Popup
-              trigger={
-                <Image
-                  src="../static/icons/info-ico.svg"
-                  alt="info"
-                  width={18}
-                  fixedWidth
-                />
-              }
-              content="Country of Immigration Department or Embassy Office where you get your passport from"
-            />
+            <LabelRequired label="Country of Issue" />
+            <CustomPopup content="Country of Immigration Department or Embassy Office where you get your passport from" />
           </Flexbox>
           <Dropdown
             error={shouldShowErrorMessage && !countryId}
@@ -317,7 +308,14 @@ class ApplyFormStepOne extends React.Component<Props, State> {
           />
         </Form.Field>
         <Form.Field required>
-          <label>Processing Time</label>
+          <Flexbox
+            width="100%"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <LabelRequired label="Processing Time" />
+            <CustomPopup content="Country of Immigration Department or Embassy Office where you get your passport from" />
+          </Flexbox>
           <Dropdown
             error={shouldShowErrorMessage && !processingTime}
             value={processingTime}
@@ -329,9 +327,17 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             onChange={this.updateProcessingTime}
           />
         </Form.Field>
+        <Flexbox justifyContent="space-between" alignItems="center">
+          <Text fontSize="s">Vietnam current time:</Text>
+          <CurrentTime />
+        </Flexbox>
+        <Flexbox justifyContent="space-between" alignItems="center">
+          <Text fontSize="s">Estimated:</Text>
+          <Text fontSize="s">TODO</Text>
+        </Flexbox>
 
         {/* TODO: collapse by default on mobile */}
-        <Flexbox paddingBottom={6} column paddingTop={6}>
+        <Flexbox paddingBottom={6} column paddingTop={8}>
           <Flexbox justifyContent="space-between" alignItems="center">
             <Text fontSize="m">Other Services (Optional)</Text>
             <Anchor href={pageNames.services}>See all</Anchor>
@@ -345,17 +351,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             justifyContent="space-between"
           >
             <label>Airport Fast Track</label>
-            <Popup
-              trigger={
-                <Image
-                  src="../static/icons/info-ico.svg"
-                  alt="info"
-                  width={18}
-                  fixedWidth
-                />
-              }
-              content="Our staff will greet you at the Visa Landing Counter and assist you to get visa stamp and sticker without queuing"
-            />
+            <CustomPopup content="Our staff will greet you at the Visa Landing Counter and assist you to get visa stamp and sticker without queuing" />
           </Flexbox>
           <Dropdown
             value={extraServices.fastTrack}
@@ -374,17 +370,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             justifyContent="space-between"
           >
             <label>Car Pick Up</label>
-            <Popup
-              trigger={
-                <Image
-                  src="../static/icons/info-ico.svg"
-                  alt="info"
-                  width={18}
-                  fixedWidth
-                />
-              }
-              content="You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time"
-            />
+            <CustomPopup content="You will be picked up to inner city by our friendly driver who stands outside the airport with your name on the welcome sign to save your waiting time" />
           </Flexbox>
           <Dropdown
             value={extraServices.carPickup}
@@ -407,17 +393,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               onChange={this.togglePrivateVisaLetter}
               label="Private Visa Letter"
             />
-            <Popup
-              trigger={
-                <Image
-                  src="../static/icons/info-ico.svg"
-                  alt="info"
-                  width={18}
-                  fixedWidth
-                />
-              }
-              content="Because of Vietnam Immigration Office policy, all names for people getting visas on the same day will be on the same letter. We offer a private letter service so your name and the names of all members in your group will in a private letter"
-            />
+            <CustomPopup content="Because of Vietnam Immigration Office policy, all names for people getting visas on the same day will be on the same letter. We offer a private letter service so your name and the names of all members in your group will in a private letter" />
           </Flexbox>
         </Form.Field>
 
@@ -432,6 +408,27 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     );
   }
 }
+
+const LabelRequired = ({ label }) => (
+  <strong>
+    <label>
+      {label} <span style={{ color: '#db2828' }}>*</span>
+    </label>
+  </strong>
+);
+const CustomPopup = ({ content }) => (
+  <Popup
+    trigger={
+      <Image
+        src="../static/icons/info-ico.svg"
+        alt="info"
+        width={18}
+        fixedWidth
+      />
+    }
+    content={content}
+  />
+);
 
 const mapStateToProps = store => {
   return {
