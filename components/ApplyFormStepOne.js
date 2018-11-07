@@ -180,7 +180,12 @@ class ApplyFormStepOne extends React.Component<Props, State> {
      */
     const dayInWeek = dayjs(currentVietnamTime).day();
 
-    // Vietnam current time
+    const nextMonAtTwelve = dayjs(currentVietnamTime)
+      .add(1, 'week')
+      .startOf('week')
+      .add(1, 'day')
+      .set('hour', 12)
+      .set('minute', 0);
     const nextWedAtTwelve = dayjs(currentVietnamTime)
       .add(1, 'week')
       .startOf('week')
@@ -238,7 +243,41 @@ class ApplyFormStepOne extends React.Component<Props, State> {
 
         break;
       }
-      // TODO 2 more cases
+      case processingTimeOptions[1].value: {
+        const isBeforeEight = dayjs(currentVietnamTime).hour() <= 8;
+        const isBeforeFourteen = dayjs(currentVietnamTime).hour() <= 14;
+        /**
+         * Urgent (4-8 working hours):
+         * - Application submit timeline: before 08:00, before or after 14:00
+         * - Approval return timeline: 12:00 or 22:00
+         * CASE sat, sun                            ->  next mon - 12:00
+         * CASE mon/tue/wed/thu/fri - before 08:00  ->  same day - 12:00
+         * CASE mon/tue/wed/thu/fri - before 14:00  ->  same day - 22:00
+         * CASE mon/tue/wed/thu - after 14:00       ->  next day - 12:00
+         * CASE fri - after 14:00                   ->  next mon - 12:00
+         */
+        if ([6, 7].includes(dayInWeek)) {
+          eta = nextMonAtTwelve;
+        } else {
+          // mon/tue/wed/thu/fri
+          eta = isBeforeEight
+            ? dayjs(currentVietnamTime)
+                .set('hour', 12)
+                .set('minute', 0)
+            : isBeforeFourteen
+              ? dayjs(currentVietnamTime)
+                  .set('hour', 22)
+                  .set('minute', 0)
+              : dayInWeek === 5
+                ? nextMonAtTwelve
+                : dayjs(currentVietnamTime)
+                    .add(1, 'day')
+                    .set('hour', 22)
+                    .set('minute', 0);
+        }
+
+        break;
+      }
       default: {
         eta = nextWedAtTwelve;
         break;
