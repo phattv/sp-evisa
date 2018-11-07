@@ -192,6 +192,10 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       .add(3, 'day')
       .set('hour', 12)
       .set('minute', 0);
+    const nextDayAtTwelve = dayjs(currentVietnamTime)
+      .add(1, 'day')
+      .set('hour', 12)
+      .set('minute', 0);
 
     switch (processingTime) {
       case processingTimeOptions[0].value: {
@@ -257,6 +261,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
          * CASE fri - after 14:00                   ->  next mon - 12:00
          */
         if ([6, 7].includes(dayInWeek)) {
+          // sat/sun
           eta = nextMonAtTwelve;
         } else {
           // mon/tue/wed/thu/fri
@@ -268,12 +273,52 @@ class ApplyFormStepOne extends React.Component<Props, State> {
               ? dayjs(currentVietnamTime)
                   .set('hour', 22)
                   .set('minute', 0)
-              : dayInWeek === 5
+              : dayInWeek === 5 // friday
                 ? nextMonAtTwelve
-                : dayjs(currentVietnamTime)
-                    .add(1, 'day')
-                    .set('hour', 22)
-                    .set('minute', 0);
+                : nextDayAtTwelve;
+        }
+
+        break;
+      }
+      case processingTimeOptions[2].value: {
+        const isBeforeTenThirty =
+          dayjs(currentVietnamTime).hour() <= 10 &&
+          dayjs(currentVietnamTime).minute() <= 30;
+        const isBeforeThirteen = dayjs(currentVietnamTime).hour() <= 13;
+        const isBeforeFifteenFifty =
+          dayjs(currentVietnamTime).hour() <= 15 &&
+          dayjs(currentVietnamTime).minute() <= 50;
+        /**
+         * Urgent (4-8 working hours):
+         * - Application submit timeline: before 10:30, 10:30 - 13:00, 13:00 - 15:50, after 15:50
+         * - Approval return timeline: 12:00 or 15:00 or 17:00
+         * CASE sat, sun                            ->  next mon - 12:00
+         * CASE mon/tue/wed/thu/fri - before 10:30  ->  same day - 12:00
+         * CASE mon/tue/wed/thu/fri - 10:30 - 13:00 ->  same day - 15:00
+         * CASE mon/tue/wed/thu/fri - 13:00 - 15:50 ->  same day - 17:00
+         * CASE mon/tue/wed/thu - after 15:50       ->  next day - 12:00
+         * CASE fri - after 15:50                   ->  next mon - 12:00
+         */
+        if ([6, 7].includes(dayInWeek)) {
+          // sat/sun
+          eta = nextMonAtTwelve;
+        } else {
+          // mon/tue/wed/thu/fri
+          eta = isBeforeTenThirty
+            ? dayjs(currentVietnamTime)
+                .set('hour', 12)
+                .set('minute', 0)
+            : isBeforeThirteen
+              ? dayjs(currentVietnamTime)
+                  .set('hour', 15)
+                  .set('minute', 0)
+              : isBeforeFifteenFifty
+                ? dayjs(currentVietnamTime)
+                    .set('hour', 17)
+                    .set('minute', 0)
+                : dayInWeek === 5 // friday
+                  ? nextMonAtTwelve
+                  : nextDayAtTwelve;
         }
 
         break;
