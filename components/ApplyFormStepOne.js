@@ -147,17 +147,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     );
 
   updateProcessingTime = (event: Object, selectedOption: Object) => {
-    // Logic note: if choose emergency, fast track is chosen
     this.setState(
       {
         processingTime: selectedOption ? selectedOption.value : '',
-        extraServices: {
-          ...this.state.extraServices,
-          fastTrack:
-            selectedOption.value === processingTimeOptions[2].value
-              ? airportFastTrackOptions[1].value
-              : '',
-        },
       },
       () => {
         this.updateStepOneToStore();
@@ -193,7 +185,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     switch (processingTime) {
       case processingTimeOptions[0].value: {
         /**
-         * Normal (Guaranteed 1-2 working days)
+         * Normal (1-2 working days)
          * - thu, fri, sat, sun -> next monday - 12:00
          * - else: 2 days from today - 12:00
          */
@@ -210,7 +202,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       }
       case processingTimeOptions[1].value: {
         /**
-         * Urgent (Guaranteed 4-8 working hours)
+         * Urgent (4-8 working hours)
          * - sat, sun -> next monday - 12:00
          * - else:
          *   + before 08:00 -> today - 12:00
@@ -240,7 +232,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
       }
       case processingTimeOptions[2].value: {
         /**
-         * Emergency (Guaranteed 1 working hour)
+         * Emergency (1 working hour)
          * - sat, sun -> next monday - 12:00
          * - else:
          *   + before 10:00 -> today - 12:00
@@ -384,11 +376,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     const typeOptionsByPurpose =
       countryId === usCountryId ? typeOptions : typeOptions.slice(0, 4);
 
-    let fastTrackOptions =
-      processingTime === processingTimeOptions[2].value
-        ? airportFastTrackOptions.slice(1)
-        : airportFastTrackOptions;
-
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
         <FormHeading text="Visa Requirements" />
@@ -500,7 +487,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             fluid
             search
             selection
-            options={fastTrackOptions}
+            options={airportFastTrackOptions}
             onChange={this.updateAirportFastTrack}
           />
         </Form.Field>
