@@ -1,4 +1,8 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.1.0] - 2018-11-08
+### Updated
+- ETA logic
+
 ## [3.0.2] - 2018-11-02
 ### Fixed
 - Fixed updateEta: Cannot read property 'format' of undefined
