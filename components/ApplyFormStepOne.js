@@ -162,6 +162,12 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateEta = processingTime => {
+    let eta;
+    const browserTime = Date.now();
+    const browserOffset = new Date().getTimezoneOffset() * 60000;
+    const vietnamOffset = -420 * 60000;
+    const currentVietnamTime = browserTime + browserOffset - vietnamOffset; // utc = browserTime + browserOffset
+
     /**
      * Returns a number representing the Dayjs's day of the week:
      * Monday = 1
@@ -172,100 +178,69 @@ class ApplyFormStepOne extends React.Component<Props, State> {
      * Saturday = 6
      * Sunday = 0
      */
-    const now = new Date();
-    const dayInWeek = dayjs(now).day();
-    let eta;
-    const nextMonday = dayjs(now)
+    const dayInWeek = dayjs(currentVietnamTime).day();
+
+    // Vietnam current time
+    const nextWedAtTwelve = dayjs(currentVietnamTime)
       .add(1, 'week')
       .startOf('week')
-      .add(1, 'day')
+      .add(3, 'day')
       .set('hour', 12)
       .set('minute', 0);
 
     switch (processingTime) {
       case processingTimeOptions[0].value: {
+        const isBeforeSevenFourty =
+          dayjs(currentVietnamTime).hour() <= 7 &&
+          dayjs(currentVietnamTime).minute() <= 40;
         /**
-         * Normal (1-2 working days)
-         * - thu, fri, sat, sun -> next monday - 12:00
-         * - else: 2 days from today - 12:00
+         * Normal (1-2 working days):
+         * - Application submit timeline: before or afer 07:40
+         * - Approval return timeline: 12:00 or 22:00
+         * CASE sat, sun                    ->  next wed - 12:00
+         * CASE mon/tue/wed - before 07:40  ->  wed/thu/fri - 12:00 (respectively)
+         * CASE mon/tue/wed - after 07:40   ->  wed/thu/fri - 22:00 (respectively)
+         * CASE thu - before 07:40          ->  next mon - 12:00
+         * CASE thu - after 04:40           ->  next mon - 22:00
+         * CASE fri - before 07:40          ->  next tue - 12:00
+         * CASE fri - after 04:40           ->  next tue 22:00
          */
-        if ([4, 5, 6, 0].includes(dayInWeek)) {
-          eta = nextMonday;
+        if ([1, 2, 3].includes(dayInWeek)) {
+          // mon/tue/wed
+          eta = isBeforeSevenFourty
+            ? dayjs(currentVietnamTime)
+                .add(2, 'day')
+                .set('hour', 12)
+                .set('minute', 0)
+            : dayjs(currentVietnamTime)
+                .add(2, 'day')
+                .set('hour', 22)
+                .set('minute', 0);
+        } else if ([4, 5].includes(dayInWeek)) {
+          // thu/fri
+          eta = isBeforeSevenFourty
+            ? dayjs(currentVietnamTime)
+                .add(1, 'week')
+                .startOf('week')
+                .add(dayInWeek - 3, 'day')
+                .set('hour', 12)
+                .set('minute', 0)
+            : dayjs(currentVietnamTime)
+                .add(1, 'week')
+                .startOf('week')
+                .add(dayInWeek - 3, 'day')
+                .set('hour', 22)
+                .set('minute', 0);
         } else {
-          eta = dayjs(now)
-            .add(2, 'day')
-            .set('hour', 12)
-            .set('minute', 0);
+          // sat/sun
+          eta = nextWedAtTwelve;
         }
 
         break;
       }
-      case processingTimeOptions[1].value: {
-        /**
-         * Urgent (4-8 working hours)
-         * - sat, sun -> next monday - 12:00
-         * - else:
-         *   + before 08:00 -> today - 12:00
-         *   + before 14:00 -> today - 18:00
-         *   + else, tomorrow - 12:00
-         */
-        if ([6, 0].includes(dayInWeek)) {
-          eta = nextMonday;
-        } else {
-          if (dayjs(now).hour() <= 8) {
-            eta = dayjs(now)
-              .set('hour', 12)
-              .set('minute', 0);
-          } else if (dayjs(now).hour() <= 14) {
-            eta = dayjs(now)
-              .set('hour', 18)
-              .set('minute', 0);
-          } else {
-            eta = dayjs(now)
-              .add(1, 'day')
-              .set('hour', 12)
-              .set('minute', 0);
-          }
-        }
-
-        break;
-      }
-      case processingTimeOptions[2].value: {
-        /**
-         * Emergency (1 working hour)
-         * - sat, sun -> next monday - 12:00
-         * - else:
-         *   + before 10:00 -> today - 12:00
-         *   + before 13:00 -> today - 15:00
-         *   + before 15:00 -> today - 17:00
-         */
-        if ([6, 0].includes(dayInWeek)) {
-          eta = nextMonday;
-        } else {
-          if (dayjs(now).hour() <= 10) {
-            eta = dayjs(now)
-              .set('hour', 12)
-              .set('minute', 0);
-          } else if (dayjs(now).hour() <= 13) {
-            eta = dayjs(now)
-              .set('hour', 15)
-              .set('minute', 0);
-          } else if (dayjs(now).hour() <= 15) {
-            eta = dayjs(now)
-              .set('hour', 17)
-              .set('minute', 0);
-          } else {
-            eta = dayjs(now)
-              .add(1, 'day')
-              .set('hour', 12)
-              .set('minute', 0);
-          }
-        }
-
-        break;
-      }
+      // TODO 2 more cases
       default: {
-        eta = nextMonday;
+        eta = nextWedAtTwelve;
         break;
       }
     }

@@ -5,7 +5,9 @@ import { displayShortDateTimeFormat } from '../constants/ui';
 
 export default class CurrentTime extends React.Component {
   state = {
-    time: dayjs(new Date()).format(displayShortDateTimeFormat),
+    time: dayjs(
+      Date.now() + new Date().getTimezoneOffset() * 60000 - -420 * 60000, // see tick()
+    ).format(displayShortDateTimeFormat),
   };
 
   componentDidMount() {
@@ -17,8 +19,13 @@ export default class CurrentTime extends React.Component {
   }
 
   tick() {
+    const browserTime = Date.now();
+    const browserOffset = new Date().getTimezoneOffset() * 60000;
+    const vietnamOffset = -420 * 60000;
+    const currentVietnamTime = browserTime + browserOffset - vietnamOffset; // utc = browserTime + browserOffset
+
     this.setState({
-      time: dayjs(new Date()).format(displayShortDateTimeFormat),
+      time: dayjs(currentVietnamTime).format(displayShortDateTimeFormat),
     });
   }
 
