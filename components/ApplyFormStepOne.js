@@ -147,17 +147,9 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     );
 
   updateProcessingTime = (event: Object, selectedOption: Object) => {
-    // Logic note: if choose emergency, fast track is chosen
     this.setState(
       {
         processingTime: selectedOption ? selectedOption.value : '',
-        extraServices: {
-          ...this.state.extraServices,
-          fastTrack:
-            selectedOption.value === processingTimeOptions[2].value
-              ? airportFastTrackOptions[1].value
-              : '',
-        },
       },
       () => {
         this.updateStepOneToStore();
@@ -170,6 +162,12 @@ class ApplyFormStepOne extends React.Component<Props, State> {
   };
 
   updateEta = processingTime => {
+    let eta;
+    const browserTime = Date.now();
+    const browserOffset = new Date().getTimezoneOffset() * 60000;
+    const vietnamOffset = -420 * 60000;
+    const currentVietnamTime = browserTime + browserOffset - vietnamOffset; // utc = browserTime + browserOffset
+
     /**
      * Returns a number representing the Dayjs's day of the week:
      * Monday = 1
@@ -180,100 +178,153 @@ class ApplyFormStepOne extends React.Component<Props, State> {
      * Saturday = 6
      * Sunday = 0
      */
-    const now = new Date();
-    const dayInWeek = dayjs(now).day();
-    let eta;
-    const nextMonday = dayjs(now)
+    const dayInWeek = dayjs(currentVietnamTime).day();
+
+    const nextMonAtTwelve = dayjs(currentVietnamTime)
       .add(1, 'week')
       .startOf('week')
+      .add(1, 'day')
+      .set('hour', 12)
+      .set('minute', 0);
+    const nextWedAtTwelve = dayjs(currentVietnamTime)
+      .add(1, 'week')
+      .startOf('week')
+      .add(3, 'day')
+      .set('hour', 12)
+      .set('minute', 0);
+    const nextDayAtTwelve = dayjs(currentVietnamTime)
       .add(1, 'day')
       .set('hour', 12)
       .set('minute', 0);
 
     switch (processingTime) {
       case processingTimeOptions[0].value: {
+        const isBeforeSevenFourty =
+          dayjs(currentVietnamTime).hour() <= 7 &&
+          dayjs(currentVietnamTime).minute() <= 40;
         /**
-         * Normal (Guaranteed 1-2 working days)
-         * - thu, fri, sat, sun -> next monday - 12:00
-         * - else: 2 days from today - 12:00
+         * Normal (1-2 working days):
+         * - Application submit timeline: before or afer 07:40
+         * - Approval return timeline: 12:00 or 22:00
+         * CASE sat, sun                    ->  next wed - 12:00
+         * CASE mon/tue/wed - before 07:40  ->  wed/thu/fri - 12:00 (respectively)
+         * CASE mon/tue/wed - after 07:40   ->  wed/thu/fri - 22:00 (respectively)
+         * CASE thu - before 07:40          ->  next mon - 12:00
+         * CASE thu - after 04:40           ->  next mon - 22:00
+         * CASE fri - before 07:40          ->  next tue - 12:00
+         * CASE fri - after 04:40           ->  next tue 22:00
          */
-        if ([4, 5, 6, 0].includes(dayInWeek)) {
-          eta = nextMonday;
+        if ([1, 2, 3].includes(dayInWeek)) {
+          // mon/tue/wed
+          eta = isBeforeSevenFourty
+            ? dayjs(currentVietnamTime)
+                .add(2, 'day')
+                .set('hour', 12)
+                .set('minute', 0)
+            : dayjs(currentVietnamTime)
+                .add(2, 'day')
+                .set('hour', 22)
+                .set('minute', 0);
+        } else if ([4, 5].includes(dayInWeek)) {
+          // thu/fri
+          eta = isBeforeSevenFourty
+            ? dayjs(currentVietnamTime)
+                .add(1, 'week')
+                .startOf('week')
+                .add(dayInWeek - 3, 'day')
+                .set('hour', 12)
+                .set('minute', 0)
+            : dayjs(currentVietnamTime)
+                .add(1, 'week')
+                .startOf('week')
+                .add(dayInWeek - 3, 'day')
+                .set('hour', 22)
+                .set('minute', 0);
         } else {
-          eta = dayjs(now)
-            .add(2, 'day')
-            .set('hour', 12)
-            .set('minute', 0);
+          // sat/sun
+          eta = nextWedAtTwelve;
         }
 
         break;
       }
       case processingTimeOptions[1].value: {
+        const isBeforeEight = dayjs(currentVietnamTime).hour() <= 8;
+        const isBeforeFourteen = dayjs(currentVietnamTime).hour() <= 14;
         /**
-         * Urgent (Guaranteed 4-8 working hours)
-         * - sat, sun -> next monday - 12:00
-         * - else:
-         *   + before 08:00 -> today - 12:00
-         *   + before 14:00 -> today - 18:00
-         *   + else, tomorrow - 12:00
+         * Urgent (4-8 working hours):
+         * - Application submit timeline: before 08:00, before or after 14:00
+         * - Approval return timeline: 12:00 or 22:00
+         * CASE sat, sun                            ->  next mon - 12:00
+         * CASE mon/tue/wed/thu/fri - before 08:00  ->  same day - 12:00
+         * CASE mon/tue/wed/thu/fri - before 14:00  ->  same day - 22:00
+         * CASE mon/tue/wed/thu - after 14:00       ->  next day - 12:00
+         * CASE fri - after 14:00                   ->  next mon - 12:00
          */
-        if ([6, 0].includes(dayInWeek)) {
-          eta = nextMonday;
+        if ([6, 7].includes(dayInWeek)) {
+          // sat/sun
+          eta = nextMonAtTwelve;
         } else {
-          if (dayjs(now).hour() <= 8) {
-            eta = dayjs(now)
-              .set('hour', 12)
-              .set('minute', 0);
-          } else if (dayjs(now).hour() <= 14) {
-            eta = dayjs(now)
-              .set('hour', 18)
-              .set('minute', 0);
-          } else {
-            eta = dayjs(now)
-              .add(1, 'day')
-              .set('hour', 12)
-              .set('minute', 0);
-          }
+          // mon/tue/wed/thu/fri
+          eta = isBeforeEight
+            ? dayjs(currentVietnamTime)
+                .set('hour', 12)
+                .set('minute', 0)
+            : isBeforeFourteen
+              ? dayjs(currentVietnamTime)
+                  .set('hour', 22)
+                  .set('minute', 0)
+              : dayInWeek === 5 // friday
+                ? nextMonAtTwelve
+                : nextDayAtTwelve;
         }
 
         break;
       }
       case processingTimeOptions[2].value: {
+        const isBeforeTenThirty =
+          dayjs(currentVietnamTime).hour() <= 10 &&
+          dayjs(currentVietnamTime).minute() <= 30;
+        const isBeforeThirteen = dayjs(currentVietnamTime).hour() <= 13;
+        const isBeforeFifteenFifty =
+          dayjs(currentVietnamTime).hour() <= 15 &&
+          dayjs(currentVietnamTime).minute() <= 50;
         /**
-         * Emergency (Guaranteed 1 working hour)
-         * - sat, sun -> next monday - 12:00
-         * - else:
-         *   + before 10:00 -> today - 12:00
-         *   + before 13:00 -> today - 15:00
-         *   + before 15:00 -> today - 17:00
+         * Urgent (4-8 working hours):
+         * - Application submit timeline: before 10:30, 10:30 - 13:00, 13:00 - 15:50, after 15:50
+         * - Approval return timeline: 12:00 or 15:00 or 17:00
+         * CASE sat, sun                            ->  next mon - 12:00
+         * CASE mon/tue/wed/thu/fri - before 10:30  ->  same day - 12:00
+         * CASE mon/tue/wed/thu/fri - 10:30 - 13:00 ->  same day - 15:00
+         * CASE mon/tue/wed/thu/fri - 13:00 - 15:50 ->  same day - 17:00
+         * CASE mon/tue/wed/thu - after 15:50       ->  next day - 12:00
+         * CASE fri - after 15:50                   ->  next mon - 12:00
          */
-        if ([6, 0].includes(dayInWeek)) {
-          eta = nextMonday;
+        if ([6, 7].includes(dayInWeek)) {
+          // sat/sun
+          eta = nextMonAtTwelve;
         } else {
-          if (dayjs(now).hour() <= 10) {
-            eta = dayjs(now)
-              .set('hour', 12)
-              .set('minute', 0);
-          } else if (dayjs(now).hour() <= 13) {
-            eta = dayjs(now)
-              .set('hour', 15)
-              .set('minute', 0);
-          } else if (dayjs(now).hour() <= 15) {
-            eta = dayjs(now)
-              .set('hour', 17)
-              .set('minute', 0);
-          } else {
-            eta = dayjs(now)
-              .add(1, 'day')
-              .set('hour', 12)
-              .set('minute', 0);
-          }
+          // mon/tue/wed/thu/fri
+          eta = isBeforeTenThirty
+            ? dayjs(currentVietnamTime)
+                .set('hour', 12)
+                .set('minute', 0)
+            : isBeforeThirteen
+              ? dayjs(currentVietnamTime)
+                  .set('hour', 15)
+                  .set('minute', 0)
+              : isBeforeFifteenFifty
+                ? dayjs(currentVietnamTime)
+                    .set('hour', 17)
+                    .set('minute', 0)
+                : dayInWeek === 5 // friday
+                  ? nextMonAtTwelve
+                  : nextDayAtTwelve;
         }
 
         break;
       }
       default: {
-        eta = nextMonday;
+        eta = nextWedAtTwelve;
         break;
       }
     }
@@ -383,11 +434,6 @@ class ApplyFormStepOne extends React.Component<Props, State> {
     // Only support 6 months & 1 year visa for United States applicants
     const typeOptionsByPurpose =
       countryId === usCountryId ? typeOptions : typeOptions.slice(0, 4);
-
-    let fastTrackOptions =
-      processingTime === processingTimeOptions[2].value
-        ? airportFastTrackOptions.slice(1)
-        : airportFastTrackOptions;
 
     return (
       <Form onSubmit={this.onSubmit} style={{ width: '100%' }}>
@@ -500,7 +546,7 @@ class ApplyFormStepOne extends React.Component<Props, State> {
             fluid
             search
             selection
-            options={fastTrackOptions}
+            options={airportFastTrackOptions}
             onChange={this.updateAirportFastTrack}
           />
         </Form.Field>

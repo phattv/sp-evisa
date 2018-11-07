@@ -116,7 +116,6 @@ class Home extends React.Component<Props, State> {
     Router.push(pageNames.apply);
   };
 
-  //<editor-fold desc="TODO: repeated code & logic between this & ApplyFormStepOne">
   updateCountryId = (event: Object, selectedOption: Object) => {
     if (selectedOption) {
       this.setState(
@@ -221,7 +220,6 @@ class Home extends React.Component<Props, State> {
 
     this.calculateTotalFee();
   };
-  //</editor-fold>
 
   calculateTotalFee = () => {
     const { purpose, type, processingTime, extraServices } = this.state;
@@ -242,12 +240,9 @@ class Home extends React.Component<Props, State> {
 
     const totalFee = costPerPerson + processingFees + extraFees;
 
-    this.setState(
-      {
-        totalFee,
-      },
-      // () => this.props.updatePrice(totalFee),
-    );
+    this.setState({
+      totalFee,
+    });
   };
 
   render() {

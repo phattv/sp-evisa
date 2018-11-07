@@ -171,7 +171,8 @@ class Fees extends React.Component<Props, State> {
                     </Text>{' '}
                     and{' '}
                     <Text semibold>
-                      {fees.stampingFeeMultipleEntries} USD for a multiple visa
+                      {fees.stampingFeeMultipleEntries} USD for a multiple entry
+                      visa
                     </Text>.
                   </Text>
                 </Card>

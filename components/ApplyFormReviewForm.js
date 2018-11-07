@@ -6,9 +6,9 @@ import _isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 // custom
-import { Image, Flexbox, Text } from './ui';
+import { Anchor, Image, Flexbox, Text } from './ui';
 import Divider from './Divider';
-import { displayDateFormat, iconSizes } from '../constants/ui';
+import { pageNames, displayDateFormat, iconSizes } from '../constants/ui';
 import { reducerNames } from '../constants/reducerNames';
 import {
   typeOptions,
@@ -40,6 +40,7 @@ type State = {
   carPickupObject: Object,
   privateVisaLetter: boolean,
   shouldShowExtraServices: boolean,
+  shouldShowDiscounts: boolean,
 };
 class ApplyFormReviewForm extends React.Component<Props, State> {
   state = {
@@ -53,6 +54,7 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     carPickupObject: {},
     privateVisaLetter: false,
     shouldShowExtraServices: false,
+    shouldShowDiscounts: false,
   };
 
   calculateTotalFee = (nextProps: Object) => {
@@ -93,11 +95,22 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
      * - per applicant: cost per person + processing fee (multiply by quantity)
      * - per order: extraServiceFees (once only)
      */
-    const totalFee =
+    let totalFee =
       (costPerPerson + processingFees) * parsedQuantity + extraServiceFees;
+
+    /**
+     * Discount:
+     * - if processing time is emergency, discount 9
+     */
+    const shouldShowDiscounts =
+      _get(processingTimeObject, 'price', 0) === processingTimeOptions[2].price;
+    if (shouldShowDiscounts) {
+      totalFee = totalFee - fees.discountNineDollar;
+    }
 
     this.setState(
       {
+        shouldShowDiscounts,
         totalFee,
       },
       () => this.props.updatePrice(totalFee),
@@ -296,14 +309,18 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           costPerPerson,
           type,
         })}
+
         {shouldShowProcessingFees &&
           this.renderProcessingFees({ quantity, processingTimeObject })}
+
         {shouldShowExtraServices &&
           this.renderExtraServices({
             fastTrackObject,
             carPickupObject,
             privateVisaLetter,
           })}
+
+        {/*  Total Fees */}
         <Flexbox
           backgroundColor="darkBlue"
           paddingHorizontal={3}
@@ -317,10 +334,12 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
           </Text>
         </Flexbox>
 
+        {/* Note */}
         <Flexbox paddingTop={2}>
           <Text textAlign="center" fontSize="s" noDoubleLineHeight>
-            *This cost doesn't include stamping fee, you have to pay in cash at
-            the airport
+            *This cost doesn't include{' '}
+            <Anchor href={pageNames.fees}>stamping fee</Anchor>, you have to pay
+            in cash at the airport
           </Text>
         </Flexbox>
       </Flexbox>
@@ -394,7 +413,6 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             width={iconSizes.small}
           />
           <Flexbox column paddingLeft={3}>
-            <Text fontSize="s">Processing Time</Text>
             <Text color="darkBlue">
               {_get(processingTimeObject, 'text', '')}
             </Text>
@@ -412,42 +430,53 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
     fastTrackObject,
     carPickupObject,
     privateVisaLetter,
-  }) => (
-    <Fragment>
-      <Flexbox alignItems="center" paddingTop={4}>
-        <Image
-          src="../static/icons/others-ico.svg"
-          alt="others ico"
-          width={iconSizes.small}
-        />
-        <Text paddingLeft={3} fontSize="s">
-          Other Services
-        </Text>
-      </Flexbox>
+  }) => {
+    const { shouldShowDiscounts } = this.state;
 
-      {!_isEmpty(fastTrackObject) &&
-        fastTrackObject !== airportFastTrackOptions[0] &&
-        this.renderSpaceBetweenBlock({
-          leftContent: fastTrackObject.text,
-          rightContent: `$${fastTrackObject.price}`,
-        })}
+    return (
+      <Fragment>
+        <Flexbox alignItems="center" paddingTop={4}>
+          <Image
+            src="../static/icons/others-ico.svg"
+            alt="others ico"
+            width={iconSizes.small}
+          />
+          <Text paddingLeft={3} fontSize="s">
+            Other Services
+          </Text>
+        </Flexbox>
 
-      {!_isEmpty(carPickupObject) &&
-        carPickupObject !== carPickUpOptions[0] &&
-        this.renderSpaceBetweenBlock({
-          leftContent: carPickupObject.text,
-          rightContent: `$${carPickupObject.price}`,
-          noMarginTop: true,
-        })}
+        {!_isEmpty(fastTrackObject) &&
+          fastTrackObject !== airportFastTrackOptions[0] &&
+          this.renderSpaceBetweenBlock({
+            leftContent: fastTrackObject.text,
+            rightContent: `$${fastTrackObject.price}`,
+          })}
 
-      {privateVisaLetter &&
-        this.renderSpaceBetweenBlock({
-          leftContent: 'Private visa letter',
-          rightContent: `$${fees.privateVisaLetter}`,
-          noMarginTop: true,
-        })}
-    </Fragment>
-  );
+        {!_isEmpty(carPickupObject) &&
+          carPickupObject !== carPickUpOptions[0] &&
+          this.renderSpaceBetweenBlock({
+            leftContent: carPickupObject.text,
+            rightContent: `$${carPickupObject.price}`,
+            noMarginTop: true,
+          })}
+
+        {privateVisaLetter &&
+          this.renderSpaceBetweenBlock({
+            leftContent: 'Private visa letter',
+            rightContent: `$${fees.privateVisaLetter}`,
+            noMarginTop: true,
+          })}
+
+        {shouldShowDiscounts &&
+          this.renderSpaceBetweenBlock({
+            leftContent: 'Discount',
+            rightContent: `-$${fees.discountNineDollar}`,
+            noMarginTop: true,
+          })}
+      </Fragment>
+    );
+  };
 
   renderSpaceBetweenBlock = ({
     leftContent,
