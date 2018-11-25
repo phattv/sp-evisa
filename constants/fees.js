@@ -11,6 +11,7 @@ const fees = {
   processingTimeEmergency: 139,
   stampingFeeSingleEntry: 25,
   stampingFeeMultipleEntries: 50,
+  discountFourDollar: 4,
   discountNineDollar: 9,
 };
 

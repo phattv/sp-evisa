@@ -108,6 +108,11 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
       totalFee = totalFee - fees.discountNineDollar;
     }
 
+    // Temporary year-end promotion
+    if (totalFee > 0) {
+      totalFee = totalFee - fees.discountFourDollar;
+    }
+
     this.setState(
       {
         shouldShowDiscounts,
@@ -319,6 +324,12 @@ class ApplyFormReviewForm extends React.Component<Props, State> {
             carPickupObject,
             privateVisaLetter,
           })}
+
+        {this.renderSpaceBetweenBlock({
+          leftContent: '* YEAR END PROMOTION!',
+          rightContent: `-$${fees.discountFourDollar}`,
+          noMarginTop: true,
+        })}
 
         {/*  Total Fees */}
         <Flexbox

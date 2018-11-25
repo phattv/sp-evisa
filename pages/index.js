@@ -224,8 +224,8 @@ class Home extends React.Component<Props, State> {
   calculateTotalFee = () => {
     const { purpose, type, processingTime, extraServices } = this.state;
 
-    const fees = _get(this, 'props.fees', []).find(
-      fees => fees.type === purpose,
+    const feesProp = _get(this, 'props.fees', []).find(
+      feesProp => feesProp.type === purpose,
     );
     const processingTimeObject = processingTimeOptions.find(
       option => option.value === processingTime,
@@ -234,11 +234,16 @@ class Home extends React.Component<Props, State> {
       option => option.value === extraServices.fastTrack,
     );
 
-    const costPerPerson = fees && fees[type] > 0 ? fees[type] : 0;
+    const costPerPerson = feesProp && feesProp[type] > 0 ? feesProp[type] : 0;
     const processingFees = _get(processingTimeObject, 'price', 0);
     const extraFees = _get(fastTrackObject, 'price', 0);
 
-    const totalFee = costPerPerson + processingFees + extraFees;
+    let totalFee = costPerPerson + processingFees + extraFees;
+
+    // Temporary year-end promotion
+    if (totalFee > 0) {
+      totalFee = totalFee - fees.discountFourDollar;
+    }
 
     this.setState({
       totalFee,
@@ -375,6 +380,20 @@ class Home extends React.Component<Props, State> {
                       onChange={this.updateProcessingTime}
                     />
                   </Form.Field>
+
+                  <Flexbox
+                    backgroundColor="white"
+                    paddingHorizontal={3}
+                    paddingVertical={2}
+                    marginBottom={2}
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Text color="green">* YEAR END PROMOTION!</Text>
+                    <Text bold color="green" paddingLeft={2}>
+                      -${fees.discountFourDollar}
+                    </Text>
+                  </Flexbox>
 
                   <Flexbox
                     backgroundColor="darkBlue"
