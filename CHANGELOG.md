@@ -1,4 +1,8 @@
 [How do I make a good changelog?](https://keepachangelog.com/en/1.0.0/#how)
+## [3.1.1] - 2018-11-26
+### Added
+- Year end promotion 4 dollar
+
 ## [3.1.0] - 2018-11-08
 ### Updated
 - ETA logic
